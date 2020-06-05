@@ -1,44 +1,40 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# kage-editor
 
-## Available Scripts
+The aim of this project is to port the glyph editor used on [GlyphWiki](https://glyphwiki.org/), which is currently implemented as a Flash app, into an HTML5 / JavaScript app
 
-In the project directory, you can run:
+Flash で実装されている [GlyphWiki](https://glyphwiki.org/) のグリフエディタを HTML5 / JavaScript アプリに移植するプロジェクト
 
-### `npm start`
+https://kurgm.github.io/kage-editor/ (開発中)
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 今後実装したい機能
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+メモも兼ねて，とりあえずリストアップしてみる
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- [ ] 編集グリフの表示
+- [ ] 筆画・部品をクリックで選択
+- [ ] 筆画・部品をCtrl+クリック or Shift+クリックで選択対象に追加/削除
+- [ ] 筆画・部品をドラッグで範囲選択
+- [ ] 選択筆画・部品の制御点の表示
+- [ ] 制御点ドラッグによる編集
+- [ ] 複数筆画・部品の拡大縮小
+- [ ] 筆画・部品をドラッグで移動
+- [ ] 部品の取得表示
+- [ ] 部品分解
+- [ ] 選択筆画・部品の制御点の座標を表示
+- [ ] 線種・頭/尾形状の編集
+- [ ] 線種形状のエラー表示
+- [ ] 選択分を削除
+- [ ] コピー/カット/ペースト
+- [ ] 筆画・部品の並べ替え
+- [ ] 1つ前/後を選択
+- [ ] キーボードショートカット
+- [ ] 部品検索・挿入
+- [ ] サムネイル表示
+- [ ] ストレッチ係数の表示/編集
+- [ ] アンドゥ/リドゥ
+- [ ] グリッド
+- [ ] 手書き
+- [ ] UI表示言語切替
+- [ ] 書体切替
+- [ ] 中心線表示
+- [ ] 部品自動配置（不要？）
