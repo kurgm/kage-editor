@@ -29,4 +29,6 @@ jobs:
     - run: npm test
       
     - if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
-      run: npm run deploy
+      run: |
+        git config user.name "GitHub Action"
+        npm run deploy
