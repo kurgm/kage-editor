@@ -1,7 +1,7 @@
 .App {
   display: grid;
-  grid-template-columns: minmax(400px, 1fr) 250px;
-  grid-template-rows: minmax(200px, 1fr) auto;
+  grid-template-columns: minmax(500px, 1fr) 250px;
+  grid-template-rows: minmax(240px, 1fr) auto;
   gap: 10px;
   height: 100vh;
 }

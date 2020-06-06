@@ -6,7 +6,7 @@ import GlyphArea from './containers/GlyphArea';
 function App() {
   return (
     <div className="App">
-      <div className="glyph-area"><GlyphArea /></div>
+      <GlyphArea />
       <div className="editor-controls">
       </div>
       <div className="parts-list-area" />
