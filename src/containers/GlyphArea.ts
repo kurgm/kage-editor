@@ -1,9 +1,9 @@
-import { Action } from 'typescript-fsa';
 import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
+
 import { editorActions, CTMInv } from '../actions/editor';
 import GlyphArea from '../components/GlyphArea';
 import { AppState } from '../reducers';
-import { Dispatch } from 'redux';
 
 export interface GlyphAreaActions {
   handleMouseDownCapture: (evt: React.MouseEvent) => void;
@@ -17,7 +17,7 @@ export interface GlyphAreaActions {
 
 const mapStateToProps = (state: AppState) => ({ ...state.editor });
 
-const mapDispatchToProps = (dispatch: Dispatch<Action<unknown>>): GlyphAreaActions => ({
+const mapDispatchToProps = (dispatch: Dispatch): GlyphAreaActions => ({
   handleMouseDownCapture: (evt: React.MouseEvent) => {
     if (!(evt.target instanceof SVGSVGElement)) {
       return;
@@ -52,8 +52,12 @@ const mapDispatchToProps = (dispatch: Dispatch<Action<unknown>>): GlyphAreaActio
     evt.stopPropagation();
   },
 
-  handleMouseMove: (evt: MouseEvent) => { dispatch(editorActions.mouseMove(evt)) },
-  handleMouseUp: (evt: MouseEvent) => { dispatch(editorActions.mouseUp(evt)) },
+  handleMouseMove: (evt: MouseEvent) => {
+    dispatch(editorActions.mouseMove(evt));
+  },
+  handleMouseUp: (evt: MouseEvent) => {
+    dispatch(editorActions.mouseUp(evt));
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(GlyphArea);
