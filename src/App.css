@@ -1,25 +1,26 @@
 .App {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(400px, 1fr) 250px;
+  grid-template-rows: minmax(200px, 1fr) auto;
+  gap: 10px;
   height: 100vh;
 }
 
-.main-edit-area {
-  display: flex;
-  flex-flow: column;
-  flex: 1;
-}
-
 .parts-list-area {
+  grid-column: 2/3;
+  grid-row: 1/3;
   display: flex;
   flex-flow: column;
 }
 
 .glyph-area {
-  flex: 1;
+  grid-column: 1/2;
+  grid-row: 1/2;
   border: 1px solid #ccc;
 }
 
 .editor-controls {
-  margin: 10px;
+  grid-column: 1/2;
+  grid-row: 2/3;
   display: flex;
 }
