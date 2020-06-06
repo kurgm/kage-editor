@@ -33,6 +33,7 @@ const GlyphComponent = (props: GlyphComponentProps) => {
     } else {
       props.selectSingle?.(index);
     }
+    evt.stopPropagation();
   };
 
   const deselected: IndexedPolygons[] = [];

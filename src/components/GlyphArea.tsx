@@ -12,21 +12,28 @@ interface OwnProps {
 
 type GlyphAreaProps = OwnProps & EditorState & GlyphAreaActions;
 
-const GlyphArea = (props: GlyphAreaProps) => (
-  <div className="glyph-area">
-    <svg width="100%" height="100%" viewBox="-20 -20 500 240">
-      {/* TODO: grid */}
-      <rect x="0" y="0" width="200" height="200" className="glyph-boundary" />
-      <rect x="12" y="12" width="176" height="176" className="glyph-guide" />
-      <Glyph
-        glyph={props.glyph}
-        selection={props.selection}
-        selectSingle={props.selectSingle}
-        selectXorSingle={props.selectXorSingle}
-      />
-      {/* TODO: control points */}
-    </svg>
-  </div>
-);
+const GlyphArea = (props: GlyphAreaProps) => {
+  const handleBackgroundClick = (evt: React.MouseEvent) => {
+    if (!(evt.shiftKey || evt.ctrlKey)) {
+      props.selectNone();
+    }
+  }
+  return (
+    <div className="glyph-area">
+      <svg width="100%" height="100%" viewBox="-20 -20 500 240" onClick={handleBackgroundClick}>
+        {/* TODO: grid */}
+        <rect x="0" y="0" width="200" height="200" className="glyph-boundary" />
+        <rect x="12" y="12" width="176" height="176" className="glyph-guide" />
+        <Glyph
+          glyph={props.glyph}
+          selection={props.selection}
+          selectSingle={props.selectSingle}
+          selectXorSingle={props.selectXorSingle}
+        />
+        {/* TODO: control points */}
+      </svg>
+    </div>
+  );
+};
 
 export default GlyphArea;
