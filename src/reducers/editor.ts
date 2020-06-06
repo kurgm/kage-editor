@@ -1,19 +1,18 @@
 import { reducerWithInitialState } from 'typescript-fsa-reducers';
 
 import { editorActions } from '../actions/editor';
+import { Glyph, parseGlyph } from '../kageUtils';
 
-export interface GlyphLine {
-  value: number[];
-  partName?: string;
-}
+import args from '../args';
+
 
 export interface EditorState {
-  glyph: GlyphLine[];
+  glyph: Glyph;
   selection: number[];
 }
 
 const initialState: EditorState = {
-  glyph: [],
+  glyph: parseGlyph(args.get('data') || ''),
   selection: [],
 };
 
