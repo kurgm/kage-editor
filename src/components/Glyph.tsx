@@ -10,6 +10,8 @@ import './Glyph.css'
 export interface GlyphComponentProps {
   glyph: Glyph;
   selection: number[];
+  selectSingle?: (index: number) => void;
+  selectXorSingle?: (index: number) => void;
 }
 
 const kage = new Kage();
@@ -25,6 +27,14 @@ const GlyphComponent = (props: GlyphComponentProps) => {
     return kage.makeGlyphSeparated(data);
   }, [props.glyph]);
 
+  const handleClickStroke = (evt: React.MouseEvent, index: number) => {
+    if (evt.shiftKey || evt.ctrlKey) {
+      props.selectXorSingle?.(index);
+    } else {
+      props.selectSingle?.(index);
+    }
+  };
+
   const deselected: IndexedPolygons[] = [];
   const selected: IndexedPolygons[] = [];
 
@@ -39,14 +49,18 @@ const GlyphComponent = (props: GlyphComponentProps) => {
   return (
     <>
       <g className="strokes-deselected">
-        {deselected
-          .map(({ polygons, index }) => <Stroke polygons={polygons} key={index} />)
-        }
+        {deselected.map(({ polygons, index }) => (
+          <g key={index} onClick={(evt) => handleClickStroke(evt, index)}>
+            <Stroke polygons={polygons} />
+          </g>
+        ))}
       </g>
       <g className="strokes-selected">
-        {selected
-          .map(({ polygons, index }) => <Stroke polygons={polygons} key={index} />)
-        }
+        {selected.map(({ polygons, index }) => (
+          <g key={index}>
+            <Stroke polygons={polygons} />
+          </g>
+        ))}
       </g>
     </>
   );
