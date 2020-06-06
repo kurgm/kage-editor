@@ -6,27 +6,54 @@ import { AppState } from '../reducers';
 import { Dispatch } from 'redux';
 
 export interface GlyphAreaActions {
-  selectSingle: (index: number) => Action<number>;
-  selectXorSingle: (index: number) => Action<number>;
-  selectNone: () => Action<void>;
-  updateCTMInv: (ctm: CTMInv) => Action<CTMInv>;
-  startAreaSelect: (evt: React.MouseEvent) => Action<React.MouseEvent>;
-  startSelectionDrag: (evt: React.MouseEvent) => Action<React.MouseEvent>;
-  handleMouseMove: (evt: MouseEvent) => Action<MouseEvent>;
-  handleMouseUp: (evt: MouseEvent) => Action<MouseEvent>;
-}
+  handleMouseDownCapture: (evt: React.MouseEvent) => void;
+
+  handleMouseDownBackground: (evt: React.MouseEvent) => void;
+  handleMouseDownStroke: (evt: React.MouseEvent, index: number) => void;
+
+  handleMouseMove: (evt: MouseEvent) => void;
+  handleMouseUp: (evt: MouseEvent) => void;
+};
 
 const mapStateToProps = (state: AppState) => ({ ...state.editor });
 
-const mapDispatchToProps = (dispatch: Dispatch<Action<unknown>>) => ({
-  selectSingle: (index: number) => dispatch(editorActions.selectSingle(index)),
-  selectXorSingle: (index: number) => dispatch(editorActions.selectXorSingle(index)),
-  selectNone: () => dispatch(editorActions.selectNone()),
-  updateCTMInv: (ctminv: CTMInv) => dispatch(editorActions.updateCTMInv(ctminv)),
-  startAreaSelect: (evt: React.MouseEvent) => dispatch(editorActions.startAreaSelect(evt)),
-  startSelectionDrag: (evt: React.MouseEvent) => dispatch(editorActions.startSelectionDrag(evt)),
-  handleMouseMove: (evt: MouseEvent) => dispatch(editorActions.mouseMove(evt)),
-  handleMouseUp: (evt: MouseEvent) => dispatch(editorActions.mouseUp(evt)),
+const mapDispatchToProps = (dispatch: Dispatch<Action<unknown>>): GlyphAreaActions => ({
+  handleMouseDownCapture: (evt: React.MouseEvent) => {
+    if (!(evt.target instanceof SVGSVGElement)) {
+      return;
+    }
+    const ctm = evt.target.getScreenCTM();
+    if (!ctm) {
+      return;
+    }
+    const pt = evt.target.createSVGPoint();
+    const ctmInv: CTMInv = (evtx, evty) => {
+      pt.x = evtx;
+      pt.y = evty;
+      const { x, y } = pt.matrixTransform(ctm.inverse());
+      return [x, y];
+    };
+    dispatch(editorActions.updateCTMInv(ctmInv));
+  },
+
+  handleMouseDownBackground: (evt: React.MouseEvent) => {
+    if (!(evt.shiftKey || evt.ctrlKey)) {
+      dispatch(editorActions.selectNone());
+    }
+    dispatch(editorActions.startAreaSelect(evt));
+  },
+  handleMouseDownStroke: (evt: React.MouseEvent, index: number) => {
+    if (evt.shiftKey || evt.ctrlKey) {
+      dispatch(editorActions.selectXorSingle(index));
+    } else {
+      dispatch(editorActions.selectSingle(index));
+    }
+    dispatch(editorActions.startSelectionDrag(evt));
+    evt.stopPropagation();
+  },
+
+  handleMouseMove: (evt: MouseEvent) => { dispatch(editorActions.mouseMove(evt)) },
+  handleMouseUp: (evt: MouseEvent) => { dispatch(editorActions.mouseUp(evt)) },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(GlyphArea);
