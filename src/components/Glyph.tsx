@@ -57,7 +57,7 @@ const GlyphComponent = (props: GlyphComponentProps) => {
       </g>
       <g className="strokes-selected">
         {selected.map(({ polygons, index }) => (
-          <g key={index}>
+          <g key={index} onClick={(evt) => handleClickStroke(evt, index)}>
             <Stroke polygons={polygons} />
           </g>
         ))}

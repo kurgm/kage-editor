@@ -22,6 +22,7 @@ const GlyphArea = (props: GlyphAreaProps) => (
         glyph={props.glyph}
         selection={props.selection}
         selectSingle={props.selectSingle}
+        selectXorSingle={props.selectXorSingle}
       />
       {/* TODO: control points */}
     </svg>
