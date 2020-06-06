@@ -1,0 +1,9 @@
+.strokes-deselected polygon {
+  fill: #000000;
+  stroke: none;
+}
+
+.strokes-selected polygon {
+  fill: #cc0000;
+  stroke: none;
+}

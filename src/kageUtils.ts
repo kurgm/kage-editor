@@ -19,7 +19,7 @@ export const getNumColumns = (strokeType: number): number => {
     default:
       return 0;
   }
-}
+};
 
 export const parseGlyphLine = (glyphLineStr: string): GlyphLine => {
   const splitLine = glyphLineStr.split(':');
@@ -34,7 +34,15 @@ export const parseGlyphLine = (glyphLineStr: string): GlyphLine => {
     return { value, partName }
   }
   return { value };
-}
+};
+
+export const unparseGlyphLine = (glyphLine: GlyphLine): string => {
+  const values: (number | string)[] = glyphLine.value.slice();
+  if (values[0] === 99) {
+    values[7] = glyphLine.partName || '';
+  }
+  return values.join(':');
+};
 
 export const isValidGlyphLine = (glyphLine: GlyphLine): boolean => (
   glyphLine.value.length !== 0 &&
@@ -50,4 +58,10 @@ export const parseGlyph = (glyphStr: string): Glyph => (
   glyphStr.split(/[$\r\n]+/)
     .map((line) => parseGlyphLine(line))
     .filter((gLine) => isValidGlyphLine(gLine))
+);
+
+export const unparseGlyph = (glyph: Glyph): string => (
+  glyph
+    .map((gLine) => unparseGlyphLine(gLine))
+    .join('$')
 );

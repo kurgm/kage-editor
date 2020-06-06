@@ -1,8 +1,10 @@
 import React from 'react';
 
 import { EditorState } from '../reducers/editor';
-import { GlyphAreaActions } from '../containers/GlyphArea';
 
+import Glyph from './Glyph';
+
+import { GlyphAreaActions } from '../containers/GlyphArea';
 import './GlyphArea.css';
 
 interface OwnProps {
@@ -16,7 +18,7 @@ const GlyphArea = (props: GlyphAreaProps) => (
       {/* TODO: grid */}
       <rect x="0" y="0" width="200" height="200" className="glyph-boundary" />
       <rect x="12" y="12" width="176" height="176" className="glyph-guide" />
-      {/* TODO: glyph */}
+      <Glyph glyph={props.glyph} selection={props.selection} />
       {/* TODO: control points */}
     </svg>
   </div>
