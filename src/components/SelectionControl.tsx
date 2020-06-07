@@ -53,7 +53,14 @@ const SelectionControl = (props: SelectionControlProps) => (
         handleMouseDown={(evt) => props.handleMouseDownRectControl(evt, RectPointPosition.southeast)}
       />
     </>}
-    {/* TODO: point control */}
+    {props.pointControl.map(({ x, y, className }, index) => (
+      <ControlPoint
+        key={index}
+        x={x} y={y}
+        className={className}
+        handleMouseDown={(evt) => props.handleMouseDownPointControl(evt, index)}
+      />
+    ))}
   </>
 );
 
