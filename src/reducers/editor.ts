@@ -1,14 +1,43 @@
 import { reducerWithInitialState } from 'typescript-fsa-reducers';
 
+// @ts-ignore
+import { polygonInPolygon, polygonIntersectsPolygon } from 'geometric';
+
 import { editorActions } from '../actions/editor';
 import { Glyph, parseGlyph } from '../kageUtils';
+import { makeGlyphSeparated } from '../kage';
 
 import args from '../args';
 
 
 const performAreaSelect = (glyph: Glyph, x1: number, y1: number, x2: number, y2: number): number[] => {
-  // FIXME
-  return [];
+  const polygonsSep = makeGlyphSeparated(glyph);
+  const result = [];
+
+  const gAreaPolygon: [number, number][] = [
+    [x1, y1],
+    [x1, y2],
+    [x2, y2],
+    [x2, y1],
+    [x1, y1],
+  ];
+
+  for (let index = 0; index < polygonsSep.length; index++) {
+    const polygons = polygonsSep[index];
+    if (polygons.array.some((polygon) => {
+      const gPolygon = polygon.array.map(({ x, y }) => [x, y]);
+      gPolygon.push(gPolygon[0]); // close polygon
+
+      return (
+        polygonInPolygon(gAreaPolygon, gPolygon) ||
+        polygonInPolygon(gPolygon, gAreaPolygon) ||
+        polygonIntersectsPolygon(gAreaPolygon, gPolygon)
+      ) as boolean;
+    })) {
+      result.push(index);
+    }
+  }
+  return result;
 };
 
 const moveSelected = (glyph: Glyph, selection: number[], dx: number, dy: number): Glyph => {
