@@ -133,7 +133,43 @@ export const moveSelectedPoint = (glyph: Glyph, selection: number[], pointIndex:
   return glyph;
 };
 
+export const resizeGlyphLine = (glyphLine: GlyphLine, oldBBX: BBX, newBBX: BBX): GlyphLine => {
+  const [x11, y11, x12, y12] = oldBBX;
+  const [x21, y21, x22, y22] = newBBX;
+  const tX = (x: number) => x21 + (x - x11) * (x22 - x21) / (x12 - x11);
+  const tY = (y: number) => y21 + (y - y11) * (y22 - y21) / (y12 - y11);
+  switch (glyphLine.value[0]) {
+    case 99: {
+      const value = glyphLine.value.slice();
+      value[3] = tX(value[3]);
+      value[4] = tY(value[4]);
+      value[5] = tX(value[5]);
+      value[6] = tY(value[6]);
+      return { value, partName: glyphLine.partName };
+    }
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 6:
+    case 7:
+    case 9: {
+      const value = glyphLine.value.slice();
+      for (let i = 3; i + 2 <= value.length; i += 2) {
+        value[i] = tX(value[i]);
+        value[i + 1] = tY(value[i + 1]);
+      }
+      return { value };
+    }
+    default:
+      return glyphLine;
+  }
+};
+
 export const resizeSelectedGlyphLines = (glyph: Glyph, selection: number[], oldBBX: BBX, newBBX: BBX): Glyph => {
-  // FIXME
-  return glyph;
+  return glyph.map((glyphLine, index) => selection.includes(index)
+    ? resizeGlyphLine(glyphLine, oldBBX, newBBX)
+    : glyphLine
+  );
 };
