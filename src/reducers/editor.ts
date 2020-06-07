@@ -47,13 +47,13 @@ export const resizeSelected = (glyph: Glyph, selection: number[], position: Rect
     case RectPointPosition.north:
       newBBX[1] += dy;
       break;
-    case RectPointPosition.east:
+    case RectPointPosition.west:
       newBBX[0] += dx;
       break;
     case RectPointPosition.south:
       newBBX[3] += dy;
       break;
-    case RectPointPosition.west:
+    case RectPointPosition.east:
       newBBX[2] += dx;
       break;
     case RectPointPosition.southeast:
