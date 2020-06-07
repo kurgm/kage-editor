@@ -2,4 +2,5 @@
   fill: none;
   stroke: #f57900;
   stroke-width: 1px;
+  pointer-events: none;
 }
