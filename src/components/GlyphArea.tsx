@@ -4,6 +4,7 @@ import { EditorState } from '../reducers/editor';
 
 import Glyph from './Glyph';
 import AreaSelectRect from './AreaSelectRect';
+import SelectionControl from '../containers/SelectionControl';
 
 import { GlyphAreaActions } from '../containers/GlyphArea';
 import './GlyphArea.css';
@@ -40,7 +41,7 @@ const GlyphArea = (props: GlyphAreaProps) => {
           handleMouseDownDeselectedStroke={props.handleMouseDownDeselectedStroke}
           handleMouseDownSelectedStroke={props.handleMouseDownSelectedStroke}
         />
-        {/* TODO: control points */}
+        <SelectionControl />
         <AreaSelectRect rect={props.areaSelectRect} />
       </svg>
     </div>

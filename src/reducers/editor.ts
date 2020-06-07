@@ -3,7 +3,7 @@ import { reducerWithInitialState } from 'typescript-fsa-reducers';
 // @ts-ignore
 import { polygonInPolygon, polygonIntersectsPolygon } from 'geometric';
 
-import { editorActions } from '../actions/editor';
+import { editorActions, RectPointPosition } from '../actions/editor';
 import { Glyph, parseGlyph } from '../kageUtils';
 import { makeGlyphSeparated } from '../kage';
 
@@ -45,12 +45,23 @@ const moveSelected = (glyph: Glyph, selection: number[], dx: number, dy: number)
   return glyph;
 };
 
+const moveSelectedPoint = (glyph: Glyph, selection: number[], pointIndex: number, dx: number, dy: number): Glyph => {
+  // FIXME
+  return glyph;
+};
+const resizeSelected = (glyph: Glyph, selection: number[], position: RectPointPosition, dx: number, dy: number): Glyph => {
+  // FIXME
+  return glyph;
+};
+
 
 export interface EditorState {
   glyph: Glyph;
   selection: number[];
   areaSelectRect: [number, number, number, number] | null;
   dragSelection: [number, number, number, number] | null;
+  dragPoint: [number, [number, number, number, number]] | null;
+  resizeSelection: [RectPointPosition, [number, number, number, number]] | null;
   ctmInv: ((x: number, y: number) => [number, number]) | null;
 }
 
@@ -59,6 +70,8 @@ const initialState: EditorState = {
   selection: [],
   areaSelectRect: null,
   dragSelection: null,
+  dragPoint: null,
+  resizeSelection: null,
   ctmInv: null,
 };
 
@@ -124,6 +137,26 @@ const editor = reducerWithInitialState(initialState)
       dragSelection: [x1, y1, x1, y1],
     };
   })
+  .case(editorActions.startPointDrag, (state, [evt, pointIndex]) => {
+    if (!state.ctmInv) {
+      return state;
+    }
+    const [x1, y1] = state.ctmInv(evt.clientX, evt.clientY);
+    return {
+      ...state,
+      dragPoint: [pointIndex, [x1, y1, x1, y1]],
+    };
+  })
+  .case(editorActions.startResize, (state, [evt, position]) => {
+    if (!state.ctmInv) {
+      return state;
+    }
+    const [x1, y1] = state.ctmInv(evt.clientX, evt.clientY);
+    return {
+      ...state,
+      resizeSelection: [position, [x1, y1, x1, y1]],
+    };
+  })
 
   .case(editorActions.mouseMove, (state, evt) => {
     if (!state.ctmInv) {
@@ -143,6 +176,22 @@ const editor = reducerWithInitialState(initialState)
       return {
         ...state,
         dragSelection: [x1, y1, x2, y2],
+      };
+    }
+    if (state.dragPoint) {
+      const [pointIndex, [x1, y1]] = state.dragPoint;
+      const [x2, y2] = state.ctmInv(evt.clientX, evt.clientY);
+      return {
+        ...state,
+        dragPoint: [pointIndex, [x1, y1, x2, y2]],
+      };
+    }
+    if (state.resizeSelection) {
+      const [position, [x1, y1]] = state.resizeSelection;
+      const [x2, y2] = state.ctmInv(evt.clientX, evt.clientY);
+      return {
+        ...state,
+        resizeSelection: [position, [x1, y1, x2, y2]],
       };
     }
     return state;
@@ -172,6 +221,28 @@ const editor = reducerWithInitialState(initialState)
         ...state,
         glyph: newGlyph,
         dragSelection: null,
+      };
+    }
+    if (state.dragPoint) {
+      const [pointIndex, [x1, y1]] = state.dragPoint;
+      const [x2, y2] = state.ctmInv(evt.clientX, evt.clientY);
+
+      const newGlyph = moveSelectedPoint(state.glyph, state.selection, pointIndex, x2 - x1, y2 - y1);
+      return {
+        ...state,
+        glyph: newGlyph,
+        dragPoint: null,
+      };
+    }
+    if (state.resizeSelection) {
+      const [position, [x1, y1]] = state.resizeSelection;
+      const [x2, y2] = state.ctmInv(evt.clientX, evt.clientY);
+
+      const newGlyph = resizeSelected(state.glyph, state.selection, position, x2 - x1, y2 - y1);
+      return {
+        ...state,
+        glyph: newGlyph,
+        resizeSelection: null,
       };
     }
     return state;
