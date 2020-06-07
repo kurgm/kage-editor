@@ -136,8 +136,8 @@ export const moveSelectedPoint = (glyph: Glyph, selection: number[], pointIndex:
 export const resizeGlyphLine = (glyphLine: GlyphLine, oldBBX: BBX, newBBX: BBX): GlyphLine => {
   const [x11, y11, x12, y12] = oldBBX;
   const [x21, y21, x22, y22] = newBBX;
-  const tX = (x: number) => x21 + (x - x11) * (x22 - x21) / (x12 - x11);
-  const tY = (y: number) => y21 + (y - y11) * (y22 - y21) / (y12 - y11);
+  const tX = (x: number) => Math.round(x21 + (x - x11) * (x22 - x21) / (x12 - x11));
+  const tY = (y: number) => Math.round(y21 + (y - y11) * (y22 - y21) / (y12 - y11));
   switch (glyphLine.value[0]) {
     case 99: {
       const value = glyphLine.value.slice();
