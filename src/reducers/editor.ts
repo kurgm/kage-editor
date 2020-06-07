@@ -4,7 +4,7 @@ import { reducerWithInitialState } from 'typescript-fsa-reducers';
 import { polygonInPolygon, polygonIntersectsPolygon } from 'geometric';
 
 import { editorActions, RectPointPosition } from '../actions/editor';
-import { Glyph, parseGlyph } from '../kageUtils';
+import { Glyph, parseGlyph, moveSelectedGlyphLines, moveSelectedPoint, resizeSelectedGlyphLines, getGlyphLinesBBX } from '../kageUtils';
 import { makeGlyphSeparated } from '../kage';
 
 import args from '../args';
@@ -40,18 +40,31 @@ const performAreaSelect = (glyph: Glyph, x1: number, y1: number, x2: number, y2:
   return result;
 };
 
-const moveSelected = (glyph: Glyph, selection: number[], dx: number, dy: number): Glyph => {
-  // FIXME
-  return glyph;
-};
-
-const moveSelectedPoint = (glyph: Glyph, selection: number[], pointIndex: number, dx: number, dy: number): Glyph => {
-  // FIXME
-  return glyph;
-};
-const resizeSelected = (glyph: Glyph, selection: number[], position: RectPointPosition, dx: number, dy: number): Glyph => {
-  // FIXME
-  return glyph;
+export const resizeSelected = (glyph: Glyph, selection: number[], position: RectPointPosition, dx: number, dy: number): Glyph => {
+  const oldBBX = getGlyphLinesBBX(selection.map((index) => glyph[index]));
+  const newBBX = oldBBX.slice() as typeof oldBBX;
+  switch (position) {
+    case RectPointPosition.north:
+      newBBX[1] += dy;
+      break;
+    case RectPointPosition.east:
+      newBBX[0] += dx;
+      break;
+    case RectPointPosition.south:
+      newBBX[3] += dy;
+      break;
+    case RectPointPosition.west:
+      newBBX[2] += dx;
+      break;
+    case RectPointPosition.southeast:
+      newBBX[2] += dx;
+      newBBX[3] += dy;
+      break;
+    default:
+      // exhaustive?
+      ((_x: never) => {})(position);
+  }
+  return resizeSelectedGlyphLines(glyph, selection, oldBBX, newBBX);
 };
 
 
@@ -216,7 +229,7 @@ const editor = reducerWithInitialState(initialState)
       const [x1, y1] = state.dragSelection;
       const [x2, y2] = state.ctmInv(evt.clientX, evt.clientY);
 
-      const newGlyph = moveSelected(state.glyph, state.selection, x2 - x1, y2 - y1);
+      const newGlyph = moveSelectedGlyphLines(state.glyph, state.selection, x2 - x1, y2 - y1);
       return {
         ...state,
         glyph: newGlyph,

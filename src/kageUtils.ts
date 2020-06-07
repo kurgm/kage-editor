@@ -116,3 +116,19 @@ export const mergeBBX = ([x11, y11, x12, y12]: BBX, [x21, y21, x22, y22]: BBX): 
 export const getGlyphLinesBBX = (glyphLines: GlyphLine[]): BBX => {
   return glyphLines.map(getGlyphLineBBX).reduce(mergeBBX, bbxOfPoints([]));
 };
+
+
+export const moveSelectedGlyphLines = (glyph: Glyph, selection: number[], dx: number, dy: number): Glyph => {
+  // FIXME
+  return glyph;
+};
+
+export const moveSelectedPoint = (glyph: Glyph, selection: number[], pointIndex: number, dx: number, dy: number): Glyph => {
+  // FIXME
+  return glyph;
+};
+
+export const resizeSelectedGlyphLines = (glyph: Glyph, selection: number[], oldBBX: BBX, newBBX: BBX): Glyph => {
+  // FIXME
+  return glyph;
+};
