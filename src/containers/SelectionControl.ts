@@ -7,6 +7,7 @@ import SelectionControl from '../components/SelectionControl';
 import { AppState } from '../reducers';
 import { getGlyphLinesBBX } from '../kageUtils/bbx';
 import { applyDraggingEffectToGlyph } from '../reducers/editor';
+import { getMatchType, MatchType } from '../kageUtils/match';
 
 export interface RectControl {
   multiSelect: boolean;
@@ -73,10 +74,21 @@ const mapStateToProps = createSelector(
       case 7: {
         const pointControl: ControlPoint[] = [];
         for (let i = 3; i + 2 <= selectedStroke.value.length; i += 2) {
+          const matchType = getMatchType(glyph, {
+            lineIndex: selection[0],
+            pointIndex: (i - 3) / 2,
+          });
+          let className = '';
+          if (matchType === MatchType.match) {
+              className = 'match';
+          } else if (matchType === MatchType.online) {
+              className = 'online';
+          }
+
           pointControl.push({
             x: selectedStroke.value[i],
             y: selectedStroke.value[i + 1],
-            className: '', // FIXME: match detection
+            className,
           });
         }
         return { rectControl: null, pointControl };
