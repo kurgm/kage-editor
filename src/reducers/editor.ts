@@ -4,7 +4,9 @@ import { reducerWithInitialState } from 'typescript-fsa-reducers';
 import { polygonInPolygon, polygonIntersectsPolygon } from 'geometric';
 
 import { editorActions, RectPointPosition } from '../actions/editor';
-import { GlyphLine, Glyph, parseGlyph, moveSelectedGlyphLines, moveSelectedPoint, resizeSelectedGlyphLines, getGlyphLinesBBX } from '../kageUtils';
+import { GlyphLine, Glyph, parseGlyph } from '../kageUtils/glyph';
+import { getGlyphLinesBBX } from '../kageUtils/bbx';
+import { moveSelectedGlyphLines, moveSelectedPoint, resizeSelectedGlyphLines } from '../kageUtils/transform';
 import { makeGlyphSeparated } from '../kage';
 
 import args from '../args';

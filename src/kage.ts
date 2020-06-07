@@ -1,7 +1,7 @@
 import memoizeOne from 'memoize-one';
 
 import { Kage, Polygons } from '@kurgm/kage-engine';
-import { Glyph, unparseGlyphLine } from './kageUtils';
+import { Glyph, unparseGlyphLine } from './kageUtils/glyph';
 
 export const kage = new Kage();
 

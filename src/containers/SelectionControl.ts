@@ -5,7 +5,7 @@ import { createSelector } from 'reselect';
 import { editorActions, RectPointPosition } from '../actions/editor';
 import SelectionControl from '../components/SelectionControl';
 import { AppState } from '../reducers';
-import { getGlyphLinesBBX } from '../kageUtils';
+import { getGlyphLinesBBX } from '../kageUtils/bbx';
 import { applyDraggingEffectToGlyph } from '../reducers/editor';
 
 export interface RectControl {

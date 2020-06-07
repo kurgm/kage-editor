@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Glyph } from '../kageUtils';
+import { Glyph } from '../kageUtils/glyph';
 import { makeGlyphSeparated } from '../kage';
 import Stroke from './Stroke';
 
