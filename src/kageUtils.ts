@@ -334,7 +334,7 @@ const listupConnectedPointsOfSelection = memoizeOne((glyph: Glyph, selection: nu
   for (const lineIndex of selection) {
     const glyphLine = glyph[lineIndex];
     selectedDescs.push({ lineIndex, pointIndex: 0 });
-    selectedDescs.push({ lineIndex, pointIndex: (getNumColumns(glyphLine.value[0]) - 3) / 2 });
+    selectedDescs.push({ lineIndex, pointIndex: (getNumColumns(glyphLine.value[0]) - 3) / 2 - 1 });
   }
   return listupConnectedPoints(glyph, selectedDescs)
     .filter(({ lineIndex }) => !selection.includes(lineIndex));
