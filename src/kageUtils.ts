@@ -54,6 +54,37 @@ export const isValidGlyphLine = (glyphLine: GlyphLine): boolean => (
   )
 );
 
+const applyGlyphLineOperation = (glyphLine: GlyphLine, tX: (x: number) => number, tY: (y: number) => number): GlyphLine => {
+  switch (glyphLine.value[0]) {
+    case 99: {
+      const value = glyphLine.value.slice();
+      value[3] = tX(value[3]);
+      value[4] = tY(value[4]);
+      value[5] = tX(value[5]);
+      value[6] = tY(value[6]);
+      return { value, partName: glyphLine.partName };
+    }
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 6:
+    case 7:
+    case 9: {
+      const value = glyphLine.value.slice();
+      for (let i = 3; i + 2 <= value.length; i += 2) {
+        value[i] = tX(value[i]);
+        value[i + 1] = tY(value[i + 1]);
+      }
+      return { value };
+    }
+    default:
+      return glyphLine;
+  }
+}
+
+
 export type Glyph = GlyphLine[];
 
 export const parseGlyph = (glyphStr: string): Glyph => (
@@ -138,33 +169,7 @@ export const resizeGlyphLine = (glyphLine: GlyphLine, oldBBX: BBX, newBBX: BBX):
   const [x21, y21, x22, y22] = newBBX;
   const tX = (x: number) => Math.round(x21 + (x - x11) * (x22 - x21) / (x12 - x11));
   const tY = (y: number) => Math.round(y21 + (y - y11) * (y22 - y21) / (y12 - y11));
-  switch (glyphLine.value[0]) {
-    case 99: {
-      const value = glyphLine.value.slice();
-      value[3] = tX(value[3]);
-      value[4] = tY(value[4]);
-      value[5] = tX(value[5]);
-      value[6] = tY(value[6]);
-      return { value, partName: glyphLine.partName };
-    }
-    case 0:
-    case 1:
-    case 2:
-    case 3:
-    case 4:
-    case 6:
-    case 7:
-    case 9: {
-      const value = glyphLine.value.slice();
-      for (let i = 3; i + 2 <= value.length; i += 2) {
-        value[i] = tX(value[i]);
-        value[i + 1] = tY(value[i + 1]);
-      }
-      return { value };
-    }
-    default:
-      return glyphLine;
-  }
+  return applyGlyphLineOperation(glyphLine, tX, tY);
 };
 
 export const resizeSelectedGlyphLines = (glyph: Glyph, selection: number[], oldBBX: BBX, newBBX: BBX): Glyph => {
