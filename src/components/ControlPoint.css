@@ -1,0 +1,26 @@
+.controlpoint-rect {
+  fill: #f57900;
+  stroke: #f57900;
+  stroke-width: 1px;
+  cursor: move;
+}
+
+.controlpoint-rect.online {
+  fill: #73d216;
+  stroke: #73d216;
+}
+
+.controlpoint-rect.match {
+  fill: #729fcf;
+  stroke: #729fcf;
+}
+
+.controlpoint-rect.north, .controlpoint-rect.south {
+  cursor: ns-resize;
+}
+.controlpoint-rect.east, .controlpoint-rect.west {
+  cursor: ew-resize;
+}
+.controlpoint-rect.southeast {
+  cursor: nwse-resize;
+}
