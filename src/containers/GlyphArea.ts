@@ -7,7 +7,7 @@ import { AppState } from '../reducers';
 import { applyDraggingEffectToGlyph } from '../reducers/editor';
 
 export interface GlyphAreaActions {
-  handleMouseDownCapture: (evt: React.MouseEvent) => void;
+  handleMouseDownCapture: (evt: React.MouseEvent<SVGSVGElement>) => void;
 
   handleMouseDownBackground: (evt: React.MouseEvent) => void;
   handleMouseDownDeselectedStroke: (evt: React.MouseEvent, index: number) => void;
@@ -23,15 +23,12 @@ const mapStateToProps = (state: AppState) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): GlyphAreaActions => ({
-  handleMouseDownCapture: (evt: React.MouseEvent) => {
-    if (!(evt.target instanceof SVGSVGElement)) {
-      return;
-    }
-    const ctm = evt.target.getScreenCTM();
+  handleMouseDownCapture: (evt: React.MouseEvent<SVGSVGElement>) => {
+    const ctm = evt.currentTarget.getScreenCTM();
     if (!ctm) {
       return;
     }
-    const pt = evt.target.createSVGPoint();
+    const pt = evt.currentTarget.createSVGPoint();
     const ctmInv: CTMInv = (evtx, evty) => {
       pt.x = evtx;
       pt.y = evty;
