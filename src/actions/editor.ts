@@ -29,4 +29,6 @@ export const editorActions = {
   mouseUp: actionCreator<MouseEvent>('MOUSE_UP'),
 
   updateCTMInv: actionCreator<CTMInv>('UPDATE_CTMINV'),
+
+  addBuhin: actionCreator<[string, string]>('BUHIN_ADD'),
 };

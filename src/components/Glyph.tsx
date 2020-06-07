@@ -8,13 +8,14 @@ import './Glyph.css'
 
 export interface GlyphComponentProps {
   glyph: Glyph;
+  buhinMap: Map<string, string>;
   selection: number[];
   handleMouseDownDeselectedStroke?: (evt: React.MouseEvent, index: number) => void;
   handleMouseDownSelectedStroke?: (evt: React.MouseEvent, index: number) => void;
 }
 
 const GlyphComponent = (props: GlyphComponentProps) => {
-  const polygonsSep = makeGlyphSeparated(props.glyph);
+  const polygonsSep = makeGlyphSeparated(props.glyph, props.buhinMap);
 
   const { selection } = props;
   const nonSelection = polygonsSep.map((_polygons, index) => index)

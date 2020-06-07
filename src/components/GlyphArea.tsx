@@ -37,6 +37,7 @@ const GlyphArea = (props: GlyphAreaProps) => {
         <rect x="12" y="12" width="176" height="176" className="glyph-guide" />
         <Glyph
           glyph={props.glyph}
+          buhinMap={props.buhinMap}
           selection={props.selection}
           handleMouseDownDeselectedStroke={props.handleMouseDownDeselectedStroke}
           handleMouseDownSelectedStroke={props.handleMouseDownSelectedStroke}
