@@ -41,24 +41,25 @@ const performAreaSelect = (glyph: Glyph, x1: number, y1: number, x2: number, y2:
 };
 
 export const resizeSelected = (glyph: Glyph, selection: number[], position: RectPointPosition, dx: number, dy: number): Glyph => {
+  const minSize = 20;
   const oldBBX = getGlyphLinesBBX(selection.map((index) => glyph[index]));
   const newBBX = oldBBX.slice() as typeof oldBBX;
   switch (position) {
     case RectPointPosition.north:
-      newBBX[1] += dy;
+      newBBX[1] = Math.min(newBBX[1] + dy, newBBX[3] - minSize);
       break;
     case RectPointPosition.west:
-      newBBX[0] += dx;
+      newBBX[0] = Math.min(newBBX[0] + dx, newBBX[2] - minSize);
       break;
     case RectPointPosition.south:
-      newBBX[3] += dy;
+      newBBX[3] = Math.max(newBBX[3] + dy, newBBX[1] + minSize);
       break;
     case RectPointPosition.east:
-      newBBX[2] += dx;
+      newBBX[2] = Math.max(newBBX[2] + dx, newBBX[0] + minSize);
       break;
     case RectPointPosition.southeast:
-      newBBX[2] += dx;
-      newBBX[3] += dy;
+      newBBX[2] = Math.max(newBBX[2] + dx, newBBX[0] + minSize);
+      newBBX[3] = Math.max(newBBX[3] + dy, newBBX[1] + minSize);
       break;
     default:
       // exhaustive?
