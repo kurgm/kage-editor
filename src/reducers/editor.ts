@@ -44,6 +44,12 @@ const editor = reducerWithInitialState(initialState)
       ? state.selection.filter((index2) => index !== index2)
       : state.selection.concat([index])
   }))
+  .case(editorActions.selectSingleIfNotSelected, (state, index) => ({
+    ...state,
+    selection: state.selection.includes(index)
+      ? state.selection
+      : [index]
+  }))
   .case(editorActions.selectAll, (state) => ({
     ...state,
     selection: state.glyph.map((_gLine, index) => index),

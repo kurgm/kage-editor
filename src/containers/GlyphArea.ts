@@ -46,7 +46,7 @@ const mapDispatchToProps = (dispatch: Dispatch): GlyphAreaActions => ({
     if (evt.shiftKey || evt.ctrlKey) {
       dispatch(editorActions.selectXorSingle(index));
     } else {
-      dispatch(editorActions.selectSingle(index));
+      dispatch(editorActions.selectSingleIfNotSelected(index));
     }
     dispatch(editorActions.startSelectionDrag(evt));
     evt.stopPropagation();
