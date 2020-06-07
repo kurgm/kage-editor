@@ -355,7 +355,18 @@ export const moveSelectedGlyphLines = (glyph: Glyph, selection: number[], dx: nu
 };
 
 export const moveSelectedPoint = (glyph: Glyph, selection: number[], pointIndex: number, dx: number, dy: number): Glyph => {
-  // FIXME
+  if (selection.length === 0) {
+    return glyph;
+  }
+  const lineIndex = selection[0];
+  const selectedDesc: PointDescriptor = { lineIndex, pointIndex };
+  const targetDescs = listupConnectedPoints(glyph, [selectedDesc])
+    .filter((targetDesc) => targetDesc.lineIndex !== lineIndex);
+  targetDescs.push(selectedDesc);
+
+  const tX = (x: number) => Math.round(x + dx);
+  const tY = (y: number) => Math.round(y + dy);
+  glyph = applyGlyphPointOperation(glyph, targetDescs, tX, tY);
   return glyph;
 };
 
