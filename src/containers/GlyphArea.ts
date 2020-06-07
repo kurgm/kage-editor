@@ -4,6 +4,7 @@ import { Dispatch } from 'redux';
 import { editorActions, CTMInv } from '../actions/editor';
 import GlyphArea from '../components/GlyphArea';
 import { AppState } from '../reducers';
+import { applyDraggingEffectToGlyph } from '../reducers/editor';
 
 export interface GlyphAreaActions {
   handleMouseDownCapture: (evt: React.MouseEvent) => void;
@@ -16,7 +17,10 @@ export interface GlyphAreaActions {
   handleMouseUp: (evt: MouseEvent) => void;
 };
 
-const mapStateToProps = (state: AppState) => ({ ...state.editor });
+const mapStateToProps = (state: AppState) => ({
+  ...state.editor,
+  glyph: applyDraggingEffectToGlyph(state.editor),
+});
 
 const mapDispatchToProps = (dispatch: Dispatch): GlyphAreaActions => ({
   handleMouseDownCapture: (evt: React.MouseEvent) => {

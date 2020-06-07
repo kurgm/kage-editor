@@ -67,6 +67,27 @@ export const resizeSelected = (glyph: Glyph, selection: number[], position: Rect
   return resizeSelectedGlyphLines(glyph, selection, oldBBX, newBBX);
 };
 
+export const applyDraggingEffectToGlyph = (state: EditorState): Glyph => {
+  let glyph = state.glyph;
+  if (state.dragSelection) {
+    const [x1, y1, x2, y2] = state.dragSelection;
+    const dx = x2 - x1;
+    const dy = y2 - y1;
+    glyph = moveSelectedGlyphLines(state.glyph, state.selection, dx, dy);
+  } else if (state.dragPoint) {
+    const [pointIndex, [x1, y1, x2, y2]] = state.dragPoint;
+    const dx = x2 - x1;
+    const dy = y2 - y1;
+    glyph = moveSelectedPoint(state.glyph, state.selection, pointIndex, dx, dy);
+  } else if (state.resizeSelection) {
+    const [position, [x1, y1, x2, y2]] = state.resizeSelection;
+    const dx = x2 - x1;
+    const dy = y2 - y1;
+    glyph = resizeSelected(state.glyph, state.selection, position, dx, dy);
+  }
+  return glyph;
+}
+
 
 export interface EditorState {
   glyph: Glyph;

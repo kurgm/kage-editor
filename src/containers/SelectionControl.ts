@@ -5,7 +5,8 @@ import { createSelector } from 'reselect';
 import { editorActions, RectPointPosition } from '../actions/editor';
 import SelectionControl from '../components/SelectionControl';
 import { AppState } from '../reducers';
-import { getGlyphLinesBBX, Glyph } from '../kageUtils';
+import { getGlyphLinesBBX } from '../kageUtils';
+import { applyDraggingEffectToGlyph } from '../reducers/editor';
 
 export interface RectControl {
   multiSelect: boolean;
@@ -29,10 +30,10 @@ export interface SelectionControlActions {
 
 const mapStateToProps = createSelector(
   [
-    (state: AppState) => state.editor.glyph,
+    (state: AppState) => applyDraggingEffectToGlyph(state.editor),
     (state: AppState) => state.editor.selection,
   ],
-  (glyph: Glyph, selection: number[]): SelectionControlState => {
+  (glyph, selection): SelectionControlState => {
     if (selection.length === 0) {
       return { rectControl: null, pointControl: [] };
     }
