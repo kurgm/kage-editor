@@ -4,7 +4,7 @@ import { reducerWithInitialState } from 'typescript-fsa-reducers';
 import { polygonInPolygon, polygonIntersectsPolygon } from 'geometric';
 
 import { editorActions, RectPointPosition } from '../actions/editor';
-import { Glyph, parseGlyph, moveSelectedGlyphLines, moveSelectedPoint, resizeSelectedGlyphLines, getGlyphLinesBBX } from '../kageUtils';
+import { GlyphLine, Glyph, parseGlyph, moveSelectedGlyphLines, moveSelectedPoint, resizeSelectedGlyphLines, getGlyphLinesBBX } from '../kageUtils';
 import { makeGlyphSeparated } from '../kage';
 
 import args from '../args';
@@ -41,6 +41,41 @@ const performAreaSelect = (glyph: Glyph, x1: number, y1: number, x2: number, y2:
 };
 
 export const resizeSelected = (glyph: Glyph, selection: number[], position: RectPointPosition, dx: number, dy: number): Glyph => {
+  if (selection.length === 1) {
+    const selectedGlyphLine = glyph[selection[0]];
+    switch (selectedGlyphLine.value[0]) {
+      case 0:
+      case 9:
+      case 99: {
+        const newValue = selectedGlyphLine.value.slice();
+        switch (position) {
+          case RectPointPosition.north:
+            newValue[4] += dy;
+            break;
+          case RectPointPosition.west:
+            newValue[3] += dx;
+            break;
+          case RectPointPosition.south:
+            newValue[6] += dy;
+            break;
+          case RectPointPosition.east:
+            newValue[5] += dx;
+            break;
+          case RectPointPosition.southeast:
+            newValue[5] += dx;
+            newValue[6] += dy;
+            break;
+          default:
+            // exhaustive?
+            ((_x: never) => {})(position);
+        }
+        const newGlyphLine: GlyphLine = selectedGlyphLine.value[0] === 99
+          ? { value: newValue, partName: selectedGlyphLine.partName }
+          : { value: newValue };
+        return glyph.map((glyphLine, index) => index === selection[0] ? newGlyphLine : glyphLine);
+      }
+    }
+  }
   const minSize = 20;
   const oldBBX = getGlyphLinesBBX(selection.map((index) => glyph[index]));
   const newBBX = oldBBX.slice() as typeof oldBBX;
