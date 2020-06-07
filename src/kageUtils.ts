@@ -12,10 +12,11 @@ export const getNumColumns = (strokeType: number): number => {
     case 9:
       return 7;
     case 2:
-      return 9;
     case 3:
     case 4:
+      return 9;
     case 6:
+    case 7:
     case 99:
       return 11;
     default:
