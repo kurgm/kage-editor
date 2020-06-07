@@ -29,10 +29,11 @@ const mapDispatchToProps = (dispatch: Dispatch): GlyphAreaActions => ({
       return;
     }
     const pt = evt.currentTarget.createSVGPoint();
+    const ictm = ctm.inverse();
     const ctmInv: CTMInv = (evtx, evty) => {
       pt.x = evtx;
       pt.y = evty;
-      const { x, y } = pt.matrixTransform(ctm.inverse());
+      const { x, y } = pt.matrixTransform(ictm);
       return [x, y];
     };
     dispatch(editorActions.updateCTMInv(ctmInv));
