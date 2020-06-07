@@ -11,20 +11,25 @@ import { getSource } from './callapi';
 export const kage = new Kage();
 
 let waiting = new Set<string>();
+const loadAbsentBuhin = (name: string) => {
+  if (waiting.has(name)) {
+    return;
+  }
+  waiting.add(name);
+  getSource(name)
+    .then((source) => {
+      store.dispatch(editorActions.addBuhin([name, source]));
+      waiting.delete(name);
+    })
+    .catch((err) => console.error(err));
+};
 
 export const makeGlyphSeparated = memoizeOne((glyph: Glyph, map: Map<string, string>): Polygons[] => {
   const data = glyph.map(unparseGlyphLine);
   kage.kBuhin.search = (name) => {
     const result = map.get(name);
     if (typeof result === 'undefined') {
-      if (!waiting.has(name)) {
-        waiting.add(name);
-        getSource(name)
-          .then((source) => {
-            store.dispatch(editorActions.addBuhin([name, source]));
-            waiting.delete(name);
-          });
-      }
+      loadAbsentBuhin(name);
       return '';
     }
     return result;
