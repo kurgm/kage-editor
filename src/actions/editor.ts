@@ -6,8 +6,8 @@ const actionCreator = actionCreatorFactory('EDITOR');
 
 export const editorActions = {
   selectSingle: actionCreator<number>('SELECT_SINGLE'),
-  selectXorSingle: actionCreator<number>('SELECT_XOR_SINGLE'),
-  selectSingleIfNotSelected: actionCreator<number>('SELECT_SINGLE_IF_NOT_SELECTED'),
+  selectAddSingle: actionCreator<number>('SELECT_ADD_SINGLE'),
+  selectRemoveSingle: actionCreator<number>('SELECT_REMOVE_SINGLE'),
   selectNone: actionCreator('SELECT_NONE'),
   selectAll: actionCreator('SELECT_ALL'),
   selectPrev: actionCreator('SELECT_PREV'),

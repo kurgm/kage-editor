@@ -9,7 +9,8 @@ import './Glyph.css'
 export interface GlyphComponentProps {
   glyph: Glyph;
   selection: number[];
-  handleMouseDownStroke?: (evt: React.MouseEvent, index: number) => void;
+  handleMouseDownDeselectedStroke?: (evt: React.MouseEvent, index: number) => void;
+  handleMouseDownSelectedStroke?: (evt: React.MouseEvent, index: number) => void;
 }
 
 const GlyphComponent = (props: GlyphComponentProps) => {
@@ -23,14 +24,14 @@ const GlyphComponent = (props: GlyphComponentProps) => {
     <>
       <g className="strokes-deselected">
         {nonSelection.map((index) => (
-          <g key={index} onMouseDown={(evt) => props.handleMouseDownStroke?.(evt, index)}>
+          <g key={index} onMouseDown={(evt) => props.handleMouseDownDeselectedStroke?.(evt, index)}>
             <Stroke polygons={polygonsSep[index]} />
           </g>
         ))}
       </g>
       <g className="strokes-selected">
         {selection.map((index) => (
-          <g key={index} onMouseDown={(evt) => props.handleMouseDownStroke?.(evt, index)}>
+          <g key={index} onMouseDown={(evt) => props.handleMouseDownSelectedStroke?.(evt, index)}>
             <Stroke polygons={polygonsSep[index]} />
           </g>
         ))}

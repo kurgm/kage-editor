@@ -9,7 +9,8 @@ export interface GlyphAreaActions {
   handleMouseDownCapture: (evt: React.MouseEvent) => void;
 
   handleMouseDownBackground: (evt: React.MouseEvent) => void;
-  handleMouseDownStroke: (evt: React.MouseEvent, index: number) => void;
+  handleMouseDownDeselectedStroke: (evt: React.MouseEvent, index: number) => void;
+  handleMouseDownSelectedStroke: (evt: React.MouseEvent, index: number) => void;
 
   handleMouseMove: (evt: MouseEvent) => void;
   handleMouseUp: (evt: MouseEvent) => void;
@@ -42,11 +43,18 @@ const mapDispatchToProps = (dispatch: Dispatch): GlyphAreaActions => ({
     }
     dispatch(editorActions.startAreaSelect(evt));
   },
-  handleMouseDownStroke: (evt: React.MouseEvent, index: number) => {
+  handleMouseDownDeselectedStroke: (evt: React.MouseEvent, index: number) => {
     if (evt.shiftKey || evt.ctrlKey) {
-      dispatch(editorActions.selectXorSingle(index));
+      dispatch(editorActions.selectAddSingle(index));
     } else {
-      dispatch(editorActions.selectSingleIfNotSelected(index));
+      dispatch(editorActions.selectSingle(index));
+    }
+    dispatch(editorActions.startSelectionDrag(evt));
+    evt.stopPropagation();
+  },
+  handleMouseDownSelectedStroke: (evt: React.MouseEvent, index: number) => {
+    if (evt.shiftKey || evt.ctrlKey) {
+      dispatch(editorActions.selectRemoveSingle(index));
     }
     dispatch(editorActions.startSelectionDrag(evt));
     evt.stopPropagation();

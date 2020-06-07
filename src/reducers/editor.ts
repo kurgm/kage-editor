@@ -38,17 +38,13 @@ const editor = reducerWithInitialState(initialState)
     ...state,
     selection: [index],
   }))
-  .case(editorActions.selectXorSingle, (state, index) => ({
+  .case(editorActions.selectAddSingle, (state, index) => ({
     ...state,
-    selection: state.selection.includes(index)
-      ? state.selection.filter((index2) => index !== index2)
-      : state.selection.concat([index])
+    selection: state.selection.includes(index) ? state.selection : state.selection.concat([index]),
   }))
-  .case(editorActions.selectSingleIfNotSelected, (state, index) => ({
+  .case(editorActions.selectRemoveSingle, (state, index) => ({
     ...state,
-    selection: state.selection.includes(index)
-      ? state.selection
-      : [index]
+    selection: state.selection.filter((index2) => index !== index2),
   }))
   .case(editorActions.selectAll, (state) => ({
     ...state,

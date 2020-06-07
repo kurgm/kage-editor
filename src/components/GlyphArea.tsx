@@ -36,7 +36,8 @@ const GlyphArea = (props: GlyphAreaProps) => {
         <Glyph
           glyph={props.glyph}
           selection={props.selection}
-          handleMouseDownStroke={props.handleMouseDownStroke}
+          handleMouseDownDeselectedStroke={props.handleMouseDownDeselectedStroke}
+          handleMouseDownSelectedStroke={props.handleMouseDownSelectedStroke}
         />
         {/* TODO: control points */}
       </svg>
