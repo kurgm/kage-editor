@@ -149,7 +149,7 @@ export const mergeBBX = ([x11, y11, x12, y12]: BBX, [x21, y21, x22, y22]: BBX): 
 
 export const getGlyphLinesBBX = memoizeOne((glyphLines: GlyphLine[]): BBX => {
   return glyphLines.map(getGlyphLineBBX).reduce(mergeBBX, bbxOfPoints([]));
-}, (gLines1: GlyphLine[], gLines2: GlyphLine[]) => (
+}, ([gLines1], [gLines2]) => (
   gLines1.length === gLines2.length &&
   gLines1.every((gLine1, index) => gLine1 === gLines2[index])
 ));
