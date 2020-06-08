@@ -5,7 +5,7 @@ import { selectActions } from '../actions/select';
 import { dragActions, CTMInv } from '../actions/drag';
 import GlyphArea from '../components/GlyphArea';
 import { AppState } from '../reducers';
-import { applyDraggingEffectToGlyph } from '../reducers';
+import { applyDraggingEffectToGlyph } from '../reducers/drag';
 
 export interface GlyphAreaActions {
   handleMouseDownCapture: (evt: React.MouseEvent<SVGSVGElement>) => void;

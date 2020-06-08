@@ -3,11 +3,12 @@ import { Dispatch } from 'redux';
 import { createSelector } from 'reselect';
 
 import { dragActions, RectPointPosition } from '../actions/drag';
-import SelectionControl from '../components/SelectionControl';
 import { AppState } from '../reducers';
+import { applyDraggingEffectToGlyph } from '../reducers/drag';
 import { getGlyphLinesBBX } from '../kageUtils/bbx';
-import { applyDraggingEffectToGlyph } from '../reducers';
 import { getMatchType, MatchType } from '../kageUtils/match';
+
+import SelectionControl from '../components/SelectionControl';
 
 export interface RectControl {
   multiSelect: boolean;
