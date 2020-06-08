@@ -6,7 +6,7 @@ import { dragActions, RectPointPosition } from '../actions/drag';
 import SelectionControl from '../components/SelectionControl';
 import { AppState } from '../reducers';
 import { getGlyphLinesBBX } from '../kageUtils/bbx';
-import { applyDraggingEffectToGlyph } from '../reducers/editor';
+import { applyDraggingEffectToGlyph } from '../reducers';
 import { getMatchType, MatchType } from '../kageUtils/match';
 
 export interface RectControl {
@@ -31,8 +31,8 @@ export interface SelectionControlActions {
 
 const mapStateToProps = createSelector(
   [
-    (state: AppState) => applyDraggingEffectToGlyph(state.editor),
-    (state: AppState) => state.editor.selection,
+    (state: AppState) => applyDraggingEffectToGlyph(state),
+    (state: AppState) => state.selection,
   ],
   (glyph, selection): SelectionControlState => {
     if (selection.length === 0) {

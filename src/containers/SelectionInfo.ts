@@ -38,10 +38,10 @@ export interface SelectionInfoActions {
 
 const mapStateToProps = createSelector(
   [
-    (state: AppState) => state.editor.glyph,
-    (state: AppState) => state.editor.buhinMap,
-    (state: AppState) => state.editor.stretchParamMap,
-    (state: AppState) => state.editor.selection,
+    (state: AppState) => state.glyph,
+    (state: AppState) => state.buhinMap,
+    (state: AppState) => state.stretchParamMap,
+    (state: AppState) => state.selection,
   ],
   (glyph, buhinMap, stretchParamMap, selection): SelectionInfoState => {
     if (selection.length === 0) {

@@ -38,11 +38,11 @@ export interface EditorControlsActions {
 };
 
 const mapStateToProps = createSelector([
-  (state: AppState) => state.editor.glyph,
-  (state: AppState) => state.editor.buhinMap,
-  (state: AppState) => state.editor.selection,
-  (state: AppState) => state.editor.clipboard,
-  (state: AppState) => state.editor.freehandMode,
+  (state: AppState) => state.glyph,
+  (state: AppState) => state.buhinMap,
+  (state: AppState) => state.selection,
+  (state: AppState) => state.clipboard,
+  (state: AppState) => state.freehandMode,
 ], (glyph, buhinMap, selection, clipboard, freehandMode): EditorControlsStateProps => ({
   glyph,
   buhinMap,

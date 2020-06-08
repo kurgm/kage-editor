@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 
-import { EditorState } from '../reducers/editor';
+import { AppState } from '../reducers';
 
 import Glyph from './Glyph';
 import AreaSelectRect from './AreaSelectRect';
@@ -12,7 +12,7 @@ import './GlyphArea.css';
 interface OwnProps {
 }
 
-type GlyphAreaProps = OwnProps & EditorState & GlyphAreaActions;
+type GlyphAreaProps = OwnProps & AppState & GlyphAreaActions;
 
 const GlyphArea = (props: GlyphAreaProps) => {
   const { handleMouseMove, handleMouseUp } = props;
