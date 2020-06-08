@@ -1,5 +1,7 @@
 import actionCreatorFactory from 'typescript-fsa';
 
+import { StretchParam } from '../kageUtils/stretchparam';
+
 export type CTMInv = (x: number, y: number) => [number, number];
 export enum RectPointPosition {
   north,
@@ -30,5 +32,6 @@ export const editorActions = {
 
   updateCTMInv: actionCreator<CTMInv>('UPDATE_CTMINV'),
 
-  addBuhin: actionCreator<[string, string]>('BUHIN_ADD'),
+  loadedBuhin: actionCreator<[string, string]>('LOAD_BUHIN_DATA'),
+  loadedStretchParam: actionCreator<[string, StretchParam]>('LOAD_STRETCH_PARAM'),
 };

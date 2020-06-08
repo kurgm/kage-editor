@@ -7,6 +7,7 @@ import { editorActions, RectPointPosition } from '../actions/editor';
 import { GlyphLine, Glyph, parseGlyph } from '../kageUtils/glyph';
 import { getGlyphLinesBBX } from '../kageUtils/bbx';
 import { moveSelectedGlyphLines, moveSelectedPoint, resizeSelectedGlyphLines } from '../kageUtils/transform';
+import { StretchParam } from '../kageUtils/stretchparam';
 import { makeGlyphSeparated } from '../kage';
 
 import args from '../args';
@@ -136,6 +137,7 @@ export interface EditorState {
   resizeSelection: [RectPointPosition, [number, number, number, number]] | null;
   ctmInv: ((x: number, y: number) => [number, number]) | null;
   buhinMap: Map<string, string>;
+  stretchParamMap: Map<string, StretchParam>;
 }
 
 const initialState: EditorState = {
@@ -147,6 +149,7 @@ const initialState: EditorState = {
   resizeSelection: null,
   ctmInv: null,
   buhinMap: new Map<string, string>(),
+  stretchParamMap: new Map<string, StretchParam>(),
 };
 
 const editor = reducerWithInitialState(initialState)
@@ -327,13 +330,21 @@ const editor = reducerWithInitialState(initialState)
     ctmInv,
   }))
 
-  .case(editorActions.addBuhin, (state, [name, data]) => {
+  .case(editorActions.loadedBuhin, (state, [name, data]) => {
     const newMap = new Map(state.buhinMap);
     newMap.set(name, data);
     return {
       ...state,
       buhinMap: newMap,
     };
+  })
+  .case(editorActions.loadedStretchParam, (state, [name, param]) => {
+    const newMap = new Map(state.stretchParamMap);
+    newMap.set(name, param);
+    return {
+      ...state,
+      stretchParamMap: newMap,
+    }
   });
 
 export default editor;

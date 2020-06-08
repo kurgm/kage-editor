@@ -12,7 +12,7 @@ const callApi = async (path: string) => {
 
 export const getSource = async (name: string) => {
   const result = await callApi(`/get_source.cgi?name=${encodeURIComponent(name)}`);
-  return result.get('data')!;
+  return result.get('data');
 };
 
 export const search = async (query: string) => {

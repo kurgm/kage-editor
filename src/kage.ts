@@ -2,6 +2,7 @@ import memoizeOne from 'memoize-one';
 
 import { Kage, Polygons } from '@kurgm/kage-engine';
 import { Glyph, unparseGlyphLine } from './kageUtils/glyph';
+import { StretchParam } from './kageUtils/stretchparam';
 
 import store from './store';
 import { editorActions } from './actions/editor';
@@ -18,7 +19,20 @@ const loadAbsentBuhin = (name: string) => {
   waiting.add(name);
   getSource(name)
     .then((source) => {
-      store.dispatch(editorActions.addBuhin([name, source]));
+      if (typeof source !== 'string') {
+        throw new Error(`failed to get buhin source of ${name}`);
+      }
+      const stretchMatch = /^0:1:0:(-?\d+):(-?\d+):(-?\d+):(-?\d+)(?=$|\$)/.exec(source);
+      if (stretchMatch) {
+        const params: StretchParam = [
+          +stretchMatch[1] || 0,
+          +stretchMatch[2] || 0,
+          +stretchMatch[3] || 0,
+          +stretchMatch[4] || 0,
+        ];
+        store.dispatch(editorActions.loadedStretchParam([name, params]));
+      }
+      store.dispatch(editorActions.loadedBuhin([name, source]));
       waiting.delete(name);
     })
     .catch((err) => console.error(err));
