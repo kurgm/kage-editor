@@ -1,11 +1,11 @@
 import { reducerWithInitialState } from 'typescript-fsa-reducers';
 
-import { RectPointPosition } from '../actions/drag';
+import { RectPointPosition, CTMInv } from '../actions/drag';
 
 import { GlyphLine, Glyph, parseGlyph } from '../kageUtils/glyph';
 import { StretchParam } from '../kageUtils/stretchparam';
-
 import args from '../args';
+
 import select from './select';
 import drag from './drag';
 import editor from './editor';
@@ -18,7 +18,7 @@ export interface AppState {
   dragSelection: [number, number, number, number] | null;
   dragPoint: [number, [number, number, number, number]] | null;
   resizeSelection: [RectPointPosition, [number, number, number, number]] | null;
-  ctmInv: ((x: number, y: number) => [number, number]) | null;
+  ctmInv: CTMInv | null;
   buhinMap: Map<string, string>;
   stretchParamMap: Map<string, StretchParam>;
   freehandMode: boolean;
