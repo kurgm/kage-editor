@@ -358,8 +358,40 @@ const editor = reducerWithInitialState(initialState)
     }
   })
 
-  .case(editorActions.swapWithPrev, (state) => state) // TODO
-  .case(editorActions.swapWithNext, (state) => state) // TODO
+  .case(editorActions.swapWithPrev, (state) => {
+    if (state.selection.length !== 1) {
+      return state;
+    }
+    const lineIndex = state.selection[0];
+    if (lineIndex === 0) {
+      return state;
+    }
+    const newGlyph = state.glyph.slice();
+    newGlyph[lineIndex - 1] = state.glyph[lineIndex];
+    newGlyph[lineIndex] = state.glyph[lineIndex - 1];
+    return {
+      ...state,
+      glyph: newGlyph,
+      selection: [lineIndex - 1],
+    };
+  })
+  .case(editorActions.swapWithNext, (state) => {
+    if (state.selection.length !== 1) {
+      return state;
+    }
+    const lineIndex = state.selection[0];
+    if (lineIndex === state.glyph.length - 1) {
+      return state;
+    }
+    const newGlyph = state.glyph.slice();
+    newGlyph[lineIndex + 1] = state.glyph[lineIndex];
+    newGlyph[lineIndex] = state.glyph[lineIndex + 1];
+    return {
+      ...state,
+      glyph: newGlyph,
+      selection: [lineIndex + 1],
+    };
+  })
 
   .case(editorActions.undo, (state) => state) // TODO
   .case(editorActions.redo, (state) => state) // TODO
