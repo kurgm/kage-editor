@@ -3,6 +3,8 @@ import { Dispatch } from 'redux';
 import { createSelector } from 'reselect';
 
 import { editorActions } from '../actions/editor';
+import { selectActions } from '../actions/select';
+
 import { AppState } from '../reducers';
 import { Glyph } from '../kageUtils/glyph';
 
@@ -62,10 +64,10 @@ const mapDispatchToProps = (dispatch: Dispatch): EditorControlsActions => ({
     dispatch(editorActions.redo());
   },
   selectAll: () => {
-    dispatch(editorActions.selectAll());
+    dispatch(selectActions.selectAll());
   },
   selectDeselected: () => {
-    dispatch(editorActions.selectDeselected());
+    dispatch(selectActions.selectDeselected());
   },
   copy: () => {
     dispatch(editorActions.copy());

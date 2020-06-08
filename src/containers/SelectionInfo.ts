@@ -3,6 +3,7 @@ import { Dispatch } from 'redux';
 import { createSelector } from 'reselect';
 
 import { editorActions } from '../actions/editor';
+import { selectActions } from '../actions/select';
 import { AppState } from '../reducers';
 import { GlyphLine } from '../kageUtils/glyph';
 import { calcStretchScalar, getStretchPositions } from '../kageUtils/stretchparam';
@@ -146,10 +147,10 @@ const mapStateToProps = createSelector(
 
 const mapDispatchToProps = (dispatch: Dispatch): SelectionInfoActions => ({
   selectPrev: () => {
-    dispatch(editorActions.selectPrev());
+    dispatch(selectActions.selectPrev());
   },
   selectNext: () => {
-    dispatch(editorActions.selectNext());
+    dispatch(selectActions.selectNext());
   },
   swapWithPrev: () => {
     dispatch(editorActions.swapWithPrev());

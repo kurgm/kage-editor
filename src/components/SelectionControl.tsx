@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { RectPointPosition } from '../actions/editor';
+import { RectPointPosition } from '../actions/drag';
 import ControlPoint from './ControlPoint';
 
 import { SelectionControlState, SelectionControlActions } from '../containers/SelectionControl';

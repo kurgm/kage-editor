@@ -3,7 +3,10 @@ import { reducerWithInitialState } from 'typescript-fsa-reducers';
 // @ts-ignore
 import { polygonInPolygon, polygonIntersectsPolygon } from 'geometric';
 
-import { editorActions, RectPointPosition } from '../actions/editor';
+import { editorActions } from '../actions/editor';
+import { selectActions } from '../actions/select';
+import { dragActions, RectPointPosition } from '../actions/drag';
+
 import { GlyphLine, Glyph, parseGlyph } from '../kageUtils/glyph';
 import { getGlyphLinesBBX } from '../kageUtils/bbx';
 import { moveSelectedGlyphLines, moveSelectedPoint, resizeSelectedGlyphLines, applyGlyphLineOperation } from '../kageUtils/transform';
@@ -160,31 +163,31 @@ const initialState: EditorState = {
 };
 
 const editor = reducerWithInitialState(initialState)
-  .case(editorActions.selectSingle, (state, index) => ({
+  .case(selectActions.selectSingle, (state, index) => ({
     ...state,
     selection: [index],
   }))
-  .case(editorActions.selectAddSingle, (state, index) => ({
+  .case(selectActions.selectAddSingle, (state, index) => ({
     ...state,
     selection: state.selection.includes(index) ? state.selection : state.selection.concat([index]),
   }))
-  .case(editorActions.selectRemoveSingle, (state, index) => ({
+  .case(selectActions.selectRemoveSingle, (state, index) => ({
     ...state,
     selection: state.selection.filter((index2) => index !== index2),
   }))
-  .case(editorActions.selectAll, (state) => ({
+  .case(selectActions.selectAll, (state) => ({
     ...state,
     selection: state.glyph.map((_gLine, index) => index),
   }))
-  .case(editorActions.selectDeselected, (state) => ({
+  .case(selectActions.selectDeselected, (state) => ({
     ...state,
     selection: state.glyph.map((_gLine, index) => index).filter((index) => !state.selection.includes(index)),
   }))
-  .case(editorActions.selectNone, (state) => ({
+  .case(selectActions.selectNone, (state) => ({
     ...state,
     selection: [],
   }))
-  .case(editorActions.selectPrev, (state) => {
+  .case(selectActions.selectPrev, (state) => {
     if (state.glyph.length === 0) {
       return { ...state, selection: [] };
     }
@@ -194,7 +197,7 @@ const editor = reducerWithInitialState(initialState)
       selection: [(firstSelected - 1 + state.glyph.length) % state.glyph.length],
     };
   })
-  .case(editorActions.selectNext, (state) => {
+  .case(selectActions.selectNext, (state) => {
     if (state.glyph.length === 0) {
       return { ...state, selection: [] };
     }
@@ -205,7 +208,7 @@ const editor = reducerWithInitialState(initialState)
     };
   })
 
-  .case(editorActions.startAreaSelect, (state, evt) => {
+  .case(dragActions.startAreaSelect, (state, evt) => {
     if (!state.ctmInv) {
       return state;
     }
@@ -215,7 +218,7 @@ const editor = reducerWithInitialState(initialState)
       areaSelectRect: [x1, y1, x1, y1],
     };
   })
-  .case(editorActions.startSelectionDrag, (state, evt) => {
+  .case(dragActions.startSelectionDrag, (state, evt) => {
     if (!state.ctmInv) {
       return state;
     }
@@ -225,7 +228,7 @@ const editor = reducerWithInitialState(initialState)
       dragSelection: [x1, y1, x1, y1],
     };
   })
-  .case(editorActions.startPointDrag, (state, [evt, pointIndex]) => {
+  .case(dragActions.startPointDrag, (state, [evt, pointIndex]) => {
     if (!state.ctmInv) {
       return state;
     }
@@ -235,7 +238,7 @@ const editor = reducerWithInitialState(initialState)
       dragPoint: [pointIndex, [x1, y1, x1, y1]],
     };
   })
-  .case(editorActions.startResize, (state, [evt, position]) => {
+  .case(dragActions.startResize, (state, [evt, position]) => {
     if (!state.ctmInv) {
       return state;
     }
@@ -246,7 +249,7 @@ const editor = reducerWithInitialState(initialState)
     };
   })
 
-  .case(editorActions.mouseMove, (state, evt) => {
+  .case(dragActions.mouseMove, (state, evt) => {
     if (!state.ctmInv) {
       return state;
     }
@@ -284,7 +287,7 @@ const editor = reducerWithInitialState(initialState)
     }
     return state;
   })
-  .case(editorActions.mouseUp, (state, evt) => {
+  .case(dragActions.mouseUp, (state, evt) => {
     if (!state.ctmInv) {
       return state;
     }
@@ -336,7 +339,7 @@ const editor = reducerWithInitialState(initialState)
     return state;
   })
 
-  .case(editorActions.updateCTMInv, (state, ctmInv) => ({
+  .case(dragActions.updateCTMInv, (state, ctmInv) => ({
     ...state,
     ctmInv,
   }))

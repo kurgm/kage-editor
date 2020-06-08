@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { createSelector } from 'reselect';
 
-import { editorActions, RectPointPosition } from '../actions/editor';
+import { dragActions, RectPointPosition } from '../actions/drag';
 import SelectionControl from '../components/SelectionControl';
 import { AppState } from '../reducers';
 import { getGlyphLinesBBX } from '../kageUtils/bbx';
@@ -101,11 +101,11 @@ const mapStateToProps = createSelector(
 
 const mapDispatchToProps = (dispatch: Dispatch): SelectionControlActions => ({
   handleMouseDownRectControl: (evt: React.MouseEvent, position: RectPointPosition) => {
-    dispatch(editorActions.startResize([evt, position]));
+    dispatch(dragActions.startResize([evt, position]));
     evt.stopPropagation();
   },
   handleMouseDownPointControl: (evt: React.MouseEvent, pointIndex: number) => {
-    dispatch(editorActions.startPointDrag([evt, pointIndex]));
+    dispatch(dragActions.startPointDrag([evt, pointIndex]));
     evt.stopPropagation();
   },
 });
