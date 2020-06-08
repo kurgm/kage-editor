@@ -5,7 +5,7 @@ import { selectActions } from '../actions/select';
 import { dragActions, CTMInv } from '../actions/drag';
 import GlyphArea from '../components/GlyphArea';
 import { AppState } from '../reducers';
-import { applyDraggingEffectToGlyph } from '../reducers/drag';
+import { draggedGlyphSelector } from '../selectors/draggedGlyph';
 
 export interface GlyphAreaActions {
   handleMouseDownCapture: (evt: React.MouseEvent<SVGSVGElement>) => void;
@@ -20,7 +20,7 @@ export interface GlyphAreaActions {
 
 const mapStateToProps = (state: AppState) => ({
   ...state,
-  glyph: applyDraggingEffectToGlyph(state),
+  glyph: draggedGlyphSelector(state),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch): GlyphAreaActions => ({
