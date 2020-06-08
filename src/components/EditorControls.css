@@ -1,0 +1,30 @@
+.editor-controls {
+  display: flex;
+}
+
+.selection-info {
+  flex: 1;
+}
+
+.control-buttons {
+  margin: 0 1em;
+  display: grid;
+  grid-template-columns: repeat(2, 7em);
+  gap: 3px;
+}
+
+.preview {
+  display: flex;
+  flex-flow: column;
+  justify-content: space-evenly;
+  width: 7em;
+}
+
+.preview-thumbnail {
+  align-self: center;
+  border: 1px solid #cccccc;
+}
+
+.preview button {
+  font-weight: bold;
+}
