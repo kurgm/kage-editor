@@ -138,6 +138,9 @@ export interface EditorState {
   ctmInv: ((x: number, y: number) => [number, number]) | null;
   buhinMap: Map<string, string>;
   stretchParamMap: Map<string, StretchParam>;
+  freehandMode: boolean;
+  showOptionModal: boolean;
+  clipboard: GlyphLine[];
 }
 
 const initialState: EditorState = {
@@ -150,6 +153,9 @@ const initialState: EditorState = {
   ctmInv: null,
   buhinMap: new Map<string, string>(),
   stretchParamMap: new Map<string, StretchParam>(),
+  freehandMode: false,
+  showOptionModal: false,
+  clipboard: [],
 };
 
 const editor = reducerWithInitialState(initialState)
@@ -168,6 +174,10 @@ const editor = reducerWithInitialState(initialState)
   .case(editorActions.selectAll, (state) => ({
     ...state,
     selection: state.glyph.map((_gLine, index) => index),
+  }))
+  .case(editorActions.selectDeselected, (state) => ({
+    ...state,
+    selection: state.glyph.map((_gLine, index) => index).filter((index) => !state.selection.includes(index)),
   }))
   .case(editorActions.selectNone, (state) => ({
     ...state,
@@ -345,6 +355,30 @@ const editor = reducerWithInitialState(initialState)
       ...state,
       stretchParamMap: newMap,
     }
-  });
+  })
+
+  .case(editorActions.undo, (state) => state) // TODO
+  .case(editorActions.redo, (state) => state) // TODO
+
+  .case(editorActions.paste, (state) => state) // TODO
+  .case(editorActions.copy, (state) => state) // TODO
+  .case(editorActions.cut, (state) => state) // TODO
+
+  .case(editorActions.decomposeSelected, (state) => state) // TODO
+
+  .case(editorActions.toggleFreehand, (state) => ({
+    ...state,
+    selection: state.freehandMode ? state.selection : [],
+    freehandMode: !state.freehandMode,
+  }))
+
+  .case(editorActions.openOptionModal, (state) => ({
+    ...state,
+    showOptionModal: true,
+  }))
+  .case(editorActions.closeOptionModal, (state) => ({
+    ...state,
+    showOptionModal: false,
+  }));
 
 export default editor;
