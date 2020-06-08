@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/kage-editor/precache-manifest.16535131d2479821633d3035c23bd57c.js"
+  "/kage-editor/precache-manifest.910f3aadd5b684148d5aeeab70257ba3.js"
 );
 
 self.addEventListener('message', (event) => {
