@@ -1,4 +1,8 @@
 {
+  "select prev": "←",
+  "swap with prev": "入替←",
+  "select next": "→",
+  "swap with next": "→入替",
   "undo": "元に戻す",
   "redo": "やり直す",
   "select all": "すべてを選択",

@@ -22,6 +22,10 @@ export interface EditorControlsStateProps {
 };
 
 export interface EditorControlsActions {
+  selectPrev: () => void;
+  selectNext: () => void;
+  swapWithPrev: () => void;
+  swapWithNext: () => void;
   undo: () => void;
   redo: () => void;
   selectAll: () => void;
@@ -55,6 +59,18 @@ const mapStateToProps = createSelector([
 }));
 
 const mapDispatchToProps = (dispatch: Dispatch): EditorControlsActions => ({
+  selectPrev: () => {
+    dispatch(editorActions.selectPrev());
+  },
+  selectNext: () => {
+    dispatch(editorActions.selectNext());
+  },
+  swapWithPrev: () => {
+    dispatch(editorActions.swapWithPrev());
+  },
+  swapWithNext: () => {
+    dispatch(editorActions.swapWithNext());
+  },
   undo: () => {
     dispatch(editorActions.undo());
   },

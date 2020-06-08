@@ -358,6 +358,9 @@ const editor = reducerWithInitialState(initialState)
     }
   })
 
+  .case(editorActions.swapWithPrev, (state) => state) // TODO
+  .case(editorActions.swapWithNext, (state) => state) // TODO
+
   .case(editorActions.undo, (state) => state) // TODO
   .case(editorActions.redo, (state) => state) // TODO
 

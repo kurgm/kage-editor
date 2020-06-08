@@ -36,6 +36,9 @@ export const editorActions = {
   loadedBuhin: actionCreator<[string, string]>('LOAD_BUHIN_DATA'),
   loadedStretchParam: actionCreator<[string, StretchParam]>('LOAD_STRETCH_PARAM'),
 
+  swapWithPrev: actionCreator('SWAP_WITH_PREV'),
+  swapWithNext: actionCreator('SWAP_WITH_NEXT'),
+
   undo: actionCreator('UNDO'),
   redo: actionCreator('REDO'),
 
