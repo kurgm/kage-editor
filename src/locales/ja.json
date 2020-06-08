@@ -9,6 +9,7 @@
   "part": "部品",
   "alias of": "({{entity}} のエイリアス)",
   "stretch": "ストレッチ:",
+  "selecting multiple strokes": "複数選択中",
   "select prev": "←",
   "swap with prev": "入替←",
   "select next": "→",

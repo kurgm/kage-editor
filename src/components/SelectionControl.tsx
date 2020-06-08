@@ -1,5 +1,5 @@
-import React, { useCallback } from 'react';
-import { useDispatch, useSelector, shallowEqual } from 'react-redux';
+import React, { useCallback, useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { createSelector } from 'reselect';
 
@@ -13,26 +13,27 @@ import ControlPoint from './ControlPoint';
 
 import './SelectionControl.css';
 
-export interface RectControl {
+interface RectControl {
   multiSelect: boolean;
   coords: [number, number, number, number];
 }
-export interface ControlPoint {
+interface ControlPoint {
   x: number;
   y: number;
   className: string;
 }
 
-export interface SelectionControlState {
+interface SelectionControlSpec {
   rectControl: RectControl | null;
   pointControl: ControlPoint[];
 }
-const mapStateToProps = createSelector(
+
+const selectionControlSelector = createSelector(
   [
     draggedGlyphSelector,
     (state: AppState) => state.selection,
   ],
-  (glyph, selection): SelectionControlState => {
+  (glyph, selection): SelectionControlSpec => {
     if (selection.length === 0) {
       return { rectControl: null, pointControl: [] };
     }
@@ -98,7 +99,7 @@ const mapStateToProps = createSelector(
 );
 
 const SelectionControl = () => {
-  const props = useSelector(mapStateToProps, shallowEqual);
+  const { rectControl, pointControl } = useSelector(selectionControlSelector);
 
   const dispatch = useDispatch();
   const handleMouseDownRectControl = useCallback((evt: React.MouseEvent, position: RectPointPosition) => {
@@ -106,57 +107,80 @@ const SelectionControl = () => {
     evt.stopPropagation();
   }, [dispatch]);
 
-  const handleMouseDownPointControl = useCallback((evt: React.MouseEvent, pointIndex: number) => {
-    dispatch(dragActions.startPointDrag([evt, pointIndex]));
-    evt.stopPropagation();
-  }, [dispatch]);
+  const handleMouseDownNorthPoint = useCallback(
+    (evt: React.MouseEvent) => handleMouseDownRectControl(evt, RectPointPosition.north),
+    [handleMouseDownRectControl]
+  );
+  const handleMouseDownWestPoint = useCallback(
+    (evt: React.MouseEvent) => handleMouseDownRectControl(evt, RectPointPosition.west),
+    [handleMouseDownRectControl]
+  );
+  const handleMouseDownSouthPoint = useCallback(
+    (evt: React.MouseEvent) => handleMouseDownRectControl(evt, RectPointPosition.south),
+    [handleMouseDownRectControl]
+  );
+  const handleMouseDownEastPoint = useCallback(
+    (evt: React.MouseEvent) => handleMouseDownRectControl(evt, RectPointPosition.east),
+    [handleMouseDownRectControl]
+  );
+  const handleMouseDownSoutheastPoint = useCallback(
+    (evt: React.MouseEvent) => handleMouseDownRectControl(evt, RectPointPosition.southeast),
+    [handleMouseDownRectControl]
+  );
+
+  const handleMouseDownPointControls = useMemo(() => {
+    return pointControl.map((_control, pointIndex) => (evt: React.MouseEvent) => {
+      dispatch(dragActions.startPointDrag([evt, pointIndex]));
+      evt.stopPropagation();
+    });
+  }, [dispatch, pointControl]);
 
   return <>
-    {props.rectControl && <>
+    {rectControl && <>
       <rect
         className='selection-rect'
-        x={props.rectControl.coords[0]}
-        y={props.rectControl.coords[1]}
-        width={props.rectControl.coords[2] - props.rectControl.coords[0]}
-        height={props.rectControl.coords[3] - props.rectControl.coords[1]}
+        x={rectControl.coords[0]}
+        y={rectControl.coords[1]}
+        width={rectControl.coords[2] - rectControl.coords[0]}
+        height={rectControl.coords[3] - rectControl.coords[1]}
       />
       <ControlPoint
-        x={(props.rectControl.coords[0] + props.rectControl.coords[2]) / 2}
-        y={props.rectControl.coords[1]}
+        x={(rectControl.coords[0] + rectControl.coords[2]) / 2}
+        y={rectControl.coords[1]}
         className='north'
-        handleMouseDown={(evt) => handleMouseDownRectControl(evt, RectPointPosition.north)}
+        handleMouseDown={handleMouseDownNorthPoint}
       />
       <ControlPoint
-        x={props.rectControl.coords[0]}
-        y={(props.rectControl.coords[1] + props.rectControl.coords[3]) / 2}
+        x={rectControl.coords[0]}
+        y={(rectControl.coords[1] + rectControl.coords[3]) / 2}
         className='west'
-        handleMouseDown={(evt) => handleMouseDownRectControl(evt, RectPointPosition.west)}
+        handleMouseDown={handleMouseDownWestPoint}
       />
       <ControlPoint
-        x={(props.rectControl.coords[0] + props.rectControl.coords[2]) / 2}
-        y={props.rectControl.coords[3]}
+        x={(rectControl.coords[0] + rectControl.coords[2]) / 2}
+        y={rectControl.coords[3]}
         className='south'
-        handleMouseDown={(evt) => handleMouseDownRectControl(evt, RectPointPosition.south)}
+        handleMouseDown={handleMouseDownSouthPoint}
       />
       <ControlPoint
-        x={props.rectControl.coords[2]}
-        y={(props.rectControl.coords[1] + props.rectControl.coords[3]) / 2}
+        x={rectControl.coords[2]}
+        y={(rectControl.coords[1] + rectControl.coords[3]) / 2}
         className='east'
-        handleMouseDown={(evt) => handleMouseDownRectControl(evt, RectPointPosition.east)}
+        handleMouseDown={handleMouseDownEastPoint}
       />
       <ControlPoint
-        x={props.rectControl.coords[2]}
-        y={props.rectControl.coords[3]}
+        x={rectControl.coords[2]}
+        y={rectControl.coords[3]}
         className='southeast'
-        handleMouseDown={(evt) => handleMouseDownRectControl(evt, RectPointPosition.southeast)}
+        handleMouseDown={handleMouseDownSoutheastPoint}
       />
     </>}
-    {props.pointControl.map(({ x, y, className }, index) => (
+    {pointControl.map(({ x, y, className }, index) => (
       <ControlPoint
         key={index}
         x={x} y={y}
         className={className}
-        handleMouseDown={(evt) => handleMouseDownPointControl(evt, index)}
+        handleMouseDown={handleMouseDownPointControls[index]}
       />
     ))}
   </>;

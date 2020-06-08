@@ -1,5 +1,5 @@
 import React, { useEffect, useCallback } from 'react';
-import { useDispatch, useSelector, shallowEqual } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { AppState } from '../reducers';
 
@@ -12,13 +12,12 @@ import SelectionControl from './SelectionControl';
 
 import './GlyphArea.css';
 
-const mapStateToProps = (state: AppState) => ({
-  ...state,
-  glyph: draggedGlyphSelector(state),
-});
-
 const GlyphArea = () => {
-  const props = useSelector(mapStateToProps, shallowEqual);
+  const glyph = useSelector(draggedGlyphSelector);
+  const buhinMap = useSelector((state: AppState) => state.buhinMap);
+  const selection = useSelector((state: AppState) => state.selection);
+  const areaSelectRect = useSelector((state: AppState) => state.areaSelectRect);
+
   const dispatch = useDispatch();
   const handleMouseDownCapture = useCallback((evt: React.MouseEvent<SVGSVGElement>) => {
     const ctm = evt.currentTarget.getScreenCTM();
@@ -59,20 +58,20 @@ const GlyphArea = () => {
     evt.stopPropagation();
   }, [dispatch]);
 
-  const handleMouseMove = useCallback((evt: MouseEvent) => {
-    dispatch(dragActions.mouseMove(evt));
-  }, [dispatch]);
-  const handleMouseUp = useCallback((evt: MouseEvent) => {
-    dispatch(dragActions.mouseUp(evt));
-  }, [dispatch]);
   useEffect(() => {
+    const handleMouseMove = (evt: MouseEvent) => {
+      dispatch(dragActions.mouseMove(evt));
+    };
+    const handleMouseUp = (evt: MouseEvent) => {
+      dispatch(dragActions.mouseUp(evt));
+    };
     document.addEventListener('mousemove', handleMouseMove)
     document.addEventListener('mouseup', handleMouseUp);
     return () => {
       document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseup', handleMouseUp);
     };
-  }, [handleMouseMove, handleMouseUp]);
+  }, [dispatch]);
 
   return (
     <div className="glyph-area">
@@ -85,14 +84,14 @@ const GlyphArea = () => {
         <rect x="0" y="0" width="200" height="200" className="glyph-boundary" />
         <rect x="12" y="12" width="176" height="176" className="glyph-guide" />
         <Glyph
-          glyph={props.glyph}
-          buhinMap={props.buhinMap}
-          selection={props.selection}
+          glyph={glyph}
+          buhinMap={buhinMap}
+          selection={selection}
           handleMouseDownDeselectedStroke={handleMouseDownDeselectedStroke}
           handleMouseDownSelectedStroke={handleMouseDownSelectedStroke}
         />
         <SelectionControl />
-        <AreaSelectRect rect={props.areaSelectRect} />
+        <AreaSelectRect rect={areaSelectRect} />
       </svg>
     </div>
   );
