@@ -6,7 +6,7 @@ import { polygonInPolygon, polygonIntersectsPolygon } from 'geometric';
 import { editorActions, RectPointPosition } from '../actions/editor';
 import { GlyphLine, Glyph, parseGlyph } from '../kageUtils/glyph';
 import { getGlyphLinesBBX } from '../kageUtils/bbx';
-import { moveSelectedGlyphLines, moveSelectedPoint, resizeSelectedGlyphLines } from '../kageUtils/transform';
+import { moveSelectedGlyphLines, moveSelectedPoint, resizeSelectedGlyphLines, applyGlyphLineOperation } from '../kageUtils/transform';
 import { StretchParam } from '../kageUtils/stretchparam';
 import { makeGlyphSeparated } from '../kage';
 
@@ -70,7 +70,7 @@ export const resizeSelected = (glyph: Glyph, selection: number[], position: Rect
             break;
           default:
             // exhaustive?
-            ((_x: never) => {})(position);
+            ((_x: never) => { })(position);
         }
         const newGlyphLine: GlyphLine = selectedGlyphLine.value[0] === 99
           ? { value: newValue, partName: selectedGlyphLine.partName }
@@ -101,7 +101,7 @@ export const resizeSelected = (glyph: Glyph, selection: number[], position: Rect
       break;
     default:
       // exhaustive?
-      ((_x: never) => {})(position);
+      ((_x: never) => { })(position);
   }
   return resizeSelectedGlyphLines(glyph, selection, oldBBX, newBBX);
 };
@@ -360,9 +360,29 @@ const editor = reducerWithInitialState(initialState)
   .case(editorActions.undo, (state) => state) // TODO
   .case(editorActions.redo, (state) => state) // TODO
 
-  .case(editorActions.paste, (state) => state) // TODO
-  .case(editorActions.copy, (state) => state) // TODO
-  .case(editorActions.cut, (state) => state) // TODO
+  .case(editorActions.paste, (state) => ({
+    ...state,
+    glyph: state.glyph.concat(state.clipboard),
+    selection: state.clipboard.map((_gLine, index) => state.glyph.length + index),
+  }))
+  .case(editorActions.copy, (state) => {
+    const targetLines = state.selection.map((index) => state.glyph[index]);
+    const [x1, y1] = getGlyphLinesBBX(targetLines);
+    const tX = (x: number) => 230 + x - x1;
+    const tY = (y: number) => 20 + y - y1;
+    return {
+      ...state,
+      clipboard: state.selection.map((index) => (
+        applyGlyphLineOperation(state.glyph[index], tX, tY)
+      )),
+    };
+  })
+  .case(editorActions.cut, (state) => ({
+    ...state,
+    glyph: state.glyph.filter((_gLine, index) => !state.selection.includes(index)),
+    clipboard: state.selection.map((index) => state.glyph[index]),
+    selection: [],
+  }))
 
   .case(editorActions.decomposeSelected, (state) => state) // TODO
 

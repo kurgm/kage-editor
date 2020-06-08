@@ -42,7 +42,7 @@ const EditorControls = (props: EditorControlsProps) => {
           {t('invert selection')}
         </button>
         <button
-          disabled={props.selection.length === 0 || true}
+          disabled={props.selection.length === 0}
           onClick={props.copy}
         >
           {t('copy')}
@@ -54,7 +54,7 @@ const EditorControls = (props: EditorControlsProps) => {
           {t('paste')}
         </button>
         <button
-          disabled={props.selection.length === 0 || true}
+          disabled={props.selection.length === 0}
           onClick={props.cut}
         >
           {t('cut')}
