@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.css';
 
-import GlyphArea from './containers/GlyphArea';
-import EditorControls from './containers/EditorControls';
+import GlyphArea from './components/GlyphArea';
+import EditorControls from './components/EditorControls';
 
 function App() {
   return (

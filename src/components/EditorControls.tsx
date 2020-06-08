@@ -1,80 +1,125 @@
-import React from 'react';
+import React, { useCallback } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { useTranslation } from 'react-i18next';
 
-import SelectionInfo from '../containers/SelectionInfo';
+import { AppState } from '../reducers';
+import { editorActions } from '../actions/editor';
+import { selectActions } from '../actions/select';
 
-import { EditorControlsStateProps, EditorControlsActions } from '../containers/EditorControls';
+import SelectionInfo from './SelectionInfo';
+
 import './EditorControls.css';
 
-interface OwnProps {
-}
+const EditorControls = () => {
+  const glyph = useSelector((state: AppState) => state.glyph);
+  const selection = useSelector((state: AppState) => state.selection);
+  const clipboard = useSelector((state: AppState) => state.clipboard);
+  const freehandMode = useSelector((state: AppState) => state.freehandMode);
 
-type EditorControlsProps = OwnProps & EditorControlsStateProps & EditorControlsActions;
+  const undoDisabled = true;
+  const redoDisabled = true;
+  const pasteDisabled = clipboard.length === 0;
+  const decomposeDisabled = !selection.some((index) => glyph[index].value[0] === 99);
 
-const EditorControls = (props: EditorControlsProps) => {
+  const dispatch = useDispatch();
+  const undo = useCallback(() => {
+    dispatch(editorActions.undo());
+  }, [dispatch]);
+  const redo = useCallback(() => {
+    dispatch(editorActions.redo());
+  }, [dispatch]);
+  const selectAll = useCallback(() => {
+    dispatch(selectActions.selectAll());
+  }, [dispatch]);
+  const selectDeselected = useCallback(() => {
+    dispatch(selectActions.selectDeselected());
+  }, [dispatch]);
+  const copy = useCallback(() => {
+    dispatch(editorActions.copy());
+  }, [dispatch]);
+  const paste = useCallback(() => {
+    dispatch(editorActions.paste());
+  }, [dispatch]);
+  const cut = useCallback(() => {
+    dispatch(editorActions.cut());
+  }, [dispatch]);
+  const toggleFreehand = useCallback(() => {
+    dispatch(editorActions.toggleFreehand());
+  }, [dispatch]);
+  const decompose = useCallback(() => {
+    dispatch(editorActions.decomposeSelected());
+  }, [dispatch]);
+  const options = useCallback(() => {
+    dispatch(editorActions.openOptionModal());
+  }, [dispatch]);
+  const finishEdit = useCallback(() => {
+    // FIXME
+    // location.href = ...
+  }, []);
+
   const { t } = useTranslation();
   return (
     <div className="editor-controls">
       <SelectionInfo />
       <div className="control-buttons">
         <button
-          disabled={props.undoDisabled}
-          onClick={props.undo}
+          disabled={undoDisabled}
+          onClick={undo}
         >
           {t('undo')}
         </button>
         <button
-          disabled={props.redoDisabled}
-          onClick={props.redo}
+          disabled={redoDisabled}
+          onClick={redo}
         >
           {t('redo')}
         </button>
         <button
-          disabled={props.freehandMode || props.glyph.length === 0}
-          onClick={props.selectAll}
+          disabled={freehandMode || glyph.length === 0}
+          onClick={selectAll}
         >
           {t('select all')}
         </button>
         <button
-          disabled={props.freehandMode || props.glyph.length === 0}
-          onClick={props.selectDeselected}
+          disabled={freehandMode || glyph.length === 0}
+          onClick={selectDeselected}
         >
           {t('invert selection')}
         </button>
         <button
-          disabled={props.selection.length === 0}
-          onClick={props.copy}
+          disabled={selection.length === 0}
+          onClick={copy}
         >
           {t('copy')}
         </button>
         <button
-          disabled={props.pasteDisabled}
-          onClick={props.paste}
+          disabled={pasteDisabled}
+          onClick={paste}
         >
           {t('paste')}
         </button>
         <button
-          disabled={props.selection.length === 0}
-          onClick={props.cut}
+          disabled={selection.length === 0}
+          onClick={cut}
         >
           {t('cut')}
         </button>
         <button
           disabled
-          onClick={props.toggleFreehand}
+          onClick={toggleFreehand}
         >
-          {props.freehandMode ? t('end freehand') : t('start freehand')}
+          {freehandMode ? t('end freehand') : t('start freehand')}
         </button>
         <button
-          disabled={props.decomposeDisabled}
-          onClick={props.decompose}
+          disabled={decomposeDisabled}
+          onClick={decompose}
         >
           {t('decompose')}
         </button>
         <button
           disabled
-          onClick={props.options}
+          onClick={options}
         >
           {t('options')}
         </button>
@@ -83,7 +128,7 @@ const EditorControls = (props: EditorControlsProps) => {
         <svg className="preview-thumbnail" viewBox="0 0 200 200" width="50" height="50"></svg>
         <button
           disabled
-          onClick={props.finishEdit}
+          onClick={finishEdit}
         >
           {t('finish edit')}
         </button>
