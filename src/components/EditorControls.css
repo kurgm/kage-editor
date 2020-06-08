@@ -5,29 +5,6 @@
 
 .select-control {
   flex: 1;
-  display: flex;
-  flex-flow: column;
-}
-
-.selected-info {
-  flex: 1;
-}
-
-.selection-control {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.select-prevnext-button {
-  height: 2.5em;
-}
-
-.selection-num {
-  margin: 0 1em;
-  width: 5em;
-  text-align: center;
-  align-self: center;
 }
 
 .control-buttons {

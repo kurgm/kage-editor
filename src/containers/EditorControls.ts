@@ -3,10 +3,10 @@ import { Dispatch } from 'redux';
 import { createSelector } from 'reselect';
 
 import { editorActions } from '../actions/editor';
-import EditorControls from '../components/EditorControls';
 import { AppState } from '../reducers';
-
 import { Glyph } from '../kageUtils/glyph';
+
+import EditorControls from '../components/EditorControls';
 
 export interface EditorControlsStateProps {
   glyph: Glyph;
@@ -22,10 +22,6 @@ export interface EditorControlsStateProps {
 };
 
 export interface EditorControlsActions {
-  selectPrev: () => void;
-  selectNext: () => void;
-  swapWithPrev: () => void;
-  swapWithNext: () => void;
   undo: () => void;
   redo: () => void;
   selectAll: () => void;
@@ -59,18 +55,6 @@ const mapStateToProps = createSelector([
 }));
 
 const mapDispatchToProps = (dispatch: Dispatch): EditorControlsActions => ({
-  selectPrev: () => {
-    dispatch(editorActions.selectPrev());
-  },
-  selectNext: () => {
-    dispatch(editorActions.selectNext());
-  },
-  swapWithPrev: () => {
-    dispatch(editorActions.swapWithPrev());
-  },
-  swapWithNext: () => {
-    dispatch(editorActions.swapWithNext());
-  },
   undo: () => {
     dispatch(editorActions.undo());
   },
