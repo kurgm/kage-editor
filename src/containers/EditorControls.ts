@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
+import { createSelector } from 'reselect';
 
 import { editorActions } from '../actions/editor';
 import EditorControls from '../components/EditorControls';
 import { AppState } from '../reducers';
-import { applyDraggingEffectToGlyph } from '../reducers/editor';
 
 import { Glyph } from '../kageUtils/glyph';
 
@@ -35,18 +35,24 @@ export interface EditorControlsActions {
   finishEdit: () => void;
 };
 
-const mapStateToProps = (state: AppState): EditorControlsStateProps => ({
-  glyph: applyDraggingEffectToGlyph(state.editor),
-  buhinMap: state.editor.buhinMap,
-  selection: state.editor.selection,
+const mapStateToProps = createSelector([
+  (state: AppState) => state.editor.glyph,
+  (state: AppState) => state.editor.buhinMap,
+  (state: AppState) => state.editor.selection,
+  (state: AppState) => state.editor.clipboard,
+  (state: AppState) => state.editor.freehandMode,
+], (glyph, buhinMap, selection, clipboard, freehandMode): EditorControlsStateProps => ({
+  glyph,
+  buhinMap,
+  selection,
 
   undoDisabled: true,
   redoDisabled: true,
-  pasteDisabled: state.editor.clipboard.length === 0,
-  decomposeDisabled: true,
+  pasteDisabled: clipboard.length === 0,
+  decomposeDisabled: !selection.some((index) => glyph[index].value[0] === 99),
 
-  freehandMode: state.editor.freehandMode,
-});
+  freehandMode,
+}));
 
 const mapDispatchToProps = (dispatch: Dispatch): EditorControlsActions => ({
   undo: () => {

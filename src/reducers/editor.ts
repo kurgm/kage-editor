@@ -8,6 +8,7 @@ import { GlyphLine, Glyph, parseGlyph } from '../kageUtils/glyph';
 import { getGlyphLinesBBX } from '../kageUtils/bbx';
 import { moveSelectedGlyphLines, moveSelectedPoint, resizeSelectedGlyphLines, applyGlyphLineOperation } from '../kageUtils/transform';
 import { StretchParam } from '../kageUtils/stretchparam';
+import { decompose } from '../kageUtils/decompose';
 import { makeGlyphSeparated } from '../kage';
 
 import args from '../args';
@@ -384,7 +385,26 @@ const editor = reducerWithInitialState(initialState)
     selection: [],
   }))
 
-  .case(editorActions.decomposeSelected, (state) => state) // TODO
+  .case(editorActions.decomposeSelected, (state) => {
+    let newGlyph: Glyph = [];
+    let newSelection: number[] = [];
+    state.glyph.forEach((gLine, index) => {
+      if (!state.selection.includes(index)) {
+        newGlyph.push(gLine);
+        return;
+      }
+      const newLines = decompose(gLine, state.buhinMap);
+      newSelection = newSelection.concat(
+        newLines.map((_gLine, subindex) => newGlyph.length + subindex)
+      );
+      newGlyph = newGlyph.concat(newLines);
+    });
+    return {
+      ...state,
+      glyph: newGlyph,
+      selection: newSelection,
+    };
+  })
 
   .case(editorActions.toggleFreehand, (state) => ({
     ...state,
