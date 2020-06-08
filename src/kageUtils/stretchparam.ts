@@ -9,8 +9,8 @@ export const getStretchPositions = (glyphLine: GlyphLine): StretchPositions | nu
   }
   const sx = glyphLine.value[9];
   const sy = glyphLine.value[10];
-  const tx = glyphLine.value[3];
-  const ty = glyphLine.value[4];
+  const tx = glyphLine.value[1];
+  const ty = glyphLine.value[2];
   return [sx, sy, tx, ty];
 };
 
@@ -23,8 +23,8 @@ export const setStretchPositions = (glyphLine: GlyphLine, positions: StretchPosi
   const newValue = glyphLine.value.slice();
   newValue[9] = sx;
   newValue[10] = sy;
-  newValue[3] = tx;
-  newValue[4] = ty;
+  newValue[1] = tx;
+  newValue[2] = ty;
   return { value: newValue, partName: glyphLine.partName };
 };
 
