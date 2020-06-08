@@ -30,13 +30,13 @@ const EditorControls = (props: EditorControlsProps) => {
           {t('redo')}
         </button>
         <button
-          disabled={props.freehandMode}
+          disabled={props.freehandMode || props.glyph.length === 0}
           onClick={props.selectAll}
         >
           {t('select all')}
         </button>
         <button
-          disabled={props.freehandMode}
+          disabled={props.freehandMode || props.glyph.length === 0}
           onClick={props.selectDeselected}
         >
           {t('invert selection')}
