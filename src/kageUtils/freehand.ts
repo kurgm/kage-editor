@@ -79,10 +79,13 @@ export const drawFreehand = (glyph: Glyph, points: [number, number][]): Glyph =>
 
 const round = (x: number) => Math.round(x);
 
+let snapped: boolean[];
+
 const correctStroke = (glyph: Glyph, newStroke: GlyphLine): Glyph => {
+  snapped = newStroke.value.map(() => false);
   glyph = snapStrokeStart(glyph, newStroke);
-  snapStrokeTilt(newStroke);
   glyph = snapStrokeEnd(glyph, newStroke);
+  snapStrokeTilt(newStroke);
   newStroke = applyGlyphLineOperation(newStroke, round, round)
   glyph = snapToNewStroke(glyph, newStroke);
   return glyph.concat([newStroke]);
@@ -137,6 +140,7 @@ const snapVerticalStroke = (
     ) {
       vertStroke.value[xi] = x1;
       vertStroke.value[yi] = y1;
+      snapped[xi] = snapped[yi] = true;
       vertStroke.value[ti] = leftType;
       return setGlyphValue(glyph, lineIndex, 1, 2); // 接続(横)
     }
@@ -147,11 +151,13 @@ const snapVerticalStroke = (
     ) {
       vertStroke.value[xi] = x2;
       vertStroke.value[yi] = y2;
+      snapped[xi] = snapped[yi] = true;
       vertStroke.value[ti] = rightType;
       return setGlyphValue(glyph, lineIndex, 2, 2); // 接続(横)
     }
     if (y1 === y2 && minY <= y1 && y1 <= maxY && x1 <= nx && nx <= x2) {
       vertStroke.value[yi] = y1;
+      snapped[yi] = true;
       vertStroke.value[ti] = middleType;
       return glyph;
     }
@@ -189,6 +195,7 @@ const snapHorizontalStroke = (glyph: Glyph, horiStroke: GlyphLine, position: 'st
       ) {
         horiStroke.value[xi] = x1;
         horiStroke.value[yi] = y1;
+        snapped[xi] = snapped[yi] = true;
         horiStroke.value[ti] = 2;
         return setGlyphValue(glyph, lineIndex, 1, 12); // 左上カド
       }
@@ -200,6 +207,7 @@ const snapHorizontalStroke = (glyph: Glyph, horiStroke: GlyphLine, position: 'st
       ) {
         horiStroke.value[xi] = x2;
         horiStroke.value[yi] = y2;
+        snapped[xi] = snapped[yi] = true;
         horiStroke.value[ti] = 2;
         return vertStroke.value[2] === 0
           ? setGlyphValue(glyph, lineIndex, 2, 13) // 左下カド
@@ -213,6 +221,7 @@ const snapHorizontalStroke = (glyph: Glyph, horiStroke: GlyphLine, position: 'st
       ) {
         horiStroke.value[xi] = x1;
         horiStroke.value[yi] = y1;
+        snapped[xi] = snapped[yi] = true;
         horiStroke.value[ti] = 2;
         return setGlyphValue(glyph, lineIndex, 1, 22); // 右上カド
       }
@@ -224,6 +233,7 @@ const snapHorizontalStroke = (glyph: Glyph, horiStroke: GlyphLine, position: 'st
       ) {
         horiStroke.value[xi] = x2;
         horiStroke.value[yi] = y2;
+        snapped[xi] = snapped[yi] = true;
         horiStroke.value[ti] = 2;
         return vertStroke.value[2] === 0
           ? setGlyphValue(glyph, lineIndex, 2, 23) // 右下カド
@@ -232,6 +242,7 @@ const snapHorizontalStroke = (glyph: Glyph, horiStroke: GlyphLine, position: 'st
     }
     if (x1 === x2 && minX <= x1 && x1 <= maxX && y1 <= ny && ny <= y2) {
       horiStroke.value[xi] = x1;
+      snapped[xi] = true;
       horiStroke.value[ti] = 2;
       return glyph;
     }
@@ -271,11 +282,11 @@ const snapStrokeTilt = (newStroke: GlyphLine) => {
 
   const dx = x2 - x1;
   const dy = y2 - y1;
-  if (Math.abs(dx) > Math.abs(dy) * 20) {
+  if (!snapped[6] && Math.abs(dx) > Math.abs(dy) * 20) {
     newStroke.value[6] = y1;
     return;
   }
-  if (Math.abs(dy) > Math.abs(dx) * 20) {
+  if (!snapped[5] && Math.abs(dy) > Math.abs(dx) * 20) {
     newStroke.value[5] = x1;
     return;
   }
