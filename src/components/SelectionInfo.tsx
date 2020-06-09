@@ -7,6 +7,7 @@ import { editorActions } from '../actions/editor';
 import { selectActions } from '../actions/select';
 import { AppState } from '../reducers';
 import { calcStretchScalar, getStretchPositions } from '../kageUtils/stretchparam';
+import { strokeTypes, headShapeTypes, tailShapeTypes } from '../kageUtils/stroketype';
 
 import { useTranslation } from 'react-i18next';
 
@@ -27,7 +28,7 @@ const strokeInfoSelector = createSelector([
     return null;
   }
   const selectedStroke = selectedStroke_!;
-  if (![1, 2, 3, 4, 6, 7].includes(selectedStroke.value[0])) {
+  if (!strokeTypes.includes(selectedStroke.value[0])) {
     return null;
   }
 
@@ -99,7 +100,8 @@ const otherInfoSelector = createSelector([
     return { isMultiple: false };
   }
   const selectedStroke = selectedStroke_!;
-  if ([1, 2, 3, 4, 6, 7, 99].includes(selectedStroke.value[0])) {
+  const strokeType = selectedStroke.value[0];
+  if (strokeTypes.includes(strokeType) || strokeType === 99) {
     return null;
   }
 
@@ -165,11 +167,26 @@ const SelectionInfo = () => {
           <div>
             {t('stroke type')}
             <select value={strokeInfo.strokeType}>
-              {[1, 2, 3, 4, 6, 7].map((strokeType) => (
-                <option key={strokeType} value={strokeType}>{t(`stroke type ${strokeType}`)}</option>
+              {strokeTypes.map((strokeType) => (
+                <option key={strokeType} value={strokeType}>
+                  {t(`stroke type ${strokeType}`)}
+                </option>
               ))}
             </select>
-            {/* TODO: 頭形状，尾形状 */}
+            <select value={strokeInfo.headShapeType}>
+              {headShapeTypes[strokeInfo.strokeType].map((headShapeType) => (
+                <option key={headShapeType} value={headShapeType}>
+                  {t(`head type ${strokeInfo.strokeType}-${headShapeType}`)}
+                </option>
+              ))}
+            </select>
+            <select value={strokeInfo.tailShapeType}>
+              {tailShapeTypes[strokeInfo.strokeType].map((tailShapeType) => (
+                <option key={tailShapeType} value={tailShapeType}>
+                  {t(`tail type ${strokeInfo.strokeType}-${tailShapeType}`)}
+                </option>
+              ))}
+            </select>
           </div>
           <div>{strokeInfo.coordString}</div>
         </>}
