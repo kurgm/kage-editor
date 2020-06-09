@@ -30,5 +30,7 @@ export const editorActions = {
   openOptionModal: actionCreator('OPEN_OPTION_MODAL'),
   closeOptionModal: actionCreator('CLOSE_OPTION_MODAL'),
 
+  escape: actionCreator('PRESS_ESC_KEY'),
+
   finishEdit: actionCreator('FINISH_EDIT'),
 };

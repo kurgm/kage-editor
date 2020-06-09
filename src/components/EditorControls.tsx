@@ -79,13 +79,13 @@ const EditorControls = () => {
           {t('redo')}
         </button>
         <button
-          disabled={freehandMode || glyph.length === 0}
+          disabled={glyph.length === 0}
           onClick={selectAll}
         >
           {t('select all')}
         </button>
         <button
-          disabled={freehandMode || glyph.length === 0}
+          disabled={glyph.length === 0}
           onClick={selectDeselected}
         >
           {t('invert selection')}

@@ -212,6 +212,28 @@ export default (builder: ReducerBuilder<AppState>) => builder
     showOptionModal: false,
   }))
 
+  .case(editorActions.escape, (state) => {
+    if (state.showOptionModal) {
+      return {
+        ...state,
+        showOptionModal: false,
+      }
+    }
+    if (state.freehandMode) {
+      return {
+        ...state,
+        freehandMode: false,
+      };
+    }
+    if (state.selection.length) {
+      return {
+        ...state,
+        selection: [],
+      };
+    }
+    return state;
+  })
+
   .case(editorActions.finishEdit, (state) => ({
     ...state,
     exiting: true,

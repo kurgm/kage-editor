@@ -41,9 +41,8 @@ export const useShortcuts = () => {
     evt.preventDefault();
   }, {}, [dispatch]);
 
-  useHotkeys('del', (evt) => {
-    dispatch(editorActions.delete());
-    evt.preventDefault();
+  useHotkeys('esc', () => {
+    dispatch(editorActions.escape());
   }, {}, [dispatch]);
 
   useHotkeys('ctrl+h, left', (evt) => {
