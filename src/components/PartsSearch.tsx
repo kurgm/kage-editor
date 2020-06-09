@@ -8,6 +8,7 @@ import { search } from '../callapi';
 import args from '../args';
 
 import './PartsSearch.css';
+import PartsList from './PartsList';
 
 const searchSuggestions = [
   'エディタ部品1',
@@ -17,10 +18,6 @@ const searchSuggestions = [
 ];
 
 const initialQuery = args.get('name') || '';
-
-const getImageURL = (name: string) => (
-  `https://glyphwiki.org/glyph/${name}.50px.png`
-);
 
 class QueryTooShortError extends Error { }
 
@@ -62,6 +59,10 @@ const PartsSearch = () => {
       return;
     }
     const query = queryInputRef.current.value;
+    if (!query) {
+      setNames([]);
+      return;
+    }
     startSearch(query);
   }, []);
   const handleFormSubmit = useCallback((evt: React.FormEvent) => {
@@ -70,16 +71,14 @@ const PartsSearch = () => {
   }, [handleSearch]);
 
   const hoverNameRef = useRef<HTMLDivElement>(null);
-  const handleImageMouseEnter = useCallback((evt: React.MouseEvent<HTMLImageElement>) => {
+  const handleItemMouseEnter = useCallback((partName: string) => {
     if (!hoverNameRef.current) {
       return;
     }
-    const partName = evt.currentTarget.dataset.name!;
     hoverNameRef.current.textContent = partName;
   }, []);
   const dispatch = useDispatch();
-  const handleImageClick = useCallback((evt: React.MouseEvent<HTMLImageElement>) => {
-    const partName = evt.currentTarget.dataset.name!;
+  const handleItemClick = useCallback((partName: string) => {
     dispatch(editorActions.insertPart(partName));
   }, [dispatch]);
 
@@ -97,25 +96,20 @@ const PartsSearch = () => {
           ))}
         </datalist>
       </form>
-      <div className="parts-list">
+      <div className="parts-list-area">
         {searching
-          ? t('searching')
+          ? <div className="message">{t('searching')}</div>
           : err
             ? err instanceof QueryTooShortError
-              ? t('search query too short')
-              : t('search error', { message: err })
+              ? <div className="message">{t('search query too short')}</div>
+              : <div className="message">{t('search error', { message: err })}</div>
             : names.length === 0
-              ? t('no search result')
-              : names.map((name) => (
-                <img
-                  key={name} alt={name} title={name}
-                  data-name={name}
-                  src={getImageURL(name)}
-                  width={50} height={50}
-                  onClick={handleImageClick}
-                  onMouseEnter={handleImageMouseEnter}
-                />
-              ))}
+              ? <div className="message">{t('no search result')}</div>
+              : <PartsList
+                names={names}
+                handleItemClick={handleItemClick}
+                handleItemMouseEnter={handleItemMouseEnter}
+              />}
       </div>
       <div className="parts-hover-name" ref={hoverNameRef}>&nbsp;</div>
     </div>

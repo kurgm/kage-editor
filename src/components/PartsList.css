@@ -1,0 +1,16 @@
+.parts-list {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-content: flex-start;
+}
+
+.parts-list img {
+  border: 1px solid #aaaaaa;
+  margin: 4px;
+}
+
+.parts-list img:hover {
+  border: 5px solid #cc0000;
+  margin: 0;
+}

@@ -13,24 +13,15 @@
   flex: 1;
 }
 
-.parts-list {
-  flex: 1;
-  overflow-y: scroll;
+.parts-list-area {
   border: 1px solid #666;
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: start;
-  align-content: flex-start;
+  flex: 1 1;
+  text-align: center;
+  overflow-y: scroll;
 }
 
-.parts-list img {
-  border: 1px solid #333;
-  margin: 4px;
-}
-
-.parts-list img:hover {
-  border: 5px solid #cc0000;
-  margin: 0;
+.parts-list-area div.message {
+  margin: 3em 0;
 }
 
 .parts-hover-name {
