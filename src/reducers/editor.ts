@@ -1,10 +1,8 @@
 import { ReducerBuilder } from 'typescript-fsa-reducers';
 
 import { editorActions } from '../actions/editor';
-import { submitGlyphSelector } from '../selectors/submitGlyph';
-import args from '../args';
 
-import { Glyph, GlyphLine, unparseGlyph } from '../kageUtils/glyph';
+import { Glyph, GlyphLine } from '../kageUtils/glyph';
 import { getGlyphLinesBBX } from '../kageUtils/bbx';
 import { decompose } from '../kageUtils/decompose';
 import { calcStretchPositions, setStretchPositions } from '../kageUtils/stretchparam';
@@ -216,32 +214,7 @@ export default (builder: ReducerBuilder<AppState>) => builder
     showOptionModal: false,
   }))
 
-  .case(editorActions.finishEdit, (state) => {
-    let host = args.get('host');
-    const ssl = args.get('ssl') !== 'false';
-    const glyphName = args.get('name');
-    const related = args.get('related');
-    const edittime = args.get('edittime');
-
-    if (!host || ![
-      'glyphwiki.org',
-      'en.glyphwiki.org',
-      'ko.glyphwiki.org',
-      'zhs.glyphwiki.org',
-      'zht.glyphwiki.org',
-    ].includes(host)) {
-      host = 'glyphwiki.org';
-    }
-
-    const params = new URLSearchParams();
-    params.set('action', 'preview');
-    params.set('textbox', unparseGlyph(submitGlyphSelector(state)));
-    params.set('related', related || 'u3013');
-    if (edittime) {
-      params.set('edittime', edittime);
-    }
-    const url = `${ssl ? 'https' : 'http'}://${host}/wiki/${glyphName || 'sandbox'}?` + params.toString();
-    window.location.href = url;
-
-    return state;
-  });
+  .case(editorActions.finishEdit, (state) => ({
+    ...state,
+    exiting: true,
+  }));

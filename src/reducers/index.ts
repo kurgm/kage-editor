@@ -29,6 +29,7 @@ export interface AppState {
     undo: Glyph[];
     redo: Glyph[];
   };
+  exiting: boolean;
 }
 
 const initialState: AppState = {
@@ -45,6 +46,7 @@ const initialState: AppState = {
   showOptionModal: false,
   clipboard: [],
   undoStacks: { undo: [], redo: [] },
+  exiting: false,
 };
 
 const reducer = reducerWithInitialState(initialState)
