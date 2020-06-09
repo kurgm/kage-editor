@@ -4,6 +4,16 @@ object-assign
 @license MIT
 */
 
+/*!
+ * hotkeys-js v3.7.6
+ * A simple micro-library for defining and dispatching keyboard shortcuts. It has no dependencies.
+ * 
+ * Copyright (c) 2020 kenny wong <wowohoo@qq.com>
+ * http://jaywcjlove.github.io/hotkeys
+ * 
+ * Licensed under the MIT license.
+ */
+
 /** @license React v0.19.1
  * scheduler.production.min.js
  *
