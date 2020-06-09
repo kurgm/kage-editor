@@ -7,7 +7,7 @@ import { getGlyphLinesBBX } from '../kageUtils/bbx';
 import { decompose } from '../kageUtils/decompose';
 import { calcStretchPositions, setStretchPositions } from '../kageUtils/stretchparam';
 import { changeStrokeType } from '../kageUtils/stroketype';
-import { applyGlyphLineOperation } from '../kageUtils/transform';
+import { applyGlyphLineOperation, moveSelectedGlyphLines } from '../kageUtils/transform';
 
 import { AppState } from '.';
 
@@ -160,6 +160,11 @@ export default (builder: ReducerBuilder<AppState>) => builder
     clipboard: state.selection.map((index) => state.glyph[index]),
     selection: [],
   }))
+  .case(editorActions.delete, (state) => ({
+    ...state,
+    glyph: state.glyph.filter((_gLine, index) => !state.selection.includes(index)),
+    selection: [],
+  }))
 
   .case(editorActions.decomposeSelected, (state) => {
     let newGlyph: Glyph = [];
@@ -181,6 +186,10 @@ export default (builder: ReducerBuilder<AppState>) => builder
       selection: newSelection,
     };
   })
+  .case(editorActions.moveSelected, (state, [dx, dy]) => ({
+    ...state,
+    glyph: moveSelectedGlyphLines(state.glyph, state.selection, dx, dy),
+  }))
 
   .case(editorActions.toggleFreehand, (state) => ({
     ...state,

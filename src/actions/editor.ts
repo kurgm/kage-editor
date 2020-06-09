@@ -22,7 +22,9 @@ export const editorActions = {
   paste: actionCreator('PASTE'),
   copy: actionCreator('COPY_SELECTION'),
   cut: actionCreator('CUT_SELECTION'),
+  delete: actionCreator('DELETE_SELECTION'),
   decomposeSelected: actionCreator('DECOMPOSE_SELECTION'),
+  moveSelected: actionCreator<[number, number]>('MOVE_SELECTED'),
 
   toggleFreehand: actionCreator('TOGGLE_FREEHAND_MODE'),
 

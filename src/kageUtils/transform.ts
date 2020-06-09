@@ -53,6 +53,9 @@ export const applyGlyphPointOperation = (glyph: Glyph, pdescs: PointDescriptor[]
 
 
 export const moveSelectedGlyphLines = (glyph: Glyph, selection: number[], dx: number, dy: number): Glyph => {
+  if (selection.length === 0) {
+    return glyph;
+  }
   const targetDescs = listupConnectedPointsOfSelection(glyph, selection);
 
   const tX = (x: number) => Math.round(x + dx);
