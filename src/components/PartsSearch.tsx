@@ -78,8 +78,16 @@ const PartsSearch = () => {
     hoverNameRef.current.textContent = partName;
   }, []);
   const dispatch = useDispatch();
-  const handleItemClick = useCallback((partName: string) => {
-    dispatch(editorActions.insertPart(partName));
+  const handleItemClick = useCallback((partName: string, evt: React.MouseEvent) => {
+    if (evt.shiftKey) {
+      if (!queryInputRef.current) {
+        return;
+      }
+      queryInputRef.current.value = partName;
+      startSearch(partName);
+    } else {
+      dispatch(editorActions.insertPart(partName));
+    }
   }, [dispatch]);
 
   const { t } = useTranslation();
