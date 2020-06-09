@@ -1,4 +1,4 @@
-import React, { useRef, useCallback, useState, useEffect } from 'react';
+import React, { useRef, useCallback, useState, useEffect, FormEvent } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { useTranslation } from 'react-i18next';
@@ -15,6 +15,8 @@ const searchSuggestions = [
   'エディタ部品3',
   'エディタ部品4',
 ];
+
+const initialQuery = args.get('name') || '';
 
 const getImageURL = (name: string) => (
   `https://glyphwiki.org/glyph/${name}.50px.png`
@@ -51,9 +53,8 @@ const PartsSearch = () => {
   };
 
   useEffect(() => {
-    const query = args.get('name');
-    if (query) {
-      startSearch(query);
+    if (initialQuery) {
+      startSearch(initialQuery);
     }
   }, []);
   const handleSearch = useCallback(() => {
@@ -63,6 +64,10 @@ const PartsSearch = () => {
     const query = queryInputRef.current.value;
     startSearch(query);
   }, []);
+  const handleFormSubmit = useCallback((evt: React.FormEvent) => {
+    evt.preventDefault();
+    handleSearch();
+  }, [handleSearch]);
 
   const hoverNameRef = useRef<HTMLDivElement>(null);
   const handleImageMouseEnter = useCallback((evt: React.MouseEvent<HTMLImageElement>) => {
@@ -81,8 +86,8 @@ const PartsSearch = () => {
   const { t } = useTranslation();
   return (
     <div className="parts-search-area">
-      <div className="parts-search-box">
-        <input defaultValue={args.get('name') || ''} list="searchList" ref={queryInputRef} />
+      <form className="parts-search-box" onSubmit={handleFormSubmit}>
+        <input defaultValue={initialQuery} list="searchList" ref={queryInputRef} />
         <button onClick={handleSearch}>
           {t('search')}
         </button>
@@ -91,7 +96,7 @@ const PartsSearch = () => {
             <option key={index} value={suggestion} />
           ))}
         </datalist>
-      </div>
+      </form>
       <div className="parts-list">
         {searching
           ? t('searching')
