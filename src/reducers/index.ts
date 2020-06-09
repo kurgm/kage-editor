@@ -9,6 +9,7 @@ import args from '../args';
 import select from './select';
 import drag from './drag';
 import editor from './editor';
+import { undoReduceBuilder as undo } from './undo';
 
 
 export interface AppState {
@@ -24,6 +25,10 @@ export interface AppState {
   freehandMode: boolean;
   showOptionModal: boolean;
   clipboard: GlyphLine[];
+  undoStacks: {
+    undo: Glyph[];
+    redo: Glyph[];
+  };
 }
 
 const initialState: AppState = {
@@ -39,11 +44,13 @@ const initialState: AppState = {
   freehandMode: false,
   showOptionModal: false,
   clipboard: [],
+  undoStacks: { undo: [], redo: [] },
 };
 
 const reducer = reducerWithInitialState(initialState)
   .withHandling(select)
   .withHandling(drag)
-  .withHandling(editor);
+  .withHandling(editor)
+  .withHandling(undo);
 
 export default reducer;

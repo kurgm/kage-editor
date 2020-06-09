@@ -3,6 +3,7 @@ import { useHotkeys }from 'react-hotkeys-hook';
 
 import { selectActions } from './actions/select';
 import { editorActions } from './actions/editor';
+import { undoActions } from './actions/undo';
 
 export const useShortcuts = () => {
   const dispatch = useDispatch();
@@ -16,11 +17,11 @@ export const useShortcuts = () => {
   }, {}, [dispatch]);
 
   useHotkeys('ctrl+z, command+z', (evt) => {
-    dispatch(editorActions.undo());
+    dispatch(undoActions.undo());
     evt.preventDefault();
   }, {}, [dispatch]);
   useHotkeys('ctrl+y, command+y, ctrl+shift+z, command+shift+z', (evt) => {
-    dispatch(editorActions.redo());
+    dispatch(undoActions.redo());
     evt.preventDefault();
   }, {}, [dispatch]);
   useHotkeys('ctrl+x, command+x', (evt) => {

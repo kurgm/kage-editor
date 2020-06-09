@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { AppState } from '../reducers';
 import { editorActions } from '../actions/editor';
 import { selectActions } from '../actions/select';
+import { undoActions } from '../actions/undo';
 
 import SelectionInfo from './SelectionInfo';
 import SubmitPreview from './SubmitPreview';
@@ -17,18 +18,20 @@ const EditorControls = () => {
   const selection = useSelector((state: AppState) => state.selection);
   const clipboard = useSelector((state: AppState) => state.clipboard);
   const freehandMode = useSelector((state: AppState) => state.freehandMode);
+  const undoLength = useSelector((state: AppState) => state.undoStacks.undo.length);
+  const redoLength = useSelector((state: AppState) => state.undoStacks.redo.length);
 
-  const undoDisabled = true;
-  const redoDisabled = true;
+  const undoDisabled = undoLength === 0;
+  const redoDisabled = redoLength === 0;
   const pasteDisabled = clipboard.length === 0;
   const decomposeDisabled = !selection.some((index) => glyph[index].value[0] === 99);
 
   const dispatch = useDispatch();
   const undo = useCallback(() => {
-    dispatch(editorActions.undo());
+    dispatch(undoActions.undo());
   }, [dispatch]);
   const redo = useCallback(() => {
-    dispatch(editorActions.redo());
+    dispatch(undoActions.redo());
   }, [dispatch]);
   const selectAll = useCallback(() => {
     dispatch(selectActions.selectAll());

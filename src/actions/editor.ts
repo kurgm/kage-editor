@@ -18,9 +18,6 @@ export const editorActions = {
 
   insertPart: actionCreator<string>('ADD_PART'),
 
-  undo: actionCreator('UNDO'),
-  redo: actionCreator('REDO'),
-
   paste: actionCreator('PASTE'),
   copy: actionCreator('COPY_SELECTION'),
   cut: actionCreator('CUT_SELECTION'),

@@ -145,9 +145,6 @@ export default (builder: ReducerBuilder<AppState>) => builder
     selection: [state.glyph.length],
   }))
 
-  .case(editorActions.undo, (state) => state) // TODO
-  .case(editorActions.redo, (state) => state) // TODO
-
   .case(editorActions.paste, (state) => ({
     ...state,
     glyph: state.glyph.concat(state.clipboard),
