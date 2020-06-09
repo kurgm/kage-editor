@@ -69,15 +69,17 @@ export const unparseGlyph = (glyph: Glyph): string => (
 );
 
 export const isGlyphDeepEqual = (glyph1: Glyph, glyph2: Glyph) => (
-  glyph1.length === glyph2.length &&
-  glyph1.every((glyphLine1, index) => {
-    const glyphLine2 = glyph2[index];
-    return (
-      glyphLine1.partName === glyphLine2.partName &&
-      glyphLine1.value.length === glyphLine2.value.length &&
-      glyphLine1.value.every((value1, index) => value1 === glyphLine2.value[index])
-    );
-  })
+  glyph1 === glyph2 || (
+    glyph1.length === glyph2.length &&
+    glyph1.every((glyphLine1, index) => {
+      const glyphLine2 = glyph2[index];
+      return glyphLine1 === glyphLine2 || (
+        glyphLine1.partName === glyphLine2.partName &&
+        glyphLine1.value.length === glyphLine2.value.length &&
+        glyphLine1.value.every((value1, index) => value1 === glyphLine2.value[index])
+      );
+    })
+  )
 );
 
 

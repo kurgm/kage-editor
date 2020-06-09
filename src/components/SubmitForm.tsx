@@ -33,9 +33,7 @@ const SubmitForm = () => {
   const formRef = useRef<HTMLFormElement>(null);
   useLayoutEffect(() => {
     if (exiting) {
-      if (formRef.current) {
-        formRef.current.submit();
-      }
+      formRef.current?.submit();
     }
   }, [exiting]);
   const glyph = useSelector(submitGlyphSelector);
