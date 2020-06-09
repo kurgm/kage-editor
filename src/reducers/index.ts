@@ -9,7 +9,7 @@ import args from '../args';
 import select from './select';
 import drag from './drag';
 import editor from './editor';
-import { undoReduceBuilder as undo } from './undo';
+import { undoable } from './undo';
 
 
 export interface AppState {
@@ -51,10 +51,11 @@ const initialState: AppState = {
   exiting: false,
 };
 
-const reducer = reducerWithInitialState(initialState)
-  .withHandling(select)
-  .withHandling(drag)
-  .withHandling(editor)
-  .withHandling(undo);
+const reducer = undoable(
+  reducerWithInitialState(initialState)
+    .withHandling(select)
+    .withHandling(drag)
+    .withHandling(editor)
+);
 
 export default reducer;
