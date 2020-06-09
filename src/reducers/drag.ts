@@ -10,6 +10,7 @@ import { Glyph } from '../kageUtils/glyph';
 import { makeGlyphSeparated } from '../kage';
 
 import { AppState } from '.';
+import { pushUndo } from './undo';
 import { resizeSelected } from '../selectors/draggedGlyph';
 
 const performAreaSelect = (glyph: Glyph, buhinMap: Map<string, string>, x1: number, y1: number, x2: number, y2: number): number[] => {
@@ -143,33 +144,33 @@ export default (builder: ReducerBuilder<AppState>) => builder
       const [x2, y2] = state.ctmInv(evt.clientX, evt.clientY);
 
       const newGlyph = moveSelectedGlyphLines(state.glyph, state.selection, x2 - x1, y2 - y1);
-      return {
+      return pushUndo(state, {
         ...state,
         glyph: newGlyph,
         dragSelection: null,
-      };
+      });
     }
     if (state.dragPoint) {
       const [pointIndex, [x1, y1]] = state.dragPoint;
       const [x2, y2] = state.ctmInv(evt.clientX, evt.clientY);
 
       const newGlyph = moveSelectedPoint(state.glyph, state.selection, pointIndex, x2 - x1, y2 - y1);
-      return {
+      return pushUndo(state, {
         ...state,
         glyph: newGlyph,
         dragPoint: null,
-      };
+      });
     }
     if (state.resizeSelection) {
       const [position, [x1, y1]] = state.resizeSelection;
       const [x2, y2] = state.ctmInv(evt.clientX, evt.clientY);
 
       const newGlyph = resizeSelected(state.glyph, state.selection, position, x2 - x1, y2 - y1);
-      return {
+      return pushUndo(state, {
         ...state,
         glyph: newGlyph,
         resizeSelection: null,
-      };
+      });
     }
     return state;
   })

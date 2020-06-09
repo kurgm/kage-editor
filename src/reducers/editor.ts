@@ -11,6 +11,8 @@ import { calcStretchPositions, setStretchPositions } from '../kageUtils/stretchp
 import { changeStrokeType } from '../kageUtils/stroketype';
 import { applyGlyphLineOperation, moveSelectedGlyphLines } from '../kageUtils/transform';
 
+import { pushUndo } from './undo';
+
 import { AppState } from '.';
 
 const setGlyphLine = (glyph: Glyph, index: number, glyphLine: GlyphLine): Glyph => {
@@ -34,7 +36,7 @@ export default (builder: ReducerBuilder<AppState>) => builder
     return {
       ...state,
       stretchParamMap: newMap,
-    }
+    };
   })
 
   .case(editorActions.changeStrokeType, (state, newType) => {
@@ -43,10 +45,10 @@ export default (builder: ReducerBuilder<AppState>) => builder
     }
     const lineIndex = state.selection[0];
     const newGLine = changeStrokeType(state.glyph[lineIndex], newType);
-    return {
+    return pushUndo(state, {
       ...state,
       glyph: setGlyphLine(state.glyph, lineIndex, newGLine),
-    }
+    });
   })
   .case(editorActions.changeHeadShapeType, (state, newType) => {
     if (state.selection.length !== 1) {
@@ -58,10 +60,10 @@ export default (builder: ReducerBuilder<AppState>) => builder
       value: state.glyph[lineIndex].value.slice(),
     };
     newGLine.value[1] = newType;
-    return {
+    return pushUndo(state, {
       ...state,
       glyph: setGlyphLine(state.glyph, lineIndex, newGLine),
-    };
+    });
   })
   .case(editorActions.changeTailShapeType, (state, newType) => {
     if (state.selection.length !== 1) {
@@ -73,10 +75,10 @@ export default (builder: ReducerBuilder<AppState>) => builder
       value: state.glyph[lineIndex].value.slice(),
     };
     newGLine.value[2] = newType;
-    return {
+    return pushUndo(state, {
       ...state,
       glyph: setGlyphLine(state.glyph, lineIndex, newGLine),
-    };
+    });
   })
   .case(editorActions.changeStretchCoeff, (state, value) => {
     if (state.selection.length !== 1) {
@@ -95,10 +97,10 @@ export default (builder: ReducerBuilder<AppState>) => builder
       state.glyph[lineIndex],
       calcStretchPositions(stretchParam, value)
     );
-    return {
+    return pushUndo(state, {
       ...state,
       glyph: setGlyphLine(state.glyph, lineIndex, newGLine),
-    };
+    });
   })
 
   .case(editorActions.swapWithPrev, (state) => {
@@ -112,11 +114,11 @@ export default (builder: ReducerBuilder<AppState>) => builder
     const newGlyph = state.glyph.slice();
     newGlyph[lineIndex - 1] = state.glyph[lineIndex];
     newGlyph[lineIndex] = state.glyph[lineIndex - 1];
-    return {
+    return pushUndo(state, {
       ...state,
       glyph: newGlyph,
       selection: [lineIndex - 1],
-    };
+    });
   })
   .case(editorActions.swapWithNext, (state) => {
     if (state.selection.length !== 1) {
@@ -129,14 +131,14 @@ export default (builder: ReducerBuilder<AppState>) => builder
     const newGlyph = state.glyph.slice();
     newGlyph[lineIndex + 1] = state.glyph[lineIndex];
     newGlyph[lineIndex] = state.glyph[lineIndex + 1];
-    return {
+    return pushUndo(state, {
       ...state,
       glyph: newGlyph,
       selection: [lineIndex + 1],
-    };
+    });
   })
 
-  .case(editorActions.insertPart, (state, partName) => ({
+  .case(editorActions.insertPart, (state, partName) => pushUndo(state, {
     ...state,
     glyph: state.glyph.concat([{
       value: [99, 0, 0, 0, 0, 200, 200, 0, 0, 0],
@@ -145,7 +147,7 @@ export default (builder: ReducerBuilder<AppState>) => builder
     selection: [state.glyph.length],
   }))
 
-  .case(editorActions.paste, (state) => ({
+  .case(editorActions.paste, (state) => pushUndo(state, {
     ...state,
     glyph: state.glyph.concat(state.clipboard),
     selection: state.clipboard.map((_gLine, index) => state.glyph.length + index),
@@ -162,13 +164,13 @@ export default (builder: ReducerBuilder<AppState>) => builder
       )),
     };
   })
-  .case(editorActions.cut, (state) => ({
+  .case(editorActions.cut, (state) => pushUndo(state, {
     ...state,
     glyph: state.glyph.filter((_gLine, index) => !state.selection.includes(index)),
     clipboard: state.selection.map((index) => state.glyph[index]),
     selection: [],
   }))
-  .case(editorActions.delete, (state) => ({
+  .case(editorActions.delete, (state) => pushUndo(state, {
     ...state,
     glyph: state.glyph.filter((_gLine, index) => !state.selection.includes(index)),
     selection: [],
@@ -188,13 +190,13 @@ export default (builder: ReducerBuilder<AppState>) => builder
       );
       newGlyph = newGlyph.concat(newLines);
     });
-    return {
+    return pushUndo(state, {
       ...state,
       glyph: newGlyph,
       selection: newSelection,
-    };
+    });
   })
-  .case(editorActions.moveSelected, (state, [dx, dy]) => ({
+  .case(editorActions.moveSelected, (state, [dx, dy]) => pushUndo(state, {
     ...state,
     glyph: moveSelectedGlyphLines(state.glyph, state.selection, dx, dy),
   }))
