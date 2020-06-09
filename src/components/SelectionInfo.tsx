@@ -6,13 +6,25 @@ import { createSelector } from 'reselect';
 import { editorActions } from '../actions/editor';
 import { selectActions } from '../actions/select';
 import { AppState } from '../reducers';
+import { GlyphLine } from '../kageUtils/glyph';
 import { calcStretchScalar, getStretchPositions } from '../kageUtils/stretchparam';
 import { strokeTypes, headShapeTypes, tailShapeTypes, isValidStrokeShapeTypes } from '../kageUtils/stroketype';
+import { draggedGlyphSelector } from '../selectors/draggedGlyph';
 
 import { useTranslation } from 'react-i18next';
 
 import './SelectionInfo.css'
 
+
+const selectedGlyphLineSelector = createSelector([
+  (state: AppState) => state.selection,
+  draggedGlyphSelector,
+], (selection, draggedGlyph): GlyphLine | null => {
+  if (selection.length !== 1) {
+    return null;
+  }
+  return draggedGlyph[selection[0]];
+});
 
 interface StrokeInfo {
   strokeType: number;
@@ -22,13 +34,11 @@ interface StrokeInfo {
   coordString: string;
 }
 const strokeInfoSelector = createSelector([
-  (state: AppState) => state.selection,
-  (state: AppState) => state.selection.length ? state.glyph[state.selection[0]] : null,
-], (selection, selectedStroke_): StrokeInfo | null => {
-  if (selection.length !== 1) {
+  selectedGlyphLineSelector
+], (selectedStroke): StrokeInfo | null => {
+  if (!selectedStroke) {
     return null;
   }
-  const selectedStroke = selectedStroke_!;
   if (!strokeTypes.includes(selectedStroke.value[0])) {
     return null;
   }
@@ -53,15 +63,13 @@ interface PartInfo {
   stretchCoeff: number | null;
 }
 const partInfoSelector = createSelector([
-  (state: AppState) => state.selection,
-  (state: AppState) => state.selection.length ? state.glyph[state.selection[0]] : null,
+  selectedGlyphLineSelector,
   (state: AppState) => state.buhinMap,
   (state: AppState) => state.stretchParamMap,
-], (selection, selectedStroke_, buhinMap, stretchParamMap): PartInfo | null => {
-  if (selection.length !== 1) {
+], (selectedStroke, buhinMap, stretchParamMap): PartInfo | null => {
+  if (!selectedStroke) {
     return null;
   }
-  const selectedStroke = selectedStroke_!;
   if (selectedStroke.value[0] !== 99) {
     return null;
   }
@@ -93,7 +101,7 @@ interface OtherInfo {
 }
 const otherInfoSelector = createSelector([
   (state: AppState) => state.selection,
-  (state: AppState) => state.selection.length ? state.glyph[state.selection[0]] : null,
+  selectedGlyphLineSelector,
 ], (selection, selectedStroke_): OtherInfo | null => {
   if (selection.length > 1) {
     return { isMultiple: true };
