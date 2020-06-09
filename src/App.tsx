@@ -3,6 +3,7 @@ import './App.css';
 
 import GlyphArea from './components/GlyphArea';
 import EditorControls from './components/EditorControls';
+import PartsSearch from './components/PartsSearch'
 import { useShortcuts } from './shortcuts';
 
 function App() {
@@ -11,7 +12,7 @@ function App() {
     <div className="App">
       <GlyphArea />
       <EditorControls />
-      <div className="parts-list-area" />
+      <PartsSearch />
     </div>
   );
 }

@@ -1,15 +1,13 @@
 .App {
   display: grid;
-  grid-template-columns: minmax(500px, 1fr) 250px;
+  grid-template-columns: minmax(500px, 1fr) auto;
   grid-template-rows: minmax(240px, 1fr) auto;
   height: 100vh;
 }
 
-.parts-list-area {
+.parts-search-area {
   grid-column: 2/3;
   grid-row: 1/3;
-  display: flex;
-  flex-flow: column;
 }
 
 .glyph-area {

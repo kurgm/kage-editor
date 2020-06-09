@@ -77,5 +77,10 @@
   "end freehand": "手書き終了",
   "decompose": "部品分解",
   "options": "表示設定...",
-  "finish edit": "編集終了"
+  "finish edit": "編集終了",
+  "search": "検索",
+  "searching": "検索中",
+  "search error": "エラー:{{message}}",
+  "search query too short": "エラー:キーワードが短すぎます",
+  "no search result": "該当部品なし"
 }

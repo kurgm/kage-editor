@@ -134,6 +134,8 @@ export default (builder: ReducerBuilder<AppState>) => builder
     };
   })
 
+  .case(editorActions.insertPart, (state, partName) => state) // TODO
+
   .case(editorActions.undo, (state) => state) // TODO
   .case(editorActions.redo, (state) => state) // TODO
 

@@ -16,6 +16,8 @@ export const editorActions = {
   swapWithPrev: actionCreator('SWAP_WITH_PREV'),
   swapWithNext: actionCreator('SWAP_WITH_NEXT'),
 
+  insertPart: actionCreator<string>('ADD_PART'),
+
   undo: actionCreator('UNDO'),
   redo: actionCreator('REDO'),
 

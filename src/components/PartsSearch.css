@@ -1,0 +1,41 @@
+.parts-search-area {
+  display: flex;
+  flex-flow: column;
+  width: 250px;
+}
+
+.parts-search-box {
+  display: flex;
+  padding: 10px;
+}
+
+.parts-search-box input {
+  flex: 1;
+}
+
+.parts-list {
+  flex: 1;
+  overflow-y: scroll;
+  border: 1px solid #666;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: start;
+  align-content: flex-start;
+}
+
+.parts-list img {
+  border: 1px solid #333;
+  margin: 4px;
+}
+
+.parts-list img:hover {
+  border: 5px solid #cc0000;
+  margin: 0;
+}
+
+.parts-hover-name {
+  height: 1.3em;
+  line-height: 1.3;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
