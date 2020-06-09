@@ -57,6 +57,7 @@
   "tail type 6-4": "左ハネ",
   "tail type 6-5": "右ハネ",
   "tail type 7-7": "左払い",
+  "invalid stroke shape types": "エラー:ありえない筆画・形状の組み合わせです",
   "part": "部品",
   "alias of": "({{entity}} のエイリアス)",
   "stretch": "ストレッチ:",

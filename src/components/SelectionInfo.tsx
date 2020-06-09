@@ -7,7 +7,7 @@ import { editorActions } from '../actions/editor';
 import { selectActions } from '../actions/select';
 import { AppState } from '../reducers';
 import { calcStretchScalar, getStretchPositions } from '../kageUtils/stretchparam';
-import { strokeTypes, headShapeTypes, tailShapeTypes } from '../kageUtils/stroketype';
+import { strokeTypes, headShapeTypes, tailShapeTypes, isValidStrokeShapeTypes } from '../kageUtils/stroketype';
 
 import { useTranslation } from 'react-i18next';
 
@@ -18,6 +18,7 @@ interface StrokeInfo {
   strokeType: number;
   headShapeType: number;
   tailShapeType: number;
+  validTypes: boolean;
   coordString: string;
 }
 const strokeInfoSelector = createSelector([
@@ -40,6 +41,7 @@ const strokeInfoSelector = createSelector([
     strokeType: selectedStroke.value[0],
     headShapeType: selectedStroke.value[1],
     tailShapeType: selectedStroke.value[2],
+    validTypes: isValidStrokeShapeTypes(selectedStroke),
     coordString: points.join(' → '),
   };
 });
@@ -203,6 +205,12 @@ const SelectionInfo = () => {
                 </option>
               ))}
             </select>
+            {' '}
+            {!strokeInfo.validTypes && (
+              <span className="alert">
+                {t('invalid stroke shape types')}
+              </span>
+            )}
           </div>
           <div>{strokeInfo.coordString}</div>
         </>}

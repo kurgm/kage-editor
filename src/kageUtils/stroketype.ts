@@ -1,4 +1,6 @@
-import {GlyphLine, getNumColumns} from './glyph';
+import memoizeOne from 'memoize-one';
+
+import { GlyphLine, getNumColumns } from './glyph';
 
 export const strokeTypes = [1, 2, 3, 4, 6, 7];
 
@@ -127,3 +129,92 @@ export const changeStrokeType = (glyphLine: GlyphLine, newType: number): GlyphLi
   }
   return newGlyphLine;
 };
+
+const validStrokeShapeTypes: [number, number, number][] = [
+  [1, 0, 0],
+  [1, 0, 2],
+  [1, 0, 32],
+  [1, 0, 13],
+  [1, 0, 23],
+  [1, 0, 4],
+  [1, 0, 313],
+  [1, 0, 413],
+  [1, 0, 24],
+  [1, 2, 0],
+  [1, 2, 2],
+  [1, 32, 0],
+  [1, 32, 32],
+  [1, 32, 13],
+  [1, 32, 23],
+  [1, 32, 4],
+  [1, 32, 313],
+  [1, 32, 413],
+  [1, 32, 24],
+  [1, 12, 0],
+  [1, 12, 32],
+  [1, 12, 13],
+  [1, 12, 23],
+  [1, 12, 313],
+  [1, 12, 413],
+  [1, 12, 24],
+  [1, 22, 0],
+  [1, 22, 32],
+  [1, 22, 13],
+  [1, 22, 23],
+  [1, 22, 4],
+  [1, 22, 313],
+  [1, 22, 413],
+  [1, 22, 24],
+  [2, 0, 7],
+  [2, 0, 5],
+  [2, 32, 7],
+  [2, 32, 4],
+  [2, 32, 5],
+  [2, 12, 7],
+  [2, 22, 7],
+  [2, 22, 4],
+  [2, 22, 5],
+  [2, 7, 0],
+  [2, 7, 8],
+  [2, 7, 4],
+  [3, 0, 0],
+  [3, 0, 5],
+  [3, 32, 0],
+  [3, 32, 5],
+  [3, 12, 0],
+  [3, 12, 5],
+  [3, 22, 0],
+  [3, 22, 5],
+  [4, 0, 0],
+  [4, 0, 5],
+  [4, 22, 0],
+  [4, 22, 5],
+  [6, 0, 7],
+  [6, 0, 5],
+  [6, 32, 7],
+  [6, 32, 4],
+  [6, 32, 5],
+  [6, 12, 7],
+  [6, 22, 7],
+  [6, 22, 4],
+  [6, 22, 5],
+  [6, 7, 0],
+  [6, 7, 8],
+  [6, 7, 4],
+  [7, 0, 7],
+  [7, 32, 7],
+  [7, 12, 7],
+  [7, 22, 7],
+];
+
+export const isValidStrokeShapeTypes = memoizeOne((stroke: GlyphLine) => {
+  if (!strokeTypes.includes(stroke.value[0])) {
+    return true;
+  }
+
+  return validStrokeShapeTypes.some(([s0, s1, s2]) => (
+    s0 === stroke.value[0] &&
+    s1 === stroke.value[1] &&
+    s2 === stroke.value[2]
+  ));
+});
