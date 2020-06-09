@@ -9,3 +9,7 @@
   stroke: #999999;
   stroke-width: 1;
 }
+
+svg.freehand * {
+  pointer-events: none;
+}

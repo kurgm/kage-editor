@@ -12,6 +12,7 @@ import { makeGlyphSeparated } from '../kage';
 import { AppState } from '.';
 import { pushUndo } from './undo';
 import { resizeSelected } from '../selectors/draggedGlyph';
+import { drawFreehand } from '../kageUtils/freehand';
 
 const performAreaSelect = (glyph: Glyph, buhinMap: Map<string, string>, x1: number, y1: number, x2: number, y2: number): number[] => {
   const polygonsSep = makeGlyphSeparated(glyph, buhinMap);
@@ -44,11 +45,17 @@ const performAreaSelect = (glyph: Glyph, buhinMap: Map<string, string>, x1: numb
 };
 
 export default (builder: ReducerBuilder<AppState>) => builder
-  .case(dragActions.startAreaSelect, (state, evt) => {
+  .case(dragActions.startBackgroundDrag, (state, evt) => {
     if (!state.ctmInv) {
       return state;
     }
     const [x1, y1] = state.ctmInv(evt.clientX, evt.clientY);
+    if (state.freehandMode) {
+      return {
+        ...state,
+        freehandStroke: [[x1, y1]],
+      };
+    }
     return {
       ...state,
       areaSelectRect: [x1, y1, x1, y1],
@@ -121,6 +128,20 @@ export default (builder: ReducerBuilder<AppState>) => builder
         resizeSelection: [position, [x1, y1, x2, y2]],
       };
     }
+    if (state.freehandStroke) {
+      const [x2, y2] = state.ctmInv(evt.clientX, evt.clientY);
+      let freehandStroke = state.freehandStroke.concat([[x2, y2]]);
+      if (freehandStroke.length >= 3) {
+        const [lastX, lastY] = freehandStroke[freehandStroke.length - 2];
+        if (Math.abs(x2 - lastX) < 2 && Math.abs(y2 - lastY) < 2) {
+          freehandStroke.splice(freehandStroke.length - 2, 1);
+        }
+      }
+      return {
+        ...state,
+        freehandStroke,
+      };
+    }
     return state;
   })
   .case(dragActions.mouseUp, (state, evt) => {
@@ -170,6 +191,17 @@ export default (builder: ReducerBuilder<AppState>) => builder
         ...state,
         glyph: newGlyph,
         resizeSelection: null,
+      });
+    }
+    if (state.freehandStroke) {
+      const [x2, y2] = state.ctmInv(evt.clientX, evt.clientY);
+      const freehandStroke = state.freehandStroke.concat([[x2, y2]]);
+
+      const newGlyph = drawFreehand(state.glyph, freehandStroke);
+      return pushUndo(state, {
+        ...state,
+        glyph: newGlyph,
+        freehandStroke: null,
       });
     }
     return state;

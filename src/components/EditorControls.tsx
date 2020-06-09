@@ -109,7 +109,6 @@ const EditorControls = () => {
           {t('cut')}
         </button>
         <button
-          disabled
           onClick={toggleFreehand}
         >
           {freehandMode ? t('end freehand') : t('start freehand')}

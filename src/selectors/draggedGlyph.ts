@@ -7,6 +7,7 @@ import { AppState } from '../reducers';
 import { Glyph, GlyphLine } from '../kageUtils/glyph';
 import { getGlyphLinesBBX } from '../kageUtils/bbx';
 import { moveSelectedGlyphLines, moveSelectedPoint, resizeSelectedGlyphLines } from '../kageUtils/transform';
+import { drawFreehand } from '../kageUtils/freehand';
 
 export const resizeSelected = (glyph: Glyph, selection: number[], position: RectPointPosition, dx: number, dy: number): Glyph => {
   if (selection.length === 1) {
@@ -77,7 +78,8 @@ export const draggedGlyphSelector = createSelector([
   (state: AppState) => state.dragSelection,
   (state: AppState) => state.dragPoint,
   (state: AppState) => state.resizeSelection,
-], (glyph, selection, dragSelection, dragPoint, resizeSelection) => {
+  (state: AppState) => state.freehandStroke,
+], (glyph, selection, dragSelection, dragPoint, resizeSelection, freehandStroke) => {
   if (dragSelection) {
     const [x1, y1, x2, y2] = dragSelection;
     const dx = x2 - x1;
@@ -93,6 +95,8 @@ export const draggedGlyphSelector = createSelector([
     const dx = x2 - x1;
     const dy = y2 - y1;
     glyph = resizeSelected(glyph, selection, position, dx, dy);
-  };
+  } else if (freehandStroke) {
+    glyph = drawFreehand(glyph, freehandStroke);
+  }
   return glyph;
 });

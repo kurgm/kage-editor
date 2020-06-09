@@ -12,7 +12,7 @@ export enum RectPointPosition {
 const actionCreator = actionCreatorFactory('EDITOR');
 
 export const dragActions = {
-  startAreaSelect: actionCreator<React.MouseEvent>('AREA_SELECT_START'),
+  startBackgroundDrag: actionCreator<React.MouseEvent>('BACKGROUND_DRAG_START'),
   startSelectionDrag: actionCreator<React.MouseEvent>('SELECTION_DRAG_START'),
   startPointDrag: actionCreator<[React.MouseEvent, number]>('MOVE_POINT_START'),
   startResize: actionCreator<[React.MouseEvent, RectPointPosition]>('RESIZE_START'),

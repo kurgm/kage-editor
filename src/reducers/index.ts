@@ -19,6 +19,7 @@ export interface AppState {
   dragSelection: [number, number, number, number] | null;
   dragPoint: [number, [number, number, number, number]] | null;
   resizeSelection: [RectPointPosition, [number, number, number, number]] | null;
+  freehandStroke: [number, number][] | null;
   ctmInv: CTMInv | null;
   buhinMap: Map<string, string>;
   stretchParamMap: Map<string, StretchParam>;
@@ -39,6 +40,7 @@ const initialState: AppState = {
   dragSelection: null,
   dragPoint: null,
   resizeSelection: null,
+  freehandStroke: null,
   ctmInv: null,
   buhinMap: new Map<string, string>(),
   stretchParamMap: new Map<string, StretchParam>(),

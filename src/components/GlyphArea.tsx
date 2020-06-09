@@ -17,6 +17,9 @@ const GlyphArea = () => {
   const buhinMap = useSelector((state: AppState) => state.buhinMap);
   const selection = useSelector((state: AppState) => state.selection);
   const areaSelectRect = useSelector((state: AppState) => state.areaSelectRect);
+  const freehandMode = useSelector((state: AppState) => state.freehandMode);
+
+  const svgClassName = freehandMode ? 'freehand' : '';
 
   const dispatch = useDispatch();
   const handleMouseDownCapture = useCallback((evt: React.MouseEvent<SVGSVGElement>) => {
@@ -39,7 +42,7 @@ const GlyphArea = () => {
     if (!(evt.shiftKey || evt.ctrlKey)) {
       dispatch(selectActions.selectNone());
     }
-    dispatch(dragActions.startAreaSelect(evt));
+    dispatch(dragActions.startBackgroundDrag(evt));
   }, [dispatch]);
   const handleMouseDownDeselectedStroke = useCallback((evt: React.MouseEvent, index: number) => {
     if (evt.shiftKey || evt.ctrlKey) {
@@ -77,6 +80,7 @@ const GlyphArea = () => {
     <div className="glyph-area">
       <svg
         width="100%" height="100%" viewBox="-20 -20 500 240"
+        className={svgClassName}
         onMouseDownCapture={handleMouseDownCapture}
         onMouseDown={handleMouseDownBackground}
       >
