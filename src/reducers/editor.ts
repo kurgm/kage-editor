@@ -2,12 +2,20 @@ import { ReducerBuilder } from 'typescript-fsa-reducers';
 
 import { editorActions } from '../actions/editor';
 
+import { Glyph, GlyphLine } from '../kageUtils/glyph';
 import { getGlyphLinesBBX } from '../kageUtils/bbx';
-import { Glyph } from '../kageUtils/glyph';
-import { applyGlyphLineOperation } from '../kageUtils/transform';
 import { decompose } from '../kageUtils/decompose';
+import { calcStretchPositions, setStretchPositions } from '../kageUtils/stretchparam';
+import { changeStrokeType } from '../kageUtils/stroketype';
+import { applyGlyphLineOperation } from '../kageUtils/transform';
 
 import { AppState } from '.';
+
+const setGlyphLine = (glyph: Glyph, index: number, glyphLine: GlyphLine): Glyph => {
+  const newGlyph = glyph.slice();
+  newGlyph[index] = glyphLine;
+  return newGlyph;
+};
 
 export default (builder: ReducerBuilder<AppState>) => builder
   .case(editorActions.loadedBuhin, (state, [name, data]) => {
@@ -25,6 +33,70 @@ export default (builder: ReducerBuilder<AppState>) => builder
       ...state,
       stretchParamMap: newMap,
     }
+  })
+
+  .case(editorActions.changeStrokeType, (state, newType) => {
+    if (state.selection.length !== 1) {
+      return state;
+    }
+    const lineIndex = state.selection[0];
+    const newGLine = changeStrokeType(state.glyph[lineIndex], newType);
+    return {
+      ...state,
+      glyph: setGlyphLine(state.glyph, lineIndex, newGLine),
+    }
+  })
+  .case(editorActions.changeHeadShapeType, (state, newType) => {
+    if (state.selection.length !== 1) {
+      return state;
+    }
+    const lineIndex = state.selection[0];
+    const newGLine = {
+      ...state.glyph[lineIndex],
+      value: state.glyph[lineIndex].value.slice(),
+    };
+    newGLine.value[1] = newType;
+    return {
+      ...state,
+      glyph: setGlyphLine(state.glyph, lineIndex, newGLine),
+    };
+  })
+  .case(editorActions.changeTailShapeType, (state, newType) => {
+    if (state.selection.length !== 1) {
+      return state;
+    }
+    const lineIndex = state.selection[0];
+    const newGLine = {
+      ...state.glyph[lineIndex],
+      value: state.glyph[lineIndex].value.slice(),
+    };
+    newGLine.value[2] = newType;
+    return {
+      ...state,
+      glyph: setGlyphLine(state.glyph, lineIndex, newGLine),
+    };
+  })
+  .case(editorActions.changeStretchCoeff, (state, value) => {
+    if (state.selection.length !== 1) {
+      return state;
+    }
+    const lineIndex = state.selection[0];
+    const selectedLine = state.glyph[lineIndex];
+    if (!selectedLine.partName) {
+      return state;
+    }
+    const stretchParam = state.stretchParamMap.get(selectedLine.partName);
+    if (!stretchParam) {
+      return state;
+    }
+    const newGLine = setStretchPositions(
+      state.glyph[lineIndex],
+      calcStretchPositions(stretchParam, value)
+    );
+    return {
+      ...state,
+      glyph: setGlyphLine(state.glyph, lineIndex, newGLine),
+    };
   })
 
   .case(editorActions.swapWithPrev, (state) => {

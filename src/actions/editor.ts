@@ -8,6 +8,11 @@ export const editorActions = {
   loadedBuhin: actionCreator<[string, string]>('LOAD_BUHIN_DATA'),
   loadedStretchParam: actionCreator<[string, StretchParam]>('LOAD_STRETCH_PARAM'),
 
+  changeStrokeType: actionCreator<number>('CHANGE_STROKE_TYPE'),
+  changeHeadShapeType: actionCreator<number>('CHANGE_HEAD_SHAPE_TYPE'),
+  changeTailShapeType: actionCreator<number>('CHANGE_TAIL_SHAPE_TYPE'),
+  changeStretchCoeff: actionCreator<number>('CHANGE_STRETCH_COEFF'),
+
   swapWithPrev: actionCreator('SWAP_WITH_PREV'),
   swapWithNext: actionCreator('SWAP_WITH_NEXT'),
 

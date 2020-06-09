@@ -146,6 +146,18 @@ const SelectionInfo = () => {
   } = useSelector(buttonsDisabledSelector, shallowEqual);
 
   const dispatch = useDispatch();
+  const changeStrokeType = useCallback((evt: React.ChangeEvent<HTMLSelectElement>) => {
+    dispatch(editorActions.changeStrokeType(+evt.currentTarget.value));
+  }, [dispatch]);
+  const changeHeadShapeType = useCallback((evt: React.ChangeEvent<HTMLSelectElement>) => {
+    dispatch(editorActions.changeHeadShapeType(+evt.currentTarget.value));
+  }, [dispatch]);
+  const changeTailShapeType = useCallback((evt: React.ChangeEvent<HTMLSelectElement>) => {
+    dispatch(editorActions.changeTailShapeType(+evt.currentTarget.value));
+  }, [dispatch]);
+  const changeStretchCoeff = useCallback((evt: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(editorActions.changeStretchCoeff(+evt.currentTarget.value));
+  }, [dispatch]);
   const selectPrev = useCallback(() => {
     dispatch(selectActions.selectPrev());
   }, [dispatch]);
@@ -166,21 +178,25 @@ const SelectionInfo = () => {
         {strokeInfo && <>
           <div>
             {t('stroke type')}
-            <select value={strokeInfo.strokeType}>
+            <select value={strokeInfo.strokeType} onChange={changeStrokeType}>
               {strokeTypes.map((strokeType) => (
                 <option key={strokeType} value={strokeType}>
                   {t(`stroke type ${strokeType}`)}
                 </option>
               ))}
             </select>
-            <select value={strokeInfo.headShapeType}>
+            {' '}
+            {t('head type')}
+            <select value={strokeInfo.headShapeType} onChange={changeHeadShapeType}>
               {headShapeTypes[strokeInfo.strokeType].map((headShapeType) => (
                 <option key={headShapeType} value={headShapeType}>
                   {t(`head type ${strokeInfo.strokeType}-${headShapeType}`)}
                 </option>
               ))}
             </select>
-            <select value={strokeInfo.tailShapeType}>
+            {' '}
+            {t('tail type')}
+            <select value={strokeInfo.tailShapeType} onChange={changeTailShapeType}>
               {tailShapeTypes[strokeInfo.strokeType].map((tailShapeType) => (
                 <option key={tailShapeType} value={tailShapeType}>
                   {t(`tail type ${strokeInfo.strokeType}-${tailShapeType}`)}
@@ -203,7 +219,11 @@ const SelectionInfo = () => {
             <div>
               {t('stretch')}
               {' '}
-              <input type="range" min={-10} max={10} value={partInfo.stretchCoeff} />
+              <input
+                type="range" min={-10} max={10}
+                value={partInfo.stretchCoeff}
+                onChange={changeStretchCoeff}
+              />
               {' '}
               {partInfo.stretchCoeff}
             </div>
