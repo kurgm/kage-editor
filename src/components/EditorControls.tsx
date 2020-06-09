@@ -8,6 +8,7 @@ import { editorActions } from '../actions/editor';
 import { selectActions } from '../actions/select';
 
 import SelectionInfo from './SelectionInfo';
+import SubmitPreview from './SubmitPreview';
 
 import './EditorControls.css';
 
@@ -125,7 +126,7 @@ const EditorControls = () => {
         </button>
       </div>
       <div className="preview">
-        <svg className="preview-thumbnail" viewBox="0 0 200 200" width="50" height="50"></svg>
+        <SubmitPreview />
         <button
           disabled
           onClick={finishEdit}

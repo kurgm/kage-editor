@@ -12,10 +12,11 @@ export interface GlyphComponentProps {
   selection: number[];
   handleMouseDownDeselectedStroke?: (evt: React.MouseEvent, index: number) => void;
   handleMouseDownSelectedStroke?: (evt: React.MouseEvent, index: number) => void;
+  makeGlyphSeparated?: typeof makeGlyphSeparated;
 }
 
 const GlyphComponent = (props: GlyphComponentProps) => {
-  const polygonsSep = makeGlyphSeparated(props.glyph, props.buhinMap);
+  const polygonsSep = (props.makeGlyphSeparated || makeGlyphSeparated)(props.glyph, props.buhinMap);
 
   const { selection } = props;
   const nonSelection = polygonsSep.map((_polygons, index) => index)

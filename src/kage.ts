@@ -38,7 +38,14 @@ const loadAbsentBuhin = (name: string) => {
     .catch((err) => console.error(err));
 };
 
-export const makeGlyphSeparated = memoizeOne((glyph: Glyph, map: Map<string, string>): Polygons[] => {
+const filteredGlyphIsEqual = (glyph1: Glyph, glyph2: Glyph) => (
+  glyph1.length === glyph2.length &&
+  glyph1.every((gLine1, index) => (
+    gLine1 === glyph2[index]
+  ))
+);
+
+const makeGlyphSeparated_ = memoizeOne((glyph: Glyph, map: Map<string, string>): Polygons[] => {
   const data = glyph.map(unparseGlyphLine);
   kage.kBuhin.search = (name) => {
     const result = map.get(name);
@@ -50,4 +57,21 @@ export const makeGlyphSeparated = memoizeOne((glyph: Glyph, map: Map<string, str
   };
   const result = kage.makeGlyphSeparated(data);
   return result;
-});
+}, ([glyph1, map1], [glyph2, map2]) => (
+  map1 === map2 &&
+  filteredGlyphIsEqual(glyph1, glyph2)
+));
+
+const makeGlyphSeparatedFactory = (
+  isEqual?: (newArgs: Parameters<typeof makeGlyphSeparated_>, lastArgs: Parameters<typeof makeGlyphSeparated_>) => boolean
+) => memoizeOne((glyph: Glyph, map: Map<string, string>): Polygons[] => {
+  return makeGlyphSeparated_(glyph, map);
+}, isEqual);
+
+export const makeGlyphSeparated = makeGlyphSeparatedFactory();
+export const makeGlyphSeparatedForSubmit = makeGlyphSeparatedFactory(
+  ([glyph1, map1], [glyph2, map2]) => (
+    map1 === map2 &&
+    filteredGlyphIsEqual(glyph1, glyph2)
+  )
+);
