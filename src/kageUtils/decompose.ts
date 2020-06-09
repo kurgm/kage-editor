@@ -36,16 +36,17 @@ export const decompose = (glyphLine: GlyphLine, buhinMap: Map<string, string>): 
       strokesArray
     );
 
-  if (failedBuhin) {
-    return [glyphLine];
-  }
-
   const x1 = glyphLine.value[3];
   const y1 = glyphLine.value[4];
   const x2 = glyphLine.value[5];
   const y2 = glyphLine.value[6];
   const [sx, sy, tx, ty] = normalizeStretchPositions(getStretchPositions(glyphLine)!);
   const isStretchEnabled = !(sx === tx - 200 && sy === ty);
+
+  if (isStretchEnabled && failedBuhin) {
+    // box may be incorrect
+    return [glyphLine];
+  }
 
   return glyph.map((oldGlyphLine) => {
     const tX = (x: number) => {
