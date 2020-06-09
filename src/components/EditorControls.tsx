@@ -55,9 +55,8 @@ const EditorControls = () => {
     dispatch(editorActions.openOptionModal());
   }, [dispatch]);
   const finishEdit = useCallback(() => {
-    // FIXME
-    // location.href = ...
-  }, []);
+    dispatch(editorActions.finishEdit());
+  }, [dispatch]);
 
   const { t } = useTranslation();
   return (
@@ -127,10 +126,7 @@ const EditorControls = () => {
       </div>
       <div className="preview">
         <SubmitPreview />
-        <button
-          disabled
-          onClick={finishEdit}
-        >
+        <button onClick={finishEdit}>
           {t('finish edit')}
         </button>
       </div>
