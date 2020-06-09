@@ -8,6 +8,7 @@
 .parts-list img {
   border: 1px solid #aaaaaa;
   margin: 4px;
+  cursor: pointer;
 }
 
 .parts-list img:hover {
