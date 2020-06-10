@@ -35,6 +35,11 @@ i18n
   .init({
     resources,
     lng,
+    fallbackLng: {
+      'zh-Hans': ['zh-Hant', 'ja'],
+      'zh-Hant': ['zh-Hans', 'ja'],
+      'default': ['ja'],
+    },
 
     returnObjects: true,
     interpolation: {

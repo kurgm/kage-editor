@@ -42,8 +42,12 @@ const OptionModal = () => {
   const handleStrokeCenterLineChange = useCallback((evt: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(displayActions.setStrokeCenterLineDisplay(evt.currentTarget.checked));
   }, [dispatch]);
+  
+  const { t, i18n } = useTranslation();
+  const handleLanguageChange = useCallback((evt: React.ChangeEvent<HTMLSelectElement>) => {
+    i18n.changeLanguage(evt.currentTarget.value);
+  }, [i18n]);
 
-  const { t } = useTranslation();
   return (
     <ReactModal
       isOpen={showOptionModal}
@@ -108,6 +112,18 @@ const OptionModal = () => {
           />
           {t('show stroke center line')}
         </label>
+      </div>
+      <div>
+        {t('display language')} <select
+          value={i18n.language}
+          onChange={handleLanguageChange}
+        >
+          <option value="ja">日本語</option>
+          <option value="en">English</option>
+          <option value="ko">한국어</option>
+          <option value="zh-Hans">简体中文</option>
+          <option value="zh-Hant">繁体中文</option>
+        </select>
       </div>
       <div>
         <button onClick={handleRequestClose}>{t('close modal')}</button>
