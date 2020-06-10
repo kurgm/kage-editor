@@ -10,6 +10,11 @@
   stroke-width: 1;
 }
 
-svg.freehand * {
+.glyph-area svg.freehand * {
   pointer-events: none;
+}
+
+.glyph-area svg {
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
