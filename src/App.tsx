@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 
 import GlyphArea from './components/GlyphArea';
 import EditorControls from './components/EditorControls';
@@ -8,6 +7,8 @@ import SubmitForm from './components/SubmitForm';
 import OptionModal from './components/OptionModal';
 
 import { useShortcuts } from './shortcuts';
+
+import './App.css';
 
 function App() {
   useShortcuts();

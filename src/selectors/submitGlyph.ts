@@ -1,9 +1,9 @@
-import { createSelector } from "reselect";
+import { createSelector } from 'reselect';
 
-import { Glyph } from "../kageUtils/glyph";
-import { getGlyphLineBBX } from "../kageUtils/bbx";
+import { Glyph } from '../kageUtils/glyph';
+import { getGlyphLineBBX } from '../kageUtils/bbx';
 
-import { draggedGlyphSelector } from "./draggedGlyph";
+import { draggedGlyphSelector } from './draggedGlyph';
 
 export const submitGlyphSelector = createSelector([
   draggedGlyphSelector,

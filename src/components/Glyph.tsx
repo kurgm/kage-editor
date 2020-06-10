@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Glyph } from '../kageUtils/glyph';
 import { makeGlyphSeparated, KShotai } from '../kage';
+
 import Stroke from './Stroke';
 
 import './Glyph.css'

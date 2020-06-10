@@ -5,13 +5,13 @@ import { polygonInPolygon, polygonIntersectsPolygon } from 'geometric';
 
 import { dragActions } from '../actions/drag';
 
-import { moveSelectedGlyphLines, moveSelectedPoint } from '../kageUtils/transform';
 import { Glyph } from '../kageUtils/glyph';
+import { moveSelectedGlyphLines, moveSelectedPoint } from '../kageUtils/transform';
+import { drawFreehand } from '../kageUtils/freehand';
 import { makeGlyphSeparated, KShotai } from '../kage';
 
 import { AppState } from '.';
 import { resizeSelected } from '../selectors/draggedGlyph';
-import { drawFreehand } from '../kageUtils/freehand';
 
 const performAreaSelect = (glyph: Glyph, buhinMap: Map<string, string>, shotai: KShotai, x1: number, y1: number, x2: number, y2: number): number[] => {
   const polygonsSep = makeGlyphSeparated(glyph, buhinMap, shotai);

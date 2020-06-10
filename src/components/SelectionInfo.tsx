@@ -2,6 +2,7 @@ import React, { useCallback } from 'react';
 
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { createSelector } from 'reselect';
+import { useTranslation } from 'react-i18next';
 
 import { editorActions } from '../actions/editor';
 import { selectActions } from '../actions/select';
@@ -10,8 +11,6 @@ import { GlyphLine } from '../kageUtils/glyph';
 import { calcStretchScalar, getStretchPositions } from '../kageUtils/stretchparam';
 import { strokeTypes, headShapeTypes, tailShapeTypes, isValidStrokeShapeTypes } from '../kageUtils/stroketype';
 import { draggedGlyphSelector } from '../selectors/draggedGlyph';
-
-import { useTranslation } from 'react-i18next';
 
 import './SelectionInfo.css'
 

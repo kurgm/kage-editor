@@ -1,4 +1,4 @@
-import React, { useRef, useCallback, useState, useEffect, FormEvent } from 'react';
+import React, { useRef, useCallback, useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { useTranslation } from 'react-i18next';
@@ -7,8 +7,9 @@ import { editorActions } from '../actions/editor';
 import { search } from '../callapi';
 import args from '../args';
 
-import './PartsSearch.css';
 import PartsList from './PartsList';
+
+import './PartsSearch.css';
 
 const searchSuggestions = [
   'エディタ部品1',

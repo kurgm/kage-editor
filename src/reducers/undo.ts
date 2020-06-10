@@ -1,11 +1,11 @@
 import { Reducer } from 'redux';
 import { reducerWithInitialState } from 'typescript-fsa-reducers';
 
-import { isGlyphDeepEqual } from "../kageUtils/glyph";
+import { isGlyphDeepEqual } from '../kageUtils/glyph';
 
 import { undoActions } from '../actions/undo';
 
-import { AppState } from ".";
+import { AppState } from '.';
 
 const UNDO_MAX_TIMES = 30;
 
