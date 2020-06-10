@@ -12,7 +12,7 @@ macOS 上の最新版の Chrome / Firefox / Safari で動作確認していま�
 グリフウィキの編集中画面からジャンプできるブックマークレットです。
 
 ```js
-javascript:(function(l,f){l.href='https://kurgm.github.io/kage-editor/#ssl='+(l.protocol!='http:')+'&host='+l.host+'&summary='+encodeURIComponent(f[2].summary.value)+'name_edittime_related_data'.split('_').map(function(k){return'&'+k+'='+f[1].elements[k].value}).join('')})(location,document.forms)
+javascript:(function(l,f){l.href='https://kurgm.github.io/kage-editor/#ssl='+(l.protocol!='http:')+'&host='+l.host+'&summary='+encodeURIComponent(f[2].elements.summary.value)+['name','edittime','related','data'].map(function(k){return'&'+k+'='+f[1].elements[k].value}).join('')})(location,document.forms)
 ```
 
 ## 機能一覧
