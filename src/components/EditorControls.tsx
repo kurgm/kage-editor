@@ -7,6 +7,7 @@ import { AppState } from '../reducers';
 import { editorActions } from '../actions/editor';
 import { selectActions } from '../actions/select';
 import { undoActions } from '../actions/undo';
+import { displayActions } from '../actions/display';
 
 import SelectionInfo from './SelectionInfo';
 import SubmitPreview from './SubmitPreview';
@@ -55,7 +56,7 @@ const EditorControls = () => {
     dispatch(editorActions.decomposeSelected());
   }, [dispatch]);
   const options = useCallback(() => {
-    dispatch(editorActions.openOptionModal());
+    dispatch(displayActions.openOptionModal());
   }, [dispatch]);
   const finishEdit = useCallback(() => {
     dispatch(editorActions.finishEdit());
@@ -120,7 +121,6 @@ const EditorControls = () => {
           {t('decompose')}
         </button>
         <button
-          disabled
           onClick={options}
         >
           {t('options')}

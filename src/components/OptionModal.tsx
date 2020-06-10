@@ -1,0 +1,107 @@
+import React, { useCallback } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
+import ReactModal from 'react-modal';
+import { useTranslation } from 'react-i18next';
+
+import { displayActions } from '../actions/display';
+import { AppState } from '../reducers';
+
+import './OptionModal.css';
+
+const OptionModal = () => {
+  const showOptionModal = useSelector((state: AppState) => state.showOptionModal);
+  const grid = useSelector((state: AppState) => state.grid);
+  const showStrokeCenterLine = useSelector((state: AppState) => state.showStrokeCenterLine);
+
+  const dispatch = useDispatch();
+  const handleRequestClose = useCallback(() => {
+    dispatch(displayActions.closeOptionModal());
+  }, [dispatch]);
+
+  const handleGridDisplayChange = useCallback((evt: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(displayActions.setGridDisplay(evt.currentTarget.checked));
+  }, [dispatch]);
+  const handleGridOriginXChange = useCallback((evt: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(displayActions.setGridOriginX(evt.currentTarget.valueAsNumber));
+  }, [dispatch]);
+  const handleGridOriginYChange = useCallback((evt: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(displayActions.setGridOriginY(evt.currentTarget.valueAsNumber));
+  }, [dispatch]);
+  const handleGridSpacingXChange = useCallback((evt: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(displayActions.setGridSpacingX(evt.currentTarget.valueAsNumber));
+  }, [dispatch]);
+  const handleGridSpacingYChange = useCallback((evt: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(displayActions.setGridSpacingY(evt.currentTarget.valueAsNumber));
+  }, [dispatch]);
+  const handleStrokeCenterLineChange = useCallback((evt: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(displayActions.setStrokeCenterLineDisplay(evt.currentTarget.checked));
+  }, [dispatch]);
+
+  const { t } = useTranslation();
+  return (
+    <ReactModal
+      isOpen={showOptionModal}
+      onRequestClose={handleRequestClose}
+      shouldCloseOnEsc={false} // handled by hotkeys-js
+      className={'modal-content'}
+    >
+      <fieldset>
+        <legend>{t('grid option')}</legend>
+        <div>
+          <label>
+            <input type="checkbox" checked={grid.display} onChange={handleGridDisplayChange} />
+            {t('enable grid')}
+          </label>
+        </div>
+        <div>
+          {t('grid origin x')} <input
+            type="number"
+            value={grid.originX}
+            onChange={handleGridOriginXChange}
+            disabled={!grid.display}
+          />
+          {' '}
+          {t('grid origin y')} <input
+            type="number"
+            value={grid.originX}
+            onChange={handleGridOriginYChange}
+            disabled={!grid.display}
+          />
+        </div>
+        <div>
+          {t('grid spacing x')} <input
+            type="number"
+            value={grid.spacingX}
+            onChange={handleGridSpacingXChange}
+            disabled={!grid.display}
+          />
+          {' '}
+          {t('grid spacing y')} <input
+            type="number"
+            value={grid.spacingY}
+            onChange={handleGridSpacingYChange}
+            disabled={!grid.display}
+          />
+        </div>
+      </fieldset>
+      <div>
+        <label>
+          <input
+            type="checkbox"
+            checked={showStrokeCenterLine}
+            onChange={handleStrokeCenterLineChange}
+          />
+          {t('show stroke center line')}
+        </label>
+      </div>
+      <div>
+        <button onClick={handleRequestClose}>{t('close modal')}</button>
+      </div>
+    </ReactModal>
+  )
+};
+
+ReactModal.setAppElement('#root');
+
+export default OptionModal;

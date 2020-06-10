@@ -82,5 +82,13 @@
   "searching": "検索中",
   "search error": "エラー:{{message}}",
   "search query too short": "エラー:キーワードが短すぎます",
-  "no search result": "該当部品なし"
+  "no search result": "該当部品なし",
+  "grid option": "グリッド",
+  "enable grid": "有効にする",
+  "grid origin x": "開始X",
+  "grid origin y": "開始Y",
+  "grid spacing x": "間隔X",
+  "grid spacing y": "間隔Y",
+  "show stroke center line": "中心線を表示",
+  "close modal": "閉じる"
 }

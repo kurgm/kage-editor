@@ -1,0 +1,17 @@
+.modal-content {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+    bottom: 40px;
+    border: 1px solid #ccc;
+    background: #ffffff;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 4px;
+    outline: none;
+    padding: 20px;
+}
+
+.modal-content > div {
+  margin: 5px 0;
+}

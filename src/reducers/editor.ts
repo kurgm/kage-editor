@@ -203,15 +203,6 @@ export default (builder: ReducerBuilder<AppState>) => builder
     freehandMode: !state.freehandMode,
   }))
 
-  .case(editorActions.openOptionModal, (state) => ({
-    ...state,
-    showOptionModal: true,
-  }))
-  .case(editorActions.closeOptionModal, (state) => ({
-    ...state,
-    showOptionModal: false,
-  }))
-
   .case(editorActions.escape, (state) => {
     if (state.showOptionModal) {
       return {
