@@ -9,7 +9,18 @@ import { editorActions } from './actions/editor';
 
 import { getSource } from './callapi';
 
-export const kage = new Kage();
+const kage_ = new Kage();
+
+export const getKage = (buhinMap: Map<string, string>, fallback?: (name: string) => string | undefined | void): Kage => {
+  kage_.kBuhin.search = (name) => {
+    let result = buhinMap.get(name);
+    if (typeof result === 'undefined') {
+      result = fallback?.(name) || '';
+    }
+    return result;
+  };
+  return kage_;
+};
 
 let waiting = new Set<string>();
 const loadAbsentBuhin = (name: string) => {
@@ -47,15 +58,7 @@ const filteredGlyphIsEqual = (glyph1: Glyph, glyph2: Glyph) => (
 
 const makeGlyphSeparated_ = memoizeOne((glyph: Glyph, map: Map<string, string>): Polygons[] => {
   const data = glyph.map(unparseGlyphLine);
-  kage.kBuhin.search = (name) => {
-    const result = map.get(name);
-    if (typeof result === 'undefined') {
-      loadAbsentBuhin(name);
-      return '';
-    }
-    return result;
-  };
-  const result = kage.makeGlyphSeparated(data);
+  const result = getKage(map, loadAbsentBuhin).makeGlyphSeparated(data);
   return result;
 }, ([glyph1, map1], [glyph2, map2]) => (
   map1 === map2 &&

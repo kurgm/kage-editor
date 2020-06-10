@@ -1,4 +1,4 @@
-import { kage } from '../kage';
+import { getKage } from '../kage';
 
 import { GlyphLine, parseGlyph, unparseGlyph } from './glyph';
 import { getStretchPositions, normalizeStretchPositions, setStretchPositions } from './stretchparam';
@@ -14,14 +14,9 @@ export const decompose = (glyphLine: GlyphLine, buhinMap: Map<string, string>): 
   }
 
   let failedBuhin = false;
-  kage.kBuhin.search = (name: string) => {
-    const data = buhinMap.get(name);
-    if (typeof data !== 'string') {
-      failedBuhin = true;
-      return '';
-    }
-    return data;
-  };
+  const kage = getKage(buhinMap, () => {
+    failedBuhin = true;
+  });
 
   const glyph = parseGlyph(buhinSource);
 
