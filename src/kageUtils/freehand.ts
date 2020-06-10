@@ -3,6 +3,31 @@ import { applyGlyphLineOperation } from './transform';
 
 const sum = (nums: number[]) => nums.reduce((a, b) => a + b, 0);
 const avg = (nums: number[]) => sum(nums) / nums.length;
+const min: {
+  (data: number[]): number;
+  <T>(data: T[], ev: (val: T) => number): number;
+} = (data: any[], ev?: (val: any) => number) => {
+  let result = Infinity;
+  for (const datum of data) {
+    const val = ev ? ev(datum) : datum as number;
+    if (val < result) {
+      result = val;
+    }
+  }
+  return result;
+};
+const minBy = <T>(data: T[], ev: (val: T) => number): T | undefined => {
+  let result: T | undefined = undefined;
+  let minVal = Infinity;
+  for (const datum of data) {
+    const val = ev(datum);
+    if (val < minVal) {
+      result = datum;
+      minVal = val;
+    }
+  }
+  return result;
+};
 
 const lerp = (x1: number, x2: number, k: number) => x1 * (1 - k) + x2 * k;
 const norm2 = (dx: number, dy: number) => dx * dx + dy * dy;
@@ -17,20 +42,27 @@ export const drawFreehand = (glyph: Glyph, points: [number, number][]): Glyph =>
     const lastStroke = glyph[glyph.length - 1];
     // ハネ部分かどうか？
     if (
-      [1, 2].includes(lastStroke.value[0]) &&
+      [1, 2, 3, 4, 6].includes(lastStroke.value[0]) && 
       norm2(
         startX - lastStroke.value[lastStroke.value.length - 2],
         startY - lastStroke.value[lastStroke.value.length - 1]
       ) < 10 ** 2
     ) {
-      if (dx < 0) { // 左ハネに変更
+      if ([1, 2, 6].includes(lastStroke.value[0]) && dx < 0) { // 左ハネに変更
         const newLastStroke: GlyphLine = {
           value: lastStroke.value.slice(),
         };
         newLastStroke.value[2] = 4;
         return glyph.slice(0, -1).concat([newLastStroke]);
       }
-      if (lastStroke.value[0] === 2 && dx > 0 && dy < 0) { // 右ハネに変更
+      if ([2, 6].includes(lastStroke.value[0]) && dx > 0 && dy < 0) { // 右ハネに変更
+        const newLastStroke: GlyphLine = {
+          value: lastStroke.value.slice(),
+        };
+        newLastStroke.value[2] = 5;
+        return glyph.slice(0, -1).concat([newLastStroke]);
+      }
+      if ([3, 4].includes(lastStroke.value[0]) && dy < 0) { // 上ハネに変更
         const newLastStroke: GlyphLine = {
           value: lastStroke.value.slice(),
         };
@@ -55,7 +87,22 @@ export const drawFreehand = (glyph: Glyph, points: [number, number][]): Glyph =>
     if (dx < 0 && dy > 0 && dis < 0) { // 左払い
       startType = 0;
       endType = 7;
-    } else if (dx > 0 && dy > 0 && dis > 0) { // 右払い
+    } else if (dx > 0 && dy > 0 && dis > 0) { // 右払い or 折れ
+      const [leftBottomX, leftBottomY] = minBy(points, ([x, y]) => x - y)!;
+      const dx1 = startX - leftBottomX;
+      const dy1 = startY - leftBottomY;
+      const dx2 = endX - leftBottomX;
+      const dy2 = endY - leftBottomY;
+      const cosAngle = (dx1 * dx2 + dy1 * dy2) / Math.sqrt(norm2(dx1, dy1) * norm2(dx2, dy2));
+      if (cosAngle > -0.15) {
+        // 折れ
+        const midX = min(points, ([x]) => x);
+        const midY = endY;
+        const newStroke: GlyphLine = {
+          value: [3, 0, 0, startX, startY, midX, midY, endX, endY],
+        };
+        return correctStroke(glyph, newStroke);
+      }
       startType = 7;
       endType = 0;
     } else if (dx > 0 && dy > 0 && dis < 0) { // 止め
@@ -271,24 +318,36 @@ const snapStrokeStart = (glyph: Glyph, newStroke: GlyphLine): Glyph => {
   }
   return glyph;
 };
-const snapStrokeTilt = (newStroke: GlyphLine) => {
-  if (newStroke.value[0] !== 1) {
-    return;
-  }
-  const x1 = newStroke.value[3];
-  const y1 = newStroke.value[4];
-  const x2 = newStroke.value[5];
-  const y2 = newStroke.value[6];
+const snapStrokeSegmentTilt = (newStroke: GlyphLine, point1Index: number) => {
+  const x1 = newStroke.value[3 + point1Index * 2];
+  const y1 = newStroke.value[3 + point1Index * 2 + 1];
+  const x2 = newStroke.value[3 + point1Index * 2 + 2];
+  const y2 = newStroke.value[3 + point1Index * 2 + 3];
 
   const dx = x2 - x1;
   const dy = y2 - y1;
-  if (!snapped[6] && Math.abs(dx) > Math.abs(dy) * 20) {
-    newStroke.value[6] = y1;
+
+  if (!snapped[3 + point1Index * 2 + 3] && Math.abs(dx) > Math.abs(dy) * 20) {
+    newStroke.value[3 + point1Index * 2 + 3] = y1;
     return;
   }
-  if (!snapped[5] && Math.abs(dy) > Math.abs(dx) * 20) {
-    newStroke.value[5] = x1;
+  if (!snapped[3 + point1Index * 2 + 2] && Math.abs(dy) > Math.abs(dx) * 20) {
+    newStroke.value[3 + point1Index * 2 + 2] = x1;
     return;
+  }
+};
+const snapStrokeTilt = (newStroke: GlyphLine) => {
+  switch (newStroke.value[0]) {
+    case 1:
+      snapStrokeSegmentTilt(newStroke, 0);
+      return;
+    case 3:
+      snapStrokeSegmentTilt(newStroke, 0);
+      snapStrokeSegmentTilt(newStroke, 1);
+      return;
+    case 4:
+      snapStrokeSegmentTilt(newStroke, 1);
+      return;
   }
 };
 const snapStrokeEnd = (glyph: Glyph, newStroke: GlyphLine): Glyph => {
