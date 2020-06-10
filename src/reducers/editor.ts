@@ -225,7 +225,7 @@ export default (builder: ReducerBuilder<AppState>) => builder
     return state;
   })
 
-  .case(editorActions.finishEdit, (state) => ({
+  .case(editorActions.finishEdit, (state, evt) => ({
     ...state,
-    exiting: true,
+    exitEvent: evt,
   }));

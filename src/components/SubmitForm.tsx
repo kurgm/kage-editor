@@ -1,4 +1,4 @@
-import React, { useRef, useLayoutEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import args from '../args';
@@ -33,13 +33,13 @@ const formStyle: React.CSSProperties = {
 };
 
 const SubmitForm = () => {
-  const exiting = useSelector((state: AppState) => state.exiting);
+  const exitEvent = useSelector((state: AppState) => state.exitEvent);
   const formRef = useRef<HTMLFormElement>(null);
-  useLayoutEffect(() => {
-    if (exiting) {
+  useEffect(() => {
+    if (exitEvent) {
       formRef.current?.submit();
     }
-  }, [exiting]);
+  }, [exitEvent]);
   const glyph = useSelector(submitGlyphSelector);
   return (
     <form

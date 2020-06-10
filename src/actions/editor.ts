@@ -29,5 +29,5 @@ export const editorActions = {
 
   escape: actionCreator('PRESS_ESC_KEY'),
 
-  finishEdit: actionCreator('FINISH_EDIT'),
+  finishEdit: actionCreator<Event>('FINISH_EDIT'),
 };

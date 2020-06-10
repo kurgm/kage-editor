@@ -58,8 +58,8 @@ const EditorControls = () => {
   const options = useCallback(() => {
     dispatch(displayActions.openOptionModal());
   }, [dispatch]);
-  const finishEdit = useCallback(() => {
-    dispatch(editorActions.finishEdit());
+  const finishEdit = useCallback((evt: React.MouseEvent) => {
+    dispatch(editorActions.finishEdit(evt.nativeEvent));
   }, [dispatch]);
 
   const { t } = useTranslation();

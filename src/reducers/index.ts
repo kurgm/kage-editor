@@ -33,7 +33,7 @@ export interface AppState {
     undo: Glyph[];
     redo: Glyph[];
   };
-  exiting: boolean;
+  exitEvent: Event | null;
 
   showOptionModal: boolean;
   grid: GridState;
@@ -57,7 +57,7 @@ const initialState: AppState = {
   stretchParamMap: new Map<string, StretchParam>(),
   clipboard: [],
   undoStacks: { undo: [], redo: [] },
-  exiting: false,
+  exitEvent: null,
 
   showOptionModal: false,
   grid: {
