@@ -18,6 +18,7 @@ import './GlyphArea.css';
 const GlyphArea = () => {
   const glyph = useSelector(draggedGlyphSelector);
   const buhinMap = useSelector((state: AppState) => state.buhinMap);
+  const shotai = useSelector((state: AppState) => state.shotai);
   const selection = useSelector((state: AppState) => state.selection);
   const areaSelectRect = useSelector((state: AppState) => state.areaSelectRect);
   const freehandMode = useSelector((state: AppState) => state.freehandMode);
@@ -94,6 +95,7 @@ const GlyphArea = () => {
         <Glyph
           glyph={glyph}
           buhinMap={buhinMap}
+          shotai={shotai}
           selection={selection}
           handleMouseDownDeselectedStroke={handleMouseDownDeselectedStroke}
           handleMouseDownSelectedStroke={handleMouseDownSelectedStroke}

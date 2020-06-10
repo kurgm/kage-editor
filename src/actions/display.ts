@@ -1,5 +1,7 @@
 import actionCreatorFactory from 'typescript-fsa';
 
+import { KShotai } from '../kage';
+
 const actionCreator = actionCreatorFactory('DISPLAY');
 
 export const displayActions = {
@@ -12,5 +14,6 @@ export const displayActions = {
   setGridSpacingX: actionCreator<number>('SET_GRID_SPACING_X'),
   setGridSpacingY: actionCreator<number>('SET_GRID_SPACING_Y'),
 
+  setShotai: actionCreator<KShotai>('SET_SHOTAI'),
   setStrokeCenterLineDisplay: actionCreator<boolean>('SET_STROKE_CENTER_LINE_DISPLAY'),
 };

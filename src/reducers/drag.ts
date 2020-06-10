@@ -7,14 +7,14 @@ import { dragActions } from '../actions/drag';
 
 import { moveSelectedGlyphLines, moveSelectedPoint } from '../kageUtils/transform';
 import { Glyph } from '../kageUtils/glyph';
-import { makeGlyphSeparated } from '../kage';
+import { makeGlyphSeparated, KShotai } from '../kage';
 
 import { AppState } from '.';
 import { resizeSelected } from '../selectors/draggedGlyph';
 import { drawFreehand } from '../kageUtils/freehand';
 
-const performAreaSelect = (glyph: Glyph, buhinMap: Map<string, string>, x1: number, y1: number, x2: number, y2: number): number[] => {
-  const polygonsSep = makeGlyphSeparated(glyph, buhinMap);
+const performAreaSelect = (glyph: Glyph, buhinMap: Map<string, string>, shotai: KShotai, x1: number, y1: number, x2: number, y2: number): number[] => {
+  const polygonsSep = makeGlyphSeparated(glyph, buhinMap, shotai);
   const result = [];
 
   const gAreaPolygon: [number, number][] = [
@@ -150,7 +150,7 @@ export default (builder: ReducerBuilder<AppState>) => builder
     if (state.areaSelectRect) {
       const [x1, y1] = state.areaSelectRect;
       const [x2, y2] = state.ctmInv(evt.clientX, evt.clientY);
-      const intersections = performAreaSelect(state.glyph, state.buhinMap, x1, y1, x2, y2);
+      const intersections = performAreaSelect(state.glyph, state.buhinMap, state.shotai, x1, y1, x2, y2);
 
       const newSelection = Array.from(new Set(state.selection.concat(intersections)));
       return {

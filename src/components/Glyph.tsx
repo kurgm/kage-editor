@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Glyph } from '../kageUtils/glyph';
-import { makeGlyphSeparated } from '../kage';
+import { makeGlyphSeparated, KShotai } from '../kage';
 import Stroke from './Stroke';
 
 import './Glyph.css'
@@ -10,13 +10,14 @@ export interface GlyphComponentProps {
   glyph: Glyph;
   buhinMap: Map<string, string>;
   selection: number[];
+  shotai: KShotai;
   handleMouseDownDeselectedStroke?: (evt: React.MouseEvent, index: number) => void;
   handleMouseDownSelectedStroke?: (evt: React.MouseEvent, index: number) => void;
   makeGlyphSeparated?: typeof makeGlyphSeparated;
 }
 
 const GlyphComponent = (props: GlyphComponentProps) => {
-  const polygonsSep = (props.makeGlyphSeparated || makeGlyphSeparated)(props.glyph, props.buhinMap);
+  const polygonsSep = (props.makeGlyphSeparated || makeGlyphSeparated)(props.glyph, props.buhinMap, props.shotai);
 
   const { selection } = props;
   const nonSelection = polygonsSep.map((_polygons, index) => index)

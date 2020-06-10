@@ -9,9 +9,11 @@ import { editorActions } from './actions/editor';
 
 import { getSource } from './callapi';
 
+export type KShotai = Kage["kShotai"];
+
 const kage_ = new Kage();
 
-export const getKage = (buhinMap: Map<string, string>, fallback?: (name: string) => string | undefined | void): Kage => {
+export const getKage = (buhinMap: Map<string, string>, fallback?: (name: string) => string | undefined | void, shotai?: KShotai): Kage => {
   kage_.kBuhin.search = (name) => {
     let result = buhinMap.get(name);
     if (typeof result === 'undefined') {
@@ -19,6 +21,9 @@ export const getKage = (buhinMap: Map<string, string>, fallback?: (name: string)
     }
     return result;
   };
+  if (typeof shotai !== 'undefined') {
+    kage_.kShotai = shotai;
+  }
   return kage_;
 };
 
@@ -56,25 +61,27 @@ const filteredGlyphIsEqual = (glyph1: Glyph, glyph2: Glyph) => (
   ))
 );
 
-const makeGlyphSeparated_ = memoizeOne((glyph: Glyph, map: Map<string, string>): Polygons[] => {
+const makeGlyphSeparated_ = memoizeOne((glyph: Glyph, map: Map<string, string>, shotai: KShotai): Polygons[] => {
   const data = glyph.map(unparseGlyphLine);
-  const result = getKage(map, loadAbsentBuhin).makeGlyphSeparated(data);
+  const result = getKage(map, loadAbsentBuhin, shotai).makeGlyphSeparated(data);
   return result;
-}, ([glyph1, map1], [glyph2, map2]) => (
+}, ([glyph1, map1, shotai1], [glyph2, map2, shotai2]) => (
   map1 === map2 &&
+  shotai1 === shotai2 &&
   filteredGlyphIsEqual(glyph1, glyph2)
 ));
 
 const makeGlyphSeparatedFactory = (
   isEqual?: (newArgs: Parameters<typeof makeGlyphSeparated_>, lastArgs: Parameters<typeof makeGlyphSeparated_>) => boolean
-) => memoizeOne((glyph: Glyph, map: Map<string, string>): Polygons[] => {
-  return makeGlyphSeparated_(glyph, map);
+) => memoizeOne((glyph: Glyph, map: Map<string, string>, shotai: KShotai): Polygons[] => {
+  return makeGlyphSeparated_(glyph, map, shotai);
 }, isEqual);
 
 export const makeGlyphSeparated = makeGlyphSeparatedFactory();
 export const makeGlyphSeparatedForSubmit = makeGlyphSeparatedFactory(
-  ([glyph1, map1], [glyph2, map2]) => (
+  ([glyph1, map1, shotai1], [glyph2, map2, shotai2]) => (
     map1 === map2 &&
+    shotai1 === shotai2 &&
     filteredGlyphIsEqual(glyph1, glyph2)
   )
 );

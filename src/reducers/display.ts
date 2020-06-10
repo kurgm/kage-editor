@@ -61,4 +61,8 @@ export default (builder: ReducerBuilder<AppState>) => builder
   .case(displayActions.setStrokeCenterLineDisplay, (state, value) => ({
     ...state,
     showStrokeCenterLine: value,
+  }))
+  .case(displayActions.setShotai, (state, shotai) => ({
+    ...state,
+    shotai,
   }));

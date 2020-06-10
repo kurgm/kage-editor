@@ -5,6 +5,7 @@ import { RectPointPosition, CTMInv } from '../actions/drag';
 import { GlyphLine, Glyph, parseGlyph } from '../kageUtils/glyph';
 import { StretchParam } from '../kageUtils/stretchparam';
 import args from '../args';
+import { KShotai } from '../kage';
 
 import select from './select';
 import drag from './drag';
@@ -37,6 +38,7 @@ export interface AppState {
   showOptionModal: boolean;
   grid: GridState;
   showStrokeCenterLine: boolean;
+  shotai: KShotai;
 }
 
 const initialState: AppState = {
@@ -66,6 +68,7 @@ const initialState: AppState = {
     spacingY: 20,
   },
   showStrokeCenterLine: false,
+  shotai: 0, // kMincho
 };
 
 const reducer = undoable(

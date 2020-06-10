@@ -89,6 +89,9 @@
   "grid origin y": "開始Y",
   "grid spacing x": "間隔X",
   "grid spacing y": "間隔Y",
+  "glyph font style": "書体",
+  "mincho style": "明朝",
+  "gothic style": "ゴシック",
   "show stroke center line": "中心線を表示",
   "close modal": "閉じる"
 }

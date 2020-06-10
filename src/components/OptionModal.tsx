@@ -6,12 +6,14 @@ import { useTranslation } from 'react-i18next';
 
 import { displayActions } from '../actions/display';
 import { AppState } from '../reducers';
+import { KShotai } from '../kage';
 
 import './OptionModal.css';
 
 const OptionModal = () => {
   const showOptionModal = useSelector((state: AppState) => state.showOptionModal);
   const grid = useSelector((state: AppState) => state.grid);
+  const shotai = useSelector((state: AppState) => state.shotai);
   const showStrokeCenterLine = useSelector((state: AppState) => state.showStrokeCenterLine);
 
   const dispatch = useDispatch();
@@ -33,6 +35,9 @@ const OptionModal = () => {
   }, [dispatch]);
   const handleGridSpacingYChange = useCallback((evt: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(displayActions.setGridSpacingY(evt.currentTarget.valueAsNumber));
+  }, [dispatch]);
+  const handleShotaiChange = useCallback((evt: React.ChangeEvent<HTMLSelectElement>) => {
+    dispatch(displayActions.setShotai(+evt.currentTarget.value as KShotai));
   }, [dispatch]);
   const handleStrokeCenterLineChange = useCallback((evt: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(displayActions.setStrokeCenterLineDisplay(evt.currentTarget.checked));
@@ -85,6 +90,15 @@ const OptionModal = () => {
           />
         </div>
       </fieldset>
+      <div>
+        {t('glyph font style')} <select
+          value={shotai}
+          onChange={handleShotaiChange}
+        >
+          <option value={0}>{t('mincho style')}</option>
+          <option value={1}>{t('gothic style')}</option>
+        </select>
+      </div>
       <div>
         <label>
           <input
