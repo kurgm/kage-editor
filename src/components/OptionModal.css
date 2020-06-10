@@ -15,3 +15,7 @@
 .modal-content > div {
   margin: 5px 0;
 }
+
+.modal-content input[type="number"] {
+  width: 4em;
+}
