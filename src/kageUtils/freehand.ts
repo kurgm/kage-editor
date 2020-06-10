@@ -42,7 +42,7 @@ export const drawFreehand = (glyph: Glyph, points: [number, number][]): Glyph =>
     const lastStroke = glyph[glyph.length - 1];
     // ハネ部分かどうか？
     if (
-      [1, 2, 3, 4, 6].includes(lastStroke.value[0]) && 
+      [1, 2, 3, 4, 6].includes(lastStroke.value[0]) &&
       norm2(
         startX - lastStroke.value[lastStroke.value.length - 2],
         startY - lastStroke.value[lastStroke.value.length - 1]
@@ -84,7 +84,17 @@ export const drawFreehand = (glyph: Glyph, points: [number, number][]): Glyph =>
     // 曲線
     let startType = 0;
     let endType = 0;
-    if (dx < 0 && dy > 0 && dis < 0) { // 左払い
+    if (dx < 0 && dy > 0 && dis < 0) { // 左払い or 縦払い
+      if (dy >= 50 && dx * -3 < dy) {
+        const mid1X = startX;
+        const mid1Y = lerp(startY, endY, 1 / 3);
+        const mid2X = startX;
+        const mid2Y = lerp(startY, endY, 2 / 3);
+        const newStroke: GlyphLine = {
+          value: [7, 0, 7, startX, startY, mid1X, mid1Y, mid2X, mid2Y, endX, endY],
+        };
+        return correctStroke(glyph, newStroke);
+      }
       startType = 0;
       endType = 7;
     } else if (dx > 0 && dy > 0 && dis > 0) { // 右払い or 折れ
@@ -348,6 +358,8 @@ const snapStrokeTilt = (newStroke: GlyphLine) => {
     case 4:
       snapStrokeSegmentTilt(newStroke, 1);
       return;
+    case 7:
+      newStroke.value[5] = newStroke.value[7] = newStroke.value[3];
   }
 };
 const snapStrokeEnd = (glyph: Glyph, newStroke: GlyphLine): Glyph => {
