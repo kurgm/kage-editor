@@ -57,3 +57,6 @@ javascript:(function(l,f){l.href='https://kurgm.github.io/kage-editor/#ssl='+(l.
 - 回転・反転機能
 
 ## 翻訳
+
+[src/locales/](src/locales/) フォルダ内にJSONファイルがある言語（日本語・英語）に対応しています。
+残りの韓国語・中国語簡体字・中国語繁体字への翻訳に協力してくださる方を募集しています。
