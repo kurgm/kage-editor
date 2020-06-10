@@ -27,6 +27,10 @@ if (!host || ![
 
 const formAction = `${ssl ? 'https' : 'http'}://${host}/wiki/${encodeURIComponent(glyphName)}?action=preview`;
 
+const formStyle: React.CSSProperties = {
+  visibility: 'hidden',
+  position: 'absolute',
+};
 
 const SubmitForm = () => {
   const exiting = useSelector((state: AppState) => state.exiting);
@@ -39,7 +43,7 @@ const SubmitForm = () => {
   const glyph = useSelector(submitGlyphSelector);
   return (
     <form
-      style={{ visibility: 'hidden', position: 'absolute' }}
+      style={formStyle}
       ref={formRef}
       action={formAction}
       method="post"
