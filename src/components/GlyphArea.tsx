@@ -6,6 +6,8 @@ import { AppState } from '../reducers';
 import { selectActions } from '../actions/select';
 import { dragActions, CTMInv } from '../actions/drag';
 import { draggedGlyphSelector } from '../selectors/draggedGlyph';
+
+import Grid from './Grid';
 import Glyph from './Glyph';
 import AreaSelectRect from './AreaSelectRect';
 import SelectionControl from './SelectionControl';
@@ -84,7 +86,7 @@ const GlyphArea = () => {
         onMouseDownCapture={handleMouseDownCapture}
         onMouseDown={handleMouseDownBackground}
       >
-        {/* TODO: grid */}
+        <Grid />
         <rect x="0" y="0" width="200" height="200" className="glyph-boundary" />
         <rect x="12" y="12" width="176" height="176" className="glyph-guide" />
         <Glyph

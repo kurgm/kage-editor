@@ -1,0 +1,8 @@
+.grid-lines {
+  pointer-events: none;
+}
+.grid-lines path {
+  fill: none;
+  stroke: #eeeeee;
+  stroke-width: 1px;
+}
