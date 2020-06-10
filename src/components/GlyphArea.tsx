@@ -9,8 +9,9 @@ import { draggedGlyphSelector } from '../selectors/draggedGlyph';
 
 import Grid from './Grid';
 import Glyph from './Glyph';
-import AreaSelectRect from './AreaSelectRect';
+import StrokeCenterLine from './StrokeCenterLine';
 import SelectionControl from './SelectionControl';
+import AreaSelectRect from './AreaSelectRect';
 
 import './GlyphArea.css';
 
@@ -20,6 +21,7 @@ const GlyphArea = () => {
   const selection = useSelector((state: AppState) => state.selection);
   const areaSelectRect = useSelector((state: AppState) => state.areaSelectRect);
   const freehandMode = useSelector((state: AppState) => state.freehandMode);
+  const showStrokeCenterLine = useSelector((state: AppState) => state.showStrokeCenterLine);
 
   const svgClassName = freehandMode ? 'freehand' : '';
 
@@ -96,6 +98,7 @@ const GlyphArea = () => {
           handleMouseDownDeselectedStroke={handleMouseDownDeselectedStroke}
           handleMouseDownSelectedStroke={handleMouseDownSelectedStroke}
         />
+        {showStrokeCenterLine && <StrokeCenterLine glyph={glyph} buhinMap={buhinMap} />}
         <SelectionControl />
         <AreaSelectRect rect={areaSelectRect} />
       </svg>

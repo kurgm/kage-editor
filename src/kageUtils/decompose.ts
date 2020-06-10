@@ -1,6 +1,6 @@
 import { getKage } from '../kage';
 
-import { GlyphLine, parseGlyph, unparseGlyph } from './glyph';
+import { GlyphLine, parseGlyph, unparseGlyph, unparseGlyphLine, getNumColumns, Glyph } from './glyph';
 import { getStretchPositions, normalizeStretchPositions, setStretchPositions } from './stretchparam';
 import { applyGlyphLineOperation } from './transform';
 
@@ -86,4 +86,35 @@ export const decompose = (glyphLine: GlyphLine, buhinMap: Map<string, string>): 
       revY(ty2 + 100),
     ]);
   });
+};
+
+export const decomposeDeep = (glyphLine: GlyphLine, buhinMap: Map<string, string>): GlyphLine[] => {
+  const kage = getKage(buhinMap);
+  const strokesArray =
+    // @ts-ignore 2445
+    kage.getEachStrokes(
+      unparseGlyphLine(glyphLine)
+    );
+  return strokesArray.map((stroke): GlyphLine => {
+    const columns = getNumColumns(stroke.a1);
+    return {
+      value: [
+        stroke.a1,
+        stroke.a2_100 + stroke.kirikuchiAdjustment * 100 + stroke.tateAdjustment * 1000,
+        stroke.a3_100 + stroke.opt3 * 100 + stroke.mageAdjustment * 1000,
+        stroke.x1,
+        stroke.y1,
+        stroke.x2,
+        stroke.y2,
+        stroke.x3,
+        stroke.y3,
+        stroke.x4,
+        stroke.y4,
+      ].slice(0, columns),
+    };
+  });
+};
+
+export const decomposeDeepGlyph = (glyph: Glyph, buhinMap: Map<string, string>): GlyphLine[] => {
+  return glyph.map((glyphLine) => decomposeDeep(glyphLine, buhinMap)).reduce((a, b) => a.concat(b), []);
 };
