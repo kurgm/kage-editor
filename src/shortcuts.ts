@@ -77,4 +77,9 @@ export const useShortcuts = () => {
     dispatch(editorActions.moveSelected([5, 0]));
     evt.preventDefault();
   }, {}, [dispatch]);
+
+  useHotkeys('ctrl+s, command+s', (evt) => {
+    dispatch(editorActions.finishEdit());
+    evt.preventDefault();
+  }, {}, [dispatch]);
 };
