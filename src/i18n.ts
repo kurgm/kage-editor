@@ -2,12 +2,16 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
 import jaTranslation from './locales/ja.json';
+import enTranslation from './locales/en.json';
 
 import args from "./args";
 
 const resources = {
   ja: {
     translation: jaTranslation,
+  },
+  en: {
+    translation: enTranslation,
   },
 };
 
