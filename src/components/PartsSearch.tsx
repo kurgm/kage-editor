@@ -22,14 +22,28 @@ const initialQuery = args.get('name') || '';
 
 class QueryTooShortError extends Error { }
 
+interface SearchState {
+  query: string;
+  result: string[] | null;
+  err: any;
+}
+
+const initialSearchState: SearchState = {
+  query: '',
+  result: [],
+  err: null,
+};
+
 const PartsSearch = () => {
   const queryInputRef = useRef<HTMLInputElement>(null);
-  const [searching, setSearching] = useState(false);
-  const [names, setNames] = useState<string[]>([]);
-  const [err, setErr] = useState<any>(null);
+  const [searchState, setSearchState] = useState<SearchState>(initialSearchState);
 
   const startSearch = (query: string) => {
-    setSearching(true);
+    setSearchState({
+      query,
+      result: null,
+      err: null,
+    });
     search(query)
       .then((result) => {
         if (result === 'tooshort') {
@@ -40,13 +54,22 @@ const PartsSearch = () => {
         }
         return result.split('\t');
       })
-      .then((names) => {
-        setSearching(false);
-        setNames(names);
-      })
-      .catch((reason) => {
-        setSearching(false);
-        setErr(reason);
+      .then((names): SearchState => ({
+        query,
+        result: names,
+        err: null,
+      }))
+      .catch((reason): SearchState => ({
+        query,
+        result: null,
+        err: reason,
+      }))
+      .then((newSearchState) => {
+        setSearchState((currentSearchState) => (
+          (currentSearchState.query === query)
+            ? newSearchState
+            : currentSearchState // query has changed, discard result
+        ));
       });
   };
 
@@ -61,7 +84,11 @@ const PartsSearch = () => {
     }
     const query = queryInputRef.current.value;
     if (!query) {
-      setNames([]);
+      setSearchState({
+        query,
+        result: [],
+        err: null,
+      });
       return;
     }
     startSearch(query);
@@ -106,16 +133,16 @@ const PartsSearch = () => {
         </datalist>
       </form>
       <div className="parts-list-area">
-        {searching
+        {!searchState.result
           ? <div className="message">{t('searching')}</div>
-          : err
-            ? err instanceof QueryTooShortError
+          : searchState.err
+            ? searchState.err instanceof QueryTooShortError
               ? <div className="message">{t('search query too short')}</div>
-              : <div className="message">{t('search error', { message: err })}</div>
-            : names.length === 0
+              : <div className="message">{t('search error', { message: searchState.err })}</div>
+            : searchState.result.length === 0
               ? <div className="message">{t('no search result')}</div>
               : <PartsList
-                names={names}
+                names={searchState.result}
                 handleItemClick={handleItemClick}
                 handleItemMouseEnter={handleItemMouseEnter}
               />}
