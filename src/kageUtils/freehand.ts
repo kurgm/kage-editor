@@ -55,11 +55,14 @@ export const drawFreehand = (glyph: Glyph, points: [number, number][]): Glyph =>
         newLastStroke.value[2] = 4;
         return glyph.slice(0, -1).concat([newLastStroke]);
       }
-      if ([2, 6].includes(lastStroke.value[0]) && dx > 0 && dy < 0) { // 右ハネに変更
+      if ([2, 6].includes(lastStroke.value[0]) && dx >= 0 && dy < 0) { // 右ハネに変更
         const newLastStroke: GlyphLine = {
           value: lastStroke.value.slice(),
         };
         newLastStroke.value[2] = 5;
+        if (newLastStroke.value[1] === 7) {
+          newLastStroke.value[1] = 0;
+        }
         return glyph.slice(0, -1).concat([newLastStroke]);
       }
       if ([3, 4].includes(lastStroke.value[0]) && dy < 0) { // 上ハネに変更
