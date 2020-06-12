@@ -104,7 +104,7 @@ export const drawFreehand = (glyph: Glyph, points: [number, number][]): Glyph =>
       const dx2 = endX - leftBottomX;
       const dy2 = endY - leftBottomY;
       const cosAngle = (dx1 * dx2 + dy1 * dy2) / Math.sqrt(norm2(dx1, dy1) * norm2(dx2, dy2));
-      if (cosAngle > -0.15) {
+      if (dx1 < 50 && dx2 > 30 && -20 <= dy2 && dy2 <= 20 && cosAngle > -0.15) {
         // 折れ
         const midX = min(points, ([x]) => x);
         const midY = endY;
