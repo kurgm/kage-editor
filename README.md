@@ -50,6 +50,7 @@ javascript:(function(l,f){l.href='https://kurgm.github.io/kage-editor/#ssl='+(l.
   + Ctrl+X, Ctrl+C, Ctrl+V: カット, コピー, ペースト
   + Del: 選択分を削除
   + 矢印キー / Ctrl+{H,J,K,L}: 選択分を1px移動 (Shift+ で5px移動)
+  + Esc: 手書きモード終了, 選択解除
   + Ctrl+S: 編集終了
 
 ## 未対応の機能
