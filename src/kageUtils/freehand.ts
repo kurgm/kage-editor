@@ -316,7 +316,8 @@ const snapStrokeStart = (glyph: Glyph, newStroke: GlyphLine): Glyph => {
     if (y1 > y2) {
       return glyph;
     }
-    return snapVerticalStroke(glyph, newStroke, 'start', 12, 32, 22);
+    const midStartShape = newStroke.value[1] === 7 ? 7 : 32;
+    return snapVerticalStroke(glyph, newStroke, 'start', 12, midStartShape, 22);
   }
   const x1 = newStroke.value[3];
   const y1 = newStroke.value[4];
