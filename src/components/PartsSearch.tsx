@@ -123,7 +123,7 @@ const PartsSearch = () => {
     <div className="parts-search-area">
       <form className="parts-search-box" onSubmit={handleFormSubmit}>
         <input defaultValue={initialQuery} list="searchList" ref={queryInputRef} />
-        <button onClick={handleSearch}>
+        <button>
           {t('search')}
         </button>
         <datalist id="searchList">
@@ -133,12 +133,12 @@ const PartsSearch = () => {
         </datalist>
       </form>
       <div className="parts-list-area">
-        {!searchState.result
-          ? <div className="message">{t('searching')}</div>
-          : searchState.err
-            ? searchState.err instanceof QueryTooShortError
-              ? <div className="message">{t('search query too short')}</div>
-              : <div className="message">{t('search error', { message: searchState.err })}</div>
+        {searchState.err
+          ? searchState.err instanceof QueryTooShortError
+            ? <div className="message">{t('search query too short')}</div>
+            : <div className="message">{t('search error', { message: searchState.err })}</div>
+          : !searchState.result
+            ? <div className="message">{t('searching')}</div>
             : searchState.result.length === 0
               ? <div className="message">{t('no search result')}</div>
               : <PartsList
