@@ -15,23 +15,20 @@ const resources = {
   },
 };
 
-const host = args.get('host');
 let lng = 'ja';
-if (host) {
-  switch (host.split('.')[0]) {
-    case 'en':
-      lng = 'en';
-      break;
-    case 'ko':
-      lng = 'ko';
-      break;
-    case 'zhs':
-      lng = 'zh-Hans';
-      break;
-    case 'zht':
-      lng = 'zh-Hant';
-      break;
-  }
+switch (args.host.split('.')[0]) {
+  case 'en':
+    lng = 'en';
+    break;
+  case 'ko':
+    lng = 'ko';
+    break;
+  case 'zhs':
+    lng = 'zh-Hans';
+    break;
+  case 'zht':
+    lng = 'zh-Hant';
+    break;
 }
 
 i18n

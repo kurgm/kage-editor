@@ -8,24 +8,9 @@ import { submitGlyphSelector } from '../selectors/submitGlyph';
 import { unparseGlyph } from '../kageUtils/glyph';
 
 
-let host = args.get('host');
-const ssl = args.get('ssl') !== 'false';
-const glyphName = args.get('name') || 'sandbox';
-const related = args.get('related') || 'u3013';
-const edittime = args.get('edittime');
-const summary = args.get('summary') || '';
+const glyphName = args.name || 'sandbox';
 
-if (!host || ![
-  'glyphwiki.org',
-  'en.glyphwiki.org',
-  'ko.glyphwiki.org',
-  'zhs.glyphwiki.org',
-  'zht.glyphwiki.org',
-].includes(host)) {
-  host = 'glyphwiki.org';
-}
-
-const formAction = `${ssl ? 'https' : 'http'}://${host}/wiki/${encodeURIComponent(glyphName)}?action=preview`;
+const formAction = `${args.ssl ? 'https' : 'http'}://${args.host}/wiki/${encodeURIComponent(glyphName)}?action=preview`;
 
 const formStyle: React.CSSProperties = {
   visibility: 'hidden',
@@ -51,9 +36,9 @@ const SubmitForm = () => {
       <input type="hidden" name="page" value={glyphName} />
       <input type="hidden" name="action" value="preview" />
       <input type="hidden" name="textbox" value={unparseGlyph(glyph)} />
-      <input type="hidden" name="related" value={related} />
-      <input type="hidden" name="summary" value={summary} />
-      {edittime && <input type="hidden" name="edittime" value={edittime} />}
+      <input type="hidden" name="related" value={args.related} />
+      <input type="hidden" name="summary" value={args.summary} />
+      {args.edittime && <input type="hidden" name="edittime" value={args.edittime} />}
     </form>
   );
 };

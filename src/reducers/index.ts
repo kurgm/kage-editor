@@ -42,7 +42,7 @@ export interface AppState {
 }
 
 const initialState: AppState = {
-  glyph: parseGlyph(args.get('data') || ''),
+  glyph: parseGlyph(args.data),
   selection: [],
 
   areaSelectRect: null,

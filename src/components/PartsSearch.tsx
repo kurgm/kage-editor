@@ -18,7 +18,7 @@ const searchSuggestions = [
   'エディタ部品4',
 ];
 
-const initialQuery = args.get('name') || '';
+const initialQuery = args.name || '';
 
 class QueryTooShortError extends Error { }
 
