@@ -331,21 +331,38 @@ const snapStrokeStart = (glyph: Glyph, newStroke: GlyphLine): Glyph => {
   return glyph;
 };
 const snapStrokeSegmentTilt = (newStroke: GlyphLine, point1Index: number) => {
-  const x1 = newStroke.value[3 + point1Index * 2];
-  const y1 = newStroke.value[3 + point1Index * 2 + 1];
-  const x2 = newStroke.value[3 + point1Index * 2 + 2];
-  const y2 = newStroke.value[3 + point1Index * 2 + 3];
+  const x1i = 3 + point1Index * 2;
+  const y1i = x1i + 1;
+  const x2i = x1i + 2;
+  const y2i = x1i + 3;
+
+  const x1 = newStroke.value[x1i];
+  const y1 = newStroke.value[y1i];
+  const x2 = newStroke.value[x2i];
+  const y2 = newStroke.value[y2i];
 
   const dx = x2 - x1;
   const dy = y2 - y1;
 
-  if (!snapped[3 + point1Index * 2 + 3] && Math.abs(dx) > Math.abs(dy) * 20) {
-    newStroke.value[3 + point1Index * 2 + 3] = y1;
-    return;
+  if (Math.abs(dx) > Math.abs(dy) * 20) {
+    if (!snapped[y2i]) {
+      newStroke.value[y2i] = y1;
+      return;
+    }
+    if (!snapped[y1i]) {
+      newStroke.value[y1i] = y2;
+      return;
+    }
   }
-  if (!snapped[3 + point1Index * 2 + 2] && Math.abs(dy) > Math.abs(dx) * 20) {
-    newStroke.value[3 + point1Index * 2 + 2] = x1;
-    return;
+  if (Math.abs(dy) > Math.abs(dx) * 20) {
+    if (!snapped[x2i]) {
+      newStroke.value[x2i] = x1;
+      return;
+    }
+    if (!snapped[x1i]) {
+      newStroke.value[x1i] = x2;
+      return;
+    }
   }
 };
 const snapStrokeTilt = (newStroke: GlyphLine) => {
