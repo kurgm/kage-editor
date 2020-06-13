@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "3990549c79daf472361ea012d01b7127",
+    "revision": "0ec0b60c68deb81fbc2be3f9a22e9b28",
     "url": "/kage-editor/index.html"
   },
   {
-    "revision": "c8b05449c713c16f6ff5",
+    "revision": "81376675f08765f58c37",
     "url": "/kage-editor/static/css/main.202ef9d6.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/kage-editor/static/js/2.199f6f5d.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "c8b05449c713c16f6ff5",
-    "url": "/kage-editor/static/js/main.f625b5b1.chunk.js"
+    "revision": "81376675f08765f58c37",
+    "url": "/kage-editor/static/js/main.09523677.chunk.js"
   },
   {
     "revision": "66926905936681612415",
