@@ -83,56 +83,55 @@ export const drawFreehand = (glyph: Glyph, points: [number, number][]): Glyph =>
   const midY = lerp((startY + endY) / 2, centroidY, midLerpRate);
 
   const dis = (dx * midY - dy * midX + startX * endY - startY * endX) / Math.sqrt(norm2(dx, dy));
-  if (Math.abs(dis) > 5) {
-    // 曲線
-    let startType = 0;
-    let endType = 0;
-    if (dx < 0 && dy > 0 && dis < 0) { // 左払い or 縦払い
-      if (dy >= 50 && dx * -3 < dy) {
-        const mid1X = startX;
-        const mid1Y = lerp(startY, endY, 1 / 3);
-        const mid2X = startX;
-        const mid2Y = lerp(startY, endY, 2 / 3);
-        const newStroke: GlyphLine = {
-          value: [7, 0, 7, startX, startY, mid1X, mid1Y, mid2X, mid2Y, endX, endY],
-        };
-        return correctStroke(glyph, newStroke);
-      }
-      startType = 0;
-      endType = 7;
-    } else if (dx > 0 && dy > 0 && dis > 0) { // 右払い or 折れ
-      const [leftBottomX, leftBottomY] = minBy(points, ([x, y]) => x - y)!;
-      const dx1 = startX - leftBottomX;
-      const dy1 = startY - leftBottomY;
-      const dx2 = endX - leftBottomX;
-      const dy2 = endY - leftBottomY;
-      const cosAngle = (dx1 * dx2 + dy1 * dy2) / Math.sqrt(norm2(dx1, dy1) * norm2(dx2, dy2));
-      if (dx1 < 50 && dx2 > 30 && -20 <= dy2 && dy2 <= 20 && cosAngle > -0.15) {
-        // 折れ
-        const midX = min(points, ([x]) => x);
-        const midY = endY;
-        const newStroke: GlyphLine = {
-          value: [3, 0, 0, startX, startY, midX, midY, endX, endY],
-        };
-        return correctStroke(glyph, newStroke);
-      }
-      startType = 7;
-      endType = 0;
-    } else if (dx > 0 && dy > 0 && dis < 0) { // 止め
-      startType = 7;
-      endType = 8;
-    } else if (dx > 0 && dy < 0 && dis > 0) { // 右上方向の「左払い」
-      startType = 0;
-      endType = 7;
-    }
+  if (
+    Math.abs(dis) <= 5 && // 曲がっていない
+    (
+      (dx > 0 && Math.abs(dy) <= dx * 0.5) || // 横
+      (dy > 0 && -dy <= dx && dx <= dy * 0.5) // 縦
+    )
+  ) { // 直線
     const newStroke: GlyphLine = {
-      value: [2, startType, endType, startX, startY, midX, midY, endX, endY],
+      value: [1, 0, 0, startX, startY, endX, endY],
     };
     return correctStroke(glyph, newStroke);
   }
-
+  if (dx < 0 && dy >= 50 && dis < 0 && dx * -3 < dy) { // 縦払い
+    const mid1X = startX;
+    const mid1Y = lerp(startY, endY, 1 / 3);
+    const mid2X = startX;
+    const mid2Y = lerp(startY, endY, 2 / 3);
+    const newStroke: GlyphLine = {
+      value: [7, 0, 7, startX, startY, mid1X, mid1Y, mid2X, mid2Y, endX, endY],
+    };
+    return correctStroke(glyph, newStroke);
+  }
+  // 曲線
+  let startType = 0;
+  let endType = 7;
+  if (dx > 0 && dy > 0 && dis > 0) { // 右払い or 折れ
+    const [leftBottomX, leftBottomY] = minBy(points, ([x, y]) => x - y)!;
+    const dx1 = startX - leftBottomX;
+    const dy1 = startY - leftBottomY;
+    const dx2 = endX - leftBottomX;
+    const dy2 = endY - leftBottomY;
+    const cosAngle = (dx1 * dx2 + dy1 * dy2) / Math.sqrt(norm2(dx1, dy1) * norm2(dx2, dy2));
+    if (dx1 < 50 && dx2 > 30 && -20 <= dy2 && dy2 <= 20 && cosAngle > -0.15) {
+      // 折れ
+      const midX = min(points, ([x]) => x);
+      const midY = endY;
+      const newStroke: GlyphLine = {
+        value: [3, 0, 0, startX, startY, midX, midY, endX, endY],
+      };
+      return correctStroke(glyph, newStroke);
+    }
+    startType = 7;
+    endType = 0;
+  } else if (dx > 0 && dy > 0 && dis < 0) { // 止め
+    startType = 7;
+    endType = 8;
+  }
   const newStroke: GlyphLine = {
-    value: [1, 0, 0, startX, startY, endX, endY],
+    value: [2, startType, endType, startX, startY, midX, midY, endX, endY],
   };
   return correctStroke(glyph, newStroke);
 };
