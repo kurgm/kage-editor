@@ -8,22 +8,26 @@ const edittime = args.get('edittime');
 const data = args.get('data') || '';
 const summary = args.get('summary') || '';
 
-if (!host && document.referrer) {
-  try {
-    const referrerUrl = new URL(document.referrer);
-    host = referrerUrl.host;
-    ssl = referrerUrl.protocol === 'https:';
-  } catch (e) {
-  }
-}
-
-if (!host || ![
+const gwHosts = [
   'glyphwiki.org',
   'en.glyphwiki.org',
   'ko.glyphwiki.org',
   'zhs.glyphwiki.org',
   'zht.glyphwiki.org',
-].includes(host)) {
+];
+
+if (!host && document.referrer) {
+  try {
+    const referrerUrl = new URL(document.referrer);
+    if (gwHosts.includes(referrerUrl.host)) {
+      host = referrerUrl.host;
+      ssl = referrerUrl.protocol === 'https:';
+    }
+  } catch (e) {
+  }
+}
+
+if (!host || !gwHosts.includes(host)) {
   host = 'glyphwiki.org';
 }
 
