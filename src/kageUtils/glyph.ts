@@ -38,7 +38,7 @@ export const parseGlyphLine = (glyphLineStr: string): GlyphLine => {
 };
 
 export const unparseGlyphLine = (glyphLine: GlyphLine): string => {
-  const values: (number | string)[] = glyphLine.value.slice();
+  const values: (number | string)[] = glyphLine.value.map((num) => Math.round(num));
   if (values[0] === 99) {
     values[7] = glyphLine.partName || '';
   }

@@ -21,10 +21,10 @@ export const setStretchPositions = (glyphLine: GlyphLine, positions: StretchPosi
   const [sx, sy, tx, ty] = positions;
 
   const newValue = glyphLine.value.slice();
-  newValue[9] = sx;
-  newValue[10] = sy;
-  newValue[1] = tx;
-  newValue[2] = ty;
+  newValue[9] = Math.round(sx);
+  newValue[10] = Math.round(sy);
+  newValue[1] = Math.round(tx);
+  newValue[2] = Math.round(ty);
   return { value: newValue, partName: glyphLine.partName };
 };
 

@@ -158,7 +158,7 @@ const setGlyphValue = (glyph: Glyph, lineIndex: number, column: number, value: n
     if (index !== lineIndex) {
       return gLine;
     }
-    const newGLine = {
+    const newGLine: GlyphLine = {
       ...gLine,
       value: gLine.value.slice(),
     };

@@ -27,7 +27,7 @@ export const changeStrokeType = (glyphLine: GlyphLine, newType: number): GlyphLi
   if (!strokeTypes.includes(oldType) || !strokeTypes.includes(newType)) {
     return glyphLine;
   }
-  const newGlyphLine = {
+  const newGlyphLine: GlyphLine = {
     value: glyphLine.value.slice(),
   };
 
