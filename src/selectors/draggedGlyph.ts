@@ -19,20 +19,20 @@ export const resizeSelected = (glyph: Glyph, selection: number[], position: Rect
         const newValue = selectedGlyphLine.value.slice();
         switch (position) {
           case RectPointPosition.north:
-            newValue[4] += dy;
+            newValue[4] = Math.round(newValue[4] + dy);
             break;
           case RectPointPosition.west:
-            newValue[3] += dx;
+            newValue[3] = Math.round(newValue[3] + dx);
             break;
           case RectPointPosition.south:
-            newValue[6] += dy;
+            newValue[6] = Math.round(newValue[6] + dy);
             break;
           case RectPointPosition.east:
-            newValue[5] += dx;
+            newValue[5] = Math.round(newValue[5] + dx);
             break;
           case RectPointPosition.southeast:
-            newValue[5] += dx;
-            newValue[6] += dy;
+            newValue[5] = Math.round(newValue[5] + dx);
+            newValue[6] = Math.round(newValue[6] + dy);
             break;
           default:
             // exhaustive?
