@@ -51,7 +51,7 @@ export default (builder: ReducerBuilder<AppState>) => builder
       return state;
     }
     const lineIndex = state.selection[0];
-    const newGLine = {
+    const newGLine: GlyphLine = {
       ...state.glyph[lineIndex],
       value: state.glyph[lineIndex].value.slice(),
     };
@@ -66,7 +66,7 @@ export default (builder: ReducerBuilder<AppState>) => builder
       return state;
     }
     const lineIndex = state.selection[0];
-    const newGLine = {
+    const newGLine: GlyphLine = {
       ...state.glyph[lineIndex],
       value: state.glyph[lineIndex].value.slice(),
     };
