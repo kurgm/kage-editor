@@ -137,7 +137,7 @@ export default (builder: ReducerBuilder<AppState>) => builder
   .case(editorActions.insertPart, (state, partName) => ({
     ...state,
     glyph: state.glyph.concat([{
-      value: [99, 0, 0, 0, 0, 200, 200, 0, 0, 0],
+      value: [99, 0, 0, 0, 0, 200, 200, 0, 0, 0, 0],
       partName,
     }]),
     selection: [state.glyph.length],
