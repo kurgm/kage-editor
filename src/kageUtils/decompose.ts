@@ -80,10 +80,10 @@ export const decompose = (glyphLine: GlyphLine, buhinMap: Map<string, string>): 
     const revX = (x: number) => (x - px1) / (px2 - px1) * 200;
     const revY = (y: number) => (y - py1) / (py2 - py1) * 200;
     return setStretchPositions(newGlyphLine, [
-      revX(sx2 + 100),
-      revY(sy2 + 100),
-      revX(tx2 - 100) + 100,
-      revY(ty2 + 100),
+      revX(sx + 100) - 100,
+      revY(sy + 100) - 100,
+      revX(tx - 100) + 100,
+      revY(ty + 100) - 100,
     ]);
   });
 };
