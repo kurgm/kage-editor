@@ -57,7 +57,9 @@ javascript:(function(l,f){l.href='https://kurgm.github.io/kage-editor/#ssl='+(l.
 - 部品自動配置（不要？）
 - 回転・反転機能
 
-## 翻訳
+## 翻訳 / Translation
 
-[src/locales/](src/locales/) フォルダ内にJSONファイルがある言語（日本語・英語）に対応しています。
+現在 [src/locales/](src/locales/) フォルダ内にJSONファイルがある言語（日本語・英語）に対応しています。
 残りの韓国語・中国語簡体字・中国語繁体字への翻訳に協力してくださる方を募集しています。
+
+Currently this editor supports displaying messages in Japanese and English. Translating to the other languages (Korean, simplified Chinese and traditional Chinese) is welcome.
