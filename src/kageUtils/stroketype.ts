@@ -6,10 +6,10 @@ export const strokeTypes = [1, 2, 3, 4, 6, 7];
 
 export const headShapeTypes: Record<number, number[]> = {
   1: [0, 2, 32, 12, 22],
-  2: [0, 32, 12, 22, 7],
+  2: [0, 32, 12, 22, 7, 27],
   3: [0, 32, 12, 22],
   4: [0, 22],
-  6: [0, 32, 12, 22, 7],
+  6: [0, 32, 12, 22, 7, 27],
   7: [0, 32, 12, 22],
 };
 
@@ -177,6 +177,7 @@ const validStrokeShapeTypes: [number, number, number][] = [
   [2, 7, 0],
   [2, 7, 8],
   [2, 7, 4],
+  [2, 27, 0],
   [3, 0, 0],
   [3, 0, 5],
   [3, 32, 0],
@@ -201,6 +202,7 @@ const validStrokeShapeTypes: [number, number, number][] = [
   [6, 7, 0],
   [6, 7, 8],
   [6, 7, 4],
+  [6, 27, 0],
   [7, 0, 7],
   [7, 32, 7],
   [7, 12, 7],

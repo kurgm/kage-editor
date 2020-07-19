@@ -53,7 +53,7 @@ const connectablePairs: [ConnectablePointFilter, ConnectablePointFilter][] = [
     {
       position: 'start',
       strokeTypes: [1, 2, 3, 4, 6, 7],
-      shapeTypes: [22],
+      shapeTypes: [22, 27],
     },
   ],
   [

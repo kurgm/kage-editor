@@ -53,6 +53,9 @@ export const drawFreehand = (glyph: Glyph, points: [number, number][]): Glyph =>
           value: lastStroke.value.slice(),
         };
         newLastStroke.value[2] = 4;
+        if (newLastStroke.value[1] === 27) {
+          newLastStroke.value[1] = 22;
+        }
         return glyph.slice(0, -1).concat([newLastStroke]);
       }
       if ([2, 6].includes(lastStroke.value[0]) && dx >= 0 && dy < 0) { // 右ハネに変更
@@ -62,6 +65,8 @@ export const drawFreehand = (glyph: Glyph, points: [number, number][]): Glyph =>
         newLastStroke.value[2] = 5;
         if (newLastStroke.value[1] === 7) {
           newLastStroke.value[1] = 0;
+        } else if (newLastStroke.value[1] === 27) {
+          newLastStroke.value[1] = 22;
         }
         return glyph.slice(0, -1).concat([newLastStroke]);
       }
@@ -317,7 +322,8 @@ const snapStrokeStart = (glyph: Glyph, newStroke: GlyphLine): Glyph => {
       return glyph;
     }
     const midStartShape = newStroke.value[1] === 7 ? 7 : 32;
-    return snapVerticalStroke(glyph, newStroke, 'start', 12, midStartShape, 22);
+    const rightStartShape = newStroke.value[1] === 7 ? 27 : 22;
+    return snapVerticalStroke(glyph, newStroke, 'start', 12, midStartShape, rightStartShape);
   }
   const x1 = newStroke.value[3];
   const y1 = newStroke.value[4];
