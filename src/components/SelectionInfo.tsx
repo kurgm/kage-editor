@@ -193,6 +193,9 @@ const SelectionInfo = () => {
                   {t(`stroke type ${strokeType}`)}
                 </option>
               ))}
+              {!strokeTypes.includes(strokeInfo.strokeType) && (
+                <option value={strokeInfo.strokeType} />
+              )}
             </select>
             {' '}
             {t('head type')}
@@ -202,6 +205,9 @@ const SelectionInfo = () => {
                   {t(`head type ${strokeInfo.strokeType}-${headShapeType}`)}
                 </option>
               ))}
+              {!headShapeTypes[strokeInfo.strokeType].includes(strokeInfo.headShapeType) && (
+                <option value={strokeInfo.headShapeType} />
+              )}
             </select>
             {' '}
             {t('tail type')}
@@ -211,6 +217,9 @@ const SelectionInfo = () => {
                   {t(`tail type ${strokeInfo.strokeType}-${tailShapeType}`)}
                 </option>
               ))}
+              {!tailShapeTypes[strokeInfo.strokeType].includes(strokeInfo.tailShapeType) && (
+                <option value={strokeInfo.tailShapeType} />
+              )}
             </select>
             {' '}
             {!strokeInfo.validTypes && (
