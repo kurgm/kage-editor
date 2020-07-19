@@ -139,10 +139,10 @@ const SelectionControl = () => {
     {rectControl && <>
       <rect
         className='selection-rect'
-        x={rectControl.coords[0]}
-        y={rectControl.coords[1]}
-        width={rectControl.coords[2] - rectControl.coords[0]}
-        height={rectControl.coords[3] - rectControl.coords[1]}
+        x={Math.min(rectControl.coords[0], rectControl.coords[2])}
+        y={Math.min(rectControl.coords[1], rectControl.coords[3])}
+        width={Math.abs(rectControl.coords[2] - rectControl.coords[0])}
+        height={Math.abs(rectControl.coords[3] - rectControl.coords[1])}
       />
       <ControlPoint
         x={(rectControl.coords[0] + rectControl.coords[2]) / 2}
