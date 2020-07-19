@@ -48,6 +48,7 @@ const GlyphArea = () => {
       dispatch(selectActions.selectNone());
     }
     dispatch(dragActions.startBackgroundDrag(evt));
+    evt.preventDefault();
   }, [dispatch]);
   const handleMouseDownDeselectedStroke = useCallback((evt: React.MouseEvent, index: number) => {
     if (evt.shiftKey || evt.ctrlKey) {
@@ -56,6 +57,7 @@ const GlyphArea = () => {
       dispatch(selectActions.selectSingle(index));
     }
     dispatch(dragActions.startSelectionDrag(evt));
+    evt.preventDefault();
     evt.stopPropagation();
   }, [dispatch]);
   const handleMouseDownSelectedStroke = useCallback((evt: React.MouseEvent, index: number) => {
@@ -63,6 +65,7 @@ const GlyphArea = () => {
       dispatch(selectActions.selectRemoveSingle(index));
     }
     dispatch(dragActions.startSelectionDrag(evt));
+    evt.preventDefault();
     evt.stopPropagation();
   }, [dispatch]);
 
