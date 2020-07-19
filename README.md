@@ -55,7 +55,7 @@ javascript:(function(l,f){l.href='https://kurgm.github.io/kage-editor/#ssl='+(l.
 
 ## 未対応の機能
 - 部品自動配置（不要？）
-- 回転・反転の追加・種別編集
+- 回転・反転の追加
 - 白抜きグリフ
 
 ## 翻訳 / Translation
