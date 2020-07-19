@@ -47,14 +47,14 @@ export default (builder: ReducerBuilder<AppState>) => builder
     ...state,
     grid: {
       ...state.grid,
-      spacingX: value,
+      spacingX: Math.max(2, value),
     },
   }))
   .case(displayActions.setGridSpacingY, (state, value) => ({
     ...state,
     grid: {
       ...state.grid,
-      spacingY: value,
+      spacingY: Math.max(2, value),
     },
   }))
 

@@ -67,13 +67,17 @@ const OptionModal = () => {
           {t('grid origin x')} <input
             type="number"
             value={grid.originX}
+            min={0}
+            max={200}
             onChange={handleGridOriginXChange}
             disabled={!grid.display}
           />
           {' '}
           {t('grid origin y')} <input
             type="number"
-            value={grid.originX}
+            value={grid.originY}
+            min={0}
+            max={200}
             onChange={handleGridOriginYChange}
             disabled={!grid.display}
           />
@@ -82,6 +86,8 @@ const OptionModal = () => {
           {t('grid spacing x')} <input
             type="number"
             value={grid.spacingX}
+            min={2}
+            max={200}
             onChange={handleGridSpacingXChange}
             disabled={!grid.display}
           />
@@ -89,6 +95,8 @@ const OptionModal = () => {
           {t('grid spacing y')} <input
             type="number"
             value={grid.spacingY}
+            min={2}
+            max={200}
             onChange={handleGridSpacingYChange}
             disabled={!grid.display}
           />
