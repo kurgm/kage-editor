@@ -1,6 +1,7 @@
 import actionCreatorFactory from 'typescript-fsa';
 
 import { StretchParam } from '../kageUtils/stretchparam';
+import { ReflectRotateType } from '../kageUtils/reflectrotate';
 
 const actionCreator = actionCreatorFactory('EDITOR');
 
@@ -12,6 +13,7 @@ export const editorActions = {
   changeHeadShapeType: actionCreator<number>('CHANGE_HEAD_SHAPE_TYPE'),
   changeTailShapeType: actionCreator<number>('CHANGE_TAIL_SHAPE_TYPE'),
   changeStretchCoeff: actionCreator<number>('CHANGE_STRETCH_COEFF'),
+  changeReflectRotateOpType: actionCreator<ReflectRotateType>('CHANGE_REFLECT_ROTATE_OPTYPE'),
 
   swapWithPrev: actionCreator('SWAP_WITH_PREV'),
   swapWithNext: actionCreator('SWAP_WITH_NEXT'),

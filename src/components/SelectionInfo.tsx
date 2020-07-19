@@ -10,6 +10,7 @@ import { AppState } from '../reducers';
 import { GlyphLine } from '../kageUtils/glyph';
 import { calcStretchScalar, getStretchPositions } from '../kageUtils/stretchparam';
 import { strokeTypes, headShapeTypes, tailShapeTypes, isValidStrokeShapeTypes } from '../kageUtils/stroketype';
+import { ReflectRotateType, reflectRotateTypeParamsMap, reflectRotateTypes } from '../kageUtils/reflectrotate';
 import { draggedGlyphSelector } from '../selectors/draggedGlyph';
 
 import './SelectionInfo.css'
@@ -94,6 +95,30 @@ const partInfoSelector = createSelector([
   };
 });
 
+interface ReflectRotateInfo {
+  opType: ReflectRotateType | -1;
+  coordString: string;
+}
+const reflectRotateInfoSelector = createSelector([
+  selectedGlyphLineSelector,
+], (selectedStroke): ReflectRotateInfo | null => {
+  if (!selectedStroke) {
+    return null;
+  }
+  if (selectedStroke.value[0] !== 0) {
+    return null;
+  }
+  const opType = reflectRotateTypes.find((type) => {
+    const [param1, param2] = reflectRotateTypeParamsMap[type];
+    return param1 === selectedStroke.value[1] && param2 === selectedStroke.value[2];
+  }) ?? -1;
+
+  return {
+    opType,
+    coordString: `(${selectedStroke.value[3]},${selectedStroke.value[4]}) → (${selectedStroke.value[5]},${selectedStroke.value[6]})`,
+  };
+});
+
 interface OtherInfo {
   isMultiple: boolean;
   coordString?: string;
@@ -110,7 +135,7 @@ const otherInfoSelector = createSelector([
   }
   const selectedStroke = selectedStroke_!;
   const strokeType = selectedStroke.value[0];
-  if (strokeTypes.includes(strokeType) || strokeType === 99) {
+  if (strokeTypes.includes(strokeType) || strokeType === 99 || strokeType === 0) {
     return null;
   }
 
@@ -145,6 +170,7 @@ const SelectionInfo = () => {
 
   const strokeInfo = useSelector(strokeInfoSelector);
   const partInfo = useSelector(partInfoSelector);
+  const reflectRotateInfo = useSelector(reflectRotateInfoSelector);
   const otherInfo = useSelector(otherInfoSelector);
 
   const selectIndexString = useSelector(selectIndexStringSelector);
@@ -166,6 +192,9 @@ const SelectionInfo = () => {
   }, [dispatch]);
   const changeStretchCoeff = useCallback((evt: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(editorActions.changeStretchCoeff(+evt.currentTarget.value));
+  }, [dispatch]);
+  const changeReflectRotateOpType = useCallback((evt: React.ChangeEvent<HTMLSelectElement>) => {
+    dispatch(editorActions.changeReflectRotateOpType(+evt.currentTarget.value))
   }, [dispatch]);
   const selectPrev = useCallback(() => {
     dispatch(selectActions.selectPrev());
@@ -252,6 +281,21 @@ const SelectionInfo = () => {
               {partInfo.stretchCoeff}
             </div>
           )}
+        </>}
+        {reflectRotateInfo && <>
+          <div>
+            <select value={reflectRotateInfo.opType} onChange={changeReflectRotateOpType}>
+              {reflectRotateTypes.map((opType) => (
+                <option key={opType} value={opType}>
+                  {t(`operation type ${ReflectRotateType[opType]}`)}
+                </option>
+              ))}
+              {!reflectRotateTypes.includes(reflectRotateInfo.opType) && (
+                <option value={reflectRotateInfo.opType} />
+              )}
+            </select>
+          </div>
+          <div>{reflectRotateInfo.coordString}</div>
         </>}
         {otherInfo && <>
           {otherInfo.isMultiple && <div>{t('selecting multiple strokes')}</div>}

@@ -7,6 +7,7 @@ import { getGlyphLinesBBX } from '../kageUtils/bbx';
 import { decompose } from '../kageUtils/decompose';
 import { calcStretchPositions, setStretchPositions } from '../kageUtils/stretchparam';
 import { changeStrokeType } from '../kageUtils/stroketype';
+import { reflectRotateTypeParamsMap } from '../kageUtils/reflectrotate';
 import { applyGlyphLineOperation, moveSelectedGlyphLines } from '../kageUtils/transform';
 
 import { AppState } from '.';
@@ -93,6 +94,26 @@ export default (builder: ReducerBuilder<AppState>) => builder
       state.glyph[lineIndex],
       calcStretchPositions(stretchParam, value)
     );
+    return {
+      ...state,
+      glyph: setGlyphLine(state.glyph, lineIndex, newGLine),
+    };
+  })
+  .case(editorActions.changeReflectRotateOpType, (state, opType) => {
+    if (state.selection.length !== 1) {
+      return state;
+    }
+    const lineIndex = state.selection[0];
+    const newGLine: GlyphLine = {
+      ...state.glyph[lineIndex],
+      value: state.glyph[lineIndex].value.slice(),
+    };
+    const params = reflectRotateTypeParamsMap[opType]
+    if (!params) {
+      return state;
+    }
+    newGLine.value[1] = params[0];
+    newGLine.value[2] = params[1];
     return {
       ...state,
       glyph: setGlyphLine(state.glyph, lineIndex, newGLine),
