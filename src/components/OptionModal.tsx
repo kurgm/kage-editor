@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { displayActions } from '../actions/display';
 import { AppState } from '../reducers';
 import { KShotai } from '../kage';
+import { XorMaskType, xorMaskTypes } from '../xorMask';
 
 import './OptionModal.css';
 
@@ -14,6 +15,7 @@ const OptionModal = () => {
   const showOptionModal = useSelector((state: AppState) => state.showOptionModal);
   const grid = useSelector((state: AppState) => state.grid);
   const shotai = useSelector((state: AppState) => state.shotai);
+  const xorMaskType = useSelector((state: AppState) => state.xorMaskType);
   const showStrokeCenterLine = useSelector((state: AppState) => state.showStrokeCenterLine);
 
   const dispatch = useDispatch();
@@ -41,6 +43,9 @@ const OptionModal = () => {
   }, [dispatch]);
   const handleStrokeCenterLineChange = useCallback((evt: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(displayActions.setStrokeCenterLineDisplay(evt.currentTarget.checked));
+  }, [dispatch]);
+  const handleXorMaskTypeChange = useCallback((evt: React.ChangeEvent<HTMLSelectElement>) => {
+    dispatch(displayActions.setXorMaskType(evt.currentTarget.value as XorMaskType));
   }, [dispatch]);
   
   const { t, i18n } = useTranslation();
@@ -120,6 +125,16 @@ const OptionModal = () => {
           />
           {t('show stroke center line')}
         </label>
+      </div>
+      <div>
+        {t('negative mask type')} <select
+          value={xorMaskType}
+          onChange={handleXorMaskTypeChange}
+        >
+          {xorMaskTypes.map((maskType) => (
+            <option value={maskType}>{t(`negative mask type ${maskType}`)}</option>
+          ))}
+        </select>
       </div>
       <div>
         {t('display language')} <select

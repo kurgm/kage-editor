@@ -7,6 +7,7 @@ import { selectActions } from '../actions/select';
 import { dragActions, CTMInv } from '../actions/drag';
 import { draggedGlyphSelector } from '../selectors/draggedGlyph';
 
+import XorMasks from './XorMasks';
 import Grid from './Grid';
 import Glyph from './Glyph';
 import StrokeCenterLine from './StrokeCenterLine';
@@ -19,6 +20,7 @@ const GlyphArea = () => {
   const glyph = useSelector(draggedGlyphSelector);
   const buhinMap = useSelector((state: AppState) => state.buhinMap);
   const shotai = useSelector((state: AppState) => state.shotai);
+  const xorMaskType = useSelector((state: AppState) => state.xorMaskType);
   const selection = useSelector((state: AppState) => state.selection);
   const areaSelectRect = useSelector((state: AppState) => state.areaSelectRect);
   const freehandMode = useSelector((state: AppState) => state.freehandMode);
@@ -92,6 +94,9 @@ const GlyphArea = () => {
         onMouseDownCapture={handleMouseDownCapture}
         onMouseDown={handleMouseDownBackground}
       >
+        <defs>
+          <XorMasks />
+        </defs>
         <Grid />
         <rect x="0" y="0" width="200" height="200" className="glyph-boundary" />
         <rect x="12" y="12" width="176" height="176" className="glyph-guide" />
@@ -99,6 +104,7 @@ const GlyphArea = () => {
           glyph={glyph}
           buhinMap={buhinMap}
           shotai={shotai}
+          xorMaskType={xorMaskType}
           selection={selection}
           handleMouseDownDeselectedStroke={handleMouseDownDeselectedStroke}
           handleMouseDownSelectedStroke={handleMouseDownSelectedStroke}

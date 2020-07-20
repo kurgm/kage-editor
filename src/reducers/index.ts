@@ -13,6 +13,7 @@ import editor from './editor';
 import display, { GridState } from './display';
 
 import { undoable } from './undo';
+import { XorMaskType } from '../xorMask';
 
 export interface AppState {
   glyph: Glyph;
@@ -39,6 +40,7 @@ export interface AppState {
   grid: GridState;
   showStrokeCenterLine: boolean;
   shotai: KShotai;
+  xorMaskType: XorMaskType;
 }
 
 const initialState: AppState = {
@@ -69,6 +71,7 @@ const initialState: AppState = {
   },
   showStrokeCenterLine: false,
   shotai: 0, // kMincho
+  xorMaskType: "none",
 };
 
 const reducer = undoable(

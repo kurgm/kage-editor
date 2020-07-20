@@ -65,4 +65,9 @@ export default (builder: ReducerBuilder<AppState>) => builder
   .case(displayActions.setShotai, (state, shotai) => ({
     ...state,
     shotai,
+  }))
+  
+  .case(displayActions.setXorMaskType, (state, xorMaskType) => ({
+    ...state,
+    xorMaskType,
   }));

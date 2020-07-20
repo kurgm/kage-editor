@@ -43,6 +43,7 @@ javascript:(function(l,f){l.href='https://kurgm.github.io/kage-editor/#ssl='+(l.
 - UI表示言語切替
 - 書体切替
 - 中心線表示
+- 白抜き表示
 - キーボードショートカット
   + Ctrl+A: 全選択
   + Ctrl+I: 選択反転
@@ -56,7 +57,6 @@ javascript:(function(l,f){l.href='https://kurgm.github.io/kage-editor/#ssl='+(l.
 ## 未対応の機能
 - 部品自動配置（不要？）
 - 回転・反転の追加
-- 白抜きグリフ
 
 ## 翻訳 / Translation
 

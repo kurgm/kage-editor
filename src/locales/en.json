@@ -100,6 +100,12 @@
   "mincho style": "mincho",
   "gothic style": "gothic",
   "show stroke center line": "Draw center line of strokes",
+  "negative mask type": "Negative mask",
+  "negative mask type none": "none",
+  "negative mask type circle": "circle",
+  "negative mask type squareWithRoundedCorners": "square with rounded corners",
+  "negative mask type square": "square",
+  "negative mask type diamond": "diamond",
   "display language": "Language",
   "close modal": "Close"
 }

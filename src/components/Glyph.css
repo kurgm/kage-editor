@@ -3,6 +3,21 @@
   stroke: none;
 }
 
+.xormask-fill {
+  fill: #000000;
+  pointer-events: none;
+}
+
+.glyph-area .xormask-fill {
+  fill-opacity: 0.7;
+}
+
+.strokes-invert polygon {
+  fill: #ffffff;
+  stroke: none;
+  pointer-events: none;
+}
+
 .strokes-selected polygon {
   fill: #cc0000;
   stroke: none;

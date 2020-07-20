@@ -100,6 +100,12 @@
   "mincho style": "明朝",
   "gothic style": "ゴシック",
   "show stroke center line": "中心線を表示",
+  "negative mask type": "白抜き",
+  "negative mask type none": "なし",
+  "negative mask type circle": "丸",
+  "negative mask type squareWithRoundedCorners": "角丸四角",
+  "negative mask type square": "四角",
+  "negative mask type diamond": "菱形",
   "display language": "表示言語",
   "close modal": "閉じる"
 }
