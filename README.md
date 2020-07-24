@@ -60,7 +60,7 @@ javascript:(function(l,f){l.href='https://kurgm.github.io/kage-editor/#ssl='+(l.
 
 ## 翻訳 / Translation
 
-現在 [src/locales/](src/locales/) フォルダ内にJSONファイルがある言語（日本語・英語）に対応しています。
-残りの韓国語・中国語簡体字・中国語繁体字への翻訳に協力してくださる方を募集しています。
+現在 [src/locales/](src/locales/) フォルダ内にJSONファイルがある言語（日本語・英語・中国語簡体字・中国語繁体字）に対応しています。
+翻訳の修正や、残りの韓国語への翻訳に協力してくださる方を募集しています。
 
-Currently this editor supports displaying messages in Japanese and English. Translating to the other languages (Korean, simplified Chinese and traditional Chinese) is welcome.
+Currently this editor supports displaying messages in Japanese, English, simplified Chinese and traditional Chinese. Correcting messages as well as adding translation in Korean is welcome.
