@@ -5,13 +5,21 @@ import args from "./args";
 
 import jaTranslation from './locales/ja.json';
 import enTranslation from './locales/en.json';
+import zhCNTranslation from './locales/zh_cn.json';
+import zhTWTranslation from './locales/zh_tw.json';
 
 const resources = {
-  ja: {
+  "ja": {
     translation: jaTranslation,
   },
-  en: {
+  "en": {
     translation: enTranslation,
+  },
+  "zh-Hans": {
+    translation: zhCNTranslation,
+  },
+  "zh-Hant": {
+    translation: zhTWTranslation,
   },
 };
 
