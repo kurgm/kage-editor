@@ -9,11 +9,13 @@ import OptionModal from './components/OptionModal';
 import { useShortcuts } from './shortcuts';
 
 import './App.css';
+import { useTranslation } from 'react-i18next';
 
 function App() {
+  const { i18n } = useTranslation();
   useShortcuts();
   return (
-    <div className="App">
+    <div className="App" lang={i18n.language}>
       <GlyphArea />
       <EditorControls />
       <PartsSearch />
