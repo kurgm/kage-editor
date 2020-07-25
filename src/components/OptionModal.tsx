@@ -132,7 +132,7 @@ const OptionModal = () => {
           onChange={handleXorMaskTypeChange}
         >
           {xorMaskTypes.map((maskType) => (
-            <option value={maskType}>{t(`negative mask type ${maskType}`)}</option>
+            <option key={maskType} value={maskType}>{t(`negative mask type ${maskType}`)}</option>
           ))}
         </select>
       </div>
