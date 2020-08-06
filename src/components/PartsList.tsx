@@ -31,6 +31,7 @@ const PartsList = (props: PartsListProps) => {
           data-name={name}
           src={getImageURL(name)}
           width={50} height={50}
+          loading="lazy"
           onClick={handleImageClick}
           onMouseEnter={handleImageMouseEnter}
         />
