@@ -10,7 +10,7 @@ import { unparseGlyph } from '../kageUtils/glyph';
 
 const glyphName = args.name || 'sandbox';
 
-const formAction = `${args.ssl ? 'https' : 'http'}://${args.host}/wiki/${encodeURIComponent(glyphName)}?action=preview`;
+const formAction = `${args.ssl ? 'https' : 'http'}://${args.host}/wiki/${encodeURIComponent(glyphName)}`;
 
 const formStyle: React.CSSProperties = {
   visibility: 'hidden',
@@ -31,7 +31,7 @@ const SubmitForm = () => {
       style={formStyle}
       ref={formRef}
       action={formAction}
-      method="post"
+      method="get"
     >
       <input type="hidden" name="page" value={glyphName} />
       <input type="hidden" name="action" value="preview" />
