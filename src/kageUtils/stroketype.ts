@@ -214,9 +214,25 @@ export const isValidStrokeShapeTypes = memoizeOne((stroke: GlyphLine) => {
     return true;
   }
 
-  return validStrokeShapeTypes.some(([s0, s1, s2]) => (
+  if (!validStrokeShapeTypes.some(([s0, s1, s2]) => (
     s0 === stroke.value[0] &&
     s1 === stroke.value[1] &&
     s2 === stroke.value[2]
-  ));
+  ))) {
+    return false;
+  }
+
+  if (stroke.value[0] === 1) {
+    const [, s1, s2, x1, y1, x2, y2] = stroke.value;
+    const isVertical = y1 === y2 ? x1 === x2 : x2 - x1 <= Math.abs(y1 - y2);
+
+    if (isVertical
+      ? (s1 === 2 || s2 === 2)
+      : !([0, 2].includes(s1) && [0, 2].includes(s2))
+    ) {
+      return false;
+    }
+  }
+
+  return true;
 });
