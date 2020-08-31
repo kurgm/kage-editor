@@ -14,6 +14,7 @@ const gwHosts = [
   'ko.glyphwiki.org',
   'zhs.glyphwiki.org',
   'zht.glyphwiki.org',
+  'non-ssl.glyphwiki.org',
 ];
 
 if (!host && document.referrer) {
