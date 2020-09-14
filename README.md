@@ -4,7 +4,7 @@ The aim of this project is to port the glyph editor used on [GlyphWiki](https://
 
 Flash で実装されている [GlyphWiki](https://glyphwiki.org/) のグリフエディタを HTML5 / JavaScript アプリに移植するプロジェクト
 
-**[https://kurgm.github.io/kage-editor/](https://kurgm.github.io/kage-editor/#data=2%3A7%3A8%3A66%3A13%3A102%3A23%3A120%3A43%241%3A0%3A2%3A34%3A60%3A100%3A60%241%3A22%3A4%3A100%3A60%3A100%3A183%241%3A0%3A2%3A16%3A93%3A71%3A93%242%3A22%3A7%3A71%3A93%3A61%3A145%3A13%3A174%242%3A0%3A7%3A171%3A64%3A152%3A81%3A119%3A104%242%3A7%3A0%3A105%3A67%3A121%3A135%3A180%3A166)**
+**[https://kage-editor.netlify.app/](https://kage-editor.netlify.app/#data=2%3A7%3A8%3A66%3A13%3A102%3A23%3A120%3A43%241%3A0%3A2%3A34%3A60%3A100%3A60%241%3A22%3A4%3A100%3A60%3A100%3A183%241%3A0%3A2%3A16%3A93%3A71%3A93%242%3A22%3A7%3A71%3A93%3A61%3A145%3A13%3A174%242%3A0%3A7%3A171%3A64%3A152%3A81%3A119%3A104%242%3A7%3A0%3A105%3A67%3A121%3A135%3A180%3A166)**
 
 macOS 上の最新版の Chrome / Firefox / Safari で動作確認しています。
 
@@ -12,7 +12,7 @@ macOS 上の最新版の Chrome / Firefox / Safari で動作確認していま�
 グリフウィキの編集中画面からジャンプできるブックマークレットです。
 
 ```js
-javascript:(function(l,f){l.href='https://kurgm.github.io/kage-editor/#ssl='+(l.protocol!='http:')+'&host='+l.host+'&summary='+encodeURIComponent(f[2].elements.summary.value)+['name','edittime','related','data'].map(function(k){return'&'+k+'='+f[1].elements[k].value}).join('')})(location,document.forms)
+javascript:(function(l,f){l.href='https://kage-editor.netlify.app/#ssl='+(l.protocol!='http:')+'&host='+l.host+'&summary='+encodeURIComponent(f[2].elements.summary.value)+['name','edittime','related','data'].map(function(k){return'&'+k+'='+f[1].elements[k].value}).join('')})(location,document.forms)
 ```
 
 ## 機能一覧
