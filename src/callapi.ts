@@ -1,6 +1,5 @@
-// The temporary reverse proxy which adds 'Access-Control-Allow-Origin: *' header.
-// This header is required for cross-origin requests.
-const apiUrlPrefix = 'https://asia-northeast1-ku6goma.cloudfunctions.net/gwproxy';
+// Proxy set up to avoid cross-origin requests.
+const apiUrlPrefix = '/gwproxy';
 
 const callApi = async (path: string) => {
   const response = await fetch(apiUrlPrefix + path);

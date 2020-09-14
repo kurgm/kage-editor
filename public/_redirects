@@ -1,0 +1,3 @@
+/gwproxy/get_source.cgi     https://glyphwiki.org/get_source.cgi      200
+/gwproxy/search4ge.cgi      https://glyphwiki.org/search4ge.cgi       200
+/gwproxy/get_candidate.cgi  https://glyphwiki.org/get_candidate.cgi   200
