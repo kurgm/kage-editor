@@ -17,7 +17,7 @@ interface RectControl {
   multiSelect: boolean;
   coords: [number, number, number, number];
 }
-interface ControlPoint {
+interface ControlPointSpec {
   x: number;
   y: number;
   className: string;
@@ -25,7 +25,7 @@ interface ControlPoint {
 
 interface SelectionControlSpec {
   rectControl: RectControl | null;
-  pointControl: ControlPoint[];
+  pointControl: ControlPointSpec[];
 }
 
 const selectionControlSelector = createSelector(
@@ -71,7 +71,7 @@ const selectionControlSelector = createSelector(
       case 4:
       case 6:
       case 7: {
-        const pointControl: ControlPoint[] = [];
+        const pointControl: ControlPointSpec[] = [];
         for (let i = 3; i + 2 <= selectedStroke.value.length; i += 2) {
           const matchType = getMatchType(glyph, {
             lineIndex: selection[0],
