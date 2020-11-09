@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.css": "/kage-editor/static/css/main.a39e14ae.chunk.css",
-    "main.js": "/kage-editor/static/js/main.0dca9534.chunk.js",
-    "main.js.map": "/kage-editor/static/js/main.0dca9534.chunk.js.map",
-    "runtime-main.js": "/kage-editor/static/js/runtime-main.1230a81a.js",
-    "runtime-main.js.map": "/kage-editor/static/js/runtime-main.1230a81a.js.map",
-    "static/js/2.5f7518d8.chunk.js": "/kage-editor/static/js/2.5f7518d8.chunk.js",
-    "static/js/2.5f7518d8.chunk.js.map": "/kage-editor/static/js/2.5f7518d8.chunk.js.map",
+    "main.css": "/kage-editor/static/css/main.0d70c86a.chunk.css",
+    "main.js": "/kage-editor/static/js/main.de3ba542.chunk.js",
+    "main.js.map": "/kage-editor/static/js/main.de3ba542.chunk.js.map",
+    "runtime-main.js": "/kage-editor/static/js/runtime-main.4864b228.js",
+    "runtime-main.js.map": "/kage-editor/static/js/runtime-main.4864b228.js.map",
+    "static/js/2.7d7584f1.chunk.js": "/kage-editor/static/js/2.7d7584f1.chunk.js",
+    "static/js/2.7d7584f1.chunk.js.map": "/kage-editor/static/js/2.7d7584f1.chunk.js.map",
+    "static/js/3.48978147.chunk.js": "/kage-editor/static/js/3.48978147.chunk.js",
+    "static/js/3.48978147.chunk.js.map": "/kage-editor/static/js/3.48978147.chunk.js.map",
     "index.html": "/kage-editor/index.html",
-    "precache-manifest.91600592563a41630ba7abbbf2e26ee9.js": "/kage-editor/precache-manifest.91600592563a41630ba7abbbf2e26ee9.js",
-    "service-worker.js": "/kage-editor/service-worker.js",
-    "static/css/main.a39e14ae.chunk.css.map": "/kage-editor/static/css/main.a39e14ae.chunk.css.map",
-    "static/js/2.5f7518d8.chunk.js.LICENSE.txt": "/kage-editor/static/js/2.5f7518d8.chunk.js.LICENSE.txt"
+    "static/css/main.0d70c86a.chunk.css.map": "/kage-editor/static/css/main.0d70c86a.chunk.css.map",
+    "static/js/2.7d7584f1.chunk.js.LICENSE.txt": "/kage-editor/static/js/2.7d7584f1.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.1230a81a.js",
-    "static/js/2.5f7518d8.chunk.js",
-    "static/css/main.a39e14ae.chunk.css",
-    "static/js/main.0dca9534.chunk.js"
+    "static/js/runtime-main.4864b228.js",
+    "static/js/2.7d7584f1.chunk.js",
+    "static/css/main.0d70c86a.chunk.css",
+    "static/js/main.de3ba542.chunk.js"
   ]
 }
