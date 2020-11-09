@@ -32,7 +32,7 @@ if (!host || !gwHosts.includes(host)) {
   host = 'glyphwiki.org';
 }
 
-export default {
+const sanitizedArgs = {
   host,
   ssl,
   name,
@@ -41,3 +41,5 @@ export default {
   data,
   summary,
 };
+
+export default sanitizedArgs;

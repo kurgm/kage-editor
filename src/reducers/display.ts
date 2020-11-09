@@ -12,7 +12,7 @@ export interface GridState {
   spacingY: number;
 }
 
-export default (builder: ReducerBuilder<AppState>) => builder
+const updateBuilder = (builder: ReducerBuilder<AppState>) => builder
   .case(displayActions.openOptionModal, (state) => ({
     ...state,
     showOptionModal: true,
@@ -71,3 +71,6 @@ export default (builder: ReducerBuilder<AppState>) => builder
     ...state,
     xorMaskType,
   }));
+
+
+export default updateBuilder;

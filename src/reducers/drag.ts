@@ -43,7 +43,7 @@ const performAreaSelect = (glyph: Glyph, buhinMap: Map<string, string>, shotai: 
   return result;
 };
 
-export default (builder: ReducerBuilder<AppState>) => builder
+const updateBuilder = (builder: ReducerBuilder<AppState>) => builder
   .case(dragActions.startBackgroundDrag, (state, evt) => {
     if (!state.ctmInv) {
       return state;
@@ -210,3 +210,6 @@ export default (builder: ReducerBuilder<AppState>) => builder
     ...state,
     ctmInv,
   }));
+
+
+export default updateBuilder;

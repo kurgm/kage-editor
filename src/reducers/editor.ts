@@ -18,7 +18,7 @@ const setGlyphLine = (glyph: Glyph, index: number, glyphLine: GlyphLine): Glyph 
   return newGlyph;
 };
 
-export default (builder: ReducerBuilder<AppState>) => builder
+const updateBuilder = (builder: ReducerBuilder<AppState>) => builder
   .case(editorActions.loadedBuhin, (state, [name, data]) => {
     const newMap = new Map(state.buhinMap);
     newMap.set(name, data);
@@ -250,3 +250,6 @@ export default (builder: ReducerBuilder<AppState>) => builder
     ...state,
     exitEvent: evt,
   }));
+
+
+export default updateBuilder;

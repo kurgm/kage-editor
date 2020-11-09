@@ -4,7 +4,7 @@ import { selectActions } from '../actions/select';
 
 import { AppState } from '.';
 
-export default (builder: ReducerBuilder<AppState>) => builder
+const updateBuilder = (builder: ReducerBuilder<AppState>) => builder
   .case(selectActions.selectSingle, (state, index) => ({
     ...state,
     selection: [index],
@@ -49,3 +49,6 @@ export default (builder: ReducerBuilder<AppState>) => builder
       selection: [(firstSelected + 1 + state.glyph.length) % state.glyph.length],
     };
   });
+
+
+export default updateBuilder;
