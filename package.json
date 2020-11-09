@@ -16,6 +16,7 @@
     "geometric": "^2.2.3",
     "gh-pages": "^3.1.0",
     "i18next": "^19.6.0",
+    "netlify-cli": "^2.68.0",
     "memoize-one": "^5.1.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -35,6 +36,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "dev": "netlify dev",
     "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
