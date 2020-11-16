@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/kage-editor/static/css/main.0d70c86a.chunk.css",
-    "main.js": "/kage-editor/static/js/main.de3ba542.chunk.js",
-    "main.js.map": "/kage-editor/static/js/main.de3ba542.chunk.js.map",
+    "main.js": "/kage-editor/static/js/main.be472af6.chunk.js",
+    "main.js.map": "/kage-editor/static/js/main.be472af6.chunk.js.map",
     "runtime-main.js": "/kage-editor/static/js/runtime-main.4864b228.js",
     "runtime-main.js.map": "/kage-editor/static/js/runtime-main.4864b228.js.map",
     "static/js/2.7d7584f1.chunk.js": "/kage-editor/static/js/2.7d7584f1.chunk.js",
@@ -17,6 +17,6 @@
     "static/js/runtime-main.4864b228.js",
     "static/js/2.7d7584f1.chunk.js",
     "static/css/main.0d70c86a.chunk.css",
-    "static/js/main.de3ba542.chunk.js"
+    "static/js/main.be472af6.chunk.js"
   ]
 }
