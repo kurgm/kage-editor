@@ -135,6 +135,11 @@ const SelectionControl = () => {
     });
   }, [dispatch, pointControl]);
 
+  const controlPointNorth = !rectControl || rectControl.coords[0] < rectControl.coords[2] ? 'north' : 'south';
+  const controlPointSouth = !rectControl || rectControl.coords[0] < rectControl.coords[2] ? 'south' : 'north';
+  const controlPointWest = !rectControl || rectControl.coords[1] < rectControl.coords[3] ? 'west' : 'east';
+  const controlPointEast = !rectControl || rectControl.coords[1] < rectControl.coords[3] ? 'east' : 'west';
+
   return <>
     {rectControl && <>
       <rect
@@ -147,31 +152,31 @@ const SelectionControl = () => {
       <ControlPoint
         x={(rectControl.coords[0] + rectControl.coords[2]) / 2}
         y={rectControl.coords[1]}
-        className='north'
+        className={controlPointNorth}
         handleMouseDown={handleMouseDownNorthPoint}
       />
       <ControlPoint
         x={rectControl.coords[0]}
         y={(rectControl.coords[1] + rectControl.coords[3]) / 2}
-        className='west'
+        className={controlPointWest}
         handleMouseDown={handleMouseDownWestPoint}
       />
       <ControlPoint
         x={(rectControl.coords[0] + rectControl.coords[2]) / 2}
         y={rectControl.coords[3]}
-        className='south'
+        className={controlPointSouth}
         handleMouseDown={handleMouseDownSouthPoint}
       />
       <ControlPoint
         x={rectControl.coords[2]}
         y={(rectControl.coords[1] + rectControl.coords[3]) / 2}
-        className='east'
+        className={controlPointEast}
         handleMouseDown={handleMouseDownEastPoint}
       />
       <ControlPoint
         x={rectControl.coords[2]}
         y={rectControl.coords[3]}
-        className='southeast'
+        className={controlPointSouth + controlPointEast}
         handleMouseDown={handleMouseDownSoutheastPoint}
       />
     </>}
