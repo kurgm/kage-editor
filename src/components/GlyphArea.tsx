@@ -91,6 +91,7 @@ const GlyphArea = () => {
       <svg
         width="100%" height="100%" viewBox="-20 -20 500 240"
         className={svgClassName}
+        onContextMenu={(evt) => evt.preventDefault()}
         onMouseDownCapture={handleMouseDownCapture}
         onMouseDown={handleMouseDownBackground}
       >
