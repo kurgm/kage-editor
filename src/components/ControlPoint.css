@@ -21,6 +21,9 @@
 .controlpoint-rect.east, .controlpoint-rect.west {
   cursor: ew-resize;
 }
-.controlpoint-rect.southeast {
+.controlpoint-rect.southeast, .controlpoint-rect.northwest {
   cursor: nwse-resize;
+}
+.controlpoint-rect.southwest, .controlpoint-rect.northeast {
+  cursor: nesw-resize;
 }

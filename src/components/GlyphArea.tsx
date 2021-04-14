@@ -6,6 +6,7 @@ import { AppState } from '../reducers';
 import { selectActions } from '../actions/select';
 import { dragActions, CTMInv } from '../actions/drag';
 import { draggedGlyphSelector } from '../selectors/draggedGlyph';
+import { showCenterLine } from '../components/OptionModal';
 
 import XorMasks from './XorMasks';
 import Grid from './Grid';
@@ -91,6 +92,7 @@ const GlyphArea = () => {
       <svg
         width="100%" height="100%" viewBox="-20 -20 500 240"
         className={svgClassName}
+        onContextMenu={(evt) => evt.preventDefault()}
         onMouseDownCapture={handleMouseDownCapture}
         onMouseDown={handleMouseDownBackground}
       >
@@ -109,7 +111,7 @@ const GlyphArea = () => {
           handleMouseDownDeselectedStroke={handleMouseDownDeselectedStroke}
           handleMouseDownSelectedStroke={handleMouseDownSelectedStroke}
         />
-        {showStrokeCenterLine && <StrokeCenterLine glyph={glyph} buhinMap={buhinMap} />}
+        {showStrokeCenterLine === showCenterLine.always && <StrokeCenterLine glyph={glyph} buhinMap={buhinMap} />}
         <SelectionControl />
         <AreaSelectRect rect={areaSelectRect} />
       </svg>

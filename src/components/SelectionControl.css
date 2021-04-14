@@ -4,3 +4,10 @@
   stroke-width: 1px;
   pointer-events: none;
 }
+
+.auxiliary-lines {
+  fill: none;
+  stroke: #729fcf;
+  stroke-width: 1px;
+  pointer-events: none;
+}

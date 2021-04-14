@@ -8,6 +8,7 @@ import { AppState } from '../reducers';
 import { draggedGlyphSelector } from '../selectors/draggedGlyph';
 import { getGlyphLinesBBX } from '../kageUtils/bbx';
 import { getMatchType, MatchType } from '../kageUtils/match';
+import { showCenterLine } from '../components/OptionModal';
 
 import ControlPoint from './ControlPoint';
 
@@ -26,6 +27,8 @@ interface ControlPointSpec {
 interface SelectionControlSpec {
   rectControl: RectControl | null;
   pointControl: ControlPointSpec[];
+  auxiliaryLines: [number, number, number, number][];
+  centerLine: string | null;
 }
 
 const selectionControlSelector = createSelector(
@@ -35,7 +38,7 @@ const selectionControlSelector = createSelector(
   ],
   (glyph, selection): SelectionControlSpec => {
     if (selection.length === 0) {
-      return { rectControl: null, pointControl: [] };
+      return { rectControl: null, pointControl: [], auxiliaryLines: [], centerLine: null };
     }
     if (selection.length > 1) {
       const selectedStrokes = selection.map((index) => glyph[index]);
@@ -46,6 +49,8 @@ const selectionControlSelector = createSelector(
           coords: bbx,
         },
         pointControl: [],
+        auxiliaryLines: [],
+        centerLine: null,
       };
     }
     const selectedStroke = glyph[selection[0]];
@@ -64,6 +69,8 @@ const selectionControlSelector = createSelector(
             ],
           },
           pointControl: [],
+          auxiliaryLines: [],
+          centerLine: null,
         };
       case 1:
       case 2:
@@ -90,16 +97,65 @@ const selectionControlSelector = createSelector(
             className,
           });
         }
-        return { rectControl: null, pointControl };
+
+        const auxiliaryLines: [number, number, number, number][] = [];
+        if (selectedStroke.value[0] === 2 || selectedStroke.value[0] === 6) {
+          auxiliaryLines.push([
+            selectedStroke.value[3],
+            selectedStroke.value[4],
+            selectedStroke.value[5],
+            selectedStroke.value[6],
+          ]);
+        }
+        if (selectedStroke.value[0] === 2 || selectedStroke.value[0] === 7) {
+          auxiliaryLines.push([
+            selectedStroke.value[5],
+            selectedStroke.value[6],
+            selectedStroke.value[7],
+            selectedStroke.value[8],
+          ]);
+        }
+        if (selectedStroke.value[0] === 6 || selectedStroke.value[0] === 7) {
+          auxiliaryLines.push([
+            selectedStroke.value[7],
+            selectedStroke.value[8],
+            selectedStroke.value[9],
+            selectedStroke.value[10],
+          ]);
+        }
+        const v = selectedStroke.value;
+        let centerLine: string | null = null;
+        switch (v[0]) {
+          case 1:
+            centerLine = `M ${v[3]} ${v[4]} ${v[5]} ${v[6]}`;
+            break;
+          case 2:
+            centerLine = `M ${v[3]} ${v[4]} Q ${v[5]} ${v[6]} ${v[7]} ${v[8]}`;
+            break;
+          case 3:
+          case 4:
+            centerLine = `M ${v[3]} ${v[4]} ${v[5]} ${v[6]} ${v[7]} ${v[8]}`;
+            break;
+          case 6:
+            centerLine = `M ${v[3]} ${v[4]} C ${v[5]} ${v[6]} ${v[7]} ${v[8]} ${v[9]} ${v[10]}`;
+            break;
+          case 7:
+            centerLine = `M ${v[3]} ${v[4]} ${v[5]} ${v[6]} Q ${v[7]} ${v[8]} ${v[9]} ${v[10]}`;
+            break;
+          default:
+            break;
+        }
+        return { rectControl: null, pointControl, auxiliaryLines, centerLine };
       }
       default:
-        return { rectControl: null, pointControl: [] };
+        return { rectControl: null, pointControl: [], auxiliaryLines: [], centerLine: null };
     }
   }
 );
 
 const SelectionControl = () => {
-  const { rectControl, pointControl } = useSelector(selectionControlSelector);
+  const { rectControl, pointControl, auxiliaryLines, centerLine } = useSelector(selectionControlSelector);
+  const showStrokeCenterLine = useSelector((state: AppState) => state.showStrokeCenterLine);
 
   const dispatch = useDispatch();
   const handleMouseDownRectControl = useCallback((evt: React.MouseEvent, position: RectPointPosition) => {
@@ -127,6 +183,18 @@ const SelectionControl = () => {
     (evt: React.MouseEvent) => handleMouseDownRectControl(evt, RectPointPosition.southeast),
     [handleMouseDownRectControl]
   );
+  const handleMouseDownSouthwestPoint = useCallback(
+    (evt: React.MouseEvent) => handleMouseDownRectControl(evt, RectPointPosition.southwest),
+    [handleMouseDownRectControl]
+  );
+  const handleMouseDownNortheastPoint = useCallback(
+    (evt: React.MouseEvent) => handleMouseDownRectControl(evt, RectPointPosition.northeast),
+    [handleMouseDownRectControl]
+  );
+  const handleMouseDownNorthwestPoint = useCallback(
+    (evt: React.MouseEvent) => handleMouseDownRectControl(evt, RectPointPosition.northwest),
+    [handleMouseDownRectControl]
+  );
 
   const handleMouseDownPointControls = useMemo(() => {
     return pointControl.map((_control, pointIndex) => (evt: React.MouseEvent) => {
@@ -134,6 +202,11 @@ const SelectionControl = () => {
       evt.stopPropagation();
     });
   }, [dispatch, pointControl]);
+
+  const controlPointNorth = !rectControl || rectControl.coords[0] < rectControl.coords[2] ? 'north' : 'south';
+  const controlPointSouth = !rectControl || rectControl.coords[0] < rectControl.coords[2] ? 'south' : 'north';
+  const controlPointWest = !rectControl || rectControl.coords[1] < rectControl.coords[3] ? 'west' : 'east';
+  const controlPointEast = !rectControl || rectControl.coords[1] < rectControl.coords[3] ? 'east' : 'west';
 
   return <>
     {rectControl && <>
@@ -147,34 +220,58 @@ const SelectionControl = () => {
       <ControlPoint
         x={(rectControl.coords[0] + rectControl.coords[2]) / 2}
         y={rectControl.coords[1]}
-        className='north'
+        className={controlPointNorth}
         handleMouseDown={handleMouseDownNorthPoint}
       />
       <ControlPoint
         x={rectControl.coords[0]}
         y={(rectControl.coords[1] + rectControl.coords[3]) / 2}
-        className='west'
+        className={controlPointWest}
         handleMouseDown={handleMouseDownWestPoint}
       />
       <ControlPoint
         x={(rectControl.coords[0] + rectControl.coords[2]) / 2}
         y={rectControl.coords[3]}
-        className='south'
+        className={controlPointSouth}
         handleMouseDown={handleMouseDownSouthPoint}
       />
       <ControlPoint
         x={rectControl.coords[2]}
         y={(rectControl.coords[1] + rectControl.coords[3]) / 2}
-        className='east'
+        className={controlPointEast}
         handleMouseDown={handleMouseDownEastPoint}
       />
       <ControlPoint
         x={rectControl.coords[2]}
         y={rectControl.coords[3]}
-        className='southeast'
+        className={controlPointSouth + controlPointEast}
         handleMouseDown={handleMouseDownSoutheastPoint}
       />
+      <ControlPoint
+        x={rectControl.coords[0]}
+        y={rectControl.coords[3]}
+        className={controlPointSouth + controlPointWest}
+        handleMouseDown={handleMouseDownSouthwestPoint}
+      />
+      <ControlPoint
+        x={rectControl.coords[2]}
+        y={rectControl.coords[1]}
+        className={controlPointNorth + controlPointEast}
+        handleMouseDown={handleMouseDownNortheastPoint}
+      />
+      <ControlPoint
+        x={rectControl.coords[0]}
+        y={rectControl.coords[1]}
+        className={controlPointNorth + controlPointWest}
+        handleMouseDown={handleMouseDownNorthwestPoint}
+      />
     </>}
+    {auxiliaryLines.map((points, index) => (
+      <path className="auxiliary-lines" key={index} d={'M ' + points.join(' ')} />
+    ))}
+    {showStrokeCenterLine === showCenterLine.selection && centerLine &&
+        <path className="stroke-center-line" d={centerLine} />
+    }
     {pointControl.map(({ x, y, className }, index) => (
       <ControlPoint
         key={index}

@@ -34,6 +34,18 @@ export const resizeSelected = (glyph: Glyph, selection: number[], position: Rect
             newValue[5] = Math.round(newValue[5] + dx);
             newValue[6] = Math.round(newValue[6] + dy);
             break;
+          case RectPointPosition.southwest:
+            newValue[3] = Math.round(newValue[3] + dx);
+            newValue[6] = Math.round(newValue[6] + dy);
+            break;
+          case RectPointPosition.northeast:
+            newValue[5] = Math.round(newValue[5] + dx);
+            newValue[4] = Math.round(newValue[4] + dy);
+            break;
+          case RectPointPosition.northwest:
+            newValue[3] = Math.round(newValue[3] + dx);
+            newValue[4] = Math.round(newValue[4] + dy);
+            break;
           default:
             // exhaustive?
             ((_x: never) => { })(position);
@@ -64,6 +76,18 @@ export const resizeSelected = (glyph: Glyph, selection: number[], position: Rect
     case RectPointPosition.southeast:
       newBBX[2] = Math.max(newBBX[2] + dx, newBBX[0] + minSize);
       newBBX[3] = Math.max(newBBX[3] + dy, newBBX[1] + minSize);
+      break;
+    case RectPointPosition.southwest:
+      newBBX[0] = Math.min(newBBX[0] + dx, newBBX[2] - minSize);
+      newBBX[3] = Math.max(newBBX[3] + dy, newBBX[1] + minSize);
+      break;
+    case RectPointPosition.northeast:
+      newBBX[2] = Math.max(newBBX[2] + dx, newBBX[0] + minSize);
+      newBBX[1] = Math.min(newBBX[1] + dy, newBBX[3] - minSize);
+      break;
+    case RectPointPosition.northwest:
+      newBBX[0] = Math.min(newBBX[0] + dx, newBBX[2] - minSize);
+      newBBX[1] = Math.min(newBBX[1] + dy, newBBX[3] - minSize);
       break;
     default:
       // exhaustive?

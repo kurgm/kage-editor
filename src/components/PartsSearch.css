@@ -1,7 +1,7 @@
 .parts-search-area {
   display: flex;
   flex-flow: column;
-  width: 250px;
+  width: 265px;
 }
 
 .parts-search-box {

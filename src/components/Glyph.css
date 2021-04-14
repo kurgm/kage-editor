@@ -1,6 +1,7 @@
 .strokes-deselected polygon {
   fill: #000000;
   stroke: none;
+  cursor: move;
 }
 
 .xormask-fill {
@@ -21,4 +22,5 @@
 .strokes-selected polygon {
   fill: #cc0000;
   stroke: none;
+  cursor: move;
 }

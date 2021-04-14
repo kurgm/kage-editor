@@ -7,6 +7,9 @@ export enum RectPointPosition {
   east,
   west,
   southeast,
+  southwest,
+  northeast,
+  northwest,
 }
 
 const actionCreator = actionCreatorFactory('EDITOR');

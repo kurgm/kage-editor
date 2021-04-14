@@ -95,6 +95,9 @@ const PartsSearch = () => {
   }, []);
   const handleFormSubmit = useCallback((evt: React.FormEvent) => {
     evt.preventDefault();
+    if (hoverNameRef.current) {
+      hoverNameRef.current.textContent = "\xa0";
+    }
     handleSearch();
   }, [handleSearch]);
 
@@ -105,9 +108,15 @@ const PartsSearch = () => {
     }
     hoverNameRef.current.textContent = partName;
   }, []);
+  const handleItemMouseLeave = useCallback(() => {
+    if (!hoverNameRef.current) {
+      return;
+    }
+    hoverNameRef.current.textContent = "\xa0";
+  }, []);
   const dispatch = useDispatch();
   const handleItemClick = useCallback((partName: string, evt: React.MouseEvent) => {
-    if (evt.shiftKey) {
+    if (evt.shiftKey || evt.ctrlKey) {
       if (!queryInputRef.current) {
         return;
       }
@@ -145,6 +154,7 @@ const PartsSearch = () => {
                 names={searchState.result}
                 handleItemClick={handleItemClick}
                 handleItemMouseEnter={handleItemMouseEnter}
+                handleItemMouseLeave={handleItemMouseLeave}
               />}
       </div>
       <div className="parts-hover-name" ref={hoverNameRef}>&nbsp;</div>

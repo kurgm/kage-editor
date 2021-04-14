@@ -10,7 +10,7 @@
 .control-buttons {
   margin: 0 1em;
   display: grid;
-  grid-template-columns: repeat(2, 7em);
+  grid-template-columns: repeat(2, 7.5em);
   gap: 3px;
 }
 
