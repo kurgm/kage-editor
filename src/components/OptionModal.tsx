@@ -68,8 +68,8 @@ const OptionModal = () => {
             {t('enable grid')}
           </label>
         </div>
-        <div>
-          {t('grid origin x')} <input
+        <div className="grid-option">
+          <div>{t('grid origin x')}</div> <input
             type="number"
             value={grid.originX}
             min={0}
@@ -78,7 +78,7 @@ const OptionModal = () => {
             disabled={!grid.display}
           />
           {' '}
-          {t('grid origin y')} <input
+          <div>{t('grid origin y')}</div> <input
             type="number"
             value={grid.originY}
             min={0}
@@ -86,9 +86,7 @@ const OptionModal = () => {
             onChange={handleGridOriginYChange}
             disabled={!grid.display}
           />
-        </div>
-        <div>
-          {t('grid spacing x')} <input
+          <div>{t('grid spacing x')}</div> <input
             type="number"
             value={grid.spacingX}
             min={2}
@@ -97,7 +95,7 @@ const OptionModal = () => {
             disabled={!grid.display}
           />
           {' '}
-          {t('grid spacing y')} <input
+          <div>{t('grid spacing y')}</div> <input
             type="number"
             value={grid.spacingY}
             min={2}
