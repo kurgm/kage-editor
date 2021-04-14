@@ -127,6 +127,18 @@ const SelectionControl = () => {
     (evt: React.MouseEvent) => handleMouseDownRectControl(evt, RectPointPosition.southeast),
     [handleMouseDownRectControl]
   );
+  const handleMouseDownSouthwestPoint = useCallback(
+    (evt: React.MouseEvent) => handleMouseDownRectControl(evt, RectPointPosition.southwest),
+    [handleMouseDownRectControl]
+  );
+  const handleMouseDownNortheastPoint = useCallback(
+    (evt: React.MouseEvent) => handleMouseDownRectControl(evt, RectPointPosition.northeast),
+    [handleMouseDownRectControl]
+  );
+  const handleMouseDownNorthwestPoint = useCallback(
+    (evt: React.MouseEvent) => handleMouseDownRectControl(evt, RectPointPosition.northwest),
+    [handleMouseDownRectControl]
+  );
 
   const handleMouseDownPointControls = useMemo(() => {
     return pointControl.map((_control, pointIndex) => (evt: React.MouseEvent) => {
@@ -178,6 +190,24 @@ const SelectionControl = () => {
         y={rectControl.coords[3]}
         className={controlPointSouth + controlPointEast}
         handleMouseDown={handleMouseDownSoutheastPoint}
+      />
+      <ControlPoint
+        x={rectControl.coords[0]}
+        y={rectControl.coords[3]}
+        className={controlPointSouth + controlPointWest}
+        handleMouseDown={handleMouseDownSouthwestPoint}
+      />
+      <ControlPoint
+        x={rectControl.coords[2]}
+        y={rectControl.coords[1]}
+        className={controlPointNorth + controlPointEast}
+        handleMouseDown={handleMouseDownNortheastPoint}
+      />
+      <ControlPoint
+        x={rectControl.coords[0]}
+        y={rectControl.coords[1]}
+        className={controlPointNorth + controlPointWest}
+        handleMouseDown={handleMouseDownNorthwestPoint}
       />
     </>}
     {pointControl.map(({ x, y, className }, index) => (
