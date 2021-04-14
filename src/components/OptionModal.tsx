@@ -11,6 +11,12 @@ import { XorMaskType, xorMaskTypes } from '../xorMask';
 
 import './OptionModal.css';
 
+export enum showCenterLine {
+  none,
+  selection,
+  always,
+}
+
 const OptionModal = () => {
   const showOptionModal = useSelector((state: AppState) => state.showOptionModal);
   const grid = useSelector((state: AppState) => state.grid);
@@ -42,7 +48,7 @@ const OptionModal = () => {
     dispatch(displayActions.setShotai(+evt.currentTarget.value as KShotai));
   }, [dispatch]);
   const handleStrokeCenterLineChange = useCallback((evt: React.ChangeEvent<HTMLSelectElement>) => {
-    dispatch(displayActions.setStrokeCenterLineDisplay(+evt.currentTarget.value === 1));
+    dispatch(displayActions.setStrokeCenterLineDisplay(+evt.currentTarget.value as showCenterLine));
   }, [dispatch]);
   const handleXorMaskTypeChange = useCallback((evt: React.ChangeEvent<HTMLSelectElement>) => {
     dispatch(displayActions.setXorMaskType(evt.currentTarget.value as XorMaskType));
@@ -114,11 +120,12 @@ const OptionModal = () => {
           <option value={1}>{t('gothic style')}</option>
         </select>
         <div>{t('show stroke center line')}</div> <select
-          value={showStrokeCenterLine ? 1 : 0}
+          value={showStrokeCenterLine}
           onChange={handleStrokeCenterLineChange}
         >
           <option value={0}>{t('show stroke center line none')}</option>
-          <option value={1}>{t('show stroke center line always')}</option>
+          <option value={1}>{t('show stroke center line selection')}</option>
+          <option value={2}>{t('show stroke center line always')}</option>
         </select>
         <div>{t('negative mask type')}</div> <select
           value={xorMaskType}

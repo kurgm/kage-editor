@@ -1,6 +1,7 @@
 import actionCreatorFactory from 'typescript-fsa';
 
 import { KShotai } from '../kage';
+import { showCenterLine } from '../components/OptionModal';
 import { XorMaskType } from '../xorMask';
 
 const actionCreator = actionCreatorFactory('DISPLAY');
@@ -16,7 +17,7 @@ export const displayActions = {
   setGridSpacingY: actionCreator<number>('SET_GRID_SPACING_Y'),
 
   setShotai: actionCreator<KShotai>('SET_SHOTAI'),
-  setStrokeCenterLineDisplay: actionCreator<boolean>('SET_STROKE_CENTER_LINE_DISPLAY'),
+  setStrokeCenterLineDisplay: actionCreator<showCenterLine>('SET_STROKE_CENTER_LINE_DISPLAY'),
 
   setXorMaskType: actionCreator<XorMaskType>('SET_XOR_MASK_TYPE'),
 };
