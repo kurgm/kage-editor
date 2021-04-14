@@ -20,3 +20,7 @@
   grid-column: 1/2;
   grid-row: 2/3;
 }
+
+.background-dragging, .background-dragging * {
+  cursor: crosshair !important;
+}
