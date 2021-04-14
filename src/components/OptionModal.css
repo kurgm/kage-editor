@@ -12,10 +12,6 @@
     padding: 20px;
 }
 
-.modal-content > div {
-  margin: 5px 0;
-}
-
 .modal-content input[type="number"] {
   width: 4em;
 }
@@ -30,4 +26,20 @@
   grid-template-columns: auto auto auto auto;
   grid-gap: 4px;
   text-align: right;
+}
+
+.general-option {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-gap: 4px;
+  text-align: right;
+  width: intrinsic;
+  width: max-content;
+  margin: 10px auto;
+}
+
+.close-option {
+  display: grid;
+  width: 80%;
+  margin: auto;
 }

@@ -105,26 +105,22 @@ const OptionModal = () => {
           />
         </div>
       </fieldset>
-      <div>
-        {t('glyph font style')} <select
+      <div className="general-option">
+        <div>{t('glyph font style')}</div> <select
           value={shotai}
           onChange={handleShotaiChange}
         >
           <option value={0}>{t('mincho style')}</option>
           <option value={1}>{t('gothic style')}</option>
         </select>
-      </div>
-      <div>
-        {t('show stroke center line')} <select
+        <div>{t('show stroke center line')}</div> <select
           value={showStrokeCenterLine ? 1 : 0}
           onChange={handleStrokeCenterLineChange}
         >
           <option value={0}>{t('show stroke center line none')}</option>
           <option value={1}>{t('show stroke center line always')}</option>
         </select>
-      </div>
-      <div>
-        {t('negative mask type')} <select
+        <div>{t('negative mask type')}</div> <select
           value={xorMaskType}
           onChange={handleXorMaskTypeChange}
         >
@@ -132,9 +128,7 @@ const OptionModal = () => {
             <option key={maskType} value={maskType}>{t(`negative mask type ${maskType}`)}</option>
           ))}
         </select>
-      </div>
-      <div>
-        {t('display language')} <select
+        <div>{t('display language')}</div> <select
           value={i18n.language}
           onChange={handleLanguageChange}
         >
@@ -145,7 +139,7 @@ const OptionModal = () => {
           <option value="zh-Hant">繁體中文</option>
         </select>
       </div>
-      <div>
+      <div className="close-option">
         <button onClick={handleRequestClose}>{t('close modal')}</button>
       </div>
     </ReactModal>
