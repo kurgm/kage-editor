@@ -95,6 +95,9 @@ const PartsSearch = () => {
   }, []);
   const handleFormSubmit = useCallback((evt: React.FormEvent) => {
     evt.preventDefault();
+    if (hoverNameRef.current) {
+      hoverNameRef.current.textContent = "\xa0";
+    }
     handleSearch();
   }, [handleSearch]);
 
