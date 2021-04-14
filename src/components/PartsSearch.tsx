@@ -105,6 +105,12 @@ const PartsSearch = () => {
     }
     hoverNameRef.current.textContent = partName;
   }, []);
+  const handleItemMouseLeave = useCallback(() => {
+    if (!hoverNameRef.current) {
+      return;
+    }
+    hoverNameRef.current.textContent = "\xa0";
+  }, []);
   const dispatch = useDispatch();
   const handleItemClick = useCallback((partName: string, evt: React.MouseEvent) => {
     if (evt.shiftKey) {
@@ -145,6 +151,7 @@ const PartsSearch = () => {
                 names={searchState.result}
                 handleItemClick={handleItemClick}
                 handleItemMouseEnter={handleItemMouseEnter}
+                handleItemMouseLeave={handleItemMouseLeave}
               />}
       </div>
       <div className="parts-hover-name" ref={hoverNameRef}>&nbsp;</div>
