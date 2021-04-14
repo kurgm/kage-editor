@@ -41,8 +41,8 @@ const OptionModal = () => {
   const handleShotaiChange = useCallback((evt: React.ChangeEvent<HTMLSelectElement>) => {
     dispatch(displayActions.setShotai(+evt.currentTarget.value as KShotai));
   }, [dispatch]);
-  const handleStrokeCenterLineChange = useCallback((evt: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(displayActions.setStrokeCenterLineDisplay(evt.currentTarget.checked));
+  const handleStrokeCenterLineChange = useCallback((evt: React.ChangeEvent<HTMLSelectElement>) => {
+    dispatch(displayActions.setStrokeCenterLineDisplay(+evt.currentTarget.value === 1));
   }, [dispatch]);
   const handleXorMaskTypeChange = useCallback((evt: React.ChangeEvent<HTMLSelectElement>) => {
     dispatch(displayActions.setXorMaskType(evt.currentTarget.value as XorMaskType));
@@ -115,14 +115,13 @@ const OptionModal = () => {
         </select>
       </div>
       <div>
-        <label>
-          <input
-            type="checkbox"
-            checked={showStrokeCenterLine}
-            onChange={handleStrokeCenterLineChange}
-          />
-          {t('show stroke center line')}
-        </label>
+        {t('show stroke center line')} <select
+          value={showStrokeCenterLine ? 1 : 0}
+          onChange={handleStrokeCenterLineChange}
+        >
+          <option value={0}>{t('show stroke center line none')}</option>
+          <option value={1}>{t('show stroke center line always')}</option>
+        </select>
       </div>
       <div>
         {t('negative mask type')} <select
