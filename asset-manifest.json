@@ -1,22 +1,15 @@
 {
   "files": {
-    "main.css": "/kage-editor/static/css/main.0d70c86a.chunk.css",
-    "main.js": "/kage-editor/static/js/main.7aaf5f6d.chunk.js",
-    "main.js.map": "/kage-editor/static/js/main.7aaf5f6d.chunk.js.map",
-    "runtime-main.js": "/kage-editor/static/js/runtime-main.4864b228.js",
-    "runtime-main.js.map": "/kage-editor/static/js/runtime-main.4864b228.js.map",
-    "static/js/2.7d7584f1.chunk.js": "/kage-editor/static/js/2.7d7584f1.chunk.js",
-    "static/js/2.7d7584f1.chunk.js.map": "/kage-editor/static/js/2.7d7584f1.chunk.js.map",
-    "static/js/3.48978147.chunk.js": "/kage-editor/static/js/3.48978147.chunk.js",
-    "static/js/3.48978147.chunk.js.map": "/kage-editor/static/js/3.48978147.chunk.js.map",
+    "main.css": "/kage-editor/static/css/main.b63b03af.css",
+    "main.js": "/kage-editor/static/js/main.40a44aa8.js",
+    "static/js/787.fc9cd0dc.chunk.js": "/kage-editor/static/js/787.fc9cd0dc.chunk.js",
     "index.html": "/kage-editor/index.html",
-    "static/css/main.0d70c86a.chunk.css.map": "/kage-editor/static/css/main.0d70c86a.chunk.css.map",
-    "static/js/2.7d7584f1.chunk.js.LICENSE.txt": "/kage-editor/static/js/2.7d7584f1.chunk.js.LICENSE.txt"
+    "main.b63b03af.css.map": "/kage-editor/static/css/main.b63b03af.css.map",
+    "main.40a44aa8.js.map": "/kage-editor/static/js/main.40a44aa8.js.map",
+    "787.fc9cd0dc.chunk.js.map": "/kage-editor/static/js/787.fc9cd0dc.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/runtime-main.4864b228.js",
-    "static/js/2.7d7584f1.chunk.js",
-    "static/css/main.0d70c86a.chunk.css",
-    "static/js/main.7aaf5f6d.chunk.js"
+    "static/css/main.b63b03af.css",
+    "static/js/main.40a44aa8.js"
   ]
 }
