@@ -1,6 +1,17 @@
-// The temporary reverse proxy which adds 'Access-Control-Allow-Origin: *' header.
-// This header is required for cross-origin requests.
-const apiUrlPrefix = 'https://asia-northeast1-ku6goma.cloudfunctions.net/gwproxy';
+import { gwHosts } from "./args";
+
+// Responses from GlyphWiki's API for glyphEditor lack headers required for cross-origin requests.
+// We call GlyphWiki's API directly if it is same-origin (i.e. this app is deployed to GlyphWiki site),
+// otherwise we call it via the reverse proxy that adds the 'Access-Control-Allow-Origin: *' header in the response.
+
+const isSameOriginAPI = (
+  ["http:", "https:"].includes(window.location.protocol) &&
+  gwHosts.includes(window.location.host)
+);
+
+const apiUrlPrefix = isSameOriginAPI
+  ? ''
+  : 'https://asia-northeast1-ku6goma.cloudfunctions.net/gwproxy';
 
 const callApi = async (path: string) => {
   const response = await fetch(apiUrlPrefix + path);

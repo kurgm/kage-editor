@@ -8,7 +8,7 @@ const edittime = args.get('edittime');
 const data = args.get('data') || '';
 const summary = args.get('summary') || '';
 
-const gwHosts = [
+export const gwHosts = [
   'glyphwiki.org',
   'en.glyphwiki.org',
   'ko.glyphwiki.org',
@@ -26,6 +26,11 @@ if (!host && document.referrer) {
     }
   } catch (e) {
   }
+}
+
+if (!host && gwHosts.includes(window.location.host)) {
+  host = window.location.host;
+  ssl = window.location.protocol === 'https:';
 }
 
 if (!host || !gwHosts.includes(host)) {
