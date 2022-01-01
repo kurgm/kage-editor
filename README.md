@@ -1,14 +1,49 @@
 # kage-editor
 
-The aim of this project is to port the glyph editor used on [GlyphWiki](https://glyphwiki.org/), which is currently implemented as a Flash app, into an HTML5 / JavaScript app
+The glyph editor used on [GlyphWiki](https://glyphwiki.org/)
 
-Flash で実装されている [GlyphWiki](https://glyphwiki.org/) のグリフエディタを HTML5 / JavaScript アプリに移植するプロジェクト
+[GlyphWiki](https://glyphwiki.org/) で使用されている字形エディタ
 
-**[https://kurgm.github.io/kage-editor/](https://kurgm.github.io/kage-editor/#data=2%3A7%3A8%3A66%3A13%3A102%3A23%3A120%3A43%241%3A0%3A2%3A34%3A60%3A100%3A60%241%3A22%3A4%3A100%3A60%3A100%3A183%241%3A0%3A2%3A16%3A93%3A71%3A93%242%3A22%3A7%3A71%3A93%3A61%3A145%3A13%3A174%242%3A0%3A7%3A171%3A64%3A152%3A81%3A119%3A104%242%3A7%3A0%3A105%3A67%3A121%3A135%3A180%3A166)**
+[![Screen shot of kage-editor](https://user-images.githubusercontent.com/14951262/147846286-5eec550d-5a20-48a6-ab67-0b37d8674d2d.png)](https://kurgm.github.io/kage-editor/#data=2%3A7%3A8%3A66%3A13%3A102%3A23%3A120%3A43%241%3A0%3A2%3A34%3A60%3A100%3A60%241%3A22%3A4%3A100%3A60%3A100%3A183%241%3A0%3A2%3A16%3A93%3A71%3A93%242%3A22%3A7%3A71%3A93%3A61%3A145%3A13%3A174%242%3A0%3A7%3A171%3A64%3A152%3A81%3A119%3A104%242%3A7%3A0%3A105%3A67%3A121%3A135%3A180%3A166)
+
+This HTML5 / JavaScript app is the ported version from the previous glyph editor which was implemented as a Flash app.
+
+この HTML5 / JavaScript アプリは、以前の Flash で実装されていた以前のグリフエディタから移植されたものです。
 
 macOS 上の最新版の Chrome / Firefox / Safari で動作確認しています。
 
+## 導入方法
+
+ソースコードは直接ウェブサイトに設置できる状態にはなっておらず、事前にビルド作業が必要になります。
+
+ビルド作業を行う環境には Node.js がインストールされていることが必要ですが、生成されるのは静的サイトですから設置先のウェブサーバには Node.js などが無くても構いません。
+
+（また、[このリポジトリの gh-pages ブランチ](https://github.com/kurgm/kage-editor/tree/gh-pages)にビルド済みの（`./build` ディレクトリ下の）ファイルがあります。）
+
+### ビルド手順
+Node.js (version 14 以上) をインストールしておいてください。
+
+この git リポジトリをクローンします：
+```bash
+git clone https://github.com/kurgm/kage-editor.git
+cd kage-editor
+```
+
+ビルドに必要なツール・ライブラリ等を `./node_modules` ディレクトリに取得します：
+```bash
+npm install
+```
+
+ビルドを行います：
+```bash
+npm run build
+```
+
+ここまでの手順が成功すれば、ビルド結果は `./build` ディレクトリに生成されています。 `./build` ディレクトリをウェブサーバにコピー・配置してください。（他のディレクトリ（`src` や `node_modules` など）をコピーする必要はありません。）
+
 ## ブックマークレット
+（最新の kage-editor を利用したいグリフウィキ利用者向け）
+
 グリフウィキの編集中画面からジャンプできるブックマークレットです。
 
 ```js
