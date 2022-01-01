@@ -8,7 +8,7 @@ The glyph editor used on [GlyphWiki](https://glyphwiki.org/)
 
 This HTML5 / JavaScript app is the ported version from the previous glyph editor which was implemented as a Flash app.
 
-この HTML5 / JavaScript アプリは、以前の Flash で実装されていた以前のグリフエディタから移植されたものです。
+この HTML5 / JavaScript アプリは、Flash で実装されていた以前のグリフエディタから移植されたものです。
 
 macOS 上の最新版の Chrome / Firefox / Safari で動作確認しています。
 
