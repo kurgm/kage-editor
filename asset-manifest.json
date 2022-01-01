@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/kage-editor/static/css/main.b63b03af.css",
-    "main.js": "/kage-editor/static/js/main.40a44aa8.js",
+    "main.js": "/kage-editor/static/js/main.f65dcc49.js",
     "static/js/787.fc9cd0dc.chunk.js": "/kage-editor/static/js/787.fc9cd0dc.chunk.js",
     "index.html": "/kage-editor/index.html",
     "main.b63b03af.css.map": "/kage-editor/static/css/main.b63b03af.css.map",
-    "main.40a44aa8.js.map": "/kage-editor/static/js/main.40a44aa8.js.map",
+    "main.f65dcc49.js.map": "/kage-editor/static/js/main.f65dcc49.js.map",
     "787.fc9cd0dc.chunk.js.map": "/kage-editor/static/js/787.fc9cd0dc.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.b63b03af.css",
-    "static/js/main.40a44aa8.js"
+    "static/js/main.f65dcc49.js"
   ]
 }
