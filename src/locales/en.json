@@ -51,6 +51,7 @@
   "tail type 2-5": "hook right",
   "tail type 3-0": "free",
   "tail type 3-5": "hook up",
+  "tail type 3-32": "connect",
   "tail type 4-0": "free",
   "tail type 4-5": "hook up",
   "tail type 6-7": "slash left",
