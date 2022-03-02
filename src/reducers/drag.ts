@@ -1,7 +1,6 @@
 import { ReducerBuilder } from 'typescript-fsa-reducers';
 
-// @ts-ignore
-import { polygonInPolygon, polygonIntersectsPolygon } from 'geometric';
+import { polygonInPolygon, polygonIntersectsPolygon, Polygon as GPolygon } from 'geometric';
 
 import { dragActions } from '../actions/drag';
 
@@ -17,7 +16,7 @@ const performAreaSelect = (glyph: Glyph, buhinMap: Map<string, string>, shotai: 
   const polygonsSep = makeGlyphSeparated(glyph, buhinMap, shotai);
   const result = [];
 
-  const gAreaPolygon: [number, number][] = [
+  const gAreaPolygon: GPolygon = [
     [x1, y1],
     [x1, y2],
     [x2, y2],
@@ -28,7 +27,7 @@ const performAreaSelect = (glyph: Glyph, buhinMap: Map<string, string>, shotai: 
   for (let index = 0; index < polygonsSep.length; index++) {
     const polygons = polygonsSep[index];
     if (polygons.array.some((polygon) => {
-      const gPolygon = polygon.array.map(({ x, y }) => [x, y]);
+      const gPolygon: GPolygon = polygon.array.map(({ x, y }) => [x, y]);
       gPolygon.push(gPolygon[0]); // close polygon
 
       return (

@@ -21,12 +21,12 @@ export const decompose = (glyphLine: GlyphLine, buhinMap: Map<string, string>): 
   const glyph = parseGlyph(buhinSource);
 
   const strokesArray =
-    // @ts-ignore 2445
+    // @ts-expect-error 2445
     kage.getEachStrokes(
       unparseGlyph(glyph)
     );
   const box =
-    // @ts-ignore 2445
+    // @ts-expect-error 2445
     kage.getBox(
       strokesArray
     );
@@ -91,17 +91,17 @@ export const decompose = (glyphLine: GlyphLine, buhinMap: Map<string, string>): 
 export const decomposeDeep = (glyphLine: GlyphLine, buhinMap: Map<string, string>): GlyphLine[] => {
   const kage = getKage(buhinMap);
   const strokesArray =
-    // @ts-ignore 2445
+    // @ts-expect-error 2445
     kage.getEachStrokes(
       unparseGlyphLine(glyphLine)
     );
   return strokesArray.map((stroke): GlyphLine => {
-    const columns = getNumColumns(stroke.a1);
+    const columns = getNumColumns(stroke.a1_100);
     return {
       value: [
-        stroke.a1,
-        stroke.a2_100 + stroke.kirikuchiAdjustment * 100 + stroke.tateAdjustment * 1000,
-        stroke.a3_100 + stroke.opt3 * 100 + stroke.mageAdjustment * 1000,
+        stroke.a1_100 + stroke.a1_opt * 100,
+        stroke.a2_100 + stroke.a2_opt * 100,
+        stroke.a3_100 + stroke.a3_opt * 100,
         Math.round(stroke.x1) || 0,
         Math.round(stroke.y1) || 0,
         Math.round(stroke.x2) || 0,
