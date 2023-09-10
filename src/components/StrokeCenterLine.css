@@ -1,5 +1,6 @@
 .stroke-center-line {
   fill: none;
-  stroke: #ffffff;
+  stroke: #e3e3e3;
   stroke-width: 1px;
+  pointer-events: none;
 }
