@@ -47,7 +47,7 @@ const OptionModal = () => {
   const handleXorMaskTypeChange = useCallback((evt: React.ChangeEvent<HTMLSelectElement>) => {
     dispatch(displayActions.setXorMaskType(evt.currentTarget.value as XorMaskType));
   }, [dispatch]);
-  
+
   const { t, i18n } = useTranslation();
   const handleLanguageChange = useCallback((evt: React.ChangeEvent<HTMLSelectElement>) => {
     i18n.changeLanguage(evt.currentTarget.value);
