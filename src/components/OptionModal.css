@@ -16,15 +16,11 @@
   width: 4em;
 }
 
-.enable-grid {
-  position: relative;
-  bottom: 4px;
-}
-
 .grid-option {
   display: grid;
   grid-template-columns: auto auto auto auto;
   grid-gap: 4px;
+  margin-top: 4px;
   text-align: right;
 }
 

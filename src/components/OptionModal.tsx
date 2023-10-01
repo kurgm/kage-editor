@@ -62,7 +62,7 @@ const OptionModal = () => {
     >
       <fieldset>
         <legend>{t('grid option')}</legend>
-        <div className="enable-grid">
+        <div>
           <label>
             <input type="checkbox" checked={grid.display} onChange={handleGridDisplayChange} />
             {t('enable grid')}
