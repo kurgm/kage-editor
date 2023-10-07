@@ -66,7 +66,7 @@ const updateBuilder = (builder: ReducerBuilder<AppState>) => builder
     ...state,
     shotai,
   }))
-  
+
   .case(displayActions.setXorMaskType, (state, xorMaskType) => ({
     ...state,
     xorMaskType,

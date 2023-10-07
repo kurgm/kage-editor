@@ -1,7 +1,6 @@
 .parts-search-area {
   display: flex;
   flex-flow: column;
-  width: 250px;
 }
 
 .parts-search-box {
@@ -22,6 +21,7 @@
 
 .parts-list-area div.message {
   margin: 3em 0;
+  width: 240px;
 }
 
 .parts-hover-name {

@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux';
-import { useHotkeys }from 'react-hotkeys-hook';
+import { useHotkeys } from 'react-hotkeys-hook';
 
 import { selectActions } from './actions/select';
 import { editorActions } from './actions/editor';

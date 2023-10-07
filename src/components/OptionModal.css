@@ -1,21 +1,41 @@
 .modal-content {
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, 0);
-    bottom: 40px;
-    border: 1px solid #ccc;
-    background: #ffffff;
-    overflow: auto;
-    -webkit-overflow-scrolling: touch;
-    border-radius: 4px;
-    outline: none;
-    padding: 20px;
-}
-
-.modal-content > div {
-  margin: 5px 0;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0);
+  bottom: 40px;
+  border: 1px solid #ccc;
+  background: #ffffff;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 4px;
+  outline: none;
+  padding: 20px;
 }
 
 .modal-content input[type="number"] {
   width: 4em;
+}
+
+.grid-option {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  grid-gap: 4px;
+  margin-top: 4px;
+  text-align: right;
+}
+
+.general-option {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-gap: 4px;
+  text-align: right;
+  width: intrinsic;
+  width: max-content;
+  margin: 10px auto;
+}
+
+.close-option {
+  display: grid;
+  width: 80%;
+  margin: auto;
 }
