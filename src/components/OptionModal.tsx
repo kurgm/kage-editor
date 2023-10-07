@@ -125,9 +125,9 @@ const OptionModal = () => {
           value={showStrokeCenterLine}
           onChange={handleStrokeCenterLineChange}
         >
-          <option value={0}>{t('show stroke center line none')}</option>
-          <option value={1}>{t('show stroke center line selection')}</option>
-          <option value={2}>{t('show stroke center line always')}</option>
+          <option value={ShowCenterLine.none}>{t('show stroke center line none')}</option>
+          <option value={ShowCenterLine.selection}>{t('show stroke center line selection')}</option>
+          <option value={ShowCenterLine.always}>{t('show stroke center line always')}</option>
         </select>
 
         <div>{t('negative mask type')}</div>

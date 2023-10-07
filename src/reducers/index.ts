@@ -70,7 +70,7 @@ const initialState: AppState = {
     spacingX: 20,
     spacingY: 20,
   },
-  showStrokeCenterLine: 1, // selection
+  showStrokeCenterLine: ShowCenterLine.selection,
   shotai: 0, // kMincho
   xorMaskType: "none",
 };
