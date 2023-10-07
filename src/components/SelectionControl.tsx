@@ -149,10 +149,10 @@ const SelectionControl = () => {
 
   const verticallyFlipped = !!rectControl && rectControl.coords[0] > rectControl.coords[2];
   const horizontallyFlipped = !!rectControl && rectControl.coords[1] > rectControl.coords[3];
-  const controlPointNorth = verticallyFlipped ? 'south' : 'north';
-  const controlPointSouth = verticallyFlipped ? 'north' : 'south';
-  const controlPointWest = horizontallyFlipped ? 'east' : 'west';
-  const controlPointEast = horizontallyFlipped ? 'west' : 'east';
+  const controlPointNorthClassName = verticallyFlipped ? 'south' : 'north';
+  const controlPointSouthClassName = verticallyFlipped ? 'north' : 'south';
+  const controlPointWestClassName = horizontallyFlipped ? 'east' : 'west';
+  const controlPointEastClassName = horizontallyFlipped ? 'west' : 'east';
 
   return <>
     {rectControl && <>
@@ -166,49 +166,49 @@ const SelectionControl = () => {
       <ControlPoint
         x={(rectControl.coords[0] + rectControl.coords[2]) / 2}
         y={rectControl.coords[1]}
-        className={controlPointNorth}
+        className={controlPointNorthClassName}
         handleMouseDown={handleMouseDownNorthPoint}
       />
       <ControlPoint
         x={rectControl.coords[0]}
         y={(rectControl.coords[1] + rectControl.coords[3]) / 2}
-        className={controlPointWest}
+        className={controlPointWestClassName}
         handleMouseDown={handleMouseDownWestPoint}
       />
       <ControlPoint
         x={(rectControl.coords[0] + rectControl.coords[2]) / 2}
         y={rectControl.coords[3]}
-        className={controlPointSouth}
+        className={controlPointSouthClassName}
         handleMouseDown={handleMouseDownSouthPoint}
       />
       <ControlPoint
         x={rectControl.coords[2]}
         y={(rectControl.coords[1] + rectControl.coords[3]) / 2}
-        className={controlPointEast}
+        className={controlPointEastClassName}
         handleMouseDown={handleMouseDownEastPoint}
       />
       <ControlPoint
         x={rectControl.coords[2]}
         y={rectControl.coords[3]}
-        className={controlPointSouth + controlPointEast}
+        className={controlPointSouthClassName + controlPointEastClassName}
         handleMouseDown={handleMouseDownSoutheastPoint}
       />
       <ControlPoint
         x={rectControl.coords[0]}
         y={rectControl.coords[3]}
-        className={controlPointSouth + controlPointWest}
+        className={controlPointSouthClassName + controlPointWestClassName}
         handleMouseDown={handleMouseDownSouthwestPoint}
       />
       <ControlPoint
         x={rectControl.coords[2]}
         y={rectControl.coords[1]}
-        className={controlPointNorth + controlPointEast}
+        className={controlPointNorthClassName + controlPointEastClassName}
         handleMouseDown={handleMouseDownNortheastPoint}
       />
       <ControlPoint
         x={rectControl.coords[0]}
         y={rectControl.coords[1]}
-        className={controlPointNorth + controlPointWest}
+        className={controlPointNorthClassName + controlPointWestClassName}
         handleMouseDown={handleMouseDownNorthwestPoint}
       />
     </>}
