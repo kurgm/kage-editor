@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { createSelector } from 'reselect';
 
-import { ShowCenterLine } from '../actions/display';
 import { dragActions, RectPointPosition } from '../actions/drag';
 import { AppState } from '../reducers';
 import { draggedGlyphSelector } from '../selectors/draggedGlyph';
@@ -27,7 +26,6 @@ interface ControlPointSpec {
 interface SelectionControlSpec {
   rectControl: RectControl | null;
   pointControl: ControlPointSpec[];
-  centerLine: string | null;
 }
 
 const selectionControlSelector = createSelector(
@@ -37,7 +35,7 @@ const selectionControlSelector = createSelector(
   ],
   (glyph, selection): SelectionControlSpec => {
     if (selection.length === 0) {
-      return { rectControl: null, pointControl: [], centerLine: null };
+      return { rectControl: null, pointControl: [] };
     }
     if (selection.length > 1) {
       const selectedStrokes = selection.map((index) => glyph[index]);
@@ -48,7 +46,6 @@ const selectionControlSelector = createSelector(
           coords: bbx,
         },
         pointControl: [],
-        centerLine: null,
       };
     }
     const selectedStroke = glyph[selection[0]];
@@ -67,7 +64,6 @@ const selectionControlSelector = createSelector(
             ],
           },
           pointControl: [],
-          centerLine: null,
         };
       case 1:
       case 2:
@@ -94,40 +90,16 @@ const selectionControlSelector = createSelector(
             className,
           });
         }
-
-        const v = selectedStroke.value;
-        let centerLine: string | null = null;
-        switch (v[0]) {
-          case 1:
-            centerLine = `M ${v[3]} ${v[4]} ${v[5]} ${v[6]}`;
-            break;
-          case 2:
-            centerLine = `M ${v[3]} ${v[4]} Q ${v[5]} ${v[6]} ${v[7]} ${v[8]}`;
-            break;
-          case 3:
-          case 4:
-            centerLine = `M ${v[3]} ${v[4]} ${v[5]} ${v[6]} ${v[7]} ${v[8]}`;
-            break;
-          case 6:
-            centerLine = `M ${v[3]} ${v[4]} C ${v[5]} ${v[6]} ${v[7]} ${v[8]} ${v[9]} ${v[10]}`;
-            break;
-          case 7:
-            centerLine = `M ${v[3]} ${v[4]} ${v[5]} ${v[6]} Q ${v[7]} ${v[8]} ${v[9]} ${v[10]}`;
-            break;
-          default:
-            break;
-        }
-        return { rectControl: null, pointControl, centerLine };
+        return { rectControl: null, pointControl };
       }
       default:
-        return { rectControl: null, pointControl: [], centerLine: null };
+        return { rectControl: null, pointControl: [] };
     }
   }
 );
 
 const SelectionControl = () => {
-  const { rectControl, pointControl, centerLine } = useSelector(selectionControlSelector);
-  const showStrokeCenterLine = useSelector((state: AppState) => state.showStrokeCenterLine);
+  const { rectControl, pointControl } = useSelector(selectionControlSelector);
 
   const dispatch = useDispatch();
   const handleMouseDownRectControl = useCallback((evt: React.MouseEvent, position: RectPointPosition) => {
@@ -203,9 +175,6 @@ const SelectionControl = () => {
         handleMouseDown={handleMouseDownSoutheastPoint}
       />
     </>}
-    {showStrokeCenterLine === ShowCenterLine.selection && centerLine &&
-        <path className="stroke-center-line" d={centerLine} />
-    }
     {pointControl.map(({ x, y, className }, index) => (
       <ControlPoint
         key={index}
