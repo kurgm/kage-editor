@@ -11,7 +11,7 @@ import { XorMaskType, xorMaskTypes } from '../xorMask';
 
 import './OptionModal.css';
 
-export enum showCenterLine {
+export enum ShowCenterLine {
   none,
   selection,
   always,
@@ -48,7 +48,7 @@ const OptionModal = () => {
     dispatch(displayActions.setShotai(+evt.currentTarget.value as KShotai));
   }, [dispatch]);
   const handleStrokeCenterLineChange = useCallback((evt: React.ChangeEvent<HTMLSelectElement>) => {
-    dispatch(displayActions.setStrokeCenterLineDisplay(+evt.currentTarget.value as showCenterLine));
+    dispatch(displayActions.setStrokeCenterLineDisplay(+evt.currentTarget.value as ShowCenterLine));
   }, [dispatch]);
   const handleXorMaskTypeChange = useCallback((evt: React.ChangeEvent<HTMLSelectElement>) => {
     dispatch(displayActions.setXorMaskType(evt.currentTarget.value as XorMaskType));

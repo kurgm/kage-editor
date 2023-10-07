@@ -6,7 +6,7 @@ import { AppState } from '../reducers';
 import { selectActions } from '../actions/select';
 import { dragActions, CTMInv } from '../actions/drag';
 import { draggedGlyphSelector } from '../selectors/draggedGlyph';
-import { showCenterLine } from '../components/OptionModal';
+import { ShowCenterLine } from '../components/OptionModal';
 
 import XorMasks from './XorMasks';
 import Grid from './Grid';
@@ -110,7 +110,7 @@ const GlyphArea = () => {
           handleMouseDownDeselectedStroke={handleMouseDownDeselectedStroke}
           handleMouseDownSelectedStroke={handleMouseDownSelectedStroke}
         />
-        {showStrokeCenterLine === showCenterLine.always && <StrokeCenterLine glyph={glyph} buhinMap={buhinMap} />}
+        {showStrokeCenterLine === ShowCenterLine.always && <StrokeCenterLine glyph={glyph} buhinMap={buhinMap} />}
         <SelectionControl />
         <AreaSelectRect rect={areaSelectRect} />
       </svg>

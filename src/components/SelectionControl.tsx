@@ -8,7 +8,7 @@ import { AppState } from '../reducers';
 import { draggedGlyphSelector } from '../selectors/draggedGlyph';
 import { getGlyphLinesBBX } from '../kageUtils/bbx';
 import { getMatchType, MatchType } from '../kageUtils/match';
-import { showCenterLine } from '../components/OptionModal';
+import { ShowCenterLine } from '../components/OptionModal';
 
 import ControlPoint from './ControlPoint';
 
@@ -203,7 +203,7 @@ const SelectionControl = () => {
         handleMouseDown={handleMouseDownSoutheastPoint}
       />
     </>}
-    {showStrokeCenterLine === showCenterLine.selection && centerLine &&
+    {showStrokeCenterLine === ShowCenterLine.selection && centerLine &&
         <path className="stroke-center-line" d={centerLine} />
     }
     {pointControl.map(({ x, y, className }, index) => (

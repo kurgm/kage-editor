@@ -6,7 +6,7 @@ import { GlyphLine, Glyph, parseGlyph } from '../kageUtils/glyph';
 import { StretchParam } from '../kageUtils/stretchparam';
 import args from '../args';
 import { KShotai } from '../kage';
-import { showCenterLine } from '../components/OptionModal';
+import { ShowCenterLine } from '../components/OptionModal';
 
 import select from './select';
 import drag from './drag';
@@ -39,7 +39,7 @@ export interface AppState {
 
   showOptionModal: boolean;
   grid: GridState;
-  showStrokeCenterLine: showCenterLine;
+  showStrokeCenterLine: ShowCenterLine;
   shotai: KShotai;
   xorMaskType: XorMaskType;
 }
