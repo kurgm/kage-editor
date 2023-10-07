@@ -147,10 +147,12 @@ const SelectionControl = () => {
     });
   }, [dispatch, pointControl]);
 
-  const controlPointNorth = !rectControl || rectControl.coords[0] < rectControl.coords[2] ? 'north' : 'south';
-  const controlPointSouth = !rectControl || rectControl.coords[0] < rectControl.coords[2] ? 'south' : 'north';
-  const controlPointWest = !rectControl || rectControl.coords[1] < rectControl.coords[3] ? 'west' : 'east';
-  const controlPointEast = !rectControl || rectControl.coords[1] < rectControl.coords[3] ? 'east' : 'west';
+  const verticallyFlipped = !!rectControl && rectControl.coords[0] > rectControl.coords[2];
+  const horizontallyFlipped = !!rectControl && rectControl.coords[1] > rectControl.coords[3];
+  const controlPointNorth = verticallyFlipped ? 'south' : 'north';
+  const controlPointSouth = verticallyFlipped ? 'north' : 'south';
+  const controlPointWest = horizontallyFlipped ? 'east' : 'west';
+  const controlPointEast = horizontallyFlipped ? 'west' : 'east';
 
   return <>
     {rectControl && <>
