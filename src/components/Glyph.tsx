@@ -31,7 +31,10 @@ const GlyphComponent = (props: GlyphComponentProps) => {
       <g className="strokes-deselected">
         {nonSelection.map((index) => (
           <g key={index} onMouseDown={(evt) => props.handleMouseDownDeselectedStroke?.(evt, index)}>
-            <Stroke polygons={polygonsSep[index]} />
+            <Stroke
+              polygons={polygonsSep[index]}
+              className={props.handleMouseDownDeselectedStroke ? "movable-stroke" : ""}
+            />
           </g>
         ))}
       </g>
@@ -51,7 +54,10 @@ const GlyphComponent = (props: GlyphComponentProps) => {
       <g className="strokes-selected">
         {selection.map((index) => (
           <g key={index} onMouseDown={(evt) => props.handleMouseDownSelectedStroke?.(evt, index)}>
-            <Stroke polygons={polygonsSep[index]} />
+            <Stroke
+              polygons={polygonsSep[index]}
+              className={props.handleMouseDownSelectedStroke ? "movable-stroke" : ""}
+            />
           </g>
         ))}
       </g>
