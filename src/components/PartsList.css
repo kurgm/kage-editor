@@ -1,8 +1,6 @@
 .parts-list {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: flex-start;
-  align-content: flex-start;
+  display: grid;
+  grid-template-columns: repeat(4, 60px);
 }
 
 .parts-list img {

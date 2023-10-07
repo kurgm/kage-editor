@@ -2,7 +2,11 @@
   display: grid;
   grid-template-columns: minmax(500px, 1fr) auto;
   grid-template-rows: minmax(240px, 1fr) auto;
-  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
 }
 
 .parts-search-area {

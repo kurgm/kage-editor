@@ -53,7 +53,7 @@ const OptionModal = () => {
   const handleXorMaskTypeChange = useCallback((evt: React.ChangeEvent<HTMLSelectElement>) => {
     dispatch(displayActions.setXorMaskType(evt.currentTarget.value as XorMaskType));
   }, [dispatch]);
-  
+
   const { t, i18n } = useTranslation();
   const handleLanguageChange = useCallback((evt: React.ChangeEvent<HTMLSelectElement>) => {
     i18n.changeLanguage(evt.currentTarget.value);
@@ -68,14 +68,15 @@ const OptionModal = () => {
     >
       <fieldset>
         <legend>{t('grid option')}</legend>
-        <div className="enable-grid">
+        <div>
           <label>
             <input type="checkbox" checked={grid.display} onChange={handleGridDisplayChange} />
             {t('enable grid')}
           </label>
         </div>
         <div className="grid-option">
-          <div>{t('grid origin x')}</div> <input
+          <div>{t('grid origin x')}</div>
+          <input
             type="number"
             value={grid.originX}
             min={0}
@@ -83,8 +84,9 @@ const OptionModal = () => {
             onChange={handleGridOriginXChange}
             disabled={!grid.display}
           />
-          {' '}
-          <div>{t('grid origin y')}</div> <input
+
+          <div>{t('grid origin y')}</div>
+          <input
             type="number"
             value={grid.originY}
             min={0}
@@ -92,7 +94,9 @@ const OptionModal = () => {
             onChange={handleGridOriginYChange}
             disabled={!grid.display}
           />
-          <div>{t('grid spacing x')}</div> <input
+
+          <div>{t('grid spacing x')}</div>
+          <input
             type="number"
             value={grid.spacingX}
             min={2}
@@ -100,8 +104,9 @@ const OptionModal = () => {
             onChange={handleGridSpacingXChange}
             disabled={!grid.display}
           />
-          {' '}
-          <div>{t('grid spacing y')}</div> <input
+
+          <div>{t('grid spacing y')}</div>
+          <input
             type="number"
             value={grid.spacingY}
             min={2}
@@ -112,14 +117,17 @@ const OptionModal = () => {
         </div>
       </fieldset>
       <div className="general-option">
-        <div>{t('glyph font style')}</div> <select
+        <div>{t('glyph font style')}</div>
+        <select
           value={shotai}
           onChange={handleShotaiChange}
         >
           <option value={0}>{t('mincho style')}</option>
           <option value={1}>{t('gothic style')}</option>
         </select>
-        <div>{t('show stroke center line')}</div> <select
+
+        <div>{t('show stroke center line')}</div>
+        <select
           value={showStrokeCenterLine}
           onChange={handleStrokeCenterLineChange}
         >
@@ -127,7 +135,9 @@ const OptionModal = () => {
           <option value={1}>{t('show stroke center line selection')}</option>
           <option value={2}>{t('show stroke center line always')}</option>
         </select>
-        <div>{t('negative mask type')}</div> <select
+
+        <div>{t('negative mask type')}</div>
+        <select
           value={xorMaskType}
           onChange={handleXorMaskTypeChange}
         >
@@ -135,7 +145,9 @@ const OptionModal = () => {
             <option key={maskType} value={maskType}>{t(`negative mask type ${maskType}`)}</option>
           ))}
         </select>
-        <div>{t('display language')}</div> <select
+
+        <div>{t('display language')}</div>
+        <select
           value={i18n.language}
           onChange={handleLanguageChange}
         >

@@ -83,9 +83,9 @@ const selectionControlSelector = createSelector(
           });
           let className = '';
           if (matchType === MatchType.match) {
-              className = 'match';
+            className = 'match';
           } else if (matchType === MatchType.online) {
-              className = 'online';
+            className = 'online';
           }
 
           pointControl.push({
