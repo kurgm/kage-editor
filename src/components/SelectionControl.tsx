@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { createSelector } from 'reselect';
 
+import { ShowCenterLine } from '../actions/display';
 import { dragActions, RectPointPosition } from '../actions/drag';
 import { AppState } from '../reducers';
 import { draggedGlyphSelector } from '../selectors/draggedGlyph';
 import { getGlyphLinesBBX } from '../kageUtils/bbx';
 import { getMatchType, MatchType } from '../kageUtils/match';
-import { ShowCenterLine } from '../components/OptionModal';
 
 import ControlPoint from './ControlPoint';
 

@@ -4,18 +4,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import ReactModal from 'react-modal';
 import { useTranslation } from 'react-i18next';
 
-import { displayActions } from '../actions/display';
+import { displayActions, ShowCenterLine } from '../actions/display';
 import { AppState } from '../reducers';
 import { KShotai } from '../kage';
 import { XorMaskType, xorMaskTypes } from '../xorMask';
 
 import './OptionModal.css';
-
-export enum ShowCenterLine {
-  none,
-  selection,
-  always,
-}
 
 const OptionModal = () => {
   const showOptionModal = useSelector((state: AppState) => state.showOptionModal);

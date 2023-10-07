@@ -4,9 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from '../reducers';
 
 import { selectActions } from '../actions/select';
+import { ShowCenterLine } from '../actions/display';
 import { dragActions, CTMInv } from '../actions/drag';
 import { draggedGlyphSelector } from '../selectors/draggedGlyph';
-import { ShowCenterLine } from '../components/OptionModal';
 
 import XorMasks from './XorMasks';
 import Grid from './Grid';

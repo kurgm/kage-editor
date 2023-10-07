@@ -1,12 +1,12 @@
 import { reducerWithInitialState } from 'typescript-fsa-reducers';
 
+import { ShowCenterLine } from '../actions/display';
 import { RectPointPosition, CTMInv } from '../actions/drag';
 
 import { GlyphLine, Glyph, parseGlyph } from '../kageUtils/glyph';
 import { StretchParam } from '../kageUtils/stretchparam';
 import args from '../args';
 import { KShotai } from '../kage';
-import { ShowCenterLine } from '../components/OptionModal';
 
 import select from './select';
 import drag from './drag';

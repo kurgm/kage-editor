@@ -1,8 +1,13 @@
 import actionCreatorFactory from 'typescript-fsa';
 
 import { KShotai } from '../kage';
-import { ShowCenterLine } from '../components/OptionModal';
 import { XorMaskType } from '../xorMask';
+
+export enum ShowCenterLine {
+  none,
+  selection,
+  always
+}
 
 const actionCreator = actionCreatorFactory('DISPLAY');
 
