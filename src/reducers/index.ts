@@ -6,7 +6,7 @@ import { RectPointPosition, CTMInv } from '../actions/drag';
 import { GlyphLine, Glyph, parseGlyph } from '../kageUtils/glyph';
 import { StretchParam } from '../kageUtils/stretchparam';
 import args from '../args';
-import { KShotai } from '../kage';
+import type { KShotai } from '../kage';
 
 import select from './select';
 import drag from './drag';
@@ -71,7 +71,7 @@ const initialState: AppState = {
     spacingY: 20,
   },
   showStrokeCenterLine: ShowCenterLine.selection,
-  shotai: KShotai.kMincho,
+  shotai: 0, // KShotai.kMincho
   xorMaskType: "none",
 };
 
