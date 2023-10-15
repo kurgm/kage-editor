@@ -30,6 +30,7 @@ module.exports = {
     'import',
     'jsx-a11y',
     '@typescript-eslint',
+    'react-refresh',
   ],
   rules: {
     'react/jsx-uses-vars': 'warn',
@@ -231,6 +232,11 @@ module.exports = {
     ],
     'no-useless-constructor': 'off',
     '@typescript-eslint/no-useless-constructor': 'warn',
+
+    'react-refresh/only-export-components': [
+      'warn',
+      { allowConstantExport: true },
+    ],
   },
   overrides: [
     {
