@@ -116,8 +116,8 @@ const OptionModal = () => {
           value={shotai}
           onChange={handleShotaiChange}
         >
-          <option value={0}>{t('mincho style')}</option>
-          <option value={1}>{t('gothic style')}</option>
+          <option value={KShotai.kMincho}>{t('mincho style')}</option>
+          <option value={KShotai.kGothic}>{t('gothic style')}</option>
         </select>
 
         <div>{t('show stroke center line')}</div>
