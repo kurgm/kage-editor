@@ -15,6 +15,9 @@ module.exports = {
     es2020: true,
     jest: true,
   },
+  extends: [
+    'plugin:react-hooks/recommended',
+  ],
   ignorePatterns: ['build', '.eslintrc.cjs'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
@@ -33,7 +36,6 @@ module.exports = {
     'react',
     'import',
     'jsx-a11y',
-    'react-hooks',
     '@typescript-eslint',
   ],
   rules: {
@@ -118,7 +120,6 @@ module.exports = {
     ],
     'no-with': 'warn',
     'no-whitespace-before-property': 'warn',
-    'react-hooks/exhaustive-deps': 'warn',
     'require-yield': 'warn',
     'rest-spread-spacing': ['warn', 'never'],
     strict: ['warn', 'never'],
@@ -195,9 +196,6 @@ module.exports = {
     'jsx-a11y/role-has-required-aria-props': 'warn',
     'jsx-a11y/role-supports-aria-props': 'warn',
     'jsx-a11y/scope': 'warn',
-
-    // https://github.com/facebook/react/tree/main/packages/eslint-plugin-react-hooks
-    'react-hooks/rules-of-hooks': 'error',
 
     // TypeScript's `noFallthroughCasesInSwitch` option is more robust (#6906)
     'default-case': 'off',
