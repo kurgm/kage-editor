@@ -35,8 +35,6 @@ module.exports = {
     'jsx-a11y',
     'react-hooks',
     '@typescript-eslint',
-    'vitest',
-    'testing-library',
   ],
   rules: {
     'react/jsx-uses-vars': 'warn',
