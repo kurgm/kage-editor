@@ -290,7 +290,7 @@ const SelectionInfo = () => {
                   {t(`operation type ${ReflectRotateType[opType]}`)}
                 </option>
               ))}
-              {!reflectRotateTypes.includes(reflectRotateInfo.opType) && (
+              {!reflectRotateTypes.includes(reflectRotateInfo.opType as any) && (
                 <option value={reflectRotateInfo.opType} />
               )}
             </select>
