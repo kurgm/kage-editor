@@ -13,6 +13,7 @@
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
     "@types/react-modal": "^3.10.6",
+    "@vitejs/plugin-react": "^4.1.0",
     "geometric": "^2.2.10",
     "i18next": "^22.1.5",
     "memoize-one": "^6.0.0",
