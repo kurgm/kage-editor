@@ -22,3 +22,7 @@
   fill: #cc0000;
   stroke: none;
 }
+
+.movable-stroke {
+  cursor: move;
+}
