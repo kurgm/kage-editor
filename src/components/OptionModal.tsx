@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import ReactModal from 'react-modal';
 import { useTranslation } from 'react-i18next';
 
-import { displayActions } from '../actions/display';
+import { displayActions, ShowCenterLine } from '../actions/display';
 import { AppState } from '../reducers';
 import { KShotai } from '../kage';
 import { XorMaskType, xorMaskTypes } from '../xorMask';
@@ -42,7 +42,7 @@ const OptionModal = () => {
     dispatch(displayActions.setShotai(+evt.currentTarget.value as KShotai));
   }, [dispatch]);
   const handleStrokeCenterLineChange = useCallback((evt: React.ChangeEvent<HTMLSelectElement>) => {
-    dispatch(displayActions.setStrokeCenterLineDisplay(+evt.currentTarget.value === 1));
+    dispatch(displayActions.setStrokeCenterLineDisplay(+evt.currentTarget.value as ShowCenterLine));
   }, [dispatch]);
   const handleXorMaskTypeChange = useCallback((evt: React.ChangeEvent<HTMLSelectElement>) => {
     dispatch(displayActions.setXorMaskType(evt.currentTarget.value as XorMaskType));
@@ -122,11 +122,12 @@ const OptionModal = () => {
 
         <div>{t('show stroke center line')}</div>
         <select
-          value={showStrokeCenterLine ? 1 : 0}
+          value={showStrokeCenterLine}
           onChange={handleStrokeCenterLineChange}
         >
-          <option value={0}>{t('show stroke center line none')}</option>
-          <option value={1}>{t('show stroke center line always')}</option>
+          <option value={ShowCenterLine.none}>{t('show stroke center line none')}</option>
+          <option value={ShowCenterLine.selection}>{t('show stroke center line selection')}</option>
+          <option value={ShowCenterLine.always}>{t('show stroke center line always')}</option>
         </select>
 
         <div>{t('negative mask type')}</div>

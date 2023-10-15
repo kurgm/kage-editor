@@ -1,5 +1,6 @@
 import { reducerWithInitialState } from 'typescript-fsa-reducers';
 
+import { ShowCenterLine } from '../actions/display';
 import { RectPointPosition, CTMInv } from '../actions/drag';
 
 import { GlyphLine, Glyph, parseGlyph } from '../kageUtils/glyph';
@@ -38,7 +39,7 @@ export interface AppState {
 
   showOptionModal: boolean;
   grid: GridState;
-  showStrokeCenterLine: boolean;
+  showStrokeCenterLine: ShowCenterLine;
   shotai: KShotai;
   xorMaskType: XorMaskType;
 }
@@ -69,7 +70,7 @@ const initialState: AppState = {
     spacingX: 20,
     spacingY: 20,
   },
-  showStrokeCenterLine: false,
+  showStrokeCenterLine: ShowCenterLine.selection,
   shotai: 0, // kMincho
   xorMaskType: "none",
 };

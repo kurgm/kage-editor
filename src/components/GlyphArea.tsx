@@ -24,7 +24,6 @@ const GlyphArea = () => {
   const selection = useSelector((state: AppState) => state.selection);
   const areaSelectRect = useSelector((state: AppState) => state.areaSelectRect);
   const freehandMode = useSelector((state: AppState) => state.freehandMode);
-  const showStrokeCenterLine = useSelector((state: AppState) => state.showStrokeCenterLine);
 
   const svgClassName = freehandMode ? 'freehand' : '';
 
@@ -109,7 +108,7 @@ const GlyphArea = () => {
           handleMouseDownDeselectedStroke={handleMouseDownDeselectedStroke}
           handleMouseDownSelectedStroke={handleMouseDownSelectedStroke}
         />
-        {showStrokeCenterLine && <StrokeCenterLine glyph={glyph} buhinMap={buhinMap} />}
+        <StrokeCenterLine />
         <SelectionControl />
         <AreaSelectRect rect={areaSelectRect} />
       </svg>
