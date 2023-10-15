@@ -21,7 +21,7 @@ macOS 上の最新版の Chrome / Firefox / Safari で動作確認していま�
 （また、[このリポジトリの gh-pages ブランチ](https://github.com/kurgm/kage-editor/tree/gh-pages)にビルド済みの（`./build` ディレクトリ下の）ファイルがあります。）
 
 ### ビルド手順
-Node.js (version 14 以上) をインストールしておいてください。
+Node.js (version 18 以上) をインストールしておいてください。
 
 この git リポジトリをクローンします：
 ```bash
