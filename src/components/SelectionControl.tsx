@@ -26,6 +26,7 @@ interface ControlPointSpec {
 interface SelectionControlSpec {
   rectControl: RectControl | null;
   pointControl: ControlPointSpec[];
+  auxiliaryLines: [number, number, number, number][];
 }
 
 const selectionControlSelector = createSelector(
@@ -35,7 +36,7 @@ const selectionControlSelector = createSelector(
   ],
   (glyph, selection): SelectionControlSpec => {
     if (selection.length === 0) {
-      return { rectControl: null, pointControl: [] };
+      return { rectControl: null, pointControl: [], auxiliaryLines: [] };
     }
     if (selection.length > 1) {
       const selectedStrokes = selection.map((index) => glyph[index]);
@@ -46,6 +47,7 @@ const selectionControlSelector = createSelector(
           coords: bbx,
         },
         pointControl: [],
+        auxiliaryLines: [],
       };
     }
     const selectedStroke = glyph[selection[0]];
@@ -64,6 +66,7 @@ const selectionControlSelector = createSelector(
             ],
           },
           pointControl: [],
+          auxiliaryLines: [],
         };
       case 1:
       case 2:
@@ -90,16 +93,42 @@ const selectionControlSelector = createSelector(
             className,
           });
         }
-        return { rectControl: null, pointControl };
+
+        const auxiliaryLines: [number, number, number, number][] = [];
+        if (selectedStroke.value[0] === 2 || selectedStroke.value[0] === 6) {
+          auxiliaryLines.push([
+            selectedStroke.value[3],
+            selectedStroke.value[4],
+            selectedStroke.value[5],
+            selectedStroke.value[6],
+          ]);
+        }
+        if (selectedStroke.value[0] === 2 || selectedStroke.value[0] === 7) {
+          auxiliaryLines.push([
+            selectedStroke.value[5],
+            selectedStroke.value[6],
+            selectedStroke.value[7],
+            selectedStroke.value[8],
+          ]);
+        }
+        if (selectedStroke.value[0] === 6 || selectedStroke.value[0] === 7) {
+          auxiliaryLines.push([
+            selectedStroke.value[7],
+            selectedStroke.value[8],
+            selectedStroke.value[9],
+            selectedStroke.value[10],
+          ]);
+        }
+        return { rectControl: null, pointControl, auxiliaryLines };
       }
       default:
-        return { rectControl: null, pointControl: [] };
+        return { rectControl: null, pointControl: [], auxiliaryLines: [] };
     }
   }
 );
 
 const SelectionControl = () => {
-  const { rectControl, pointControl } = useSelector(selectionControlSelector);
+  const { rectControl, pointControl, auxiliaryLines } = useSelector(selectionControlSelector);
 
   const dispatch = useDispatch();
   const handleMouseDownRectControl = useCallback((evt: React.MouseEvent, position: RectPointPosition) => {
@@ -212,6 +241,9 @@ const SelectionControl = () => {
         handleMouseDown={handleMouseDownNorthwestPoint}
       />
     </>}
+    {auxiliaryLines.map((points, index) => (
+      <path className="auxiliary-lines" key={index} d={'M ' + points.join(' ')} />
+    ))}
     {pointControl.map(({ x, y, className }, index) => (
       <ControlPoint
         key={index}
