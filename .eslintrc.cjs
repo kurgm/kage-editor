@@ -35,7 +35,7 @@ module.exports = {
     'jsx-a11y',
     'react-hooks',
     '@typescript-eslint',
-    'jest',
+    'vitest',
     'testing-library',
   ],
   rules: {
@@ -251,22 +251,12 @@ module.exports = {
     },
     {
       files: ['**/__tests__/**/*', '**/*.{spec,test}.*'],
-      env: {
-        'jest/globals': true,
-      },
+      extends: ['plugin:vitest/recommended'],
       // A subset of the recommended rules:
       rules: {
-        // https://github.com/jest-community/eslint-plugin-jest
-        'jest/no-conditional-expect': 'error',
-        'jest/no-identical-title': 'error',
-        'jest/no-interpolation-in-snapshots': 'error',
-        'jest/no-jasmine-globals': 'error',
-        'jest/no-jest-import': 'error',
-        'jest/no-mocks-import': 'error',
-        'jest/valid-describe-callback': 'error',
-        'jest/valid-expect': 'error',
-        'jest/valid-expect-in-promise': 'error',
-        'jest/valid-title': 'warn',
+        'vitest/no-conditional-expect': 'error',
+        'vitest/no-interpolation-in-snapshots': 'error',
+        'vitest/no-mocks-import': 'error',
 
         // https://github.com/testing-library/eslint-plugin-testing-library
         'testing-library/await-async-query': 'error',
