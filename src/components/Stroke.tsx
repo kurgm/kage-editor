@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { Polygons } from '@kurgm/kage-engine';
 
 export interface StrokeComponentProps {
