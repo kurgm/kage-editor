@@ -4,12 +4,11 @@
   "private": true,
   "dependencies": {
     "@kurgm/kage-engine": "^0.5.0",
-    "@testing-library/jest-dom": "^5.14.1",
+    "@testing-library/jest-dom": "^6.1.4",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
     "@types/eslint": "^8.44.4",
     "@types/geometric": "^2.2.0",
-    "@types/jest": "^27.0.1",
     "@types/node": "^18.18.5",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
@@ -40,13 +39,15 @@
     "typescript-fsa": "^3.0.0",
     "typescript-fsa-reducers": "^1.2.2",
     "vite": "^4.4.11",
+    "vitest": "^0.34.6",
     "web-vitals": "^2.1.0"
   },
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest"
   },
   "browserslist": {
     "production": [
