@@ -6,8 +6,8 @@ import args from "./args";
 import jaTranslation from './locales/ja.json';
 import enTranslation from './locales/en.json';
 import koTranslation from './locales/ko.json';
-import zhCNTranslation from './locales/zh_CN.json';
-import zhTWTranslation from './locales/zh_TW.json';
+import zhHansTranslation from './locales/zh-Hans.json';
+import zhHantTranslation from './locales/zh-Hant.json';
 
 const resources = {
   "ja": {
@@ -20,10 +20,10 @@ const resources = {
     translation: koTranslation,
   },
   "zh-Hans": {
-    translation: zhCNTranslation,
+    translation: zhHansTranslation,
   },
   "zh-Hant": {
-    translation: zhTWTranslation,
+    translation: zhHantTranslation,
   },
 };
 
