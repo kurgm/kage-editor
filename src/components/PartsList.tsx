@@ -10,10 +10,11 @@ interface PartsListProps {
   names: string[];
   handleItemClick: (partName: string, evt: React.MouseEvent<HTMLImageElement>) => void;
   handleItemMouseEnter: (partName: string, evt: React.MouseEvent<HTMLImageElement>) => void;
+  handleItemMouseLeave: (evt: React.MouseEvent<HTMLImageElement>) => void;
 }
 
 const PartsList = (props: PartsListProps) => {
-  const { handleItemClick, handleItemMouseEnter } = props;
+  const { handleItemClick, handleItemMouseEnter, handleItemMouseLeave } = props;
   const handleImageClick = useCallback((evt: React.MouseEvent<HTMLImageElement>) => {
     const partName = evt.currentTarget.dataset.name!;
     handleItemClick(partName, evt);
@@ -22,6 +23,9 @@ const PartsList = (props: PartsListProps) => {
     const partName = evt.currentTarget.dataset.name!;
     handleItemMouseEnter(partName, evt);
   }, [handleItemMouseEnter]);
+  const handleImageMouseLeave = useCallback((evt: React.MouseEvent<HTMLImageElement>) => {
+    handleItemMouseLeave(evt);
+  }, [handleItemMouseLeave]);
 
   return (
     <div className="parts-list">
@@ -34,6 +38,7 @@ const PartsList = (props: PartsListProps) => {
           loading="lazy"
           onClick={handleImageClick}
           onMouseEnter={handleImageMouseEnter}
+          onMouseLeave={handleImageMouseLeave}
         />
       ))}
     </div>
