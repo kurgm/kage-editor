@@ -1,4 +1,4 @@
-import { Reducer } from 'redux';
+import { Reducer } from '@reduxjs/toolkit';
 import { reducerWithInitialState } from 'typescript-fsa-reducers';
 
 import { isGlyphDeepEqual } from '../kageUtils/glyph';
