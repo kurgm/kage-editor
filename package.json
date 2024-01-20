@@ -37,7 +37,7 @@
     "typescript": "^5.2.2",
     "typescript-fsa": "^3.0.0",
     "typescript-fsa-reducers": "^1.2.2",
-    "vite": "^4.4.12",
+    "vite": "^4.5.2",
     "vitest": "^0.34.6",
     "web-vitals": "^2.1.0"
   },
