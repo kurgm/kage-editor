@@ -39,7 +39,7 @@
     "typescript-fsa": "^3.0.0",
     "typescript-fsa-reducers": "^1.2.2",
     "vite": "^5.4.14",
-    "vitest": "^0.34.6",
+    "vitest": "^3.0.5",
     "web-vitals": "^2.1.0"
   },
   "scripts": {
