@@ -241,7 +241,7 @@ module.exports = {
   overrides: [
     {
       files: ['src/**'],
-      parserOptions: { project: ['./tsconfig.json'] },
+      parserOptions: { project: ['./tsconfig.node.json', './tsconfig.app.json'] },
     },
     {
       files: ['**/__tests__/**/*', '**/*.{spec,test}.*'],

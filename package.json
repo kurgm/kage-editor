@@ -2,6 +2,7 @@
   "name": "kage-editor",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "dependencies": {
     "@kurgm/kage-engine": "^0.5.0",
     "@reduxjs/toolkit": "^1.9.7",
@@ -28,8 +29,8 @@
     "geometric": "^2.2.10",
     "i18next": "^22.1.5",
     "memoize-one": "^6.0.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "react-hotkeys-hook": "^3.4.4",
     "react-i18next": "^12.1.1",
     "react-modal": "^3.11.2",
@@ -37,13 +38,13 @@
     "typescript": "^5.2.2",
     "typescript-fsa": "^3.0.0",
     "typescript-fsa-reducers": "^1.2.2",
-    "vite": "^4.5.9",
+    "vite": "^5.4.14",
     "vitest": "^0.34.6",
     "web-vitals": "^2.1.0"
   },
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "tsc -b && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "test": "vitest"
