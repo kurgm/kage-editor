@@ -245,14 +245,15 @@ module.exports = {
     },
     {
       files: ['**/__tests__/**/*', '**/*.{spec,test}.*'],
+      plugins: ['@vitest'],
       extends: [
-        'plugin:vitest/recommended',
+        'plugin:@vitest/legacy-recommended',
         'plugin:testing-library/react',
       ],
       rules: {
-        'vitest/no-conditional-expect': 'error',
-        'vitest/no-interpolation-in-snapshots': 'error',
-        'vitest/no-mocks-import': 'error',
+        '@vitest/no-conditional-expect': 'error',
+        '@vitest/no-interpolation-in-snapshots': 'error',
+        '@vitest/no-mocks-import': 'error',
       },
     },
   ],
