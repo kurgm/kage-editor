@@ -9,15 +9,15 @@ module.exports = {
     jest: true,
   },
   extends: [
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
     'plugin:jsx-a11y/recommended',
     'plugin:react/recommended',
     'plugin:react/jsx-runtime',
     'plugin:react-hooks/recommended',
   ],
   ignorePatterns: ['build', '.eslintrc.cjs'],
-  parser: '@typescript-eslint/parser',
   parserOptions: {
-    sourceType: 'module',
     warnOnUnsupportedTypeScriptVersion: true,
     project: ['./tsconfig.node.json', './tsconfig.app.json'],
   },
@@ -28,7 +28,6 @@ module.exports = {
   },
   plugins: [
     'import',
-    '@typescript-eslint',
     'react-refresh',
   ],
   rules: {
@@ -38,24 +37,15 @@ module.exports = {
     eqeqeq: ['warn', 'smart'],
     'new-parens': 'warn',
     'no-caller': 'warn',
-    'no-cond-assign': ['warn', 'except-parens'],
     'no-const-assign': 'warn',
-    'no-control-regex': 'warn',
-    'no-delete-var': 'warn',
     'no-dupe-args': 'warn',
     'no-dupe-keys': 'warn',
-    'no-duplicate-case': 'warn',
-    'no-empty-character-class': 'warn',
-    'no-empty-pattern': 'warn',
     'no-eval': 'warn',
-    'no-ex-assign': 'warn',
     'no-extend-native': 'warn',
     'no-extra-bind': 'warn',
     'no-extra-label': 'warn',
-    'no-fallthrough': 'warn',
     'no-func-assign': 'warn',
     'no-implied-eval': 'warn',
-    'no-invalid-regexp': 'warn',
     'no-iterator': 'warn',
     'no-label-var': 'warn',
     'no-labels': ['warn', { allowLoop: true, allowSwitch: false }],
@@ -74,31 +64,23 @@ module.exports = {
       },
     ],
     'no-multi-str': 'warn',
-    'no-global-assign': 'warn',
     'no-unsafe-negation': 'warn',
     'no-new-func': 'warn',
     'no-new-object': 'warn',
     'no-new-symbol': 'warn',
     'no-new-wrappers': 'warn',
     'no-obj-calls': 'warn',
-    'no-octal': 'warn',
     'no-octal-escape': 'warn',
-    'no-regex-spaces': 'warn',
     'no-restricted-syntax': ['warn', 'WithStatement'],
     'no-script-url': 'warn',
-    'no-self-assign': 'warn',
     'no-self-compare': 'warn',
     'no-sequences': 'warn',
-    'no-shadow-restricted-names': 'warn',
-    'no-sparse-arrays': 'warn',
     'no-template-curly-in-string': 'warn',
     'no-this-before-super': 'warn',
     'no-throw-literal': 'warn',
     'no-unreachable': 'warn',
-    'no-unused-labels': 'warn',
     'no-useless-computed-key': 'warn',
     'no-useless-concat': 'warn',
-    'no-useless-escape': 'warn',
     'no-useless-rename': [
       'warn',
       {
@@ -107,14 +89,10 @@ module.exports = {
         ignoreExport: false,
       },
     ],
-    'no-with': 'warn',
     'no-whitespace-before-property': 'warn',
-    'require-yield': 'warn',
     'rest-spread-spacing': ['warn', 'never'],
     strict: ['warn', 'never'],
     'unicode-bom': ['warn', 'never'],
-    'use-isnan': 'warn',
-    'valid-typeof': 'warn',
     'no-restricted-properties': [
       'error',
       {
@@ -156,16 +134,9 @@ module.exports = {
 
     // TypeScript's `noFallthroughCasesInSwitch` option is more robust (#6906)
     'default-case': 'off',
-    // 'tsc' already handles this (https://github.com/typescript-eslint/typescript-eslint/issues/291)
-    'no-dupe-class-members': 'off',
-    // 'tsc' already handles this (https://github.com/typescript-eslint/typescript-eslint/issues/477)
-    'no-undef': 'off',
 
     // Add TypeScript specific rules (and turn off ESLint equivalents)
     '@typescript-eslint/consistent-type-assertions': 'warn',
-    'no-array-constructor': 'off',
-    '@typescript-eslint/no-array-constructor': 'warn',
-    'no-redeclare': 'off',
     '@typescript-eslint/no-redeclare': 'warn',
     'no-use-before-define': 'off',
     '@typescript-eslint/no-use-before-define': [
@@ -177,23 +148,6 @@ module.exports = {
         typedefs: false,
       },
     ],
-    'no-unused-expressions': 'off',
-    '@typescript-eslint/no-unused-expressions': [
-      'error',
-      {
-        allowShortCircuit: true,
-        allowTernary: true,
-        allowTaggedTemplates: true,
-      },
-    ],
-    'no-unused-vars': 'off',
-    '@typescript-eslint/no-unused-vars': [
-      'warn',
-      {
-        args: 'none',
-        ignoreRestSiblings: true,
-      },
-    ],
     'no-useless-constructor': 'off',
     '@typescript-eslint/no-useless-constructor': 'warn',
 
@@ -201,6 +155,10 @@ module.exports = {
       'warn',
       { allowConstantExport: true },
     ],
+
+    // TODO: activate these rules
+    '@typescript-eslint/no-explicit-any': 'off',
+    'prefer-const': 'off',
   },
   overrides: [
     {

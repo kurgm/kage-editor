@@ -25,6 +25,7 @@ if (!host && document.referrer) {
       ssl = referrerUrl.protocol === 'https:';
     }
   } catch {
+    // ignore invalid referrer
   }
 }
 
