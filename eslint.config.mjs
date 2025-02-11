@@ -82,7 +82,7 @@ export default tseslint.config(
       'no-unsafe-negation': 'warn',
       'no-new-func': 'warn',
       'no-object-constructor': 'warn',
-      'no-new-symbol': 'warn',
+      'no-new-native-nonconstructor': 'warn',
       'no-new-wrappers': 'warn',
       'no-obj-calls': 'warn',
       'no-octal-escape': 'warn',
