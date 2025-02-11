@@ -19,6 +19,7 @@ module.exports = {
   parserOptions: {
     sourceType: 'module',
     warnOnUnsupportedTypeScriptVersion: true,
+    project: ['./tsconfig.node.json', './tsconfig.app.json'],
   },
   settings: {
     react: {
@@ -202,10 +203,6 @@ module.exports = {
     ],
   },
   overrides: [
-    {
-      files: ['src/**'],
-      parserOptions: { project: ['./tsconfig.node.json', './tsconfig.app.json'] },
-    },
     {
       files: ['**/__tests__/**/*', '**/*.{spec,test}.*'],
       plugins: ['@vitest'],
