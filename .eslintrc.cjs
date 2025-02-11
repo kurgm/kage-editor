@@ -27,15 +27,16 @@ module.exports = {
     },
   },
   plugins: [
+    '@stylistic',
     'import',
     'react-refresh',
   ],
   rules: {
     // http://eslint.org/docs/rules/
     'array-callback-return': 'warn',
-    'dot-location': ['warn', 'property'],
+    '@stylistic/dot-location': ['warn', 'property'],
     eqeqeq: ['warn', 'smart'],
-    'new-parens': 'warn',
+    '@stylistic/new-parens': 'warn',
     'no-caller': 'warn',
     'no-const-assign': 'warn',
     'no-dupe-args': 'warn',
@@ -51,7 +52,7 @@ module.exports = {
     'no-labels': ['warn', { allowLoop: true, allowSwitch: false }],
     'no-lone-blocks': 'warn',
     'no-loop-func': 'warn',
-    'no-mixed-operators': [
+    '@stylistic/no-mixed-operators': [
       'warn',
       {
         groups: [
@@ -89,8 +90,8 @@ module.exports = {
         ignoreExport: false,
       },
     ],
-    'no-whitespace-before-property': 'warn',
-    'rest-spread-spacing': ['warn', 'never'],
+    '@stylistic/no-whitespace-before-property': 'warn',
+    '@stylistic/rest-spread-spacing': ['warn', 'never'],
     strict: ['warn', 'never'],
     'unicode-bom': ['warn', 'never'],
     'no-restricted-properties': [
