@@ -9,15 +9,14 @@ module.exports = {
     jest: true,
   },
   extends: [
+    'plugin:react/recommended',
+    'plugin:react/jsx-runtime',
     'plugin:react-hooks/recommended',
   ],
   ignorePatterns: ['build', '.eslintrc.cjs'],
   parser: '@typescript-eslint/parser',
   parserOptions: {
     sourceType: 'module',
-    ecmaFeatures: {
-      jsx: true,
-    },
     warnOnUnsupportedTypeScriptVersion: true,
   },
   settings: {
@@ -26,16 +25,12 @@ module.exports = {
     },
   },
   plugins: [
-    'react',
     'import',
     'jsx-a11y',
     '@typescript-eslint',
     'react-refresh',
   ],
   rules: {
-    'react/jsx-uses-vars': 'warn',
-    'react/jsx-uses-react': 'warn',
-
     // http://eslint.org/docs/rules/
     'array-callback-return': 'warn',
     'dot-location': ['warn', 'property'],
@@ -144,10 +139,6 @@ module.exports = {
 
     // https://github.com/yannickcr/eslint-plugin-react/tree/master/docs/rules
     'react/forbid-foreign-prop-types': ['warn', { allowInPropTypes: true }],
-    'react/jsx-no-comment-textnodes': 'warn',
-    'react/jsx-no-duplicate-props': 'warn',
-    'react/jsx-no-target-blank': 'warn',
-    'react/jsx-no-undef': 'error',
     'react/jsx-pascal-case': [
       'warn',
       {
@@ -155,15 +146,7 @@ module.exports = {
         ignore: [],
       },
     ],
-    'react/no-danger-with-children': 'warn',
-    // Disabled because of undesirable warnings
-    // See https://github.com/facebook/create-react-app/issues/5204 for
-    // blockers until its re-enabled
-    // 'react/no-deprecated': 'warn',
-    'react/no-direct-mutation-state': 'warn',
-    'react/no-is-mounted': 'warn',
     'react/no-typos': 'error',
-    'react/require-render-return': 'error',
     'react/style-prop-object': 'warn',
 
     // https://github.com/evcohen/eslint-plugin-jsx-a11y/tree/master/docs/rules
