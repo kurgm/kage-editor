@@ -1,32 +1,54 @@
 // @ts-check
 
-/** @type {import('eslint').ESLint.ConfigData} */
-module.exports = {
-  root: true,
-  extends: [
-    'eslint:recommended',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:jsx-a11y/recommended',
-    'plugin:react/recommended',
-    'plugin:react/jsx-runtime',
-    'plugin:react-hooks/recommended',
-  ],
-  ignorePatterns: ['build', '.eslintrc.cjs'],
-  parserOptions: {
-    warnOnUnsupportedTypeScriptVersion: true,
-    project: ['./tsconfig.node.json', './tsconfig.app.json'],
+import js from '@eslint/js';
+import stylistic from '@stylistic/eslint-plugin';
+import vitest from '@vitest/eslint-plugin';
+// @ts-ignore
+import importPlugin from 'eslint-plugin-import';
+import jsxA11y from 'eslint-plugin-jsx-a11y';
+import reactPlugin from 'eslint-plugin-react';
+import reactHooks from 'eslint-plugin-react-hooks';
+import reactRefresh from 'eslint-plugin-react-refresh';
+import testingLibrary from 'eslint-plugin-testing-library';
+import tseslint from 'typescript-eslint';
+
+
+export default tseslint.config(
+  { files: ['**/*.ts', '**/*.tsx'] },
+  {
+    ignores: ['**/build', 'eslint.config.mjs'],
   },
-  settings: {
-    react: {
-      version: 'detect',
+  js.configs.recommended,
+  tseslint.configs.recommended,
+  jsxA11y.flatConfigs.recommended,
+  reactPlugin.configs.flat.recommended,
+  reactPlugin.configs.flat['jsx-runtime'],
+  /** @type {any} */({
+    plugins: {
+      'react-hooks': reactHooks,
     },
-  },
-  plugins: [
-    '@stylistic',
-    'import',
-    'react-refresh',
-  ],
-  rules: {
+    rules: reactHooks.configs.recommended.rules,
+  }),
+
+  {
+    languageOptions: {
+      parserOptions: {
+        warnOnUnsupportedTypeScriptVersion: true,
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+      },
+    },
+    settings: {
+      react: {
+        version: 'detect',
+      },
+    },
+    plugins: {
+      '@stylistic': stylistic,
+      import: importPlugin,
+      'react-refresh': reactRefresh,
+    },
+    rules: {
+
     // http://eslint.org/docs/rules/
     'array-callback-return': 'warn',
     '@stylistic/dot-location': ['warn', 'property'],
@@ -155,20 +177,27 @@ module.exports = {
     // TODO: activate these rules
     '@typescript-eslint/no-explicit-any': 'off',
     'prefer-const': 'off',
-  },
-  overrides: [
-    {
-      files: ['**/__tests__/**/*', '**/*.{spec,test}.*'],
-      plugins: ['@vitest'],
-      extends: [
-        'plugin:@vitest/legacy-recommended',
-        'plugin:testing-library/react',
-      ],
-      rules: {
-        '@vitest/no-conditional-expect': 'error',
-        '@vitest/no-interpolation-in-snapshots': 'error',
-        '@vitest/no-mocks-import': 'error',
-      },
+
     },
-  ],
-};
+  },
+
+  {
+    files: ['**/__tests__/**/*', '**/*.{spec,test}.*'],
+
+    plugins: {
+      vitest,
+    },
+
+    rules: {
+      ...vitest.configs.recommended.rules,
+      'vitest/no-conditional-expect': 'error',
+      'vitest/no-interpolation-in-snapshots': 'error',
+      'vitest/no-mocks-import': 'error',
+    },
+  },
+
+  {
+    files: ['**/__tests__/**/*', '**/*.{spec,test}.*'],
+    ...testingLibrary.configs['flat/react'],
+  }
+);
