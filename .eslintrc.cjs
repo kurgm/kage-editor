@@ -67,7 +67,7 @@ module.exports = {
     'no-multi-str': 'warn',
     'no-unsafe-negation': 'warn',
     'no-new-func': 'warn',
-    'no-new-object': 'warn',
+    'no-object-constructor': 'warn',
     'no-new-symbol': 'warn',
     'no-new-wrappers': 'warn',
     'no-obj-calls': 'warn',
