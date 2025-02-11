@@ -46,12 +46,12 @@ module.exports = {
     'no-extra-bind': 'warn',
     'no-extra-label': 'warn',
     'no-func-assign': 'warn',
-    'no-implied-eval': 'warn',
+    '@typescript-eslint/no-implied-eval': 'warn',
     'no-iterator': 'warn',
     'no-label-var': 'warn',
     'no-labels': ['warn', { allowLoop: true, allowSwitch: false }],
     'no-lone-blocks': 'warn',
-    'no-loop-func': 'warn',
+    '@typescript-eslint/no-loop-func': 'warn',
     '@stylistic/no-mixed-operators': [
       'warn',
       {
