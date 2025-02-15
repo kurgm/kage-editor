@@ -46,15 +46,15 @@ export const resizeSelected = (glyph: Glyph, selection: number[], position: Rect
             newValue[3] = Math.round(newValue[3] + dx);
             newValue[4] = Math.round(newValue[4] + dy);
             break;
-          default:
-            // exhaustive?
-            ((x: never) => x)(position);
         }
         const newGlyphLine: GlyphLine = selectedGlyphLine.value[0] === 99
           ? { value: newValue, partName: selectedGlyphLine.partName }
           : { value: newValue };
         return glyph.map((glyphLine, index) => index === selection[0] ? newGlyphLine : glyphLine);
       }
+      default:
+        // not expected to reach here...
+        break;
     }
   }
   const minSize = 20;
@@ -89,9 +89,6 @@ export const resizeSelected = (glyph: Glyph, selection: number[], position: Rect
       newBBX[0] = Math.min(newBBX[0] + dx, newBBX[2] - minSize);
       newBBX[1] = Math.min(newBBX[1] + dy, newBBX[3] - minSize);
       break;
-    default:
-      // exhaustive?
-      ((x: never) => x)(position);
   }
   return resizeSelectedGlyphLines(glyph, selection, oldBBX, newBBX);
 };

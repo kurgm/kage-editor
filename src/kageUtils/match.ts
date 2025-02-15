@@ -63,6 +63,8 @@ export const getMatchType = (glyph: Glyph, point: PointDescriptor): MatchType =>
           result = MatchType.online;
         }
         break;
+      default:
+        break;
     }
   }
   return result;

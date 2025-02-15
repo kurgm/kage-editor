@@ -35,9 +35,6 @@ const strokeCenterLineShownNumbersSelector = createSelector(
       }
       case ShowCenterLine.always:
         return glyph.map((_gLine, index) => index);
-      default:
-        // exhaustive?
-        return ((_x: never) => _x)(showStrokeCenterLine);
     }
   }
 );

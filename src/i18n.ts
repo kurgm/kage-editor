@@ -27,7 +27,7 @@ const resources = {
   },
 };
 
-let lng = 'ja';
+let lng: keyof typeof resources;
 switch (args.host.split('.')[0]) {
   case 'en':
     lng = 'en';
@@ -40,6 +40,9 @@ switch (args.host.split('.')[0]) {
     break;
   case 'zht':
     lng = 'zh-Hant';
+    break;
+  default:
+    lng = 'ja';
     break;
 }
 

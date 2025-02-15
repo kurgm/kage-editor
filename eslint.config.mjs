@@ -161,6 +161,11 @@ export default tseslint.config(
         { allowConstantExport: true },
       ],
 
+      '@typescript-eslint/switch-exhaustiveness-check': [
+        'warn',
+        { requireDefaultForNonUnion: true },
+      ],
+
       // TODO: activate these rules
       '@typescript-eslint/no-explicit-any': 'off',
       'prefer-const': 'off',
