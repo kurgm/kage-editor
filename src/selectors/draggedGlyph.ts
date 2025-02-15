@@ -48,7 +48,7 @@ export const resizeSelected = (glyph: Glyph, selection: number[], position: Rect
             break;
           default:
             // exhaustive?
-            ((_x: never) => { })(position);
+            ((x: never) => x)(position);
         }
         const newGlyphLine: GlyphLine = selectedGlyphLine.value[0] === 99
           ? { value: newValue, partName: selectedGlyphLine.partName }
@@ -91,7 +91,7 @@ export const resizeSelected = (glyph: Glyph, selection: number[], position: Rect
       break;
     default:
       // exhaustive?
-      ((_x: never) => { })(position);
+      ((x: never) => x)(position);
   }
   return resizeSelectedGlyphLines(glyph, selection, oldBBX, newBBX);
 };

@@ -81,7 +81,7 @@ export const drawFreehand = (glyph: Glyph, points: [number, number][]): Glyph =>
   }
 
   const centroidX = avg(points.map(([x]) => x));
-  const centroidY = avg(points.map(([_x, y]) => y));
+  const centroidY = avg(points.map(([, y]) => y));
 
   const midLerpRate = 3;
   const midX = lerp((startX + endX) / 2, centroidX, midLerpRate);
