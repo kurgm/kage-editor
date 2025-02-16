@@ -1,10 +1,8 @@
 import React, { useCallback, useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-
-import { createSelector } from '@reduxjs/toolkit';
 
 import { dragActions, RectPointPosition } from '../actions/drag';
-import { AppState } from '../reducers';
+import { useAppDispatch, useAppSelector } from '../hooks';
+import { createAppSelector } from '../selectors/util';
 import { draggedGlyphSelector } from '../selectors/draggedGlyph';
 import { getGlyphLinesBBX } from '../kageUtils/bbx';
 import { getMatchType, MatchType } from '../kageUtils/match';
@@ -28,11 +26,10 @@ interface SelectionControlSpec {
   pointControl: ControlPointSpec[];
   auxiliaryLines: [number, number, number, number][];
 }
-
-const selectionControlSelector = createSelector(
+const selectionControlSelector = createAppSelector(
   [
     draggedGlyphSelector,
-    (state: AppState) => state.selection,
+    (state) => state.selection,
   ],
   (glyph, selection): SelectionControlSpec => {
     if (selection.length === 0) {
@@ -128,9 +125,9 @@ const selectionControlSelector = createSelector(
 );
 
 const SelectionControl = () => {
-  const { rectControl, pointControl, auxiliaryLines } = useSelector(selectionControlSelector);
+  const { rectControl, pointControl, auxiliaryLines } = useAppSelector(selectionControlSelector);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const handleMouseDownRectControl = useCallback((evt: React.MouseEvent, position: RectPointPosition) => {
     dispatch(dragActions.startResize([evt, position]));
     evt.stopPropagation();

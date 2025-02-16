@@ -1,23 +1,23 @@
 import React, { useCallback } from 'react';
 
-import { useDispatch, useSelector, shallowEqual } from 'react-redux';
-import { createSelector } from '@reduxjs/toolkit';
+import { shallowEqual } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
 import { editorActions } from '../actions/editor';
 import { selectActions } from '../actions/select';
-import { AppState } from '../reducers';
+import { useAppDispatch, useAppSelector } from '../hooks';
 import { GlyphLine } from '../kageUtils/glyph';
 import { calcStretchScalar, getStretchPositions } from '../kageUtils/stretchparam';
 import { strokeTypes, headShapeTypes, tailShapeTypes, isValidStrokeShapeTypes } from '../kageUtils/stroketype';
 import { ReflectRotateType, reflectRotateTypeParamsMap, reflectRotateTypes } from '../kageUtils/reflectrotate';
 import { draggedGlyphSelector } from '../selectors/draggedGlyph';
+import { createAppSelector } from '../selectors/util';
 
-import './SelectionInfo.css'
+import './SelectionInfo.css';
 
 
-const selectedGlyphLineSelector = createSelector([
-  (state: AppState) => state.selection,
+const selectedGlyphLineSelector = createAppSelector([
+  (state) => state.selection,
   draggedGlyphSelector,
 ], (selection, draggedGlyph): GlyphLine | null => {
   if (selection.length !== 1) {
@@ -33,7 +33,7 @@ interface StrokeInfo {
   validTypes: boolean;
   coordString: string;
 }
-const strokeInfoSelector = createSelector([
+const strokeInfoSelector = createAppSelector([
   selectedGlyphLineSelector
 ], (selectedStroke): StrokeInfo | null => {
   if (!selectedStroke) {
@@ -62,10 +62,10 @@ interface PartInfo {
   coordString: string;
   stretchCoeff: number | null;
 }
-const partInfoSelector = createSelector([
+const partInfoSelector = createAppSelector([
   selectedGlyphLineSelector,
-  (state: AppState) => state.buhinMap,
-  (state: AppState) => state.stretchParamMap,
+  (state) => state.buhinMap,
+  (state) => state.stretchParamMap,
 ], (selectedStroke, buhinMap, stretchParamMap): PartInfo | null => {
   if (!selectedStroke) {
     return null;
@@ -99,7 +99,7 @@ interface ReflectRotateInfo {
   opType: ReflectRotateType | -1;
   coordString: string;
 }
-const reflectRotateInfoSelector = createSelector([
+const reflectRotateInfoSelector = createAppSelector([
   selectedGlyphLineSelector,
 ], (selectedStroke): ReflectRotateInfo | null => {
   if (!selectedStroke) {
@@ -123,8 +123,8 @@ interface OtherInfo {
   isMultiple: boolean;
   coordString?: string;
 }
-const otherInfoSelector = createSelector([
-  (state: AppState) => state.selection,
+const otherInfoSelector = createAppSelector([
+  (state) => state.selection,
   selectedGlyphLineSelector,
 ], (selection, selectedStroke_): OtherInfo | null => {
   if (selection.length > 1) {
@@ -146,9 +146,9 @@ const otherInfoSelector = createSelector([
   return { isMultiple: false, coordString: points.join(' → ') };
 });
 
-const selectIndexStringSelector = createSelector([
-  (state: AppState) => state.glyph.length,
-  (state: AppState) => state.selection,
+const selectIndexStringSelector = createAppSelector([
+  (state) => state.glyph.length,
+  (state) => state.selection,
 ], (glyphLength, selection) => {
   const selectedIndexString = selection
     .map((index) => index + 1)
@@ -156,9 +156,9 @@ const selectIndexStringSelector = createSelector([
   return `${selectedIndexString || '-'} / ${glyphLength || '-'}`;
 });
 
-const buttonsDisabledSelector = createSelector([
-  (state: AppState) => state.glyph.length,
-  (state: AppState) => state.selection,
+const buttonsDisabledSelector = createAppSelector([
+  (state) => state.glyph.length,
+  (state) => state.selection,
 ], (glyphLength, selection) => ({
   swapPrevDisabled: selection.length !== 1 || selection[0] === 0,
   swapNextDisabled: selection.length !== 1 || selection[0] === glyphLength - 1,
@@ -168,19 +168,19 @@ const buttonsDisabledSelector = createSelector([
 
 const SelectionInfo = () => {
 
-  const strokeInfo = useSelector(strokeInfoSelector);
-  const partInfo = useSelector(partInfoSelector);
-  const reflectRotateInfo = useSelector(reflectRotateInfoSelector);
-  const otherInfo = useSelector(otherInfoSelector);
+  const strokeInfo = useAppSelector(strokeInfoSelector);
+  const partInfo = useAppSelector(partInfoSelector);
+  const reflectRotateInfo = useAppSelector(reflectRotateInfoSelector);
+  const otherInfo = useAppSelector(otherInfoSelector);
 
-  const selectIndexString = useSelector(selectIndexStringSelector);
+  const selectIndexString = useAppSelector(selectIndexStringSelector);
 
   const {
     swapPrevDisabled, swapNextDisabled,
     selectPrevDisabled, selectNextDisabled,
-  } = useSelector(buttonsDisabledSelector, shallowEqual);
+  } = useAppSelector(buttonsDisabledSelector, shallowEqual);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const changeStrokeType = useCallback((evt: React.ChangeEvent<HTMLSelectElement>) => {
     dispatch(editorActions.changeStrokeType(+evt.currentTarget.value));
   }, [dispatch]);

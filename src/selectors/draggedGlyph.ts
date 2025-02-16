@@ -1,13 +1,11 @@
-import { createSelector } from '@reduxjs/toolkit';
-
 import { RectPointPosition } from '../actions/drag';
-
-import { AppState } from '../reducers';
 
 import { Glyph, GlyphLine } from '../kageUtils/glyph';
 import { getGlyphLinesBBX } from '../kageUtils/bbx';
 import { moveSelectedGlyphLines, moveSelectedPoint, resizeSelectedGlyphLines } from '../kageUtils/transform';
 import { drawFreehand } from '../kageUtils/freehand';
+
+import { createAppSelector } from './util';
 
 export const resizeSelected = (glyph: Glyph, selection: number[], position: RectPointPosition, dx: number, dy: number): Glyph => {
   if (selection.length === 1) {
@@ -96,13 +94,13 @@ export const resizeSelected = (glyph: Glyph, selection: number[], position: Rect
   return resizeSelectedGlyphLines(glyph, selection, oldBBX, newBBX);
 };
 
-export const draggedGlyphSelector = createSelector([
-  (state: AppState) => state.glyph,
-  (state: AppState) => state.selection,
-  (state: AppState) => state.dragSelection,
-  (state: AppState) => state.dragPoint,
-  (state: AppState) => state.resizeSelection,
-  (state: AppState) => state.freehandStroke,
+export const draggedGlyphSelector = createAppSelector([
+  (state) => state.glyph,
+  (state) => state.selection,
+  (state) => state.dragSelection,
+  (state) => state.dragPoint,
+  (state) => state.resizeSelection,
+  (state) => state.freehandStroke,
 ], (glyph, selection, dragSelection, dragPoint, resizeSelection, freehandStroke) => {
   if (dragSelection) {
     const [x1, y1, x2, y2] = dragSelection;

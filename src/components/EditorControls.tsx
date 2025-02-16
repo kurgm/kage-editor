@@ -1,9 +1,8 @@
 import React, { useCallback } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 
 import { useTranslation } from 'react-i18next';
 
-import { AppState } from '../reducers';
+import { useAppDispatch, useAppSelector } from '../hooks';
 import { editorActions } from '../actions/editor';
 import { selectActions } from '../actions/select';
 import { undoActions } from '../actions/undo';
@@ -15,19 +14,19 @@ import SubmitPreview from './SubmitPreview';
 import './EditorControls.css';
 
 const EditorControls = () => {
-  const glyph = useSelector((state: AppState) => state.glyph);
-  const selection = useSelector((state: AppState) => state.selection);
-  const clipboard = useSelector((state: AppState) => state.clipboard);
-  const freehandMode = useSelector((state: AppState) => state.freehandMode);
-  const undoLength = useSelector((state: AppState) => state.undoStacks.undo.length);
-  const redoLength = useSelector((state: AppState) => state.undoStacks.redo.length);
+  const glyph = useAppSelector((state) => state.glyph);
+  const selection = useAppSelector((state) => state.selection);
+  const clipboard = useAppSelector((state) => state.clipboard);
+  const freehandMode = useAppSelector((state) => state.freehandMode);
+  const undoLength = useAppSelector((state) => state.undoStacks.undo.length);
+  const redoLength = useAppSelector((state) => state.undoStacks.redo.length);
 
   const undoDisabled = undoLength === 0;
   const redoDisabled = redoLength === 0;
   const pasteDisabled = clipboard.length === 0;
   const decomposeDisabled = !selection.some((index) => glyph[index].value[0] === 99);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const undo = useCallback(() => {
     dispatch(undoActions.undo());
   }, [dispatch]);

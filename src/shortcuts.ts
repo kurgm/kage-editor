@@ -1,12 +1,12 @@
-import { useDispatch } from 'react-redux';
 import { useHotkeys } from 'react-hotkeys-hook';
 
+import { useAppDispatch } from './hooks';
 import { selectActions } from './actions/select';
 import { editorActions } from './actions/editor';
 import { undoActions } from './actions/undo';
 
 export const useShortcuts = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   useHotkeys('ctrl+a, command+a', (evt) => {
     dispatch(selectActions.selectAll());
     evt.preventDefault();
