@@ -118,6 +118,8 @@ const getConnectablePoints = (glyphLine: GlyphLine): ConnectablePoint[] => {
       });
       break;
     }
+    default:
+      break;
   }
   return result;
 };

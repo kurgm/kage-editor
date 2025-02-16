@@ -81,10 +81,16 @@ const selectionControlSelector = createSelector(
             pointIndex: (i - 3) / 2,
           });
           let className = '';
-          if (matchType === MatchType.match) {
-            className = 'match';
-          } else if (matchType === MatchType.online) {
-            className = 'online';
+          switch (matchType) {
+            case MatchType.match:
+              className = 'match';
+              break;
+            case MatchType.online:
+              className = 'online';
+              break;
+            case MatchType.none:
+              className = '';
+              break;
           }
 
           pointControl.push({

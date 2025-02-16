@@ -386,6 +386,9 @@ const snapStrokeTilt = (newStroke: GlyphLine) => {
       return;
     case 7:
       newStroke.value[5] = newStroke.value[7] = newStroke.value[3];
+      return;
+    default:
+      return;
   }
 };
 const snapStrokeEnd = (glyph: Glyph, newStroke: GlyphLine): Glyph => {
