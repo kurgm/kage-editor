@@ -7,32 +7,32 @@ import { undoActions } from './actions/undo';
 
 export const useShortcuts = () => {
   const dispatch = useAppDispatch();
-  useHotkeys('ctrl+a, command+a', (evt) => {
+  useHotkeys('mod+a', (evt) => {
     dispatch(selectActions.selectAll());
     evt.preventDefault();
   }, {}, [dispatch]);
-  useHotkeys('ctrl+i, command+i', (evt) => {
+  useHotkeys('mod+i', (evt) => {
     dispatch(selectActions.selectDeselected());
     evt.preventDefault();
   }, {}, [dispatch]);
 
-  useHotkeys('ctrl+z, command+z', (evt) => {
+  useHotkeys('mod+z', (evt) => {
     dispatch(undoActions.undo());
     evt.preventDefault();
   }, {}, [dispatch]);
-  useHotkeys('ctrl+y, command+y, ctrl+shift+z, command+shift+z', (evt) => {
+  useHotkeys('mod+y, mod+shift+z', (evt) => {
     dispatch(undoActions.redo());
     evt.preventDefault();
   }, {}, [dispatch]);
-  useHotkeys('ctrl+x, command+x', (evt) => {
+  useHotkeys('mod+x', (evt) => {
     dispatch(editorActions.cut());
     evt.preventDefault();
   }, {}, [dispatch]);
-  useHotkeys('ctrl+c, command+c', (evt) => {
+  useHotkeys('mod+c', (evt) => {
     dispatch(editorActions.copy());
     evt.preventDefault();
   }, {}, [dispatch]);
-  useHotkeys('ctrl+v, command+v', (evt) => {
+  useHotkeys('mod+v', (evt) => {
     dispatch(editorActions.paste());
     evt.preventDefault();
   }, {}, [dispatch]);
@@ -78,7 +78,7 @@ export const useShortcuts = () => {
     evt.preventDefault();
   }, {}, [dispatch]);
 
-  useHotkeys('ctrl+s, command+s', (evt) => {
+  useHotkeys('mod+s', (evt) => {
     dispatch(editorActions.finishEdit(evt));
     evt.preventDefault();
   }, {}, [dispatch]);
