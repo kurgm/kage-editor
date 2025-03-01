@@ -1,9 +1,8 @@
 import React, { useRef, useEffect } from 'react';
-import { useSelector } from 'react-redux';
 
 import args, { gwHosts } from '../args';
 
-import { AppState } from '../reducers';
+import { useAppSelector } from '../hooks';
 import { submitGlyphSelector } from '../selectors/submitGlyph';
 import { unparseGlyph } from '../kageUtils/glyph';
 
@@ -25,14 +24,14 @@ const formStyle: React.CSSProperties = {
 };
 
 const SubmitForm = () => {
-  const exitEvent = useSelector((state: AppState) => state.exitEvent);
+  const exitEvent = useAppSelector((state) => state.exitEvent);
   const formRef = useRef<HTMLFormElement>(null);
   useEffect(() => {
     if (exitEvent) {
       formRef.current?.submit();
     }
   }, [exitEvent]);
-  const glyph = useSelector(submitGlyphSelector);
+  const glyph = useAppSelector(submitGlyphSelector);
   return (
     <form
       style={formStyle}

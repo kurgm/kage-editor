@@ -1,24 +1,23 @@
 import React, { useCallback } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
 
 import ReactModal from 'react-modal';
 import { useTranslation } from 'react-i18next';
 
 import { displayActions, ShowCenterLine } from '../actions/display';
-import { AppState } from '../reducers';
+import { useAppDispatch, useAppSelector } from '../hooks';
 import { KShotai } from '../kage';
 import { XorMaskType, xorMaskTypes } from '../xorMask';
 
 import './OptionModal.css';
 
 const OptionModal = () => {
-  const showOptionModal = useSelector((state: AppState) => state.showOptionModal);
-  const grid = useSelector((state: AppState) => state.grid);
-  const shotai = useSelector((state: AppState) => state.shotai);
-  const xorMaskType = useSelector((state: AppState) => state.xorMaskType);
-  const showStrokeCenterLine = useSelector((state: AppState) => state.showStrokeCenterLine);
+  const showOptionModal = useAppSelector((state) => state.showOptionModal);
+  const grid = useAppSelector((state) => state.grid);
+  const shotai = useAppSelector((state) => state.shotai);
+  const xorMaskType = useAppSelector((state) => state.xorMaskType);
+  const showStrokeCenterLine = useAppSelector((state) => state.showStrokeCenterLine);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const handleRequestClose = useCallback(() => {
     dispatch(displayActions.closeOptionModal());
   }, [dispatch]);

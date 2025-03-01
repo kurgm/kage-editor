@@ -1,11 +1,9 @@
-import { useSelector } from 'react-redux';
-
-import { AppState } from '../reducers';
+import { useAppSelector } from '../hooks';
 
 import './Grid.css';
 
 const Grid = () => {
-  const grid = useSelector((state: AppState) => state.grid);
+  const grid = useAppSelector((state) => state.grid);
   if (!grid.display) {
     return <></>;
   }

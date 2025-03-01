@@ -1,7 +1,6 @@
 import React, { useEffect, useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 
-import { AppState } from '../reducers';
+import { useAppDispatch, useAppSelector } from '../hooks';
 
 import { selectActions } from '../actions/select';
 import { dragActions, CTMInv } from '../actions/drag';
@@ -17,17 +16,17 @@ import AreaSelectRect from './AreaSelectRect';
 import './GlyphArea.css';
 
 const GlyphArea = () => {
-  const glyph = useSelector(draggedGlyphSelector);
-  const buhinMap = useSelector((state: AppState) => state.buhinMap);
-  const shotai = useSelector((state: AppState) => state.shotai);
-  const xorMaskType = useSelector((state: AppState) => state.xorMaskType);
-  const selection = useSelector((state: AppState) => state.selection);
-  const areaSelectRect = useSelector((state: AppState) => state.areaSelectRect);
-  const freehandMode = useSelector((state: AppState) => state.freehandMode);
+  const glyph = useAppSelector(draggedGlyphSelector);
+  const buhinMap = useAppSelector((state) => state.buhinMap);
+  const shotai = useAppSelector((state) => state.shotai);
+  const xorMaskType = useAppSelector((state) => state.xorMaskType);
+  const selection = useAppSelector((state) => state.selection);
+  const areaSelectRect = useAppSelector((state) => state.areaSelectRect);
+  const freehandMode = useAppSelector((state) => state.freehandMode);
 
   const svgClassName = freehandMode ? 'freehand' : '';
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const handleMouseDownCapture = useCallback((evt: React.MouseEvent<SVGSVGElement>) => {
     const ctm = evt.currentTarget.getScreenCTM();
     if (!ctm) {

@@ -1,16 +1,14 @@
-import { useSelector } from 'react-redux';
-
+import { useAppSelector } from '../hooks';
 import { submitGlyphSelector } from '../selectors/submitGlyph';
-import { AppState } from '../reducers';
 import { makeGlyphSeparatedForSubmit } from '../kage';
 
 import GlyphComponent from './Glyph';
 
 const SubmitPreview = () => {
-  const submitGlyph = useSelector(submitGlyphSelector);
-  const buhinMap = useSelector((state: AppState) => state.buhinMap);
-  const shotai = useSelector((state: AppState) => state.shotai);
-  const xorMaskType = useSelector((state: AppState) => state.xorMaskType);
+  const submitGlyph = useAppSelector(submitGlyphSelector);
+  const buhinMap = useAppSelector((state) => state.buhinMap);
+  const shotai = useAppSelector((state) => state.shotai);
+  const xorMaskType = useAppSelector((state) => state.xorMaskType);
 
   return (
     <svg className="preview-thumbnail" viewBox="0 0 200 200" width="50" height="50">

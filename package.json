@@ -6,7 +6,7 @@
   "dependencies": {
     "@eslint/js": "^9.20.0",
     "@kurgm/kage-engine": "^0.5.0",
-    "@reduxjs/toolkit": "^1.9.7",
+    "@reduxjs/toolkit": "^2.5.1",
     "@stylistic/eslint-plugin": "^3.1.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.2.0",
@@ -33,7 +33,7 @@
     "react-hotkeys-hook": "^3.4.4",
     "react-i18next": "^12.1.1",
     "react-modal": "^3.11.2",
-    "react-redux": "^8.0.2",
+    "react-redux": "^9.2.0",
     "typescript": "^5.7.3",
     "typescript-eslint": "^8.24.0",
     "typescript-fsa": "^3.0.0",

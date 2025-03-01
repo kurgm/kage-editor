@@ -1,4 +1,4 @@
-import { Reducer } from '@reduxjs/toolkit';
+import { AnyAction, Reducer } from '@reduxjs/toolkit';
 import { reducerWithInitialState } from 'typescript-fsa-reducers';
 
 import { isGlyphDeepEqual } from '../kageUtils/glyph';
@@ -22,7 +22,7 @@ const pushUndo = (oldState: AppState, newState: AppState): AppState => {
   };
 };
 
-export const undoable = (reducer: Reducer<AppState>): Reducer<AppState> => {
+export const undoable = (reducer: Reducer<AppState, AnyAction>): Reducer<AppState, AnyAction> => {
   const initialState = reducer(undefined, { type: '_INIT' });
   return reducerWithInitialState(initialState)
     .case(undoActions.undo, (state) => {

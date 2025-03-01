@@ -1,8 +1,8 @@
 import React, { useRef, useCallback, useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
 
 import { useTranslation } from 'react-i18next';
 
+import { useAppDispatch } from '../hooks';
 import { editorActions } from '../actions/editor';
 import { search } from '../callapi';
 import args from '../args';
@@ -105,7 +105,7 @@ const PartsSearch = () => {
     }
     hoverNameRef.current.textContent = partName;
   }, []);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const handleItemClick = useCallback((partName: string, evt: React.MouseEvent) => {
     if (evt.shiftKey) {
       if (!queryInputRef.current) {

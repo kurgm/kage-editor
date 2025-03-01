@@ -1,19 +1,18 @@
-import { useSelector } from 'react-redux';
-import { createSelector } from '@reduxjs/toolkit';
 
 import { ShowCenterLine } from '../actions/display';
-import { AppState } from '../reducers';
+import { useAppSelector } from '../hooks';
+import { createAppSelector } from '../selectors/util';
 import { draggedGlyphSelector } from '../selectors/draggedGlyph';
 import { decomposeDeep } from '../kageUtils/decompose';
 import { GlyphLine } from '../kageUtils/glyph';
 
 import './StrokeCenterLine.css';
 
-const strokeCenterLineShownNumbersSelector = createSelector(
+const strokeCenterLineShownNumbersSelector = createAppSelector(
   [
     draggedGlyphSelector,
-    (state: AppState) => state.showStrokeCenterLine,
-    (state: AppState) => state.selection,
+    (state) => state.showStrokeCenterLine,
+    (state) => state.selection,
   ],
   (glyph, showStrokeCenterLine, selection): number[] => {
     switch (showStrokeCenterLine) {
@@ -39,10 +38,10 @@ const strokeCenterLineShownNumbersSelector = createSelector(
   }
 );
 
-const strokeCenterLineStrokesPerLinesSelector = createSelector(
+const strokeCenterLineStrokesPerLinesSelector = createAppSelector(
   [
     draggedGlyphSelector,
-    (state: AppState) => state.buhinMap,
+    (state) => state.buhinMap,
     strokeCenterLineShownNumbersSelector,
   ],
   (glyph, buhinMap, glyphLineNumbers): GlyphLine[][] => (
@@ -51,7 +50,7 @@ const strokeCenterLineStrokesPerLinesSelector = createSelector(
 );
 
 const StrokeCenterLine = () => {
-  const strokesPerLines = useSelector(strokeCenterLineStrokesPerLinesSelector);
+  const strokesPerLines = useAppSelector(strokeCenterLineStrokesPerLinesSelector);
   return (
     <g className="stroke-center-line">
       {strokesPerLines.map((strokesPerLine, lineIndex) => (
