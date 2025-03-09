@@ -5,7 +5,7 @@
   "type": "module",
   "dependencies": {
     "@eslint/js": "^9.22.0",
-    "@kurgm/kage-engine": "^0.5.0",
+    "@kurgm/kage-engine": "^0.6.0",
     "@reduxjs/toolkit": "^2.5.1",
     "@stylistic/eslint-plugin": "^4.2.0",
     "@testing-library/jest-dom": "^6.6.3",
