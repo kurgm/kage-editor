@@ -23,6 +23,7 @@ export default tseslint.config(
       jsxA11y.flatConfigs.recommended,
       reactPlugin.configs.flat.recommended,
       reactPlugin.configs.flat['jsx-runtime'],
+      reactHooks.configs['recommended-latest'],
     ],
 
     languageOptions: {
@@ -38,14 +39,11 @@ export default tseslint.config(
       },
     },
     plugins: {
-      'react-hooks': /** @type {any} */(reactHooks),
       '@stylistic': stylistic,
       import: importPlugin,
       'react-refresh': reactRefresh,
     },
     rules: {
-      .../** @type {any} */(reactHooks.configs.recommended.rules),
-
       // http://eslint.org/docs/rules/
       'array-callback-return': 'warn',
       '@stylistic/dot-location': ['warn', 'property'],
