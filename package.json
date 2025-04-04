@@ -39,7 +39,7 @@
     "typescript-eslint": "^8.26.0",
     "typescript-fsa": "^3.0.0",
     "typescript-fsa-reducers": "^1.2.2",
-    "vite": "^6.2.1",
+    "vite": "^6.2.5",
     "vitest": "^3.0.8",
     "web-vitals": "^4.2.4"
   },
