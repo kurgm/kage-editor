@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: GPL-3.0-only
+// Copyright 2020, 2023, 2025  kurgm
+
 import { render, RenderOptions, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import ReactModal from 'react-modal';

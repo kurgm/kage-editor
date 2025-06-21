@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: GPL-3.0-only
+// Copyright 2020, 2023, 2025  kurgm
+
 import { AnyAction, Reducer } from '@reduxjs/toolkit';
 import { reducerWithInitialState } from 'typescript-fsa-reducers';
 

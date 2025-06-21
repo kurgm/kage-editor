@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: GPL-3.0-only
+// Copyright 2023, 2025  kurgm
+
 // @ts-check
 
 import js from '@eslint/js';

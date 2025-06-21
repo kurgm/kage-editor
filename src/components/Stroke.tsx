@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: GPL-3.0-only
+// Copyright 2020, 2023  kurgm
+
 import { Polygons } from '@kurgm/kage-engine';
 
 export interface StrokeComponentProps {

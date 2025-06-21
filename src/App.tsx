@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: GPL-3.0-only
+// Copyright 2020, 2023  kurgm
+
 import GlyphArea from './components/GlyphArea';
 import EditorControls from './components/EditorControls';
 import PartsSearch from './components/PartsSearch'

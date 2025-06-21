@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: GPL-3.0-only
+// Copyright 2020, 2022, 2025  kurgm
+
 const args = new URLSearchParams(window.location.hash.slice(1));
 
 let host = args.get('host');

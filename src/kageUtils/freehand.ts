@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: GPL-3.0-only
+// Copyright 2020, 2025  kurgm
+
 import { Glyph, GlyphLine } from './glyph';
 import { applyGlyphLineOperation } from './transform';
 

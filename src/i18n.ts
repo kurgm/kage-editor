@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: GPL-3.0-only
+// Copyright 2020, 2023, 2025  kurgm
+
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
