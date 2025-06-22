@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: GPL-3.0-only
+// Copyright 2020, 2021, 2023, 2025  kurgm and graphemecluster
+
 import React, { useCallback, useMemo } from 'react';
 
 import { dragActions, RectPointPosition } from '../actions/drag';

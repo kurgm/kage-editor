@@ -99,3 +99,7 @@ javascript:(function(l,f){l.href='https://kurgm.github.io/kage-editor/#ssl='+(l.
 翻訳に誤りを発見した場合は報告・修正にご協力いただけると非常に助かります。
 
 Localized messages are maintained as JSON files under [src/locales/](src/locales/) folder. Feedback or correction of mistranslations is greatly appreciated if you find any.
+
+## ライセンス
+
+[GPL-3.0-only](COPYING)

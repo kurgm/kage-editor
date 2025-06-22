@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: GPL-3.0-only
+// Copyright 2020, 2022  kurgm
+
 import { getKage } from '../kage';
 
 import { GlyphLine, parseGlyph, unparseGlyph, unparseGlyphLine, getNumColumns, Glyph } from './glyph';

@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: GPL-3.0-only
+// Copyright 2020, 2025  kurgm
+
 import React, { useRef, useCallback, useState, useEffect } from 'react';
 
 import { useTranslation } from 'react-i18next';

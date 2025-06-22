@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: GPL-3.0-only
+// Copyright 2020, 2022  kurgm
+
 import memoizeOne from 'memoize-one';
 
 import { GlyphLine, getNumColumns } from './glyph';

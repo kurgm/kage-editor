@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: GPL-3.0-only
+// Copyright 2020  kurgm
+
 import { ReducerBuilder } from 'typescript-fsa-reducers';
 
 import { selectActions } from '../actions/select';

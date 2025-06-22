@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: GPL-3.0-only
+// Copyright 2020  kurgm
+
 import { GlyphLine } from './glyph';
 
 export type StretchParam = [number, number, number, number];

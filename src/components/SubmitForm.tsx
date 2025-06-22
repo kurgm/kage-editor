@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: GPL-3.0-only
+// Copyright 2020, 2022, 2023, 2025  kurgm
+
 import React, { useRef, useEffect } from 'react';
 
 import args, { gwHosts } from '../args';

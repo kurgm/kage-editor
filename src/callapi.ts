@@ -1,3 +1,6 @@
+// SPDX-License-Identifier: GPL-3.0-only
+// Copyright 2020, 2022  kurgm
+
 import { gwHosts } from "./args";
 
 // Responses from GlyphWiki's API for glyphEditor lack headers required for cross-origin requests.
