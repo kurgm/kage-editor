@@ -39,7 +39,7 @@ export const useShortcuts = () => {
     dispatch(editorActions.paste());
     evt.preventDefault();
   }, {}, [dispatch]);
-  useHotkeys('del', (evt) => {
+  useHotkeys('delete', (evt) => {
     dispatch(editorActions.delete());
     evt.preventDefault();
   }, {}, [dispatch]);
