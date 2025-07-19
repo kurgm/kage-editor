@@ -24,7 +24,7 @@
     "@eslint/js": "^9.31.0",
     "@stylistic/eslint-plugin": "^5.2.0",
     "@testing-library/jest-dom": "^6.6.3",
-    "@testing-library/react": "^16.2.0",
+    "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^14.6.1",
     "@types/geometric": "^2.5.3",
     "@types/node": "^20.19.9",
