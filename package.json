@@ -27,7 +27,7 @@
     "@testing-library/react": "^16.2.0",
     "@testing-library/user-event": "^14.6.1",
     "@types/geometric": "^2.5.3",
-    "@types/node": "^18.19.80",
+    "@types/node": "^20.19.9",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
     "@types/react-modal": "^3.16.3",
