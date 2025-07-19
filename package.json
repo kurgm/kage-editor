@@ -18,7 +18,7 @@
     "react-redux": "^9.2.0",
     "typescript-fsa": "^3.0.0",
     "typescript-fsa-reducers": "^1.2.2",
-    "web-vitals": "^4.2.4"
+    "web-vitals": "^5.0.3"
   },
   "devDependencies": {
     "@eslint/js": "^9.31.0",
