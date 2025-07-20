@@ -129,7 +129,7 @@ const EditorControls = () => {
         </button>
       </div>
       <div className="preview">
-        <SubmitPreview />
+        <SubmitPreview className="preview-thumbnail" />
         <button onClick={finishEdit}>
           {t('finish edit')}
         </button>
