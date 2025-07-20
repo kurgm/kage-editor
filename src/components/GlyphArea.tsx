@@ -105,6 +105,7 @@ const GlyphArea = () => {
           buhinMap={buhinMap}
           shotai={shotai}
           xorMaskType={xorMaskType}
+          translucentXorMask
           selection={selection}
           handleMouseDownDeselectedStroke={handleMouseDownDeselectedStroke}
           handleMouseDownSelectedStroke={handleMouseDownSelectedStroke}

@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
-// Copyright 2020, 2023  kurgm
+// Copyright 2020, 2023, 2025  kurgm
 
 import clsx from 'clsx/lite';
 import React from 'react';
@@ -18,6 +18,7 @@ export interface GlyphComponentProps {
   selection: number[];
   shotai: KShotai;
   xorMaskType: XorMaskType;
+  translucentXorMask?: boolean;
   handleMouseDownDeselectedStroke?: (evt: React.MouseEvent, index: number) => void;
   handleMouseDownSelectedStroke?: (evt: React.MouseEvent, index: number) => void;
   makeGlyphSeparated?: typeof makeGlyphSeparated;
@@ -43,7 +44,10 @@ const GlyphComponent = (props: GlyphComponentProps) => {
         ))}
       </g>
       {props.xorMaskType !== "none" && <>
-        <use xlinkHref={`#xormask_${props.xorMaskType}`} className="xormask-fill" />
+        <use
+          xlinkHref={`#xormask_${props.xorMaskType}`}
+          className={clsx("xormask-fill", props.translucentXorMask && 'translucent')}
+        />
         <clipPath id="xorMaskClip">
           <use xlinkHref={`#xormask_${props.xorMaskType}`} />
         </clipPath>
