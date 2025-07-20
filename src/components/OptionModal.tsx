@@ -60,7 +60,7 @@ const OptionModal = () => {
       isOpen={showOptionModal}
       onRequestClose={handleRequestClose}
       shouldCloseOnEsc={false} // handled by hotkeys-js
-      className={'modal-content'}
+      className="modal-content"
     >
       <fieldset>
         <legend>{t('grid option')}</legend>

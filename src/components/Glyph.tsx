@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-only
 // Copyright 2020, 2023  kurgm
 
+import clsx from 'clsx/lite';
 import React from 'react';
 
 import { Glyph } from '../kageUtils/glyph';
@@ -36,7 +37,7 @@ const GlyphComponent = (props: GlyphComponentProps) => {
           <g key={index} onMouseDown={(evt) => props.handleMouseDownDeselectedStroke?.(evt, index)}>
             <Stroke
               polygons={polygonsSep[index]}
-              className={props.handleMouseDownDeselectedStroke ? "movable-stroke" : ""}
+              className={clsx(props.handleMouseDownDeselectedStroke && 'movable-stroke')}
             />
           </g>
         ))}
@@ -59,7 +60,7 @@ const GlyphComponent = (props: GlyphComponentProps) => {
           <g key={index} onMouseDown={(evt) => props.handleMouseDownSelectedStroke?.(evt, index)}>
             <Stroke
               polygons={polygonsSep[index]}
-              className={props.handleMouseDownSelectedStroke ? "movable-stroke" : ""}
+              className={clsx(props.handleMouseDownSelectedStroke && 'movable-stroke')}
             />
           </g>
         ))}

@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-only
 // Copyright 2020  kurgm
 
+import clsx from 'clsx/lite';
 import React from 'react';
 
 import './ControlPoint.css';
@@ -17,7 +18,7 @@ const ControlPoint = (props: ControlPointProps) => (
     x={props.x - 4}
     y={props.y - 4}
     width={8} height={8}
-    className={`controlpoint-rect ${props.className || ''}`}
+    className={clsx('controlpoint-rect', props.className)}
     onMouseDown={props.handleMouseDown}
   />
 );

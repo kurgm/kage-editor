@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-only
 // Copyright 2020, 2021, 2023, 2025  kurgm and graphemecluster
 
+import clsx from 'clsx/lite';
 import React, { useEffect, useCallback } from 'react';
 
 import { useAppDispatch, useAppSelector } from '../hooks';
@@ -26,8 +27,6 @@ const GlyphArea = () => {
   const selection = useAppSelector((state) => state.selection);
   const areaSelectRect = useAppSelector((state) => state.areaSelectRect);
   const freehandMode = useAppSelector((state) => state.freehandMode);
-
-  const svgClassName = freehandMode ? 'freehand' : '';
 
   const dispatch = useAppDispatch();
   const handleMouseDownCapture = useCallback((evt: React.MouseEvent<SVGSVGElement>) => {
@@ -91,7 +90,7 @@ const GlyphArea = () => {
     <div className="glyph-area">
       <svg
         width="100%" height="100%" viewBox="-20 -20 500 240"
-        className={svgClassName}
+        className={clsx(freehandMode && 'freehand')}
         onMouseDownCapture={handleMouseDownCapture}
         onMouseDown={handleMouseDownBackground}
       >
