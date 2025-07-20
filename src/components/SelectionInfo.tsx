@@ -219,6 +219,7 @@ const SelectionInfo = () => {
         {strokeInfo && <>
           <div>
             {t('stroke type')}
+            {' '}
             <select value={strokeInfo.strokeType} onChange={changeStrokeType}>
               {strokeTypes.map((strokeType) => (
                 <option key={strokeType} value={strokeType}>
@@ -229,8 +230,9 @@ const SelectionInfo = () => {
                 <option value={strokeInfo.strokeType} />
               )}
             </select>
-            {' '}
+            {'　'}
             {t('head type')}
+            {' '}
             <select value={strokeInfo.headShapeType} onChange={changeHeadShapeType}>
               {headShapeTypes[strokeInfo.strokeType].map((headShapeType) => (
                 <option key={headShapeType} value={headShapeType}>
@@ -241,8 +243,9 @@ const SelectionInfo = () => {
                 <option value={strokeInfo.headShapeType} />
               )}
             </select>
-            {' '}
+            {'　'}
             {t('tail type')}
+            {' '}
             <select value={strokeInfo.tailShapeType} onChange={changeTailShapeType}>
               {tailShapeTypes[strokeInfo.strokeType].map((tailShapeType) => (
                 <option key={tailShapeType} value={tailShapeType}>
@@ -253,9 +256,9 @@ const SelectionInfo = () => {
                 <option value={strokeInfo.tailShapeType} />
               )}
             </select>
-            {' '}
             {!strokeInfo.validTypes && (
               <span className="alert">
+                {'　'}
                 {t('invalid stroke shape types')}
               </span>
             )}
