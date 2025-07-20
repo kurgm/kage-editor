@@ -66,9 +66,9 @@ const EditorControls = () => {
 
   const { t } = useTranslation();
   return (
-    <div className="editor-controls">
+    <div className="editorControls">
       <SelectionInfo />
-      <div className="control-buttons">
+      <div className="controlButtons">
         <button
           disabled={undoDisabled}
           onClick={undo}
@@ -129,7 +129,7 @@ const EditorControls = () => {
         </button>
       </div>
       <div className="preview">
-        <SubmitPreview className="preview-thumbnail" />
+        <SubmitPreview className="previewThumbnail" />
         <button onClick={finishEdit}>
           {t('finish edit')}
         </button>

@@ -1,7 +1,7 @@
 /* SPDX-License-Identifier: GPL-3.0-only */
-/* Copyright 2020  kurgm */
+/* Copyright 2020, 2025  kurgm */
 
-.areaselect-rect {
+.areaSelectRect {
   fill: none;
   stroke: #f57900;
   stroke-width: 1px;

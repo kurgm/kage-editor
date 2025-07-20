@@ -1,14 +1,14 @@
 /* SPDX-License-Identifier: GPL-3.0-only */
-/* Copyright 2020, 2021  kurgm and graphemecluster */
+/* Copyright 2020, 2021, 2025  kurgm and graphemecluster */
 
-.selection-rect {
+.selectionRect {
   fill: none;
   stroke: #f57900;
   stroke-width: 1px;
   pointer-events: none;
 }
 
-.auxiliary-lines {
+.auxiliaryLines {
   fill: none;
   stroke: #729fcf;
   stroke-width: 1px;

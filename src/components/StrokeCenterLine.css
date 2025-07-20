@@ -1,7 +1,7 @@
 /* SPDX-License-Identifier: GPL-3.0-only */
-/* Copyright 2020, 2021  kurgm and graphemecluster */
+/* Copyright 2020, 2021, 2025  kurgm and graphemecluster */
 
-.stroke-center-line {
+.strokeCenterLine {
   fill: none;
   stroke: #e3e3e3;
   stroke-width: 1px;

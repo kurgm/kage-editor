@@ -55,7 +55,7 @@ const strokeCenterLineStrokesPerLinesSelector = createAppSelector(
 const StrokeCenterLine = () => {
   const strokesPerLines = useAppSelector(strokeCenterLineStrokesPerLinesSelector);
   return (
-    <g className="stroke-center-line">
+    <g className="strokeCenterLine">
       {strokesPerLines.map((strokesPerLine, lineIndex) => (
         <g key={lineIndex}>
           {strokesPerLine.map((stroke, strokeIndex) => {

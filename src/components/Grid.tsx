@@ -19,7 +19,7 @@ const Grid = () => {
     ys.push(y);
   }
   return (
-    <g className="grid-lines">
+    <g className="gridLines">
       {xs.map((x) => (
         <path
           key={x}

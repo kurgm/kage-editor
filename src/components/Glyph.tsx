@@ -33,12 +33,12 @@ const GlyphComponent = (props: GlyphComponentProps) => {
 
   return (
     <>
-      <g className="strokes-deselected">
+      <g className="strokesDeselected">
         {nonSelection.map((index) => (
           <g key={index} onMouseDown={(evt) => props.handleMouseDownDeselectedStroke?.(evt, index)}>
             <Stroke
               polygons={polygonsSep[index]}
-              className={clsx(props.handleMouseDownDeselectedStroke && 'movable-stroke')}
+              className={clsx(props.handleMouseDownDeselectedStroke && 'movableStroke')}
             />
           </g>
         ))}
@@ -46,12 +46,12 @@ const GlyphComponent = (props: GlyphComponentProps) => {
       {props.xorMaskType !== "none" && <>
         <use
           xlinkHref={`#xormask_${props.xorMaskType}`}
-          className={clsx("xormask-fill", props.translucentXorMask && 'translucent')}
+          className={clsx("xormaskFill", props.translucentXorMask && 'translucent')}
         />
         <clipPath id="xorMaskClip">
           <use xlinkHref={`#xormask_${props.xorMaskType}`} />
         </clipPath>
-        <g clipPath="url(#xorMaskClip)" className="strokes-invert">
+        <g clipPath="url(#xorMaskClip)" className="strokesInvert">
           {nonSelection.map((index) => (
             <g key={index}>
               <Stroke polygons={polygonsSep[index]} />
@@ -59,12 +59,12 @@ const GlyphComponent = (props: GlyphComponentProps) => {
           ))}
         </g>
       </>}
-      <g className="strokes-selected">
+      <g className="strokesSelected">
         {selection.map((index) => (
           <g key={index} onMouseDown={(evt) => props.handleMouseDownSelectedStroke?.(evt, index)}>
             <Stroke
               polygons={polygonsSep[index]}
-              className={clsx(props.handleMouseDownSelectedStroke && 'movable-stroke')}
+              className={clsx(props.handleMouseDownSelectedStroke && 'movableStroke')}
             />
           </g>
         ))}

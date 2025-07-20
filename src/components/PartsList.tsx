@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
-// Copyright 2020  kurgm
+// Copyright 2020, 2025  kurgm
 
 import React, { useCallback } from 'react';
 
@@ -27,7 +27,7 @@ const PartsList = (props: PartsListProps) => {
   }, [handleItemMouseEnter]);
 
   return (
-    <div className="parts-list">
+    <div className="partsList">
       {props.names.map((name) => (
         <img
           key={name} alt={name} title={name}

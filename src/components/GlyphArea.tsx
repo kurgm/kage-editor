@@ -87,7 +87,7 @@ const GlyphArea = () => {
   }, [dispatch]);
 
   return (
-    <div className="glyph-area">
+    <div className="glyphArea">
       <svg
         width="100%" height="100%" viewBox="-20 -20 500 240"
         className={clsx(freehandMode && 'freehand')}
@@ -98,8 +98,8 @@ const GlyphArea = () => {
           <XorMasks />
         </defs>
         <Grid />
-        <rect x="0" y="0" width="200" height="200" className="glyph-boundary" />
-        <rect x="12" y="12" width="176" height="176" className="glyph-guide" />
+        <rect x="0" y="0" width="200" height="200" className="glyphBoundary" />
+        <rect x="12" y="12" width="176" height="176" className="glyphGuide" />
         <Glyph
           glyph={glyph}
           buhinMap={buhinMap}

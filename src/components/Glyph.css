@@ -1,31 +1,31 @@
 /* SPDX-License-Identifier: GPL-3.0-only */
 /* Copyright 2020, 2021, 2023, 2025  kurgm and graphemecluster */
 
-.strokes-deselected polygon {
+.strokesDeselected polygon {
   fill: #000000;
   stroke: none;
 }
 
-.xormask-fill {
+.xormaskFill {
   fill: #000000;
   pointer-events: none;
 }
 
-.xormask-fill.translucent {
+.xormaskFill.translucent {
   fill-opacity: 0.7;
 }
 
-.strokes-invert polygon {
+.strokesInvert polygon {
   fill: #ffffff;
   stroke: none;
   pointer-events: none;
 }
 
-.strokes-selected polygon {
+.strokesSelected polygon {
   fill: #cc0000;
   stroke: none;
 }
 
-.movable-stroke {
+.movableStroke {
   cursor: move;
 }

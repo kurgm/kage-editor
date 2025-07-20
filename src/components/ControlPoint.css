@@ -1,34 +1,34 @@
 /* SPDX-License-Identifier: GPL-3.0-only */
 /* Copyright 2020, 2021, 2025  kurgm and graphemecluster */
 
-.controlpoint-rect {
+.controlpointRect {
   fill: #f57900;
   stroke: #f57900;
   stroke-width: 1px;
 }
 
-.controlpoint-rect.online {
+.controlpointRect.online {
   fill: #73d216;
   stroke: #73d216;
 }
 
-.controlpoint-rect.match {
+.controlpointRect.match {
   fill: #729fcf;
   stroke: #729fcf;
 }
 
-.controlpoint-rect.move {
+.controlpointRect.move {
   cursor: move;
 }
-.controlpoint-rect.ns-resize {
+.controlpointRect.nsResize {
   cursor: ns-resize;
 }
-.controlpoint-rect.ew-resize {
+.controlpointRect.ewResize {
   cursor: ew-resize;
 }
-.controlpoint-rect.nwse-resize {
+.controlpointRect.nwseResize {
   cursor: nwse-resize;
 }
-.controlpoint-rect.nesw-resize {
+.controlpointRect.neswResize {
   cursor: nesw-resize;
 }

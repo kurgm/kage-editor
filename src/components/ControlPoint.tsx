@@ -12,7 +12,7 @@ interface ControlPointProps {
   x: number;
   y: number;
   matchType?: MatchType;
-  cursorType?: 'ns-resize' | 'ew-resize' | 'nwse-resize' | 'nesw-resize' | 'move';
+  cursorType?: 'nsResize' | 'ewResize' | 'nwseResize' | 'neswResize' | 'move';
   handleMouseDown: (evt: React.MouseEvent) => void;
 }
 
@@ -23,7 +23,7 @@ const ControlPoint = (props: ControlPointProps) => (
     width={8} height={8}
     className={
       clsx(
-        'controlpoint-rect',
+        'controlpointRect',
         props.matchType === MatchType.match && 'match',
         props.matchType === MatchType.online && 'online',
         props.cursorType ?? 'move',

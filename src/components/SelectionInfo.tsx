@@ -214,8 +214,8 @@ const SelectionInfo = () => {
 
   const { t } = useTranslation();
   return (
-    <div className="select-control">
-      <div className="selected-info">
+    <div className="selectControl">
+      <div className="selectedInfo">
         {strokeInfo && <>
           <div>
             {t('stroke type')}
@@ -305,7 +305,7 @@ const SelectionInfo = () => {
           {otherInfo.coordString && <div>{otherInfo.coordString}</div>}
         </>}
       </div>
-      <div className="selection-control">
+      <div className="selectionControl">
         <button
           disabled={swapPrevDisabled}
           onClick={swapWithPrev}
@@ -313,17 +313,17 @@ const SelectionInfo = () => {
           {t('swap with prev')}
         </button>
         <button
-          className="select-prevnext-button"
+          className="selectPrevnextButton"
           disabled={selectPrevDisabled}
           onClick={selectPrev}
         >
           {t('select prev')}
         </button>
-        <div className="selection-num">
+        <div className="selectionNum">
           {selectIndexString}
         </div>
         <button
-          className="select-prevnext-button"
+          className="selectPrevnextButton"
           disabled={selectNextDisabled}
           onClick={selectNext}
         >

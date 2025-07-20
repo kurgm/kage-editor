@@ -176,7 +176,7 @@ const SelectionControl = () => {
   return <>
     {rectControl && <>
       <rect
-        className='selection-rect'
+        className='selectionRect'
         x={Math.min(rectControl.coords[0], rectControl.coords[2])}
         y={Math.min(rectControl.coords[1], rectControl.coords[3])}
         width={Math.abs(rectControl.coords[2] - rectControl.coords[0])}
@@ -185,54 +185,54 @@ const SelectionControl = () => {
       <ControlPoint
         x={(rectControl.coords[0] + rectControl.coords[2]) / 2}
         y={rectControl.coords[1]}
-        cursorType='ns-resize'
+        cursorType='nsResize'
         handleMouseDown={handleMouseDownNorthPoint}
       />
       <ControlPoint
         x={rectControl.coords[0]}
         y={(rectControl.coords[1] + rectControl.coords[3]) / 2}
-        cursorType='ew-resize'
+        cursorType='ewResize'
         handleMouseDown={handleMouseDownWestPoint}
       />
       <ControlPoint
         x={(rectControl.coords[0] + rectControl.coords[2]) / 2}
         y={rectControl.coords[3]}
-        cursorType='ns-resize'
+        cursorType='nsResize'
         handleMouseDown={handleMouseDownSouthPoint}
       />
       <ControlPoint
         x={rectControl.coords[2]}
         y={(rectControl.coords[1] + rectControl.coords[3]) / 2}
-        cursorType='ew-resize'
+        cursorType='ewResize'
         handleMouseDown={handleMouseDownEastPoint}
       />
       <ControlPoint
         x={rectControl.coords[2]}
         y={rectControl.coords[3]}
-        cursorType={rectCornerFlipped ? 'nesw-resize' : 'nwse-resize'}
+        cursorType={rectCornerFlipped ? 'neswResize' : 'nwseResize'}
         handleMouseDown={handleMouseDownSoutheastPoint}
       />
       <ControlPoint
         x={rectControl.coords[0]}
         y={rectControl.coords[3]}
-        cursorType={rectCornerFlipped ? 'nwse-resize' : 'nesw-resize'}
+        cursorType={rectCornerFlipped ? 'nwseResize' : 'neswResize'}
         handleMouseDown={handleMouseDownSouthwestPoint}
       />
       <ControlPoint
         x={rectControl.coords[2]}
         y={rectControl.coords[1]}
-        cursorType={rectCornerFlipped ? 'nwse-resize' : 'nesw-resize'}
+        cursorType={rectCornerFlipped ? 'nwseResize' : 'neswResize'}
         handleMouseDown={handleMouseDownNortheastPoint}
       />
       <ControlPoint
         x={rectControl.coords[0]}
         y={rectControl.coords[1]}
-        cursorType={rectCornerFlipped ? 'nesw-resize' : 'nwse-resize'}
+        cursorType={rectCornerFlipped ? 'neswResize' : 'nwseResize'}
         handleMouseDown={handleMouseDownNorthwestPoint}
       />
     </>}
     {auxiliaryLines.map((points, index) => (
-      <path className="auxiliary-lines" key={index} d={'M ' + points.join(' ')} />
+      <path className="auxiliaryLines" key={index} d={'M ' + points.join(' ')} />
     ))}
     {pointControl.map(({ x, y, matchType }, index) => (
       <ControlPoint

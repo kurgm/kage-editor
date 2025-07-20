@@ -123,8 +123,8 @@ const PartsSearch = () => {
 
   const { t } = useTranslation();
   return (
-    <div className="parts-search-area">
-      <form className="parts-search-box" onSubmit={handleFormSubmit}>
+    <div className="partsSearchArea">
+      <form className="partsSearchBox" onSubmit={handleFormSubmit}>
         <input defaultValue={initialQuery} list="searchList" ref={queryInputRef} />
         <button>
           {t('search')}
@@ -135,7 +135,7 @@ const PartsSearch = () => {
           ))}
         </datalist>
       </form>
-      <div className="parts-list-area">
+      <div className="partsListArea">
         {searchState.err
           ? searchState.err instanceof QueryTooShortError
             ? <div className="message">{t('search query too short')}</div>
@@ -150,7 +150,7 @@ const PartsSearch = () => {
                 handleItemMouseEnter={handleItemMouseEnter}
               />}
       </div>
-      <div className="parts-hover-name" ref={hoverNameRef}>&nbsp;</div>
+      <div className="partsHoverName" ref={hoverNameRef}>&nbsp;</div>
     </div>
   )
 };
