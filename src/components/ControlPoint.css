@@ -1,11 +1,10 @@
 /* SPDX-License-Identifier: GPL-3.0-only */
-/* Copyright 2020, 2021  kurgm and graphemecluster */
+/* Copyright 2020, 2021, 2025  kurgm and graphemecluster */
 
 .controlpoint-rect {
   fill: #f57900;
   stroke: #f57900;
   stroke-width: 1px;
-  cursor: move;
 }
 
 .controlpoint-rect.online {
@@ -18,15 +17,18 @@
   stroke: #729fcf;
 }
 
-.controlpoint-rect.north, .controlpoint-rect.south {
+.controlpoint-rect.move {
+  cursor: move;
+}
+.controlpoint-rect.ns-resize {
   cursor: ns-resize;
 }
-.controlpoint-rect.east, .controlpoint-rect.west {
+.controlpoint-rect.ew-resize {
   cursor: ew-resize;
 }
-.controlpoint-rect.southeast, .controlpoint-rect.northwest {
+.controlpoint-rect.nwse-resize {
   cursor: nwse-resize;
 }
-.controlpoint-rect.southwest, .controlpoint-rect.northeast {
+.controlpoint-rect.nesw-resize {
   cursor: nesw-resize;
 }
