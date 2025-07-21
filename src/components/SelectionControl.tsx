@@ -12,7 +12,7 @@ import { getMatchType, MatchType } from '../kageUtils/match';
 
 import ControlPoint from './ControlPoint';
 
-import './SelectionControl.css';
+import styles from './SelectionControl.module.css';
 
 interface RectControl {
   multiSelect: boolean;
@@ -176,7 +176,7 @@ const SelectionControl = () => {
   return <>
     {rectControl && <>
       <rect
-        className='selectionRect'
+        className={styles.selectionRect}
         x={Math.min(rectControl.coords[0], rectControl.coords[2])}
         y={Math.min(rectControl.coords[1], rectControl.coords[3])}
         width={Math.abs(rectControl.coords[2] - rectControl.coords[0])}
@@ -232,7 +232,7 @@ const SelectionControl = () => {
       />
     </>}
     {auxiliaryLines.map((points, index) => (
-      <path className="auxiliaryLines" key={index} d={'M ' + points.join(' ')} />
+      <path className={styles.auxiliaryLines} key={index} d={'M ' + points.join(' ')} />
     ))}
     {pointControl.map(({ x, y, matchType }, index) => (
       <ControlPoint

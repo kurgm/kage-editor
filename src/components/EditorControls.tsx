@@ -14,7 +14,7 @@ import { displayActions } from '../actions/display';
 import SelectionInfo from './SelectionInfo';
 import SubmitPreview from './SubmitPreview';
 
-import './EditorControls.css';
+import styles from './EditorControls.module.css';
 
 interface EditorControlsProps {
   className?: string;
@@ -70,9 +70,9 @@ const EditorControls = (props: EditorControlsProps) => {
 
   const { t } = useTranslation();
   return (
-    <div className={clsx('editorControls', props.className)}>
-      <SelectionInfo className="selectControl" />
-      <div className="controlButtons">
+    <div className={clsx(styles.editorControls, props.className)}>
+      <SelectionInfo className={styles.selectControl} />
+      <div className={styles.controlButtons}>
         <button
           disabled={undoDisabled}
           onClick={undo}
@@ -132,8 +132,8 @@ const EditorControls = (props: EditorControlsProps) => {
           {t('options')}
         </button>
       </div>
-      <div className="preview">
-        <SubmitPreview className="previewThumbnail" />
+      <div className={styles.preview}>
+        <SubmitPreview className={styles.previewThumbnail} />
         <button onClick={finishEdit}>
           {t('finish edit')}
         </button>

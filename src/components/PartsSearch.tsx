@@ -12,7 +12,7 @@ import args from '../args';
 
 import PartsList from './PartsList';
 
-import './PartsSearch.css';
+import styles from './PartsSearch.module.css';
 
 const searchSuggestions = [
   'エディタ部品1',
@@ -127,8 +127,8 @@ const PartsSearch = (props: PartsSearchProps) => {
 
   const { t } = useTranslation();
   return (
-    <div className={clsx('partsSearchArea', props.className)}>
-      <form className="partsSearchBox" onSubmit={handleFormSubmit}>
+    <div className={clsx(styles.partsSearchArea, props.className)}>
+      <form className={styles.partsSearchBox} onSubmit={handleFormSubmit}>
         <input defaultValue={initialQuery} list="searchList" ref={queryInputRef} />
         <button>
           {t('search')}
@@ -139,22 +139,22 @@ const PartsSearch = (props: PartsSearchProps) => {
           ))}
         </datalist>
       </form>
-      <div className="partsListArea">
+      <div className={styles.partsListArea}>
         {searchState.err
           ? searchState.err instanceof QueryTooShortError
-            ? <div className="message">{t('search query too short')}</div>
-            : <div className="message">{t('search error', { message: searchState.err })}</div>
+            ? <div className={styles.message}>{t('search query too short')}</div>
+            : <div className={styles.message}>{t('search error', { message: searchState.err })}</div>
           : !searchState.result
-            ? <div className="message">{t('searching')}</div>
+            ? <div className={styles.message}>{t('searching')}</div>
             : searchState.result.length === 0
-              ? <div className="message">{t('no search result')}</div>
+              ? <div className={styles.message}>{t('no search result')}</div>
               : <PartsList
                 names={searchState.result}
                 handleItemClick={handleItemClick}
                 handleItemMouseEnter={handleItemMouseEnter}
               />}
       </div>
-      <div className="partsHoverName" ref={hoverNameRef}>&nbsp;</div>
+      <div className={styles.partsHoverName} ref={hoverNameRef}>&nbsp;</div>
     </div>
   )
 };

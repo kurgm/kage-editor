@@ -17,7 +17,7 @@ import StrokeCenterLine from './StrokeCenterLine';
 import SelectionControl from './SelectionControl';
 import AreaSelectRect from './AreaSelectRect';
 
-import './GlyphArea.css';
+import styles from './GlyphArea.module.css';
 
 interface GlyphAreaProps {
   className?: string;
@@ -91,10 +91,10 @@ const GlyphArea = (props: GlyphAreaProps) => {
   }, [dispatch]);
 
   return (
-    <div className={clsx('glyphArea', props.className)}>
+    <div className={clsx(styles.glyphArea, props.className)}>
       <svg
         width="100%" height="100%" viewBox="-20 -20 500 240"
-        className={clsx(freehandMode && 'freehand')}
+        className={clsx(freehandMode && styles.freehand)}
         onMouseDownCapture={handleMouseDownCapture}
         onMouseDown={handleMouseDownBackground}
       >
@@ -102,8 +102,8 @@ const GlyphArea = (props: GlyphAreaProps) => {
           <XorMasks />
         </defs>
         <Grid />
-        <rect x="0" y="0" width="200" height="200" className="glyphBoundary" />
-        <rect x="12" y="12" width="176" height="176" className="glyphGuide" />
+        <rect x="0" y="0" width="200" height="200" className={styles.glyphBoundary} />
+        <rect x="12" y="12" width="176" height="176" className={styles.glyphGuide} />
         <Glyph
           glyph={glyph}
           buhinMap={buhinMap}

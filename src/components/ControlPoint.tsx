@@ -6,7 +6,7 @@ import React from 'react';
 
 import { MatchType } from '../kageUtils/match';
 
-import './ControlPoint.css';
+import styles from './ControlPoint.module.css';
 
 interface ControlPointProps {
   x: number;
@@ -23,10 +23,10 @@ const ControlPoint = (props: ControlPointProps) => (
     width={8} height={8}
     className={
       clsx(
-        'controlpointRect',
-        props.matchType === MatchType.match && 'match',
-        props.matchType === MatchType.online && 'online',
-        props.cursorType ?? 'move',
+        styles.controlpointRect,
+        props.matchType === MatchType.match && styles.match,
+        props.matchType === MatchType.online && styles.online,
+        styles[props.cursorType ?? 'move'],
       )
     }
     onMouseDown={props.handleMouseDown}

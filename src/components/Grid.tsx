@@ -3,7 +3,7 @@
 
 import { useAppSelector } from '../hooks';
 
-import './Grid.css';
+import styles from './Grid.module.css';
 
 const Grid = () => {
   const grid = useAppSelector((state) => state.grid);
@@ -19,7 +19,7 @@ const Grid = () => {
     ys.push(y);
   }
   return (
-    <g className="gridLines">
+    <g className={styles.gridLines}>
       {xs.map((x) => (
         <path
           key={x}

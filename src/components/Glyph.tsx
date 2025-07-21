@@ -10,7 +10,7 @@ import { XorMaskType } from '../xorMask';
 
 import Stroke from './Stroke';
 
-import './Glyph.css'
+import styles from './Glyph.module.css'
 
 export interface GlyphComponentProps {
   glyph: Glyph;
@@ -33,12 +33,12 @@ const GlyphComponent = (props: GlyphComponentProps) => {
 
   return (
     <>
-      <g className="strokesDeselected">
+      <g className={styles.strokesDeselected}>
         {nonSelection.map((index) => (
           <g key={index} onMouseDown={(evt) => props.handleMouseDownDeselectedStroke?.(evt, index)}>
             <Stroke
               polygons={polygonsSep[index]}
-              className={clsx(props.handleMouseDownDeselectedStroke && 'movableStroke')}
+              className={clsx(props.handleMouseDownDeselectedStroke && styles.movableStroke)}
             />
           </g>
         ))}
@@ -46,12 +46,12 @@ const GlyphComponent = (props: GlyphComponentProps) => {
       {props.xorMaskType !== "none" && <>
         <use
           xlinkHref={`#xormask_${props.xorMaskType}`}
-          className={clsx("xormaskFill", props.translucentXorMask && 'translucent')}
+          className={clsx(styles.xormaskFill, props.translucentXorMask && styles.translucent)}
         />
         <clipPath id="xorMaskClip">
           <use xlinkHref={`#xormask_${props.xorMaskType}`} />
         </clipPath>
-        <g clipPath="url(#xorMaskClip)" className="strokesInvert">
+        <g clipPath="url(#xorMaskClip)" className={styles.strokesInvert}>
           {nonSelection.map((index) => (
             <g key={index}>
               <Stroke polygons={polygonsSep[index]} />
@@ -59,12 +59,12 @@ const GlyphComponent = (props: GlyphComponentProps) => {
           ))}
         </g>
       </>}
-      <g className="strokesSelected">
+      <g className={styles.strokesSelected}>
         {selection.map((index) => (
           <g key={index} onMouseDown={(evt) => props.handleMouseDownSelectedStroke?.(evt, index)}>
             <Stroke
               polygons={polygonsSep[index]}
-              className={clsx(props.handleMouseDownSelectedStroke && 'movableStroke')}
+              className={clsx(props.handleMouseDownSelectedStroke && styles.movableStroke)}
             />
           </g>
         ))}

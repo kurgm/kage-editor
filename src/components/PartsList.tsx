@@ -3,7 +3,7 @@
 
 import React, { useCallback } from 'react';
 
-import './PartsList.css';
+import styles from './PartsList.module.css';
 
 const getImageURL = (name: string) => (
   `https://glyphwiki.org/glyph/${name}.50px.png`
@@ -27,7 +27,7 @@ const PartsList = (props: PartsListProps) => {
   }, [handleItemMouseEnter]);
 
   return (
-    <div className="partsList">
+    <div className={styles.partsList}>
       {props.names.map((name) => (
         <img
           key={name} alt={name} title={name}

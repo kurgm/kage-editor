@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-only
 // Copyright 2020, 2023, 2025  kurgm
 
-import './AreaSelectRect.css';
+import styles from './AreaSelectRect.module.css';
 
 interface AreaSelectRectProps {
   rect: [number, number, number, number] | null;
@@ -25,7 +25,7 @@ const AreaSelectRect = (props: AreaSelectRectProps) => {
     y2 = temp;
   }
 
-  return <rect className='areaSelectRect' x={x1} y={y1} width={x2 - x1} height={y2 - y1} />;
+  return <rect className={styles.areaSelectRect} x={x1} y={y1} width={x2 - x1} height={y2 - y1} />;
 };
 
 export default AreaSelectRect;

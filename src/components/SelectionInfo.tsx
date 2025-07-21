@@ -16,7 +16,7 @@ import { ReflectRotateType, reflectRotateTypeParamsMap, reflectRotateTypes } fro
 import { draggedGlyphSelector } from '../selectors/draggedGlyph';
 import { createAppSelector } from '../selectors/util';
 
-import './SelectionInfo.css';
+import styles from './SelectionInfo.module.css';
 
 
 const selectedGlyphLineSelector = createAppSelector([
@@ -218,8 +218,8 @@ const SelectionInfo = (props: SelectionInfoProps) => {
 
   const { t } = useTranslation();
   return (
-    <div className={clsx('selectControl', props.className)}>
-      <div className="selectedInfo">
+    <div className={clsx(styles.selectControl, props.className)}>
+      <div className={styles.selectedInfo}>
         {strokeInfo && <>
           <div>
             {t('stroke type')}
@@ -259,7 +259,7 @@ const SelectionInfo = (props: SelectionInfoProps) => {
             </select>
             {' '}
             {!strokeInfo.validTypes && (
-              <span className="alert">
+              <span className={styles.alert}>
                 {t('invalid stroke shape types')}
               </span>
             )}
@@ -309,7 +309,7 @@ const SelectionInfo = (props: SelectionInfoProps) => {
           {otherInfo.coordString && <div>{otherInfo.coordString}</div>}
         </>}
       </div>
-      <div className="selectionControl">
+      <div className={styles.selectionControl}>
         <button
           disabled={swapPrevDisabled}
           onClick={swapWithPrev}
@@ -317,17 +317,17 @@ const SelectionInfo = (props: SelectionInfoProps) => {
           {t('swap with prev')}
         </button>
         <button
-          className="selectPrevnextButton"
+          className={styles.selectPrevnextButton}
           disabled={selectPrevDisabled}
           onClick={selectPrev}
         >
           {t('select prev')}
         </button>
-        <div className="selectionNum">
+        <div className={styles.selectionNum}>
           {selectIndexString}
         </div>
         <button
-          className="selectPrevnextButton"
+          className={styles.selectPrevnextButton}
           disabled={selectNextDisabled}
           onClick={selectNext}
         >
