@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: GPL-3.0-only
 // Copyright 2020, 2025  kurgm
 
+import clsx from 'clsx/lite';
 import React, { useRef, useCallback, useState, useEffect } from 'react';
-
 import { useTranslation } from 'react-i18next';
 
 import { useAppDispatch } from '../hooks';
@@ -37,7 +37,11 @@ const initialSearchState: SearchState = {
   err: null,
 };
 
-const PartsSearch = () => {
+interface PartsSearchProps {
+  className?: string;
+}
+
+const PartsSearch = (props: PartsSearchProps) => {
   const queryInputRef = useRef<HTMLInputElement>(null);
   const [searchState, setSearchState] = useState<SearchState>(initialSearchState);
 
@@ -123,7 +127,7 @@ const PartsSearch = () => {
 
   const { t } = useTranslation();
   return (
-    <div className="partsSearchArea">
+    <div className={clsx('partsSearchArea', props.className)}>
       <form className="partsSearchBox" onSubmit={handleFormSubmit}>
         <input defaultValue={initialQuery} list="searchList" ref={queryInputRef} />
         <button>

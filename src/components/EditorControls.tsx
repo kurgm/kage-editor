@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: GPL-3.0-only
 // Copyright 2020, 2025  kurgm
 
+import clsx from 'clsx/lite';
 import React, { useCallback } from 'react';
-
 import { useTranslation } from 'react-i18next';
 
 import { useAppDispatch, useAppSelector } from '../hooks';
@@ -16,7 +16,11 @@ import SubmitPreview from './SubmitPreview';
 
 import './EditorControls.css';
 
-const EditorControls = () => {
+interface EditorControlsProps {
+  className?: string;
+}
+
+const EditorControls = (props: EditorControlsProps) => {
   const glyph = useAppSelector((state) => state.glyph);
   const selection = useAppSelector((state) => state.selection);
   const clipboard = useAppSelector((state) => state.clipboard);
@@ -66,8 +70,8 @@ const EditorControls = () => {
 
   const { t } = useTranslation();
   return (
-    <div className="editorControls">
-      <SelectionInfo />
+    <div className={clsx('editorControls', props.className)}>
+      <SelectionInfo className="selectControl" />
       <div className="controlButtons">
         <button
           disabled={undoDisabled}

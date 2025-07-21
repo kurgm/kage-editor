@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
-// Copyright 2020, 2023  kurgm
+// Copyright 2020, 2023, 2025  kurgm
 
 import GlyphArea from './components/GlyphArea';
 import EditorControls from './components/EditorControls';
@@ -17,9 +17,9 @@ function App() {
   useShortcuts();
   return (
     <div className="App" lang={i18n.language}>
-      <GlyphArea />
-      <EditorControls />
-      <PartsSearch />
+      <GlyphArea className="glyphArea" />
+      <EditorControls className="editorControls" />
+      <PartsSearch className="partsSearchArea" />
       <SubmitForm />
       <OptionModal />
     </div>

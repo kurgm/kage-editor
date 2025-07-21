@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: GPL-3.0-only
 // Copyright 2020, 2023, 2025  kurgm
 
+import clsx from 'clsx/lite';
 import React, { useCallback } from 'react';
-
 import { shallowEqual } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
@@ -169,7 +169,11 @@ const buttonsDisabledSelector = createAppSelector([
   selectNextDisabled: glyphLength === 0,
 }));
 
-const SelectionInfo = () => {
+interface SelectionInfoProps {
+  className?: string;
+}
+
+const SelectionInfo = (props: SelectionInfoProps) => {
 
   const strokeInfo = useAppSelector(strokeInfoSelector);
   const partInfo = useAppSelector(partInfoSelector);
@@ -214,7 +218,7 @@ const SelectionInfo = () => {
 
   const { t } = useTranslation();
   return (
-    <div className="selectControl">
+    <div className={clsx('selectControl', props.className)}>
       <div className="selectedInfo">
         {strokeInfo && <>
           <div>

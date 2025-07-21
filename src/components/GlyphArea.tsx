@@ -19,7 +19,11 @@ import AreaSelectRect from './AreaSelectRect';
 
 import './GlyphArea.css';
 
-const GlyphArea = () => {
+interface GlyphAreaProps {
+  className?: string;
+}
+
+const GlyphArea = (props: GlyphAreaProps) => {
   const glyph = useAppSelector(draggedGlyphSelector);
   const buhinMap = useAppSelector((state) => state.buhinMap);
   const shotai = useAppSelector((state) => state.shotai);
@@ -87,7 +91,7 @@ const GlyphArea = () => {
   }, [dispatch]);
 
   return (
-    <div className="glyphArea">
+    <div className={clsx('glyphArea', props.className)}>
       <svg
         width="100%" height="100%" viewBox="-20 -20 500 240"
         className={clsx(freehandMode && 'freehand')}
