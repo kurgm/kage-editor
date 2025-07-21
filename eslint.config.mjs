@@ -14,19 +14,21 @@ import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
 import testingLibrary from 'eslint-plugin-testing-library';
 import tseslint from 'typescript-eslint';
+import { globalIgnores } from 'eslint/config'
 
 
-export default tseslint.config(
-  { ignores: ['build'] },
+export default tseslint.config([
+  globalIgnores(['build']),
   {
     files: ['**/*.{ts,tsx}'],
     extends: [
       js.configs.recommended,
-      ...tseslint.configs.recommended,
+      tseslint.configs.recommended,
       jsxA11y.flatConfigs.recommended,
       reactPlugin.configs.flat.recommended,
       reactPlugin.configs.flat['jsx-runtime'],
       reactHooks.configs['recommended-latest'],
+      reactRefresh.configs.vite,
     ],
 
     languageOptions: {
@@ -44,7 +46,6 @@ export default tseslint.config(
     plugins: {
       '@stylistic': stylistic,
       import: importPlugin,
-      'react-refresh': reactRefresh,
     },
     rules: {
       // http://eslint.org/docs/rules/
@@ -157,11 +158,6 @@ export default tseslint.config(
       'no-useless-constructor': 'off',
       '@typescript-eslint/no-useless-constructor': 'warn',
 
-      'react-refresh/only-export-components': [
-        'warn',
-        { allowConstantExport: true },
-      ],
-
       '@typescript-eslint/switch-exhaustiveness-check': [
         'warn',
         { requireDefaultForNonUnion: true },
@@ -187,4 +183,4 @@ export default tseslint.config(
       'vitest/no-mocks-import': 'error',
     },
   },
-);
+]);
