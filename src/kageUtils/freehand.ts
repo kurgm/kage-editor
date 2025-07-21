@@ -9,7 +9,7 @@ const avg = (nums: number[]) => sum(nums) / nums.length;
 const min: {
   (data: number[]): number;
   <T>(data: T[], ev: (val: T) => number): number;
-} = (data: any[], ev?: (val: any) => number) => {
+} = <T>(data: T[], ev?: (val: T) => number) => {
   let result = Infinity;
   for (const datum of data) {
     const val = ev ? ev(datum) : datum as number;

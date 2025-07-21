@@ -166,9 +166,6 @@ export default tseslint.config(
         'warn',
         { requireDefaultForNonUnion: true },
       ],
-
-      // TODO: activate these rules
-      '@typescript-eslint/no-explicit-any': 'off',
     },
   },
 
