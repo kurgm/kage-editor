@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
-// Copyright 2020, 2022  kurgm
+// Copyright 2020, 2022, 2025  kurgm
 
 import memoizeOne from 'memoize-one';
 
@@ -30,7 +30,7 @@ export const getKage = (buhinMap: Map<string, string>, fallback?: (name: string)
   return kage_;
 };
 
-let waiting = new Set<string>();
+const waiting = new Set<string>();
 const loadAbsentBuhin = (name: string) => {
   if (waiting.has(name)) {
     return;
