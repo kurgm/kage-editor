@@ -9,7 +9,7 @@ import { draggedGlyphSelector } from '../selectors/draggedGlyph';
 import { decomposeDeep } from '../kageUtils/decompose';
 import { GlyphLine } from '../kageUtils/glyph';
 
-import './StrokeCenterLine.css';
+import styles from './StrokeCenterLine.module.css';
 
 const strokeCenterLineShownNumbersSelector = createAppSelector(
   [
@@ -55,7 +55,7 @@ const strokeCenterLineStrokesPerLinesSelector = createAppSelector(
 const StrokeCenterLine = () => {
   const strokesPerLines = useAppSelector(strokeCenterLineStrokesPerLinesSelector);
   return (
-    <g className="stroke-center-line">
+    <g className={styles.strokeCenterLine}>
       {strokesPerLines.map((strokesPerLine, lineIndex) => (
         <g key={lineIndex}>
           {strokesPerLine.map((stroke, strokeIndex) => {

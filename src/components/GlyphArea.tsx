@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0-only
 // Copyright 2020, 2021, 2023, 2025  kurgm and graphemecluster
 
+import clsx from 'clsx/lite';
 import React, { useEffect, useCallback } from 'react';
 
 import { useAppDispatch, useAppSelector } from '../hooks';
@@ -16,9 +17,13 @@ import StrokeCenterLine from './StrokeCenterLine';
 import SelectionControl from './SelectionControl';
 import AreaSelectRect from './AreaSelectRect';
 
-import './GlyphArea.css';
+import styles from './GlyphArea.module.css';
 
-const GlyphArea = () => {
+interface GlyphAreaProps {
+  className?: string;
+}
+
+const GlyphArea = (props: GlyphAreaProps) => {
   const glyph = useAppSelector(draggedGlyphSelector);
   const buhinMap = useAppSelector((state) => state.buhinMap);
   const shotai = useAppSelector((state) => state.shotai);
@@ -26,8 +31,6 @@ const GlyphArea = () => {
   const selection = useAppSelector((state) => state.selection);
   const areaSelectRect = useAppSelector((state) => state.areaSelectRect);
   const freehandMode = useAppSelector((state) => state.freehandMode);
-
-  const svgClassName = freehandMode ? 'freehand' : '';
 
   const dispatch = useAppDispatch();
   const handleMouseDownCapture = useCallback((evt: React.MouseEvent<SVGSVGElement>) => {
@@ -88,10 +91,10 @@ const GlyphArea = () => {
   }, [dispatch]);
 
   return (
-    <div className="glyph-area">
+    <div className={clsx(styles.glyphArea, props.className)}>
       <svg
         width="100%" height="100%" viewBox="-20 -20 500 240"
-        className={svgClassName}
+        className={clsx(freehandMode && styles.freehand)}
         onMouseDownCapture={handleMouseDownCapture}
         onMouseDown={handleMouseDownBackground}
       >
@@ -99,13 +102,14 @@ const GlyphArea = () => {
           <XorMasks />
         </defs>
         <Grid />
-        <rect x="0" y="0" width="200" height="200" className="glyph-boundary" />
-        <rect x="12" y="12" width="176" height="176" className="glyph-guide" />
+        <rect x="0" y="0" width="200" height="200" className={styles.glyphBoundary} />
+        <rect x="12" y="12" width="176" height="176" className={styles.glyphGuide} />
         <Glyph
           glyph={glyph}
           buhinMap={buhinMap}
           shotai={shotai}
           xorMaskType={xorMaskType}
+          translucentXorMask
           selection={selection}
           handleMouseDownDeselectedStroke={handleMouseDownDeselectedStroke}
           handleMouseDownSelectedStroke={handleMouseDownSelectedStroke}

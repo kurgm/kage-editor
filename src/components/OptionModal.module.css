@@ -1,7 +1,7 @@
 /* SPDX-License-Identifier: GPL-3.0-only */
-/* Copyright 2020, 2021, 2023  kurgm and graphemecluster */
+/* Copyright 2020, 2021, 2023, 2025  kurgm and graphemecluster */
 
-.modal-content {
+.modalContent {
   position: absolute;
   left: 50%;
   transform: translate(-50%, 0);
@@ -15,11 +15,11 @@
   padding: 20px;
 }
 
-.modal-content input[type="number"] {
+.modalContent input[type="number"] {
   width: 4em;
 }
 
-.grid-option {
+.gridOption {
   display: grid;
   grid-template-columns: auto auto auto auto;
   grid-gap: 4px;
@@ -27,7 +27,7 @@
   text-align: right;
 }
 
-.general-option {
+.generalOption {
   display: grid;
   grid-template-columns: auto auto;
   grid-gap: 4px;
@@ -37,7 +37,7 @@
   margin: 10px auto;
 }
 
-.close-option {
+.closeOption {
   display: grid;
   width: 80%;
   margin: auto;

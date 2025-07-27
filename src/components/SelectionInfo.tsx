@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: GPL-3.0-only
 // Copyright 2020, 2023, 2025  kurgm
 
+import clsx from 'clsx/lite';
 import React, { useCallback } from 'react';
-
 import { shallowEqual } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
@@ -16,7 +16,7 @@ import { ReflectRotateType, reflectRotateTypeParamsMap, reflectRotateTypes } fro
 import { draggedGlyphSelector } from '../selectors/draggedGlyph';
 import { createAppSelector } from '../selectors/util';
 
-import './SelectionInfo.css';
+import styles from './SelectionInfo.module.css';
 
 
 const selectedGlyphLineSelector = createAppSelector([
@@ -169,7 +169,11 @@ const buttonsDisabledSelector = createAppSelector([
   selectNextDisabled: glyphLength === 0,
 }));
 
-const SelectionInfo = () => {
+interface SelectionInfoProps {
+  className?: string;
+}
+
+const SelectionInfo = (props: SelectionInfoProps) => {
 
   const strokeInfo = useAppSelector(strokeInfoSelector);
   const partInfo = useAppSelector(partInfoSelector);
@@ -214,8 +218,8 @@ const SelectionInfo = () => {
 
   const { t } = useTranslation();
   return (
-    <div className="select-control">
-      <div className="selected-info">
+    <div className={clsx(styles.selectControl, props.className)}>
+      <div className={styles.selectedInfo}>
         {strokeInfo && <>
           <div>
             {t('stroke type')}
@@ -255,7 +259,7 @@ const SelectionInfo = () => {
             </select>
             {' '}
             {!strokeInfo.validTypes && (
-              <span className="alert">
+              <span className={styles.alert}>
                 {t('invalid stroke shape types')}
               </span>
             )}
@@ -305,7 +309,7 @@ const SelectionInfo = () => {
           {otherInfo.coordString && <div>{otherInfo.coordString}</div>}
         </>}
       </div>
-      <div className="selection-control">
+      <div className={styles.selectionControl}>
         <button
           disabled={swapPrevDisabled}
           onClick={swapWithPrev}
@@ -313,17 +317,17 @@ const SelectionInfo = () => {
           {t('swap with prev')}
         </button>
         <button
-          className="select-prevnext-button"
+          className={styles.selectPrevnextButton}
           disabled={selectPrevDisabled}
           onClick={selectPrev}
         >
           {t('select prev')}
         </button>
-        <div className="selection-num">
+        <div className={styles.selectionNum}>
           {selectIndexString}
         </div>
         <button
-          className="select-prevnext-button"
+          className={styles.selectPrevnextButton}
           disabled={selectNextDisabled}
           onClick={selectNext}
         >

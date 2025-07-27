@@ -1,16 +1,16 @@
 /* SPDX-License-Identifier: GPL-3.0-only */
-/* Copyright 2020, 2021  kurgm and graphemecluster */
+/* Copyright 2020, 2021, 2025  kurgm and graphemecluster */
 
-.editor-controls {
+.editorControls {
   display: flex;
   padding: 10px;
 }
 
-.select-control {
+.selectControl {
   flex: 1;
 }
 
-.control-buttons {
+.controlButtons {
   margin: 0 1em;
   display: grid;
   grid-template-columns: repeat(2, 7.5em);
@@ -24,7 +24,7 @@
   width: 7em;
 }
 
-.preview-thumbnail {
+.previewThumbnail {
   align-self: center;
   border: 1px solid #aaaaaa;
 }

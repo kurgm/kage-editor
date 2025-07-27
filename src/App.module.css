@@ -1,5 +1,5 @@
 /* SPDX-License-Identifier: GPL-3.0-only */
-/* Copyright 2020, 2021  kurgm and graphemecluster */
+/* Copyright 2020, 2021, 2025  kurgm and graphemecluster */
 
 .App {
   display: grid;
@@ -12,18 +12,18 @@
   right: 0;
 }
 
-.parts-search-area {
+.partsSearchArea {
   grid-column: 2/3;
   grid-row: 1/3;
 }
 
-.glyph-area {
+.glyphArea {
   grid-column: 1/2;
   grid-row: 1/2;
   border: 1px solid #ccc;
 }
 
-.editor-controls {
+.editorControls {
   grid-column: 1/2;
   grid-row: 2/3;
 }

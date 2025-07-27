@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: GPL-3.0-only
 // Copyright 2020, 2025  kurgm
 
+import clsx from 'clsx/lite';
 import React, { useRef, useCallback, useState, useEffect } from 'react';
-
 import { useTranslation } from 'react-i18next';
 
 import { useAppDispatch } from '../hooks';
@@ -12,7 +12,7 @@ import args from '../args';
 
 import PartsList from './PartsList';
 
-import './PartsSearch.css';
+import styles from './PartsSearch.module.css';
 
 const searchSuggestions = [
   'エディタ部品1',
@@ -37,7 +37,11 @@ const initialSearchState: SearchState = {
   err: null,
 };
 
-const PartsSearch = () => {
+interface PartsSearchProps {
+  className?: string;
+}
+
+const PartsSearch = (props: PartsSearchProps) => {
   const queryInputRef = useRef<HTMLInputElement>(null);
   const [searchState, setSearchState] = useState<SearchState>(initialSearchState);
 
@@ -123,8 +127,8 @@ const PartsSearch = () => {
 
   const { t } = useTranslation();
   return (
-    <div className="parts-search-area">
-      <form className="parts-search-box" onSubmit={handleFormSubmit}>
+    <div className={clsx(styles.partsSearchArea, props.className)}>
+      <form className={styles.partsSearchBox} onSubmit={handleFormSubmit}>
         <input defaultValue={initialQuery} list="searchList" ref={queryInputRef} />
         <button>
           {t('search')}
@@ -135,22 +139,22 @@ const PartsSearch = () => {
           ))}
         </datalist>
       </form>
-      <div className="parts-list-area">
+      <div className={styles.partsListArea}>
         {searchState.err
           ? searchState.err instanceof QueryTooShortError
-            ? <div className="message">{t('search query too short')}</div>
-            : <div className="message">{t('search error', { message: searchState.err })}</div>
+            ? <div className={styles.message}>{t('search query too short')}</div>
+            : <div className={styles.message}>{t('search error', { message: searchState.err })}</div>
           : !searchState.result
-            ? <div className="message">{t('searching')}</div>
+            ? <div className={styles.message}>{t('searching')}</div>
             : searchState.result.length === 0
-              ? <div className="message">{t('no search result')}</div>
+              ? <div className={styles.message}>{t('no search result')}</div>
               : <PartsList
                 names={searchState.result}
                 handleItemClick={handleItemClick}
                 handleItemMouseEnter={handleItemMouseEnter}
               />}
       </div>
-      <div className="parts-hover-name" ref={hoverNameRef}>&nbsp;</div>
+      <div className={styles.partsHoverName} ref={hoverNameRef}>&nbsp;</div>
     </div>
   )
 };

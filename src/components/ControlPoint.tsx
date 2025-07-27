@@ -1,14 +1,18 @@
 // SPDX-License-Identifier: GPL-3.0-only
-// Copyright 2020  kurgm
+// Copyright 2020, 2025  kurgm
 
+import clsx from 'clsx/lite';
 import React from 'react';
 
-import './ControlPoint.css';
+import { MatchType } from '../kageUtils/match';
+
+import styles from './ControlPoint.module.css';
 
 interface ControlPointProps {
   x: number;
   y: number;
-  className?: string;
+  matchType?: MatchType;
+  cursorType?: 'nsResize' | 'ewResize' | 'nwseResize' | 'neswResize' | 'move';
   handleMouseDown: (evt: React.MouseEvent) => void;
 }
 
@@ -17,7 +21,14 @@ const ControlPoint = (props: ControlPointProps) => (
     x={props.x - 4}
     y={props.y - 4}
     width={8} height={8}
-    className={`controlpoint-rect ${props.className || ''}`}
+    className={
+      clsx(
+        styles.controlpointRect,
+        props.matchType === MatchType.match && styles.match,
+        props.matchType === MatchType.online && styles.online,
+        styles[props.cursorType ?? 'move'],
+      )
+    }
     onMouseDown={props.handleMouseDown}
   />
 );

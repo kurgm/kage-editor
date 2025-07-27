@@ -7,14 +7,18 @@ import { makeGlyphSeparatedForSubmit } from '../kage';
 
 import GlyphComponent from './Glyph';
 
-const SubmitPreview = () => {
+type SubmitPreviewProps = {
+  className?: string;
+};
+
+const SubmitPreview = (props: SubmitPreviewProps) => {
   const submitGlyph = useAppSelector(submitGlyphSelector);
   const buhinMap = useAppSelector((state) => state.buhinMap);
   const shotai = useAppSelector((state) => state.shotai);
   const xorMaskType = useAppSelector((state) => state.xorMaskType);
 
   return (
-    <svg className="preview-thumbnail" viewBox="0 0 200 200" width="50" height="50">
+    <svg className={props.className} viewBox="0 0 200 200" width="50" height="50">
       <GlyphComponent
         buhinMap={buhinMap}
         glyph={submitGlyph}

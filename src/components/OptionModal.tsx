@@ -11,7 +11,7 @@ import { useAppDispatch, useAppSelector } from '../hooks';
 import { KShotai } from '../kage';
 import { XorMaskType, xorMaskTypes } from '../xorMask';
 
-import './OptionModal.css';
+import styles from './OptionModal.module.css';
 
 const OptionModal = () => {
   const showOptionModal = useAppSelector((state) => state.showOptionModal);
@@ -60,7 +60,7 @@ const OptionModal = () => {
       isOpen={showOptionModal}
       onRequestClose={handleRequestClose}
       shouldCloseOnEsc={false} // handled by hotkeys-js
-      className={'modal-content'}
+      className={styles.modalContent}
     >
       <fieldset>
         <legend>{t('grid option')}</legend>
@@ -70,7 +70,7 @@ const OptionModal = () => {
             {t('enable grid')}
           </label>
         </div>
-        <div className="grid-option">
+        <div className={styles.gridOption}>
           <div>{t('grid origin x')}</div>
           <input
             type="number"
@@ -112,7 +112,7 @@ const OptionModal = () => {
           />
         </div>
       </fieldset>
-      <div className="general-option">
+      <div className={styles.generalOption}>
         <div>{t('glyph font style')}</div>
         <select
           value={shotai}
@@ -154,7 +154,7 @@ const OptionModal = () => {
           <option value="zh-Hant">繁體中文</option>
         </select>
       </div>
-      <div className="close-option">
+      <div className={styles.closeOption}>
         <button onClick={handleRequestClose}>{t('close modal')}</button>
       </div>
     </ReactModal>

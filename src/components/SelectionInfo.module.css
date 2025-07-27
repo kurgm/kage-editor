@@ -1,12 +1,12 @@
 /* SPDX-License-Identifier: GPL-3.0-only */
-/* Copyright 2020  kurgm */
+/* Copyright 2020, 2025  kurgm */
 
-.select-control {
+.selectControl {
   display: flex;
   flex-flow: column;
 }
 
-.selected-info {
+.selectedInfo {
   flex: 1;
 }
 
@@ -14,17 +14,17 @@
   color: red;
 }
 
-.selection-control {
+.selectionControl {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.select-prevnext-button {
+.selectPrevnextButton {
   height: 2.5em;
 }
 
-.selection-num {
+.selectionNum {
   margin: 0 1em;
   width: 5em;
   text-align: center;

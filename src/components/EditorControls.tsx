@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: GPL-3.0-only
 // Copyright 2020, 2025  kurgm
 
+import clsx from 'clsx/lite';
 import React, { useCallback } from 'react';
-
 import { useTranslation } from 'react-i18next';
 
 import { useAppDispatch, useAppSelector } from '../hooks';
@@ -14,9 +14,13 @@ import { displayActions } from '../actions/display';
 import SelectionInfo from './SelectionInfo';
 import SubmitPreview from './SubmitPreview';
 
-import './EditorControls.css';
+import styles from './EditorControls.module.css';
 
-const EditorControls = () => {
+interface EditorControlsProps {
+  className?: string;
+}
+
+const EditorControls = (props: EditorControlsProps) => {
   const glyph = useAppSelector((state) => state.glyph);
   const selection = useAppSelector((state) => state.selection);
   const clipboard = useAppSelector((state) => state.clipboard);
@@ -66,9 +70,9 @@ const EditorControls = () => {
 
   const { t } = useTranslation();
   return (
-    <div className="editor-controls">
-      <SelectionInfo />
-      <div className="control-buttons">
+    <div className={clsx(styles.editorControls, props.className)}>
+      <SelectionInfo className={styles.selectControl} />
+      <div className={styles.controlButtons}>
         <button
           disabled={undoDisabled}
           onClick={undo}
@@ -128,8 +132,8 @@ const EditorControls = () => {
           {t('options')}
         </button>
       </div>
-      <div className="preview">
-        <SubmitPreview />
+      <div className={styles.preview}>
+        <SubmitPreview className={styles.previewThumbnail} />
         <button onClick={finishEdit}>
           {t('finish edit')}
         </button>

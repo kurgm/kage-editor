@@ -1,23 +1,23 @@
 /* SPDX-License-Identifier: GPL-3.0-only */
-/* Copyright 2020  kurgm */
+/* Copyright 2020, 2025  kurgm */
 
-.glyph-boundary {
+.glyphBoundary {
   fill: none;
   stroke: #333333;
   stroke-width: 2;
 }
 
-.glyph-guide {
+.glyphGuide {
   fill: none;
   stroke: #999999;
   stroke-width: 1;
 }
 
-.glyph-area svg.freehand * {
+.glyphArea svg.freehand * {
   pointer-events: none;
 }
 
-.glyph-area svg {
+.glyphArea svg {
   stroke-linecap: round;
   stroke-linejoin: round;
 }

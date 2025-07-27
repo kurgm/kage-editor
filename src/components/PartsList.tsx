@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: GPL-3.0-only
-// Copyright 2020  kurgm
+// Copyright 2020, 2025  kurgm
 
 import React, { useCallback } from 'react';
 
-import './PartsList.css';
+import styles from './PartsList.module.css';
 
 const getImageURL = (name: string) => (
   `https://glyphwiki.org/glyph/${name}.50px.png`
@@ -27,7 +27,7 @@ const PartsList = (props: PartsListProps) => {
   }, [handleItemMouseEnter]);
 
   return (
-    <div className="parts-list">
+    <div className={styles.partsList}>
       {props.names.map((name) => (
         <img
           key={name} alt={name} title={name}
