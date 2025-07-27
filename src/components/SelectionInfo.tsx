@@ -297,7 +297,7 @@ const SelectionInfo = (props: SelectionInfoProps) => {
                   {t(`operation type ${ReflectRotateType[opType]}`)}
                 </option>
               ))}
-              {!reflectRotateTypes.includes(reflectRotateInfo.opType as any) && (
+              {!(reflectRotateTypes as unknown[]).includes(reflectRotateInfo.opType) && (
                 <option value={reflectRotateInfo.opType} />
               )}
             </select>

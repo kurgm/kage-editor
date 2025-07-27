@@ -28,7 +28,7 @@ class QueryTooShortError extends Error { }
 interface SearchState {
   query: string;
   result: string[] | null;
-  err: any;
+  err: unknown;
 }
 
 const initialSearchState: SearchState = {

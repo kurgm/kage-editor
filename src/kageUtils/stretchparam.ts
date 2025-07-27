@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
-// Copyright 2020  kurgm
+// Copyright 2020, 2025  kurgm
 
 import { GlyphLine } from './glyph';
 
@@ -32,10 +32,9 @@ export const setStretchPositions = (glyphLine: GlyphLine, positions: StretchPosi
 };
 
 export const normalizeStretchPositions = (positions: StretchPositions): StretchPositions => {
-  let [sx, sy, tx, ty] = positions;
+  const [sx, sy, tx, ty] = positions;
   if (tx <= 100) {
-    tx += 200;
-    sx = sy = 0;
+    return [0, 0, tx + 200, ty];
   }
   return [sx, sy, tx, ty];
 };

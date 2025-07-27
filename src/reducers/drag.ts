@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
-// Copyright 2020, 2022  kurgm
+// Copyright 2020, 2022, 2025  kurgm
 
 import { ReducerBuilder } from 'typescript-fsa-reducers';
 
@@ -131,7 +131,7 @@ const updateBuilder = (builder: ReducerBuilder<AppState>) => builder
     }
     if (state.freehandStroke) {
       const [x2, y2] = state.ctmInv(evt.clientX, evt.clientY);
-      let freehandStroke = state.freehandStroke.concat([[x2, y2]]);
+      const freehandStroke = state.freehandStroke.concat([[x2, y2]]);
       if (freehandStroke.length >= 3) {
         const [lastX, lastY] = freehandStroke[freehandStroke.length - 2];
         if (Math.abs(x2 - lastX) < 2 && Math.abs(y2 - lastY) < 2) {
