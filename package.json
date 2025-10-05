@@ -24,7 +24,7 @@
   "devDependencies": {
     "@eslint/js": "^9.37.0",
     "@stylistic/eslint-plugin": "^5.4.0",
-    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^14.6.1",
     "@types/geometric": "^2.5.3",
@@ -32,7 +32,7 @@
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
     "@types/react-modal": "^3.16.3",
-    "@vitejs/plugin-react": "^4.7.0",
+    "@vitejs/plugin-react": "^5.0.4",
     "@vitest/eslint-plugin": "^1.3.15",
     "eslint": "^9.37.0",
     "eslint-plugin-import": "^2.32.0",
@@ -41,10 +41,10 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.23",
     "eslint-plugin-testing-library": "^7.11.0",
-    "jsdom": "^26.1.0",
+    "jsdom": "^27.0.0",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.45.0",
-    "vite": "^7.1.5",
+    "vite": "^7.1.9",
     "vitest": "^3.2.4"
   },
   "scripts": {
