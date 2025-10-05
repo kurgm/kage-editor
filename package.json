@@ -6,7 +6,7 @@
   "type": "module",
   "dependencies": {
     "@kurgm/kage-engine": "^0.6.0",
-    "@reduxjs/toolkit": "^2.8.2",
+    "@reduxjs/toolkit": "^2.9.0",
     "clsx": "^2.1.1",
     "geometric": "^2.5.5",
     "i18next": "^25.5.3",
@@ -19,7 +19,7 @@
     "react-redux": "^9.2.0",
     "typescript-fsa": "^3.0.0",
     "typescript-fsa-reducers": "^1.2.2",
-    "web-vitals": "^5.0.3"
+    "web-vitals": "^5.1.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.37.0",
