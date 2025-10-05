@@ -28,7 +28,7 @@
     "@testing-library/react": "^16.3.0",
     "@testing-library/user-event": "^14.6.1",
     "@types/geometric": "^2.5.3",
-    "@types/node": "^20.19.9",
+    "@types/node": "^20.19.19",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
     "@types/react-modal": "^3.16.3",
@@ -42,7 +42,7 @@
     "eslint-plugin-react-refresh": "^0.4.23",
     "eslint-plugin-testing-library": "^7.11.0",
     "jsdom": "^27.0.0",
-    "typescript": "^5.8.3",
+    "typescript": "^5.9.3",
     "typescript-eslint": "^8.45.0",
     "vite": "^7.1.9",
     "vitest": "^3.2.4"
