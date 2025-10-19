@@ -6,7 +6,6 @@
 import js from '@eslint/js';
 import stylistic from '@stylistic/eslint-plugin';
 import vitest from '@vitest/eslint-plugin';
-// @ts-ignore
 import importPlugin from 'eslint-plugin-import';
 import jsxA11y from 'eslint-plugin-jsx-a11y';
 import reactPlugin from 'eslint-plugin-react';
@@ -27,7 +26,7 @@ export default tseslint.config([
       jsxA11y.flatConfigs.recommended,
       reactPlugin.configs.flat.recommended,
       reactPlugin.configs.flat['jsx-runtime'],
-      reactHooks.configs['recommended-latest'],
+      reactHooks.configs.flat.recommended,
       reactRefresh.configs.vite,
     ],
 
@@ -169,15 +168,11 @@ export default tseslint.config([
     files: ['**/__tests__/**/*', '**/*.{spec,test}.*'],
 
     extends: [
-      testingLibrary.configs['flat/react']
+      testingLibrary.configs['flat/react'],
+      vitest.configs.recommended,
     ],
 
-    plugins: {
-      vitest,
-    },
-
     rules: {
-      ...vitest.configs.recommended.rules,
       'vitest/no-conditional-expect': 'error',
       'vitest/no-interpolation-in-snapshots': 'error',
       'vitest/no-mocks-import': 'error',
