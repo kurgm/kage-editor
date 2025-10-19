@@ -82,6 +82,7 @@ const PartsSearch = (props: PartsSearchProps) => {
 
   useEffect(() => {
     if (initialQuery) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       startSearch(initialQuery);
     }
   }, []);
