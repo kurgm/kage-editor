@@ -115,7 +115,7 @@ const PartsSearch = (props: PartsSearchProps) => {
   }, []);
   const dispatch = useAppDispatch();
   const handleItemClick = useCallback((partName: string, evt: React.MouseEvent) => {
-    if (evt.shiftKey) {
+    if (evt.shiftKey || evt.ctrlKey) {
       if (!queryInputRef.current) {
         return;
       }
