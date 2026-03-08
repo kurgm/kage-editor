@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
-// Copyright 2023, 2025  kurgm
+// Copyright 2023, 2025, 2026  kurgm
 
 // @ts-check
 
@@ -13,10 +13,10 @@ import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
 import testingLibrary from 'eslint-plugin-testing-library';
 import tseslint from 'typescript-eslint';
-import { globalIgnores } from 'eslint/config'
+import { defineConfig, globalIgnores } from 'eslint/config'
 
 
-export default tseslint.config([
+export default defineConfig([
   globalIgnores(['build']),
   {
     files: ['**/*.{ts,tsx}'],
