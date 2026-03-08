@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: GPL-3.0-only
-// Copyright 2020, 2021, 2023, 2025  kurgm, hulenkius and graphemecluster
+// Copyright 2020, 2021, 2023, 2025, 2026  kurgm, hulenkius and graphemecluster
 
 import React, { useCallback } from 'react';
 
@@ -161,7 +161,7 @@ const OptionModal = () => {
   )
 };
 
-if (process.env.NODE_ENV !== 'test') {
+if (import.meta.env.NODE_ENV !== 'test') {
   ReactModal.setAppElement('#root');
 }
 
